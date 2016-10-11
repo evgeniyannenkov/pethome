@@ -1,0 +1,14 @@
+extends layout
+
+block header
+    include partials/_navbar
+
+block content
+    h1= type
+    if type == "login"
+        include partials/_login
+    else if type == "registration"
+        include partials/_registration
+
+block footer
+    include partials/_footer

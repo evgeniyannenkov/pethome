@@ -1,0 +1,8 @@
+include ../vars/common
+//Style link mixin
+
+mixin stylelink(href)
+    link(rel = "stylesheet" href = stylesDest + href + ".css")&attributes(attributes)
+
+mixin scriptlink(href)
+    script(src = scriptsDest + href + ".js")&attributes(attributes)

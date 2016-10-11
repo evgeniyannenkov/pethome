@@ -1,0 +1,6 @@
+.idea/
+node_modules/
+bower_components/
+assets/styles/main.scss
+assets/styles/libs.scss
+assets/styles/libs.less

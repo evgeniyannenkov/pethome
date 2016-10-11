@@ -1,0 +1,43 @@
+{
+  "dependencies": {
+    "main.js": {
+      "files": [
+        "scripts/main.js",
+        "scripts/blocks/**/*.js",
+        "scripts/common/*.js"
+      ]
+    },
+    "main.css": {
+      "files": [
+        "styles/main.scss"
+      ],
+      "main": true
+    },
+    "critical.css": {
+      "files": [
+        "styles/blocks/*--blog--cp/*.scss",
+        "styles/**/*--cp.scss"
+      ]
+    },
+    "libs.css": {
+      "files": [
+        "styles/libs.scss",
+        "styles/libs.less"
+      ]
+    },
+    "angular.js": {
+      "bower": [
+        "angular"
+      ]
+    },
+    "libs.js": {
+      "bower": [
+        "es6-promise-polyfill",
+        "js-md5"
+      ]
+    }
+  },
+  "config": {
+    "devUrl": "http://localhost:3000"
+  }
+}

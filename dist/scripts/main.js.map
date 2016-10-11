@@ -1,0 +1,1 @@
+{"version":3,"sources":["../assets/scripts/main.js"],"names":["console","log"],"mappings":"AAAA,YAEAA,SAAAC,IAAA","file":"main.js","sourcesContent":["\"use strict\";\r\n\r\nconsole.log(\"JS file\");"],"sourceRoot":"assets/scripts/"}

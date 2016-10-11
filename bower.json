@@ -1,0 +1,22 @@
+{
+  "name": "portfolio",
+  "description": "Portfolio site based on Node.js",
+  "main": "app.js",
+  "authors": [
+    "evgeniy.annenkov <evgeniy.annenkov@farrosoft.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "es6-promise-polyfill": "^1.1.1",
+    "js-md5": "md5#^0.4.1"
+  }
+}
