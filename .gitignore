@@ -4,3 +4,4 @@ bower_components/
 assets/styles/main.scss
 assets/styles/libs.scss
 assets/styles/libs.less
+npm-debug.*
