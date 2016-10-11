@@ -33,4 +33,18 @@ const advertiserSchema = new mongoose.Schema({
     },
 });
 
+advertiserSchema.methods.validatePassword = function ( password ) {
+    return new Promise((resolve, reject) => {
+        hasher(password).verifyAgainst(this.password, function(err, verified) {
+            if(err)
+                reject(err);
+            if(!verified) {
+                resolve({success: false, message: "Wrong Password"});
+            } else {
+                resolve({success: true, message: "Correct Password"});
+            }
+        });
+    });
+};
+
 module.exports = mongoose.model('Advertiser', advertiserSchema);

@@ -63,14 +63,24 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            Advertiser.findOne({"contactInfo.email" : email, password}, ( err, user ) => {
+            Advertiser.findOne({"contactInfo.email" : email}, ( err, user ) => {
                 if ( err ) {
                     done(err);
                 }
                 if ( !user ) {
                     done(null, false, "user not found");
                 } else {
-                    done(null, user);
+                    user.validatePassword(password)
+                        .then(( data ) => {
+                            if ( data.success ) {
+                                done(null, user);
+                            } else {
+                                done(null, false, {message : data.message})
+                            }
+                        })
+                        .catch(( err ) => {
+                            done(err);
+                        });
                 }
             });
         }
