@@ -1,7 +1,7 @@
 "use strict";
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+const advertiserSchema = new mongoose.Schema({
     "oauthID" : Number,
     "avatar" : String,
     "name": String,
@@ -32,4 +32,4 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Advertiser', advertiserSchema);
