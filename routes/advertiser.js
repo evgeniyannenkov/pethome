@@ -17,20 +17,20 @@ router.post('/', passport.authenticate('local-register'), (req, res, next) => {
 //    res.json(req.user);
 //});
 //
-////Logout Router
-//router.get('/logout', (req, res, next) => {
-//    if(req.session) {
-//        req.logout();
-//        req.session.destroy((err) => {
-//            if(err) {
-//                next(err);
-//            } else {
-//                res.json({
-//                    message: "User logged out",
-//                    success: true
-//                });
-//            }
-//        });
-//    }
-//});
+//Logout Router
+router.get('/logout', (req, res, next) => {
+    if(req.session) {
+        req.logout();
+        req.session.destroy((err) => {
+            if(err) {
+                next(err);
+            } else {
+                res.json({
+                    message: "User logged out",
+                    success: true
+                });
+            }
+        });
+    }
+});
 module.exports = router;
