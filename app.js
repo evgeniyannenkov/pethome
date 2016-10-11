@@ -10,7 +10,7 @@ const dbConnection = require('./config/database');
 const mongoStore = require('connect-mongo')(session);
 
 const routes = require('./routes/index');
-const users = require('./routes/users');
+const advertiser = require('./routes/advertiser');
 
 const app = express();
 
@@ -45,7 +45,7 @@ passportConfigure();
 app.use('/assets', express.static(path.join(__dirname, '/dist')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/advertiser', advertiser);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

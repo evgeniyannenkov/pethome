@@ -2,7 +2,7 @@
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../schemas/advertizer');
+const Advertiser = require('../schemas/advertizer');
 
 module.exports = () => {
 
@@ -13,17 +13,49 @@ module.exports = () => {
 
     //Get user by id from session
     passport.deserializeUser((userId, done) => {
-        User.findById(userId, (err, user) => {
+        Advertiser.findById(userId, (err, user) => {
             done(err, user);
         });
     });
+
+    passport.use('local-register', new LocalStrategy({
+            "usernameField" : "email",
+            "passwordField" : "password",
+        },
+        function ( email, password, done ) {
+            Advertiser.findOne({email}, ( err, user ) => {
+                if ( err ) {
+                    done(err);
+                }
+                if ( !user ) {
+                    user = new Advertiser({
+                        password,
+                        contactInfo: {
+                            email
+                        }
+                    });
+                    user.save()
+                        .then((user)=>{
+                            console.log(user);
+                            done(null, user);
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                            done(err)
+                        });
+                } else {
+                    done(null, false, {success: false, message: "Email is already taken"});
+                }
+            });
+        }
+    ));
 
     passport.use('local-login', new LocalStrategy({
             "usernameField" : "email",
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            User.findOne({email, password}, ( err, user ) => {
+            Advertiser.findOne({email, password}, ( err, user ) => {
                 if ( err ) {
                     done(err);
                 }
