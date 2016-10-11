@@ -1,7 +1,7 @@
 "use strict";
 
 const mongoose = require('mongoose');
-const dbName = 'db-engine';
+const dbName = 'pethome_db';
 
 mongoose.connect(`mongodb://localhost/${dbName}`, (error) => {
     if(error) {
