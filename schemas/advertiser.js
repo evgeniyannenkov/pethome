@@ -1,5 +1,6 @@
 "use strict";
 const mongoose = require('mongoose');
+const hasher = require('password-hash-and-salt');
 
 const advertiserSchema = new mongoose.Schema({
     "oauthID" : Number,

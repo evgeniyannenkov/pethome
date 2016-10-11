@@ -2,21 +2,19 @@
 
 const express = require('express');
 const passport = require('passport');
-const User = require('../schemas/advertizer');
+const Advertiser = require('../schemas/advertiser');
 const router = express.Router();
 
 //Registration Route
-
 router.post('/', passport.authenticate('local-register'), (req, res, next) => {
     res.json(req.user);
 });
 
-//
-////Login Router
-//router.post('/login', passport.authenticate('local-login'), (req, res, next) => {
-//    res.json(req.user);
-//});
-//
+//Login Router
+router.post('/login', passport.authenticate('local-login'), (req, res, next) => {
+    res.json(req.user);
+});
+
 //Logout Router
 router.get('/logout', (req, res, next) => {
     if(req.session) {

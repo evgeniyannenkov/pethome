@@ -2,18 +2,19 @@
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const Advertiser = require('../schemas/advertizer');
+const Advertiser = require('../schemas/advertiser');
+const hasher = require('password-hash-and-salt');
 
 module.exports = () => {
 
     //Save user id to session
-    passport.serializeUser((user, done) => {
+    passport.serializeUser(( user, done ) => {
         done(null, user._id);
     });
 
     //Get user by id from session
-    passport.deserializeUser((userId, done) => {
-        Advertiser.findById(userId, (err, user) => {
+    passport.deserializeUser(( userId, done ) => {
+        Advertiser.findById(userId, ( err, user ) => {
             done(err, user);
         });
     });
@@ -23,28 +24,35 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            Advertiser.findOne({email}, ( err, user ) => {
+            Advertiser.findOne({"contactInfo.email" : email}, ( err, user ) => {
                 if ( err ) {
                     done(err);
                 }
                 if ( !user ) {
-                    user = new Advertiser({
-                        password,
-                        contactInfo: {
-                            email
+                    hasher(password).hash(( err, hash ) => {
+                        if ( err ) {
+                            done(err);
+                        }
+                        else {
+                            user = new Advertiser({
+                                password : hash,
+                                contactInfo : {
+                                    email
+                                }
+                            });
+                            user.save()
+                                .then(( user )=> {
+                                    console.log(user);
+                                    done(null, user);
+                                })
+                                .catch(( err ) => {
+                                    console.log(err);
+                                    done(err)
+                                });
                         }
                     });
-                    user.save()
-                        .then((user)=>{
-                            console.log(user);
-                            done(null, user);
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                            done(err)
-                        });
                 } else {
-                    done(null, false, {success: false, message: "Email is already taken"});
+                    done(null, false, {success : false, message : "Email is already taken"});
                 }
             });
         }
@@ -55,7 +63,7 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            Advertiser.findOne({email, password}, ( err, user ) => {
+            Advertiser.findOne({"contactInfo.email" : email, password}, ( err, user ) => {
                 if ( err ) {
                     done(err);
                 }
