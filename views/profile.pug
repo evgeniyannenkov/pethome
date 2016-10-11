@@ -1,0 +1,12 @@
+extends layout
+
+block header
+    include partials/_navbar
+
+block content
+    h1 PROFILE
+    if currentUser
+        h1= currentUser.contactInfo.email
+
+block footer
+    include partials/_footer

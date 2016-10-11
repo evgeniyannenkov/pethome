@@ -44,8 +44,18 @@ passportConfigure();
 
 app.use('/assets', express.static(path.join(__dirname, '/dist')));
 
+
+//Globals
+app.use(( req, res, next ) => {
+  res.locals = {
+    currentUser : req.user
+  };
+  next();
+});
+
 app.use('/', routes);
 app.use('/advertiser', advertiser);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -10,7 +10,7 @@ router.post('/', passport.authenticate('local-register'), (req, res, next) => {
     res.json(req.user);
 });
 
-//Login Router
+//Login Route
 router.post('/login', passport.authenticate('local-login'), (req, res, next) => {
     res.json(req.user);
 });

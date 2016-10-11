@@ -4,7 +4,9 @@
       "files": [
         "scripts/main.js",
         "scripts/blocks/**/*.js",
-        "scripts/common/*.js"
+        "scripts/common/*.js",
+        "scripts/modules/*.js",
+        "scripts/controllers/*.js"
       ]
     },
     "main.css": {
@@ -25,13 +27,9 @@
         "styles/libs.less"
       ]
     },
-    "angular.js": {
-      "bower": [
-        "angular"
-      ]
-    },
     "libs.js": {
       "bower": [
+        "angular",
         "es6-promise-polyfill",
         "js-md5"
       ]
