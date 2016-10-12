@@ -2,5 +2,5 @@ nav
     a.nav-item.nav-link(href='registration') Sign Up
     a.nav-item.nav-link(href='profile') My Profile
     a.btn.btn-info.pull-md-right(href='login') Login
-    a.btn.btn-info.pull-md-right(href='/advertiser/logout') Logout
+    a.btn.btn-info.pull-md-right(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") Logout
 

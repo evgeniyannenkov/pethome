@@ -21,7 +21,10 @@ router.get('/logout', (req, res, next) => {
         req.logout();
         req.session.destroy((err) => {
             if(err) {
-                next(err);
+                res.json({
+                    message: "Logout failed",
+                    success: false
+                });
             } else {
                 res.json({
                     message: "User logged out",

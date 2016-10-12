@@ -5,7 +5,7 @@ block header
 
 block content
     h1= type
-    .auth(ng-controller="authCtrl as auth")
+    .auth(ng-controller="authCtrl as ctrl")
         if type == "login"
             include partials/_login
         else if type == "registration"
