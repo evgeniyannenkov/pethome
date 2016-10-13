@@ -10,8 +10,10 @@ mixin input(label)
 //Button mixin
 mixin button(label)
     .form__item
-        button.form__btn&attributes(attributes)
-            span= label
+        .form__btn-wrap
+            button.form__btn&attributes(attributes)
+                span= label
+            .form__progress-bar
 
 //Textarea mixin
 mixin textarea(label)
