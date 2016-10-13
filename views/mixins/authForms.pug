@@ -1,3 +1,4 @@
+include _form-parts
 mixin authForm(form)
     if form == "registration"
         -var controller = "registrationCtrl as ctrl"
@@ -9,13 +10,6 @@ mixin authForm(form)
         -var title = "login"
 
     form.form(ng-controller=controller ng-submit=method)
-        .form__item
-            label.form__label
-                div.form__title Email
-                input.form__input(ng-model="ctrl.email" type="email", name="email" class="auth__input")
-        .form__item
-            label.form__label
-                div.form__title Password
-            input.form__input(ng-model="ctrl.password" type="password", name="password" class="auth__input")
-        .form__item
-            input.form__btn(type="submit" value=title)
+        +input("Email")(ng-model="ctrl.email" type="email")
+        +input("Password")(ng-model="ctrl.password" type="password")
+        +button(title)

@@ -2,34 +2,43 @@ include ../vars/common
 
 //Input mixin
 mixin input(label)
-    label
-        div= label
-        input&attributes(attributes)
+    .form__item
+        label.form__label
+            div.form__title= label
+            input.form__input&attributes(attributes)
+
+//Button mixin
+mixin button(label)
+    .form__item
+        button.form__btn&attributes(attributes)= label
 
 //Textarea mixin
 mixin textarea(label)
-    label
-        div= label
-        textarea&attributes(attributes)
+    .form__item
+        label.form__label
+            div.form__title= label
+            textarea.form__textarea&attributes(attributes)
 
 //Radios mixin
-mixin radios(block_name, block_inputs)
-    div= block_name
-    div
-        each inputs, name in block_inputs
-            each label,value in inputs
-                label
-                    span= label
-                    input(type="radio" name=name ,value = value)&attributes(attributes)
+mixin radios(block_title, block_inputs)
+    .form__item
+        div.form__title= block_title
+        div
+            each inputs, name in block_inputs
+                    each label,value in inputs
+                        label.form__label
+                            span= label
+                            input.form__radio(type="radio" name=name ,value = value)&attributes(attributes)
 
 //Select mixin
 mixin select(label, options)
-    div= label
-    div
-        each inputs, name in options
-            select(name = name)&attributes(attributes)
-                each label,value in inputs
-                    option(value = value)
-                        | #{label}
-                option(value = "other")
-                    | Other
+    .form__item
+        div.form__title= label
+        div
+            each inputs, name in options
+                    select.form__select(name = name)&attributes(attributes)
+                        each label,value in inputs
+                            option(value = value)
+                                | #{label}
+                        option(value = "other")
+                            | Other
