@@ -28,7 +28,8 @@ const components = {
         popupControllersInit
     ],
     advert : [
-        advertControllersInit
+        advertControllersInit,
+        advertDirectivesInit
     ]
 };
 

@@ -2,6 +2,26 @@
 
 function advertControllersInit ( module ) {
 
+    module.controller('advertsFeedCtrl', [
+        "$http",
+        function ( ajax ) {
+            this.getAdverts = () => {
+                ajax({
+                    method : "get",
+                    url : "/advert"
+                }).then(( response ) => {
+                    if ( response.data.adverts ) {
+                        this.adverts = response.data.adverts;
+                    }
+                }).catch(( err ) => {
+                    console.log(err);
+                });
+            };
+
+            this.getAdverts();
+        }
+    ]);
+
     module.controller('newAdvertCtrl', [
         "$http",
         function ( ajax ) {
@@ -22,5 +42,5 @@ function advertControllersInit ( module ) {
                 });
             };
         }
-    ])
+    ]);
 }

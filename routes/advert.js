@@ -4,6 +4,22 @@ const express = require('express');
 const Advert = require('../schemas/advert');
 const router = express.Router();
 
+router.get("/", ( req, res, next ) => {
+    Advert.find({})
+          .then(( adverts ) => {
+              res.json({
+                  adverts,
+                  success : true
+              });
+          })
+          .catch(( error ) => {
+              res.json({
+                  success : false,
+                  message : error.message
+              });
+          });
+});
+
 //Registration Route
 router.post('/', ( req, res, next ) => {
     if ( req.user ) {
