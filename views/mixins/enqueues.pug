@@ -6,3 +6,6 @@ mixin stylelink(href)
 
 mixin scriptlink(href)
     script(src = scriptsDest + href + ".js")&attributes(attributes)
+
+mixin scriptlinkExternal(href)
+    script(src = href)&attributes(attributes)

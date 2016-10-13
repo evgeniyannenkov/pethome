@@ -5,9 +5,9 @@ nav(ng-controller="popupCtrl as popup")
     a.nav-item.nav-link(href='profile') My Profile
     a.btn.btn-info.pull-md-right(ng-click="popup.active=true;popup.type='login';") Login
     a.btn.btn-info.pull-md-right(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") Logout
-    .popup(ng-show="popup.active" ng-click="popup.active=false")
+    .popup(ng-show="popup.active")
         .popup__inner
-            .popup__header {{popup.type}}
+            .popup__header(ng-click="popup.active=false") {{popup.type}}
             .popup__form(ng-show="popup.type=='registration'")
                 +authForm("registration")
             .popup__form(ng-show="popup.type=='login'")

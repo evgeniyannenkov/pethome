@@ -10,6 +10,6 @@ mixin authForm(form)
         -var title = "login"
 
     form.form(ng-controller=controller ng-submit=method)
-        +input("Email")(ng-model="ctrl.email" type="email")
-        +input("Password")(ng-model="ctrl.password" type="password")
-        +button(title)
+        +input("Email")(ng-model="ctrl.email" type="email" autocomplete="off")
+        +input("Password")(ng-model="ctrl.password" type="password" autocomplete="off")
+        +button(title)(class="fa fa-envelope")
