@@ -42,17 +42,15 @@ module.exports = () => {
                             });
                             user.save()
                                 .then(( user )=> {
-                                    console.log(user);
                                     done(null, user);
                                 })
                                 .catch(( err ) => {
-                                    console.log(err);
-                                    done(err)
+                                    done(err);
                                 });
                         }
                     });
                 } else {
-                    done(null, false, {success : false, message : "Email is already taken"});
+                    done(null, false, {success : false, message : "Registration: Email is already taken"});
                 }
             });
         }
@@ -68,7 +66,7 @@ module.exports = () => {
                     done(err);
                 }
                 if ( !user ) {
-                    done(null, false, "user not found");
+                    done(null, false, "Login: User not found");
                 } else {
                     user.validatePassword(password)
                         .then(( data ) => {

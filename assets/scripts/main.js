@@ -23,6 +23,9 @@ const modules = getModules();
 const components = {
     auth: [
         authControllersInit
+    ],
+    popup: [
+        popupControllersInit
     ]
 };
 

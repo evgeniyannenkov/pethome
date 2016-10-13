@@ -1,3 +1,5 @@
+"use strict";
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -6,11 +8,15 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
+const flash = require('connect-flash');
 const dbConnection = require('./config/database');
 const mongoStore = require('connect-mongo')(session);
 
+
+//Routes
 const routes = require('./routes/index');
 const advertiser = require('./routes/advertiser');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -23,8 +29,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
-//Created Session via Express-session
 app.use(session({
   secret: "user_authentication",
   resave: true,
@@ -35,10 +39,11 @@ app.use(session({
   })
 }));
 
-//Init Passport
+// Passport
 const passportConfigure = require('./config/passport');
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 passportConfigure();
 
 
@@ -55,6 +60,7 @@ app.use(( req, res, next ) => {
 
 app.use('/', routes);
 app.use('/advertiser', advertiser);
+app.use('/auth', auth);
 
 
 // catch 404 and forward to error handler

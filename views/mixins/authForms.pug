@@ -1,0 +1,18 @@
+mixin authForm(form)
+    if form == "registration"
+        -var controller = "registrationCtrl as ctrl"
+        -var method = "ctrl.registration();"
+    else if form == "login"
+        -var controller = "loginCtrl as ctrl"
+        -var method = "ctrl.login();"
+
+    form.auth(ng-controller=controller ng-submit=method)
+        .auth__item
+            label
+                div Email
+                input(ng-model="ctrl.email" type="email", name="email" class="auth__input")
+        .auth__item
+            label(for="password") Password
+            input(ng-model="ctrl.password" type="password", name="password" class="auth__input")
+        .auth__item
+            input(type="submit")

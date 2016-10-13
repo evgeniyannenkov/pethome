@@ -39,9 +39,9 @@ advertiserSchema.methods.validatePassword = function ( password ) {
             if(err)
                 reject(err);
             if(!verified) {
-                resolve({success: false, message: "Wrong Password"});
+                resolve({success: false, message: "Login: Wrong Password"});
             } else {
-                resolve({success: true, message: "Correct Password"});
+                resolve({success: true, message: "Login: Correct Password"});
             }
         });
     });

@@ -1,9 +1,9 @@
-form(method="post", action="/advertiser/login")
+form(ng-submit="ctrl.login();")
     .item
         label(for="login__email") Email
-        input(type="email", name="email" class="login__input", id="login__email")
+        input(ng-model="ctrl.loginEmail" type="email", name="email" class="login__input", id="login__email")
     .item
         label(for="login__password") Password
-        input(type="password", name="password" class="login__input", id="login__password")
+        input(ng-model="ctrl.loginPassword" type="password", name="password" class="login__input", id="login__password")
     .item
         input(type="submit")

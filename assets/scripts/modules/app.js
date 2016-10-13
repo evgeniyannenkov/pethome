@@ -3,6 +3,7 @@
 function getModules () {
     return {
         auth: angular.module("auth", []),
-        app : angular.module("app", [ "auth" ])
+        popup: angular.module("popup", []),
+        app : angular.module("app", [ "auth", "popup" ])
     };
 }

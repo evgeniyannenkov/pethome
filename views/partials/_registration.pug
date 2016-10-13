@@ -1,12 +1,12 @@
-form(method="post", action="/advertiser")
+form(novalidate ng-submit="ctrl.registration();")
     .registration__item
         label(for="registration__name") Name
-        input(type="text", name="name" class="registration__input", id="registration__name")
+        input(ng-model="registrationName" type="text", name="name" class="registration__input", id="registration__name")
     .item
         label(for="registration__email") Email
-        input(type="email", name="email" class="registration__input", id="registration__email")
+        input(ng-model="ctrl.registrationEmail" type="email", name="email" class="registration__input", id="registration__email")
     .item
         label(for="registration__password") Password
-        input(type="password", name="password" class="registration__input", id="registration__password")
+        input(ng-model="ctrl.registrationPassword" type="password", name="password" class="registration__input", id="registration__password")
     .item
         input(type="submit")
