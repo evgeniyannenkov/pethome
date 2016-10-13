@@ -1,0 +1,42 @@
+@font-face {
+  font-family    : 'Lato';
+  src            : url('fonts/Lato-Regular.eot');
+  src            : url('fonts/Lato-Regular.eot?#iefix') format('embedded-opentype'),
+  url('fonts/Lato-Regular.woff2') format('woff2'),
+  url('fonts/Lato-Regular.woff') format('woff'),
+  url('fonts/Lato-Regular.ttf') format('truetype');
+  font-style     : normal;
+  font-weight    : normal;
+  text-rendering : optimizeLegibility;
+}
+
+@font-face {
+  font-family    : 'Roboto Regular';
+  src            : url('fonts/Roboto-Regular.ttf') format('truetype');
+  font-style     : normal;
+  font-weight    : normal;
+  text-rendering : optimizeLegibility;
+}
+
+@font-face {
+  font-family    : 'Roboto Conrensed';
+  src            : url('fonts/Roboto-Conrensed.ttf') format('truetype');
+  font-style     : normal;
+  font-weight    : normal;
+  text-rendering : optimizeLegibility;
+}
+
+@mixin regular-font() {
+  font-family : Lato, sans-serif;
+  font-weight : normal;
+}
+
+@mixin roboto-regular() {
+  font-family : "Roboto Regular", sans-serif;
+  font-weight : 600;
+}
+
+@mixin roboto-condensed() {
+  font-family : "Roboto Conrensed", sans-serif;
+  font-weight : 400;
+}
