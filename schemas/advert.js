@@ -18,6 +18,7 @@ const advertSchema = new mongoose.Schema({
         type: String,
         required: [ true, 'pet age required' ]
     },
+    "publicationDate":Date,
     "breed" : String,
     "info" : String,
     "advertiserID" : {

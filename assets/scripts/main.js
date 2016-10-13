@@ -21,11 +21,14 @@ class Portfolio {
 }
 const modules = getModules();
 const components = {
-    auth: [
+    auth : [
         authControllersInit
     ],
-    popup: [
+    popup : [
         popupControllersInit
+    ],
+    advert : [
+        advertControllersInit
     ]
 };
 
