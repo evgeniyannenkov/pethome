@@ -1,6 +1,6 @@
 @import "../../common/variables";
 
-.popup {
+.popup-overlay {
   display         : flex;
   flex-flow       : row nowrap;
   align-items     : center;
@@ -11,12 +11,62 @@
   background      : rgba(0, 0, 0, .8);
   width           : 100%;
   height          : 100%;
+  z-index         : 99;
+  transition      : all 0.3s;
+}
+
+.popup {
+  display         : flex;
+  flex-flow       : row nowrap;
+  align-items     : center;
+  justify-content : center;
+  position        : fixed;
+  top             : 0;
+  left            : 0;
+  width           : 100%;
+  height          : 100%;
   z-index         : 100;
+}
+
+.popup__close {
+  cursor     : pointer;
+  width      : 25px;
+  height     : 25px;
+  position   : absolute;
+  top        : 50px;
+  right      : 50px;
+  z-index    : 100;
+  transition : all 0.3s;
+  &:hover {
+    transform : scale(1.2);
+  }
+  &:before {
+    position         : absolute;
+    top              : 50%;
+    left             : 0;
+    display          : block;
+    content          : "";
+    width            : 100%;
+    height           : 4px;
+    background-color : $red;
+    transform        : rotateZ(45deg);
+  }
+  &:after {
+    position         : absolute;
+    top              : 50%;
+    left             : 0;
+    display          : block;
+    content          : "";
+    width            : 100%;
+    height           : 4px;
+    background-color : $red;
+    transform        : rotateZ(-45deg);
+  }
 }
 
 .popup__inner {
   width            : 50%;
-  max-width        : 450px;
+  max-width        : 400px;
   background-color : $white;
   box-shadow       : 0 2px 4px 0 rgba(0, 0, 0, .5);
   height           : auto;
