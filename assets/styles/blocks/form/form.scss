@@ -110,33 +110,51 @@
   cursor           : pointer;
   color            : $white;
   text-transform   : uppercase;
-  span {
-    display    : inline-block;
-    @include roboto-regular;
-    color      : $white;
-    transition : all 0.3s;
+  &:hover {
+    .form__btn-icon {
+      left : 0;
+    }
+    .form__btn-title {
+      left : 100%;
+    }
   }
   &.error {
     animation : error 0.5s forwards;
+    .form__btn-icon {
+      &:before {
+        content : "\f00d";
+      }
+    }
   }
+}
+
+.form__btn-icon {
+  font                    : normal normal normal 14px/1 FontAwesome;
+  text-rendering          : auto;
+  -webkit-font-smoothing  : antialiased;
+  -moz-osx-font-smoothing : grayscale;
+  position                : absolute;
+  display                 : flex;
+  flex-flow               : row nowrap;
+  justify-content         : center;
+  align-items             : center;
+  z-index                 : 1;
+  width                   : 100%;
+  height                  : 100%;
+  font-size               : 1.3em;
+  top                     : 0;
+  left                    : -100%;
+  transition              : left 0.3s;
   &:before {
-    content     : "";
-    position    : absolute;
-    z-index     : 1;
-    width       : 100%;
-    height      : 100%;
-    line-height : 40px;
-    font-size   : 1.3em;
-    top         : 0;
-    left        : -100%;
-    transition  : left 0.3s;
+    content : "\f0e0";
   }
-  &:hover {
-    &:before {
-      left : 0;
-    }
-    span {
-      transform : translateX(150px);
-    }
-  }
+}
+
+.form__btn-title {
+  display    : inline-block;
+  position   : relative;
+  left       : 0;
+  @include roboto-regular;
+  color      : $white;
+  transition : left 0.3s;
 }

@@ -10,6 +10,6 @@ mixin authForm(form)
         -var title = "login"
 
     form.form(novalidate ng-controller=controller ng-submit=method name="authForm")
-        +input("Email")(ng-model="ctrl.email" type="email" autocomplete="off")
-        +input("Password")(ng-model="ctrl.password" type="password" autocomplete="off")
-        +button(title)(ng-disabled="authForm.$invalid" class="fa fa-envelope")
+        +input("Email")(ng-model="ctrl.email" ng-change="popup.error=false;" ng-focus="popup.error=false;" type="email" autocomplete="off")
+        +input("Password")(ng-model="ctrl.password" ng-change="popup.error=false;" ng-focus="popup.error=false;" type="password" autocomplete="off")
+        +button(title)(ng-click="popup.error = authForm.$invalid" ng-class="{error: popup.error}")

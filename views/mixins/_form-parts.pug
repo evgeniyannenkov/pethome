@@ -12,7 +12,8 @@ mixin button(label)
     .form__item
         .form__btn-wrap
             button.form__btn&attributes(attributes)
-                span= label
+                span.form__btn-icon
+                span.form__btn-title= label
             .form__progress-bar
 
 //Textarea mixin

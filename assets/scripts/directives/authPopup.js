@@ -1,6 +1,6 @@
 "use strict";
 
-function advertDirectivesInit ( module ) {
+function authPopupDirectivesInit ( module ) {
     const templatesFolder = "/assets/templates";
 
     module.directive('authPopup', [

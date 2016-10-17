@@ -6,9 +6,7 @@ function popupControllersInit ( module ) {
         "$http",
         function ( $http ) {
 
-            this.popup = () => {
-                console.log(12345);
-            }
+
 
         }
     ])

@@ -44,17 +44,17 @@ var manifest = require('asset-builder')('./assets/manifest.json');
 var path = manifest.paths;
 
 var files = {
-    main_sass: 'main.scss',
-    libs_sass: 'libs.scss',
-    libs_less: 'libs.less',
-    critical_sass: 'critical-path.scss',
-    main_js: 'main.js'
+    main_sass : 'main.scss',
+    libs_sass : 'libs.scss',
+    libs_less : 'libs.less',
+    critical_sass : 'critical-path.scss',
+    main_js : 'main.js'
 };
 
 var sassPaths = {
-    blocksFolder: './assets/styles/blocks',
-    stylesFolder: './assets/styles',
-    sassFiles: [
+    blocksFolder : './assets/styles/blocks',
+    stylesFolder : './assets/styles',
+    sassFiles : [
         './assets/styles/common/**/*.scss',
         './assets/styles/components/**/*.scss',
         './assets/styles/layouts/**/*.scss',
@@ -62,11 +62,11 @@ var sassPaths = {
         '!./assets/styles/blocks/**/_*.scss',
         '!./assets/styles/main.scss'
     ],
-    excludedCriticalPathFiles: [
+    excludedCriticalPathFiles : [
         '!./assets/styles/blocks/*--cp/*.scss',
         '!./assets/styles/**/*--cp.scss'
     ],
-    criticalPathFiles: [
+    criticalPathFiles : [
         './assets/styles/blocks/*--cp/*.scss',
         './assets/styles/**/*--cp.scss',
         '!./assets/styles/blocks/**/_*.scss'
@@ -98,19 +98,19 @@ var project = manifest.getProjectGlobs();
 // CLI options
 var enabled = {
     // Enable static asset revisioning when `--production`
-    rev: argv.production,
+    rev : argv.production,
     // Disable source maps when `--production`
-    maps: !argv.production,
+    maps : !argv.production,
     // Fail styles task on error when `--production`
-    failStyleTask: argv.production,
+    failStyleTask : argv.production,
     // Fail due to JSHint warnings only when `--production`
-    failJSHint: argv.production,
+    failJSHint : argv.production,
     // Strip debug statments from javascript when `--production`
-    stripJSDebug: argv.production,
+    stripJSDebug : argv.production,
     // Run browserSync on watch when `--sync`
-    browserSync: argv.sync,
+    browserSync : argv.sync,
     // Disable notify messages when `--server`
-    notify: !argv.server
+    notify : !argv.server
 };
 
 // Path to the compiled assets manifest in the dist directory
@@ -152,15 +152,15 @@ var cssTasks = function ( filename ) {
         })
         .pipe(function () {
             return gulpif('*.scss', sass({
-                outputStyle: 'nested', // libsass doesn't support expanded yet
-                precision: 10,
-                includePaths: ['.'],
-                errLogToConsole: !enabled.failStyleTask
+                outputStyle : 'nested', // libsass doesn't support expanded yet
+                precision : 10,
+                includePaths : ['.'],
+                errLogToConsole : !enabled.failStyleTask
             }));
         })
         .pipe(concat, filename)
         .pipe(autoprefixer, {
-            browsers: [
+            browsers : [
                 'last 2 versions',
                 'android 4',
                 'opera 12'
@@ -168,7 +168,7 @@ var cssTasks = function ( filename ) {
         })
         .pipe(function () {
             return modifyCssUrls({
-                modify: function ( url ) {
+                modify : function ( url ) {
                     if ( !url.startsWith('http') ) {
                         return '../' + url;
                     }
@@ -178,7 +178,7 @@ var cssTasks = function ( filename ) {
         })
         .pipe(function () {
             return modifyCssUrls({
-                modify: function ( url, filePath ) {
+                modify : function ( url, filePath ) {
                     var cleanFileName = getCleanFileName(url);
                     if ( isInBowerFiles(cleanFileName, globs.fonts.concat(globs.images)) ) {
                         return '../fonts/' + cleanFileName;
@@ -188,20 +188,20 @@ var cssTasks = function ( filename ) {
             });
         })
         .pipe(cssNano, {
-            safe: true
+            safe : true
         })
         .pipe(function () {
             return gulpif(enabled.rev, rev());
         })
         .pipe(function () {
                 return gulpif(enabled.notify && filename === 'main.css', notify({
-                    message: "Generated file: <%= file.relative %>"
+                    message : "Generated file: <%= file.relative %>"
                 }));
             }
         )
         .pipe(function () {
             return gulpif(enabled.maps, sourcemaps.write('.', {
-                sourceRoot: 'assets/styles/'
+                sourceRoot : 'assets/styles/'
             }));
         })();
 };
@@ -220,26 +220,26 @@ var criticalTasks = function ( filename ) {
         })
         .pipe(function () {
             return gulpif('*.scss', sass({
-                outputStyle: 'nested', // libsass doesn't support expanded yet
-                precision: 10,
-                includePaths: ['.'],
-                errLogToConsole: !enabled.failStyleTask
+                outputStyle : 'nested', // libsass doesn't support expanded yet
+                precision : 10,
+                includePaths : ['.'],
+                errLogToConsole : !enabled.failStyleTask
             }));
         })
         .pipe(concat, filename)
         .pipe(autoprefixer, {
-            browsers: [
+            browsers : [
                 'last 2 versions',
                 'android 4',
                 'opera 12'
             ]
         })
         .pipe(cssNano, {
-            safe: true
+            safe : true
         })
         .pipe(function () {
             return modifyCssUrls({
-                modify: function ( url ) {
+                modify : function ( url ) {
                     if ( !url.startsWith('http') ) {
                         return '<?php echo get_template_directory_uri() . "/dist/" ?>' + url;
                     }
@@ -257,7 +257,7 @@ var criticalTasks = function ( filename ) {
         )
         .pipe(function () {
                 return checkFilesize({
-                    fileSizeLimit: 10240
+                    fileSizeLimit : 10240
                 });
             }
         )
@@ -281,14 +281,14 @@ var jsTasks = function ( filename ) {
         .pipe(concat, filename)
         .pipe(function () {
             return gulpif(filename === files.main_js, babel({
-                presets: [
+                presets : [
                     'es2015'
                 ]
             }));
         })
         .pipe(uglify, {
-            compress: {
-                'drop_debugger': enabled.stripJSDebug
+            compress : {
+                'drop_debugger' : enabled.stripJSDebug
             }
         })
         .pipe(function () {
@@ -296,13 +296,13 @@ var jsTasks = function ( filename ) {
         })
         .pipe(function () {
                 return gulpif(enabled.notify && filename === files.main_js, notify({
-                    message: "Generated file: <%= file.relative %>"
+                    message : "Generated file: <%= file.relative %>"
                 }));
             }
         )
         .pipe(function () {
             return gulpif(enabled.maps, sourcemaps.write('.', {
-                sourceRoot: 'assets/scripts/'
+                sourceRoot : 'assets/scripts/'
             }));
         })();
 };
@@ -313,10 +313,10 @@ var jsTasks = function ( filename ) {
 var writeToManifest = function ( directory ) {
     return lazypipe()
         .pipe(gulp.dest, path.dist + directory)
-        .pipe(browserSync.stream, {match: '**/*.{js,css}'})
+        .pipe(browserSync.stream, {match : '**/*.{js,css}'})
         .pipe(rev.manifest, revManifest, {
-            base: path.dist,
-            merge: true
+            base : path.dist,
+            merge : true
         })
         .pipe(gulp.dest, path.dist)();
 };
@@ -327,9 +327,9 @@ var writeToManifest = function ( directory ) {
 var blocksList = function ( config ) {
     return gulp.src(config.files)
                .pipe(concatFilenames(config.blocksFile, {
-                   root: 'assets/styles',
-                   prepend: '@import "',
-                   append: '";'
+                   root : 'assets/styles',
+                   prepend : '@import "',
+                   append : '";'
                }))
                .pipe(gulp.dest(config.dest));
 };
@@ -337,9 +337,9 @@ var blocksList = function ( config ) {
 var libsList = function ( config ) {
     return gulp.src(config.files)
                .pipe(concatFilenames(config.blocksFile, {
-                   root: './',
-                   prepend: '@import "../../',
-                   append: '";'
+                   root : './',
+                   prepend : '@import "../../',
+                   append : '";'
                }))
                .pipe(gulp.dest(config.dest));
 };
@@ -360,33 +360,33 @@ var getLibsFiles = function ( extention ) {
 // raised. If the `--production` flag is set: this task will fail outright.
 gulp.task('sass:import:libs', function () {
     return libsList({
-        files: getLibsFiles('.scss'),
-        dest: path.source + "styles",
-        blocksFile: files.libs_sass
+        files : getLibsFiles('.scss'),
+        dest : path.source + "styles",
+        blocksFile : files.libs_sass
     });
 });
 
 gulp.task('less:import:libs', function () {
     return libsList({
-        files: getLibsFiles('.less'),
-        dest: path.source + "styles",
-        blocksFile: files.libs_less
+        files : getLibsFiles('.less'),
+        dest : path.source + "styles",
+        blocksFile : files.libs_less
     });
 });
 
 gulp.task('sass:import:build', function () {
     return blocksList({
-        files: sassPaths.sassFiles.concat(sassPaths.excludedCriticalPathFiles),
-        dest: path.source + "styles",
-        blocksFile: files.main_sass
+        files : sassPaths.sassFiles.concat(sassPaths.excludedCriticalPathFiles),
+        dest : path.source + "styles",
+        blocksFile : files.main_sass
     });
 });
 
 gulp.task('sass:import:watch', function () {
     return blocksList({
-        files: sassPaths.sassFiles,
-        dest: path.source + "styles",
-        blocksFile: files.main_sass
+        files : sassPaths.sassFiles,
+        dest : path.source + "styles",
+        blocksFile : files.main_sass
     });
 });
 
@@ -401,7 +401,7 @@ gulp.task('styles', ['sass:import:libs', 'less:import:libs'], function () {
                     this.emit('end');
                 });
             }
-            merged.add(gulp.src(dep.globs, {base: 'styles'})
+            merged.add(gulp.src(dep.globs, {base : 'styles'})
                            .pipe(cssTasksInstance));
         }
     });
@@ -427,7 +427,7 @@ gulp.task('scripts', function () {
     var merged = merge();
     manifest.forEachDependency('js', function ( dep ) {
         merged.add(
-            gulp.src(dep.globs, {base: 'scripts'})
+            gulp.src(dep.globs, {base : 'scripts'})
                 .pipe(jsTasks(dep.name))
         );
     });
@@ -476,16 +476,16 @@ gulp.task('fonts', function () {
 gulp.task('images', function () {
     return gulp.src(globs.images)
                .pipe(imagemin({
-                   progressive: true,
-                   interlaced: true,
-                   svgoPlugins: [{removeUnknownsAndDefaults: false}, {cleanupIDs: false}]
+                   progressive : true,
+                   interlaced : true,
+                   svgoPlugins : [{removeUnknownsAndDefaults : false}, {cleanupIDs : false}]
                }))
                .pipe(gulp.dest(path.dist + 'images'))
                .pipe(browserSync.stream());
 });
 
 // ### Templates
-gulp.task('templates', function buildHTML() {
+gulp.task('templates', function buildHTML () {
     return gulp.src(['assets/templates/**/*.pug'])
                .pipe(pug())
                .pipe(gulp.dest(path.dist + 'templates'))
@@ -499,7 +499,7 @@ gulp.task('jshint', function () {
         'bower.json', 'gulpfile.js'
     ].concat(project.js))
                .pipe(jshint({
-                   esversion: 6
+                   esversion : 6
                }))
                .pipe(jshint.reporter('jshint-stylish'))
                .pipe(gulpif(enabled.failJSHint, jshint.reporter('fail')));
@@ -543,11 +543,11 @@ gulp.task('watch', ['clean'], function () {
 
     if ( enabled.browserSync ) {
         browserSync.init({
-            files: ['{lib,templates}/**/*.php', '*.php'],
-            proxy: config.devUrl,
-            snippetOptions: {
-                whitelist: ['/wp-admin/admin-ajax.php'],
-                blacklist: ['/wp-admin/**']
+            files : ['{lib,templates}/**/*.php', '*.php'],
+            proxy : config.devUrl,
+            snippetOptions : {
+                whitelist : ['/wp-admin/admin-ajax.php'],
+                blacklist : ['/wp-admin/**']
             }
         });
     }
@@ -580,9 +580,16 @@ gulp.task('watch', ['clean'], function () {
         }
     });
 
+    watch([path.source + 'templates/**/*', './views/mixins/**/*', './views/partials/**/*', './views/vars/**/*'], function ( events ) {
+        if ( 'add' === events.event || 'unlink' === events.event || 'change' === events.event ) {
+            return runSequence(
+                'templates'
+            );
+        }
+    });
+
     gulp.watch([path.source + 'fonts/**/*'], ['fonts']);
     gulp.watch([path.source + 'images/**/*'], ['images']);
-    gulp.watch([path.source + 'templates/**/*'], ['templates']);
     //gulp.watch(['bower.json', 'assets/manifest.json'], ['watch']);
 });
 
@@ -621,8 +628,8 @@ gulp.task('mongo-start', function () {
 
 gulp.task('server-start', function () {
     nodemon({
-        script: './bin/www',
-        ignore: [
+        script : './bin/www',
+        ignore : [
             'node_modules',
             'bower_components',
             'dist',
