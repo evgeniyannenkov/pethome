@@ -17,8 +17,7 @@
     width : 40%
   }
   100% {
-    width   : 100%;
-    display : none;
+    width : 100%;
   }
 }
 
@@ -79,7 +78,8 @@
   position         : relative;
   width            : 100%;
   height           : 0;
-  transition       : height 0.2s;
+  margin-bottom    : 7px;
+  transition       : height 0.2s, margin-bottom 0.2s;
   background-color : darken($blue, 5%);
   &:before {
     content          : "";
@@ -89,7 +89,8 @@
     background-color : darken($blue, 10%);
   }
   &.active {
-    height : 7px;
+    height        : 7px;
+    margin-bottom : 0;
     &:before {
       width     : 100%;
       animation : load 3s;
