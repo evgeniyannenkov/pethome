@@ -55,6 +55,9 @@
     border  : 1px solid $blue;
     outline : none;
   }
+  &.ng-invalid.ng-touched {
+    border : 1px solid $red;
+  }
 }
 
 .form__label {
