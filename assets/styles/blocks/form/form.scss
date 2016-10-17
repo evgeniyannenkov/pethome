@@ -93,7 +93,7 @@
     margin-bottom : 0;
     &:before {
       width     : 100%;
-      animation : load 3s;
+      animation : load 3s forwards;
     }
   }
 }
@@ -117,7 +117,7 @@
     transition : all 0.3s;
   }
   &.error {
-    animation : error 0.5s;
+    animation : error 0.5s forwards;
   }
   &:before {
     content     : "";
