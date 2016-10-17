@@ -6,13 +6,4 @@ nav(ng-controller="popupCtrl as popup")
     else
         a.nav-item.nav-link(href='/profile') My Profile
         a.btn.btn-info.pull-md-right(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") Logout
-    .popup-overlay(ng-show="popup.active")
-    .popup(ng-show="popup.active")
-        .popup__close(ng-click="popup.active=false")
-        .popup__inner
-            .popup__header {{popup.type}}
-            .popup__form(ng-show="popup.type=='registration'")
-                +authForm("registration")
-            .popup__form(ng-show="popup.type=='login'")
-                +authForm("login")
     div(auth-popup popup="popup")
