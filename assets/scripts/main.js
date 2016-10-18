@@ -21,6 +21,9 @@ class Portfolio {
 }
 const modules = getModules();
 const components = {
+    services : [
+        authServicesInit
+    ],
     auth : [
         authControllersInit
     ],

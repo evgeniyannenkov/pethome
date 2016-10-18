@@ -2,62 +2,21 @@
 function authControllersInit ( module ) {
 
     module.controller('registrationCtrl', [
-        "$http",
-        function ( $http ) {
+        "$http", "authService",
+        function ( $http, authService ) {
 
             this.registration = () => {
-                $http({
-                    method : "post",
-                    url : "/advertiser",
-                    data : {
-                        email : this.email,
-                        password : this.password,
-                    }
-                }).then(( response ) => {
-                    if(response.data.success) {
-                        document.location.reload();
-                    } else {
-                        console.log("Registration: failed");
-                        console.log(response);
-                    }
-                }).catch(( err ) => {
-                    if(err.data.success === false) {
-                        console.log(err.data.message);
-                    } else {
-                        console.log(err);
-                    }
-                });
+                authService.authenticate("/advertiser", {email : this.email, password : this.password}, "registration");
             };
         }
     ]);
 
     module.controller('loginCtrl', [
-        "$http",
-        function ( $http ) {
+        "$http", "authService",
+        function ( $http, authService ) {
 
             this.login = () => {
-                $http({
-                    method : "post",
-                    url : "/advertiser/login",
-                    data : {
-                        email : this.email,
-                        password : this.password,
-                    }
-                }).then(( response ) => {
-                    if(response.data.success) {
-                        document.location.reload();
-                    } else {
-                        console.log("Login: failed");
-                        console.log(response);
-                    }
-                }).catch(( err ) => {
-                    if(err.data.success === false) {
-                        console.log(err.data.message);
-                    } else {
-                        console.log(err);
-                    }
-                });
-
+                authService.authenticate("/advertiser/login", {email : this.email, password : this.password}, "login");
             };
         }
     ]);
