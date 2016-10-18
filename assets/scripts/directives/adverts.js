@@ -3,7 +3,20 @@
 function advertDirectivesInit ( module ) {
     const templatesFolder = "/assets/templates";
 
-    module.directive('advertPost', [
+    module.directive('advertsFeed', [
+        function () {
+
+            return {
+                restrict : 'A',
+                templateUrl : `${templatesFolder}/advertsFeed.html`,
+                scope : {
+                    user_id : "@advertsFeed"
+                }
+            };
+        }
+    ]);
+
+    module.directive('advert', [
         "$http",
         function ( ajax ) {
 

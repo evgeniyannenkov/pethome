@@ -9,5 +9,8 @@ block content
         h1= currentUser.contactInfo.email
     include partials/_new-advert-form
 
+    if currentUser
+        div(adverts-feed=currentUser._id)
+
 block footer
     include partials/_footer
