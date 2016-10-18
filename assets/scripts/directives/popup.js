@@ -15,7 +15,6 @@ function popupDirectivesInit ( module ) {
                 },
                 templateUrl : `${templatesFolder}/popup.html`,
                 scope : {
-                    popup : "=",
                     type : "@"
                 },
             };

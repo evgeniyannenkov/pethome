@@ -2,21 +2,21 @@ include ../mixins/authForms
 
 nav
     ul
-        li
-            a.nav-item.nav-link(href='/') Home
+        li.nav-item
+            a.nav-link(href='/') Home
         if !currentUser
-            li(popup type="registration")
+            li.nav-item(popup type="registration")
                 popup-trigger.nav-item.nav-link Sign Up
                 popup-content
                     .popup__form
                         +authForm("registration")
-            li(popup type="login")
-                popup-trigger.btn.btn-info.pull-md-right Login
+            li.nav-item(popup type="login")
+                popup-trigger.nav-link Login
                 popup-content
                     .popup__form
                         +authForm("login")
         else
-            li
-                a.nav-item.nav-link(href='/profile') My Profile
-            li
-                a.btn.btn-info.pull-md-right(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") Logout
+            li.nav-item
+                a.nav-link(href='/profile') My Profile
+            li.nav-item
+                a.nav-link(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") Logout

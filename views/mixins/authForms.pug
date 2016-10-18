@@ -1,15 +1,15 @@
 include _form-parts
 mixin authForm(form)
     if form == "registration"
-        -var controller = "registrationCtrl as ctrl"
-        -var method = "ctrl.registration();"
+        -var controller = "registrationCtrl as auth"
+        -var method = "auth.registration();"
         -var title = "sign up"
     else if form == "login"
-        -var controller = "loginCtrl as ctrl"
-        -var method = "ctrl.login();"
+        -var controller = "loginCtrl as auth"
+        -var method = "auth.login();"
         -var title = "login"
 
-    form.form(novalidate ng-controller=controller ng-submit=method name="authForm")
-        +input("Email")(ng-model="ctrl.email" ng-change="popup.error=false;" ng-focus="popup.error=false;" type="email" autocomplete="off")
-        +input("Password")(ng-model="ctrl.password" ng-change="popup.error=false;" ng-focus="popup.error=false;" type="password" autocomplete="off")
-        +button(title)(ng-click="popup.error = authForm.$invalid" ng-class="{error: popup.error}")
+    form.form(novalidate ng-controller=controller ng-submit=method name=form + "Form")
+        +input("Email")(ng-model="auth.email" ng-change="auth.error=false;" ng-focus="auth.error=false;" type="email" autocomplete="off")
+        +input("Password")(ng-model="auth.password" ng-change="auth.error=false;" ng-focus="auth.error=false;" type="password" autocomplete="off")
+        +button(title)(ng-click="auth.error = " + form + "Form.$invalid" ng-class="{error: auth.error}")
