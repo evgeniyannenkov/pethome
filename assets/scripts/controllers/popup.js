@@ -3,11 +3,8 @@
 function popupControllersInit ( module ) {
 
     module.controller('popupCtrl', [
-        "$http",
-        function ( $http ) {
-
-
-
+        function () {
+            this.active = false;
         }
     ])
 }

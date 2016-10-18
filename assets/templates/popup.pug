@@ -1,0 +1,8 @@
+include ../../views/mixins/authForms
+div(ng-controller="popupCtrl as popup")
+    div(ng-transclude="trigger" ng-click="popup.active=true;")
+    .popup(ng-class="{visible : popup.active}")
+        .popup__close(ng-click="popup.active=false")
+        .popup__inner(ng-class="{active : popup.active}")
+            .popup__header {{type}}
+            div(ng-transclude="content")
