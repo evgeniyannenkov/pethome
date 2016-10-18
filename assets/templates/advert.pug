@@ -1,8 +1,14 @@
-div {{advert.name}}
-div {{advert.type}}
-div {{advert.gender}}
-div {{advert.age}}
-div {{advert.publicationDate}}
-div {{advert.info}}
-div {{advert.breed}}
-hr
+div.advert__field(ng-if="advert.name")
+    | {{advert.name}}
+div.advert__field(ng-if="advert.type")
+    | {{advert.type}}
+div.advert__field(ng-if="advert.gender")
+    | {{advert.gender}}
+div.advert__field(ng-if="advert.age")
+    | {{advert.age}}
+div.advert__field(ng-if="advert.publicationDate")
+    | {{advert.publicationDate}}
+div.advert__field(ng-if="advert.breed")
+    | {{advert.breed}}
+div.advert__field(ng-if="advert.info")
+    | {{advert.info}}

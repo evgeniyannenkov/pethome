@@ -8,12 +8,12 @@ nav
             li.nav-item(popup type="registration")
                 popup-trigger.nav-item.nav-link Sign Up
                 popup-content
-                    .popup__form
+                    .popup__content
                         +authForm("registration")
             li.nav-item(popup type="login")
                 popup-trigger.nav-link Login
                 popup-content
-                    .popup__form
+                    .popup__content
                         +authForm("login")
         else
             li.nav-item

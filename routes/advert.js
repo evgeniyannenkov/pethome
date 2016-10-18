@@ -5,7 +5,7 @@ const Advert = require('../schemas/advert');
 const router = express.Router();
 
 router.get("/", ( req, res, next ) => {
-    Advert.find({})
+    Advert.find({}).sort({ "publicationDate" : "desc" })
           .then(( adverts ) => {
               res.json({
                   adverts,

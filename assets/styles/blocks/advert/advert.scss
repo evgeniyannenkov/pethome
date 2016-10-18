@@ -1,0 +1,15 @@
+@import "../../common/variables";
+
+.advert {
+  padding       : 10px;
+  display       : flex;
+  flex-flow     : column nowrap;
+  align-items   : stretch;
+  border        : 1px solid $blue;
+  margin-bottom : 10px;
+}
+
+.advert__field {
+  padding       : 5px;
+  border-bottom : 1px solid $blue;
+}
