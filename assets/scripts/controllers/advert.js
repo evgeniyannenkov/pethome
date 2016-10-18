@@ -3,22 +3,36 @@
 function advertControllersInit ( module ) {
 
     module.controller('advertsFeedCtrl', [
-        "$http",
-        function ( ajax ) {
-            this.getAdverts = () => {
-                ajax({
-                    method : "get",
-                    url : "/advert"
-                }).then(( response ) => {
-                    if ( response.data.adverts ) {
-                        this.adverts = response.data.adverts;
-                    }
-                }).catch(( err ) => {
-                    console.log(err);
-                });
+        "$http", "$scope",
+        function ( ajax, $scope ) {
+            this.getAdverts = ( user_id ) => {
+                if ( !user_id ) {
+                    ajax({
+                        method : "get",
+                        url : "/advert"
+                    }).then(( response ) => {
+                        if ( response.data.adverts ) {
+                            this.adverts = response.data.adverts;
+                        }
+                    }).catch(( err ) => {
+                        console.log(err);
+                    });
+                } else {
+                    ajax({
+                        method : "get",
+                        url : `/advertiser/${user_id}/adverts`
+                    }).then(( response ) => {
+                        console.log(response);
+                        if ( response.data.adverts ) {
+                            this.adverts = response.data.adverts;
+                        }
+                    }).catch(( err ) => {
+                        console.log(err);
+                    })
+                }
             };
 
-            this.getAdverts();
+            this.getAdverts($scope.user_id);
         }
     ]);
 
