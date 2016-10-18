@@ -26,7 +26,7 @@ const components = {
     ],
     popup : [
         popupControllersInit,
-        authPopupDirectivesInit
+        popupDirectivesInit
     ],
     advert : [
         advertControllersInit,
