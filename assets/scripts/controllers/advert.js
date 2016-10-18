@@ -57,4 +57,41 @@ function advertControllersInit ( module ) {
             };
         }
     ]);
+
+    module.controller('editAdvertCtrl', [
+        "$http", "$scope",
+        function ( ajax, $scope ) {
+            let requestData = {};
+            this.getAdvert = ( advert_id ) => {
+                ajax({
+                    method : "get",
+                    url : `/advert/api/${advert_id}`
+                }).then(( response ) => {
+                    if ( response.data.success && response.data.advert ) {
+                        console.log(response.data.advert);
+                        this.advert = response.data.advert;
+                    }
+                }).catch(( err ) => {
+                    console.log(err);
+                });
+            };
+
+            this.getAdvert($scope.advert_id);
+
+            this.save = () => {
+                ajax({
+                    method : "put",
+                    url : `/advert/api/${$scope.advert_id}`,
+                    data : this.advert
+                }).then(( response ) => {
+                    if ( response.data.success && response.data.advert ) {
+                        this.advert = response.data.advert;
+                    }
+                }).catch(( err ) => {
+                    console.log(err);
+                });
+                console.log(this.advert);
+            };
+        }
+    ]);
 }

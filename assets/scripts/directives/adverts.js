@@ -17,8 +17,7 @@ function advertDirectivesInit ( module ) {
     ]);
 
     module.directive('advert', [
-        "$http",
-        function ( ajax ) {
+        function () {
 
             return {
                 restrict : 'A',
@@ -26,6 +25,20 @@ function advertDirectivesInit ( module ) {
                 scope : {
                     advert : "="
                 }
+            };
+        }
+    ]);
+
+    module.directive('advertSingle', [
+        function () {
+            return {
+                restrict : 'A',
+                templateUrl : `${templatesFolder}/edit-advert.html`,
+                scope : {
+                    advert_id : "@advertSingle"
+                },
+                controller : "editAdvertCtrl",
+                controllerAs : "advertEditor"
             };
         }
     ]);

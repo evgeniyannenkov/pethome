@@ -1,0 +1,27 @@
+extends layout
+
+block header
+    include partials/_navbar
+
+block content
+    h1= title
+
+    if currentUser && advert.advertiserID.toString() == currentUser._id.toString()
+        div(advert-single=advert._id)
+    else
+        if advert.name
+            h1= advert.name
+        if advert.type
+            h1= advert.type
+        if advert.gender
+            h1= advert.gender
+        if advert.age
+            h1= advert.age
+        if advert.publicationDate
+            h1= advert.publicationDate
+        if advert.breed
+            h1= advert.breed
+        if advert.info
+            h1= advert.info
+block footer
+    include partials/_footer

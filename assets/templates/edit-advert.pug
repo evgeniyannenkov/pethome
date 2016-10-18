@@ -1,0 +1,30 @@
+div.advert__field(ng-if="advertEditor.advert.name")
+    label
+        h3 name
+        input(ng-model="advertEditor.advert.name")
+div.advert__field(ng-if="advertEditor.advert.type")
+    label
+        h3 type
+        input(ng-model="advertEditor.advert.type")
+div.advert__field(ng-if="advertEditor.advert.gender")
+    label
+        h3 gender
+        input(ng-model="advertEditor.advert.gender")
+div.advert__field(ng-if="advertEditor.advert.age")
+    label
+        h3 age
+        input(ng-model="advertEditor.advert.age")
+div.advert__field(ng-if="advertEditor.advert.publicationDate")
+    label
+        h3 publication
+        input(ng-model="advertEditor.advert.publicationDate")
+div.advert__field(ng-if="advertEditor.advert.breed")
+    label
+        h3 breed
+        input(ng-model="advertEditor.advert.breed")
+div.advert__field(ng-if="advertEditor.advert.info")
+    label
+        h3 info
+        input(ng-model="advertEditor.advert.info")
+
+button(ng-click="advertEditor.save();") Save
