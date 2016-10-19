@@ -22,7 +22,8 @@ class Portfolio {
 const modules = getModules();
 const components = {
     services : [
-        authServicesInit
+        authServicesInit,
+        advertiserServicesInit
     ],
     auth : [
         authControllersInit

@@ -3,8 +3,9 @@
 function profileControllersInit ( module ) {
 
     module.controller('profileSettingsCtrl', [
-        function () {
+        "advertiser", function (advertiser) {
             console.log(123);
+            advertiserService.test();
         }
     ]);
 }
