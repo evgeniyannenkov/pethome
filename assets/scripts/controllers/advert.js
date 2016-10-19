@@ -5,6 +5,8 @@ function advertControllersInit ( module ) {
     module.controller('advertsFeedCtrl', [
         "$http", "$scope",
         function ( ajax, $scope ) {
+            this.order = "-publicationDate";
+
             this.getAdverts = ( user_id ) => {
                 if ( !user_id ) {
                     ajax({
