@@ -1,23 +1,53 @@
 "use strict";
 function authControllersInit ( module ) {
 
-    module.controller('registrationCtrl', [
-        "$http", "authService",
-        function ( $http, authService ) {
+    module.controller('authCtrl', [
+        "$scope", "$http", "$timeout", "authService",
+        function ( $scope, $http, $timeout, authService ) {
 
-            this.registration = () => {
-                authService.authenticate("/advertiser", {email : this.email, password : this.password}, "registration");
+            this.emailRegex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+            this.passwordRegex = /.*\S.*/;
+
+            this.checkForm = (form) => {
+                this.error = !$scope[form].$valid;
+                this.validClass = $scope[form].$valid ? "valid" : "error";
             };
-        }
-    ]);
 
-    module.controller('loginCtrl', [
-        "$http", "authService",
-        function ( $http, authService ) {
+            this.submit = (form) => {
+                $scope[form].email.$setTouched();
+                $scope[form].password.$setTouched();
 
-            this.login = () => {
-                authService.authenticate("/advertiser/login", {email : this.email, password : this.password}, "login");
+                const url = form === "registration" ? "/advertiser" : "/advertiser/login";
+
+                if ( $scope[form].$valid ) {
+
+                    authService.authenticate(url, {email : this.email, password : this.password})
+                               .then(( response ) => {
+                                   if ( response.data.success ) {
+                                       $timeout(() => {
+                                           this.responseClass = "success";
+                                           document.location.reload();
+                                       }, 3000);
+                                   } else {
+                                       console.log(`${$scope[form]}: failed`);
+                                       console.log(response);
+                                   }
+                               })
+                               .catch(( err ) => {
+                                   if ( !err.data.success ) {
+                                       $timeout(() => {
+                                           this.responseClass = "fail";
+                                       }, 3000);
+                                       console.log(err.data.message);
+                                   } else {
+                                       console.log(err);
+                                   }
+                               });
+                } else {
+                    console.log(`${$scope[form]} form invalid`);
+                }
             };
+
         }
     ]);
 
