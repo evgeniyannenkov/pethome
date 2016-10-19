@@ -8,10 +8,28 @@ function advertDirectivesInit ( module ) {
 
             return {
                 restrict : 'A',
-                templateUrl : `${templatesFolder}/advertsFeed.html`,
+                templateUrl : `${templatesFolder}/adverts-feed.html`,
                 scope : {
-                    user_id : "@advertsFeed"
-                }
+                    user_id : "@advertsFeed",
+                    filter_enabled : "=enableFilter"
+                },
+                controller : "advertsFeedCtrl",
+                controllerAs : "feed"
+            };
+        }
+    ]);
+
+    module.directive('advertsFilter', [
+        function () {
+
+            return {
+                restrict : 'AE',
+                templateUrl : `${templatesFolder}/adverts-filter.html`,
+                scope : {
+                    filter_fields : "=feedFilter"
+                },
+                controller : "advertsFeedFilterCtrl",
+                controllerAs : "filter"
             };
         }
     ]);

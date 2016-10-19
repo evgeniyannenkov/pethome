@@ -36,6 +36,17 @@ function advertControllersInit ( module ) {
         }
     ]);
 
+    module.controller('advertsFeedFilterCtrl', [
+        "$http", "$scope",
+        function ( ajax, $scope ) {
+            this.set = () => {
+                $scope.filter_fields = {
+                    name : "Nickolas"
+                };
+            };
+        }
+    ]);
+
     module.controller('newAdvertCtrl', [
         "$http",
         function ( ajax ) {

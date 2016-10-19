@@ -1,0 +1,3 @@
+adverts-filter(ng-if="filter_enabled" feed-filter="feed.filter")
+div.adverts-feed
+    div.advert(ng-repeat="(index, advert) in feed.adverts | filter: feed.filter" advert="advert")
