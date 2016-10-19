@@ -6,6 +6,6 @@ mixin authForm(form)
         -var title = "login"
 
     form.form(novalidate ng-controller="authCtrl as auth" ng-submit="auth.submit('"+form+"');" name=form)
-        +input("Email")(name="email" ng-required="true" ng-model="auth.email" ng-change="auth.error=false; auth.validClass=''; auth.responseClass='';" ng-focus="auth.error=false;" ng-pattern="auth.emailRegex" type="email" autocomplete="off")
-        +input("Password")(name="password" ng-required="true" ng-model="auth.password" ng-change="auth.error=false;" ng-focus="auth.error=false;" ng-pattern="auth.passwordRegex" type="password" autocomplete="off")
+        +input("Email")(name="email" ng-required="true" ng-model="auth.email" ng-change="auth.reset();" ng-focus="auth.error=false;" ng-pattern="auth.emailRegex" type="email" autocomplete="off")
+        +input("Password")(name="password" ng-required="true" ng-model="auth.password" ng-change="auth.reset();" ng-focus="auth.error=false;" ng-pattern="auth.passwordRegex" type="password" autocomplete="off")
         +button(title)(ng-click="auth.checkForm('"+form+"');" class="{{auth.validClass}} {{auth.responseClass}}")
