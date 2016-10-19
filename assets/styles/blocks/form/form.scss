@@ -2,43 +2,29 @@
 
 @keyframes load {
   0% {
-    width : 0;
-  }
-  20% {
+    left  : 0;
     width : 0;
   }
   25% {
-    width : 10%;
-  }
-  50% {
-    width : 30%;
-  }
-  75% {
-    width : 40%
-  }
-  100% {
+    left  : 0;
     width : 100%;
   }
-}
-
-@keyframes success {
-  0% {
-    content : "\f0e0";
+  50% {
+    left  : 100%;
+    width : 0;
   }
-  99% {
-    content : "\f0e0";
+  75% {
+    left  : 0;
+    width : 100%;
   }
   100% {
-    content : "\f00c";
+    left  : 0;
+    width : 0;
   }
 }
 
 @keyframes finish {
   0% {
-    height        : 7px;
-    margin-bottom : 0;
-  }
-  90% {
     height        : 7px;
     margin-bottom : 0;
   }
@@ -107,24 +93,29 @@
   height           : 0;
   margin-bottom    : 7px;
   transition       : height 0.2s, margin-bottom 0.2s;
-  background-color : darken($blue, 5%);
+  background-color : darken($blue, 10%);
   &:before {
     content          : "";
     position         : absolute;
     width            : 0;
     height           : 100%;
-    background-color : darken($blue, 10%);
+    background-color : darken($blue, 20%);
   }
 }
 
-.success {
+.valid {
   & + .form__progress-bar {
     height        : 7px;
     margin-bottom : 0;
-    animation     : finish 3s forwards;
     &:before {
-      animation : load 2.8s forwards;
+      animation : load 2.8s infinite ease-in-out;
     }
+  }
+}
+
+.success, .fail {
+  & + .form__progress-bar {
+    animation : finish 0.2s forwards;
   }
 }
 
@@ -156,15 +147,28 @@
       }
     }
   }
-  &.success {
+  &.valid {
     .form__btn-icon {
-      left      : 0;
-      &:before {
-        animation : success 3s forwards;
-      }
+      left : 0;
     }
     .form__btn-title {
       left : 100%;
+    }
+  }
+  &.success {
+    .form__btn-icon {
+      &:before {
+        transition : content 0.2s;
+        content    : "\f00c";
+      }
+    }
+  }
+  &.fail {
+    .form__btn-icon {
+      &:before {
+        transition : content 0.2s;
+        content    : "\f00d";
+      }
     }
   }
 }

@@ -12,9 +12,9 @@ function authControllersInit ( module ) {
             this.passwordRegex = passwordRegex;
             this.type = "registration";
 
-            this.checkForm = (success) => {
+            this.checkForm = () => {
                 this.error = !$scope.registrationForm.$valid;
-                this.validClass = $scope.registrationForm.$valid ? "success" : "error";
+                this.validClass = $scope.registrationForm.$valid ? "valid" : "error";
             };
 
             this.registration = () => {
@@ -25,11 +25,11 @@ function authControllersInit ( module ) {
 
                     authService.authenticate("/advertiser", {email : this.email, password : this.password})
                                .then(( response ) => {
-                                   console.log(response);
                                    if ( response.data.success ) {
                                        $timeout(() => {
+                                           this.responseClass = "success";
                                            document.location.reload();
-                                       }, 4000 );
+                                       }, 3000);
                                    } else {
                                        console.log(`${this.type}: failed`);
                                        console.log(response);
@@ -37,6 +37,9 @@ function authControllersInit ( module ) {
                                })
                                .catch(( err ) => {
                                    if ( !err.data.success ) {
+                                       $timeout(() => {
+                                           this.responseClass = "fail";
+                                       }, 3000);
                                        console.log(err.data.message);
                                    } else {
                                        console.log(err);
@@ -51,12 +54,17 @@ function authControllersInit ( module ) {
     ]);
 
     module.controller('loginCtrl', [
-        "$scope", "$http", "authService",
-        function ( $scope, $http, authService ) {
+        "$scope", "$http", "$timeout", "authService",
+        function ( $scope, $http, $timeout, authService ) {
 
             this.emailRegex = emailRegex;
             this.passwordRegex = passwordRegex;
             this.type = "login";
+
+            this.checkForm = () => {
+                this.error = !$scope.loginForm.$valid;
+                this.validClass = $scope.loginForm.$valid ? "valid" : "error";
+            };
 
             this.login = () => {
                 $scope.loginForm.email.$setTouched();
@@ -65,9 +73,11 @@ function authControllersInit ( module ) {
                 if ( $scope.loginForm.$valid ) {
                     authService.authenticate("/advertiser/login", {email : this.email, password : this.password})
                                .then(( response ) => {
-                                   console.log(response);
                                    if ( response.data.success ) {
-                                       document.location.reload();
+                                       $timeout(() => {
+                                           this.responseClass = "success";
+                                           document.location.reload();
+                                       }, 3000);
                                    } else {
                                        console.log(`${this.type}: failed`);
                                        console.log(response);
@@ -75,6 +85,9 @@ function authControllersInit ( module ) {
                                })
                                .catch(( err ) => {
                                    if ( !err.data.success ) {
+                                       $timeout(() => {
+                                           this.responseClass = "fail";
+                                       }, 3000);
                                        console.log(err.data.message);
                                    } else {
                                        console.log(err);
