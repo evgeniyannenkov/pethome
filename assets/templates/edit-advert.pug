@@ -1,30 +1,60 @@
-div.advert__field(ng-if="advertEditor.advert.name")
-    label
-        h3 name
-        input(ng-model="advertEditor.advert.name")
-div.advert__field(ng-if="advertEditor.advert.type")
-    label
-        h3 type
-        input(ng-model="advertEditor.advert.type")
-div.advert__field(ng-if="advertEditor.advert.gender")
-    label
-        h3 gender
-        input(ng-model="advertEditor.advert.gender")
-div.advert__field(ng-if="advertEditor.advert.age")
-    label
-        h3 age
-        input(ng-model="advertEditor.advert.age")
-div.advert__field(ng-if="advertEditor.advert.publicationDate")
-    label
-        h3 publication
-        input(ng-model="advertEditor.advert.publicationDate")
-div.advert__field(ng-if="advertEditor.advert.breed")
-    label
-        h3 breed
-        input(ng-model="advertEditor.advert.breed")
-div.advert__field(ng-if="advertEditor.advert.info")
-    label
-        h3 info
-        input(ng-model="advertEditor.advert.info")
+include ../../views/mixins/_form-parts
 
-button(ng-click="advertEditor.save();") Save
+div
+    button(ng-hide = "advertEditor.edition" ng-click = "advertEditor.edition = true;") Edit
+    button(ng-show = "advertEditor.edition" ng-click = "advertEditor.edition = false;advertEditor.save();") Save
+    button(ng-show = "advertEditor.edition" ng-click = "advertEditor.edition = false;advertEditor.reset();") Cancel
+
+div.advert__field
+    label
+        div(ng-hide = "advertEditor.edition")
+            h3 Name
+            | {{advertEditor.advert.name}}
+        div(ng-show = "advertEditor.edition")
+            +input("Name")(ng-model = "advertEditor.advert.name")
+div.advert__field
+    label
+        div(ng-hide = "advertEditor.edition")
+            h3 Type
+            | {{advertEditor.advert.type}}
+        div(ng-show = "advertEditor.edition")
+            +select("Type", {
+                "type" : {
+                    "dog" : "Dog",
+                    "cat" : "Cat",
+                    "hamster" : "Hamster"
+                }
+            })(ng-model = "advertEditor.advert.type")
+div.advert__field
+    label
+        div(ng-hide = "advertEditor.edition")
+            h3 Gender
+            | {{advertEditor.advert.gender}}
+        div(ng-show = "advertEditor.edition")
+            +radios("Gender", {
+                "gender" : {
+                    "boy" : "Boy",
+                    "girl" : "Girl"
+                }
+            })(ng-model = "advertEditor.advert.gender")
+div.advert__field
+    label
+        div(ng-hide = "advertEditor.edition")
+            h3 age
+            | {{advertEditor.advert.age}}
+        div(ng-show = "advertEditor.edition")
+            +input("Age")(type="number" ng-model = "advertEditor.advert.age")
+div.advert__field
+    label
+        div(ng-hide = "advertEditor.edition")
+            h3 breed
+            | {{advertEditor.advert.breed}}
+        div(ng-show = "advertEditor.edition")
+            +input("Breed")(ng-model = "advertEditor.advert.breed")
+div.advert__field
+    label
+        div(ng-hide = "advertEditor.edition")
+            h3 info
+            | {{advertEditor.advert.info}}
+        div(ng-show = "advertEditor.edition")
+            +textarea("Info")(ng-model = "advertEditor.advert.info")

@@ -62,14 +62,18 @@ function advertControllersInit ( module ) {
         "$http", "$scope",
         function ( ajax, $scope ) {
             let requestData = {};
+            let current_advert = {};
             this.getAdvert = ( advert_id ) => {
                 ajax({
                     method : "get",
                     url : `/advert/api/${advert_id}`
                 }).then(( response ) => {
                     if ( response.data.success && response.data.advert ) {
-                        console.log(response.data.advert);
                         this.advert = response.data.advert;
+                        if ( this.advert.age ) {
+                            this.advert.age = parseInt(this.advert.age);
+                        }
+                        current_advert = JSON.parse(JSON.stringify(this.advert));
                     }
                 }).catch(( err ) => {
                     console.log(err);
@@ -86,11 +90,18 @@ function advertControllersInit ( module ) {
                 }).then(( response ) => {
                     if ( response.data.success && response.data.advert ) {
                         this.advert = response.data.advert;
+                        if ( this.advert.age ) {
+                            this.advert.age = parseInt(this.advert.age);
+                        }
+                        current_advert = JSON.parse(JSON.stringify(this.advert));
                     }
                 }).catch(( err ) => {
                     console.log(err);
                 });
-                console.log(this.advert);
+            };
+
+            this.reset = () => {
+                this.advert = JSON.parse(JSON.stringify(current_advert));
             };
         }
     ]);
