@@ -6,6 +6,7 @@ function getModules () {
         auth : angular.module("auth", []),
         popup : angular.module("popup", []),
         advert : angular.module("advert", []),
-        app : angular.module("app", ["services", "auth", "popup", "advert"])
+        profile : angular.module("profile", []),
+        app : angular.module("app", ["services", "auth", "popup", "advert", "profile"])
     };
 }

@@ -34,6 +34,9 @@ const components = {
     advert : [
         advertControllersInit,
         advertDirectivesInit
+    ],
+    profile : [
+        profileControllersInit
     ]
 };
 

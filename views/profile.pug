@@ -8,6 +8,7 @@ block content
     if currentUser
         h1= currentUser.contactInfo.email
     include partials/_new-advert-form
+    include partials/_form-profile-settings
 
     if currentUser
         div(adverts-feed=currentUser._id)

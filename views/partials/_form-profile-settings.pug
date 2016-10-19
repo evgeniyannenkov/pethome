@@ -1,0 +1,13 @@
+include ../mixins/formParts
+
+div(popup type="profileSettings")
+    popup-trigger
+        button Edit Profile
+    popup-content
+        .popup__content
+            form.form(novalidate ng-controller="profileSettingsCtrl as profileSettings" ng-submit="profileSettings.save();")
+                +input("Name")(ng-model="profileSettings.name" name="name" autocomplete="off")
+                +input("Email")(name="email" ng-required="true" ng-model="profileSettings.email" ng-change="profileSettings.error=false; profileSettings.validClass=''; profileSettings.responseClass='';" ng-focus="profileSettings.error=false;" ng-pattern="profileSettings.emailRegex" type="email" autocomplete="off")
+                +input("Password")(name="password" ng-required="true" ng-model="profileSettings.password" ng-change="profileSettings.error=false;" ng-focus="profileSettings.error=false;" ng-pattern="profileSettings.passwordRegex" type="password" autocomplete="off")
+                +input("Phone Number")(name="phone" ng-model="profileSettings.phone" ng-change="profileSettings.error=false;" ng-focus="profileSettings.error=false;" ng-pattern="" autocomplete="off")
+                +button(title)(ng-click="profileSettings.checkForm('" + form + "');" class="{{profileSettings.validClass}} {{profileSettings.responseClass}}")
