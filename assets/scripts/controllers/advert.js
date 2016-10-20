@@ -9,7 +9,7 @@ function advertControllersInit ( module ) {
 
             const api = apiGen.generate({
                 "options" : {
-                    api_base : "/api/advert"
+                    api_base : "/api/:document"
                 },
                 "calls" : {
                     "get" : {
@@ -19,14 +19,23 @@ function advertControllersInit ( module ) {
                         "get" : {
                             url : "/:id"
                         }
+                    },
+                    "post" : {
+                        "create" : {
+                            url : ""
+                        },
+                        "createAdvert" : {}
                     }
                 }
             });
 
-            api.get({ id : "5806353a39c58118b4f5db2e" })
-               .then(( response )=> {
-                   console.log(response);
-               });
+            api.createAdvert({
+                document : "advert"
+            }).then(( response )=> {
+                console.log(response);
+            }).catch(( response )=> {
+                console.log(response);
+            });
 
             this.getAdverts = ( user_id ) => {
                 if ( !user_id ) {

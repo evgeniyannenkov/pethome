@@ -10,24 +10,27 @@ function apiGenServicesInit ( module ) {
             let calls = {};
 
             const generateCall = ( method, call_options ) => {
+                method = method.toUpperCase();
+                call_options.url = call_options.url || "";
+
                 let requestData = {
                     method,
                     url : `${options.api_base}${call_options.url}`
                 };
 
-                let arg;
-
-                if ( call_options.data ) {
-                    requestData.data = call_options.data;
-                }
                 return ( params ) => {
 
                     for ( let param in params ) {
                         if ( params.hasOwnProperty(param) ) {
-                            requestData.url = requestData.url.replace(`:${param}`, params[param]);
+                            if ( param !== "data" ) {
+                                requestData.url = requestData.url.replace(`:${param}`, params[ param ]);
+                            } else if ( method !== "GET" ) {
+                                requestData.data = params[ param ];
+                            }
                         }
                     }
 
+                    console.log(requestData);
                     return ajax(requestData);
                 };
             };
