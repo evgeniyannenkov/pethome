@@ -3,6 +3,7 @@
 const express = require('express');
 const Advert = require('../../schemas/advert');
 const router = express.Router();
+const response = require("../../middleware/response");
 
 router.get("/", ( req, res, next ) => {
     Advert.find({})
@@ -34,15 +35,21 @@ router.get("/:id", ( req, res, next ) => {
           });
 });
 
-router.get("/:id/delete", ( req, res, next ) => {
+router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
     const _id = req.params.id;
-    if ( req.user && _id ) {
-        Advert.findOneAndRemove({ _id, advertiserID : req.user._id })
+    const advert = req.body || {};
+
+    if ( _id && advert._id && advert._id == _id ) {
+
+        Advert.findOneAndUpdate({ _id, advertiserID : req.user.id }, advert, { new : true })
               .then(( advert ) => {
                   if ( advert ) {
-                      res.json({ success : true, advert, redirect : "/profile" });
+                      res.json({ advert, success : true });
                   } else {
-                      res.json({ success : false, message : "No advert was removed." });
+                      res.json({
+                          message : "Update Advert: not found",
+                          success : false
+                      });
                   }
               })
               .catch(( error ) => {
@@ -53,90 +60,45 @@ router.get("/:id/delete", ( req, res, next ) => {
               });
     } else {
         res.json({
-            success : false,
-            message : "You must be logged in."
+            message : "Update Advert: id isn't correct",
+            success : false
         });
-
     }
 });
 
-router.put("/:id", ( req, res, next ) => {
-    const _id = req.params.id;
-    const advert = req.body || {};
-    let updateData = {};
-    if ( _id && advert._id && advert._id == _id && req.user && advert.advertiserID && advert.advertiserID == req.user._id ) {
+router.post('/', response.ifLoggedOut(), ( req, res, next ) => {
 
-        if ( advert.name ) {
-            updateData.name = advert.name;
-        }
-        if ( advert.age ) {
-            updateData.age = advert.age;
-        }
-        if ( advert.breed ) {
-            updateData.breed = advert.breed;
-        }
-        if ( advert.gender ) {
-            updateData.gender = advert.gender;
-        }
-        if ( advert.info ) {
-            updateData.info = advert.info;
-        }
-        if ( advert.type ) {
-            updateData.type = advert.type;
-        }
+    const advert = new Advert();
 
-        Advert.findByIdAndUpdate(_id, updateData, { new : true })
-              .then(( advert ) => {
-                  res.json({ advert, success : true });
-              })
-              .catch(( error ) => {
-                  res.json({
-                      success : false,
-                      message : error.message
-                  });
-              });
+    advert.type = req.body.type || "dog";
+    advert.gender = req.body.gender || "boy";
+    advert.age = req.body.age || "1";
+    advert.name = req.body.name || `${advert.type}, ${advert.gender} ${advert.age}`;
+    advert.publicationDate = new Date();
+    advert.advertiserID = req.user._id;
+
+    if ( req.body.breed ) {
+        advert.breed = req.body.breed;
     }
-});
 
-//Registration Route
-router.post('/', ( req, res, next ) => {
-    if ( req.user ) {
-        const advert = new Advert();
-
-        advert.type = req.body.type || "dog";
-        advert.gender = req.body.gender || "boy";
-        advert.age = req.body.age || "1";
-        advert.name = req.body.name || `${advert.type}, ${advert.gender} ${advert.age}`;
-        advert.publicationDate = new Date();
-        advert.advertiserID = req.user._id;
-
-        if ( req.body.breed ) {
-            advert.breed = req.body.breed;
-        }
-
-        if ( req.body.info ) {
-            advert.info = req.body.info;
-        }
-
-        advert.save()
-              .then(( data )=> {
-                  res.json({
-                      success : true,
-                      advert : data
-                  });
-              })
-              .catch(( error )=> {
-                  res.json({
-                      success : false,
-                      message : error.message
-                  });
-              });
-    } else {
-        res.json({
-            success : false,
-            message : "you should be logged in"
-        });
+    if ( req.body.info ) {
+        advert.info = req.body.info;
     }
+
+    advert.save()
+          .then(( data )=> {
+              res.json({
+                  success : true,
+                  advert : data
+              });
+          })
+          .catch(( error )=> {
+              res.json({
+                  success : false,
+                  message : error.message
+              });
+          });
+
 });
 
 module.exports = router;
