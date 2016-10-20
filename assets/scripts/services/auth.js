@@ -38,9 +38,10 @@ function authServicesInit ( module ) {
                     $http(requestData)
                         .then(( response ) => {
                             resolve(response);
-                        }).catch(( err ) => {
-                        reject(err);
-                    });
+                        })
+                        .catch(( err ) => {
+                            reject(err);
+                        });
                 });
             };
 

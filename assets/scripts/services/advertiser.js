@@ -4,27 +4,44 @@ function advertiserServicesInit ( module ) {
     module.factory('advertiser', [
         "$http", ( $http ) => {
 
+            const getRequestData = ( data ) => {
+                const requestData = {};
+                const apiBase = "/api/advertiser";
+
+                switch ( data.type ) {
+                    case "get" :
+                        break;
+                    case "update" :
+                        break;
+                    case "remove" :
+                        requestData.method = "GET";
+                        requestData.url = `${apiBase}/${data.id}/delete`;
+                        break;
+                }
+
+                if ( data.bodyData ) {
+                    requestData.data = data.bodyData;
+                }
+
+                return requestData;
+
+            };
+
+            const makeApiCall = ( data )=> {
+                const requestData = getRequestData(data);
+                return $http(requestData);
+            };
+
             const get = () => {
-                //return new Promise((resolve, reject) => {
-                //
-                //})
-                $http({
-                    method : "GET",
-                    url : url,
-                    data : data
-                }).then(( response ) => {
-                    console.log(response);
-                }).catch(( err ) => {
-                    console.log(err);
-                });
+
             };
 
             const save = () => {
 
             };
 
-            const remove = () => {
-
+            const remove = ( id ) => {
+                return makeApiCall({type : "remove", id});
             };
 
             const update = () => {
