@@ -3,9 +3,30 @@
 function advertControllersInit ( module ) {
 
     module.controller('advertsFeedCtrl', [
-        "$http", "$scope", "adverts",
-        function ( ajax, $scope, adverts ) {
+        "$http", "$scope", "adverts", "apiGen",
+        function ( ajax, $scope, adverts, apiGen ) {
             this.order = "-publicationDate";
+
+            const api = apiGen.generate({
+                "options" : {
+                    api_base : "/api/advert"
+                },
+                "calls" : {
+                    "get" : {
+                        "getAll" : {
+                            url : ""
+                        },
+                        "get" : {
+                            url : "/:id"
+                        }
+                    }
+                }
+            });
+
+            api.get({ id : "5806353a39c58118b4f5db2e" })
+               .then(( response )=> {
+                   console.log(response);
+               });
 
             this.getAdverts = ( user_id ) => {
                 if ( !user_id ) {
