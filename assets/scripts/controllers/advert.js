@@ -30,7 +30,7 @@ function advertControllersInit ( module ) {
                         }
                     }).catch(( err ) => {
                         console.log(err);
-                    })
+                    });
                 }
             };
 
