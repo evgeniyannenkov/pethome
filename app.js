@@ -18,6 +18,7 @@ const routes = require('./routes/index');
 const advertiser = require('./routes/advertiser');
 const advert = require('./routes/advert');
 const auth = require('./routes/auth');
+const api = require('./routes/api');
 
 const app = express();
 
@@ -63,7 +64,7 @@ app.use('/', routes);
 app.use('/advertiser', advertiser);
 app.use('/advert', advert);
 app.use('/auth', auth);
-
+app.use("/api", api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

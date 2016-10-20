@@ -17,7 +17,7 @@ function authControllersInit ( module ) {
                 $scope[ form ].email.$setTouched();
                 $scope[ form ].password.$setTouched();
 
-                const url = form === "registration" ? "/advertiser" : "/advertiser/login";
+                const url = form === "registration" ? "/api/advertiser" : "/api/advertiser/login";
 
                 if ( $scope[ form ].$valid ) {
 
@@ -64,7 +64,7 @@ function authControllersInit ( module ) {
             this.logout = () => {
                 $http({
                     method : "GET",
-                    url : "/advertiser/logout"
+                    url : "/api/advertiser/logout"
                 }).then(( response ) => {
                     if ( response.data.success ) {
                         document.location.reload();

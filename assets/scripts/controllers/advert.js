@@ -11,7 +11,7 @@ function advertControllersInit ( module ) {
                 if ( !user_id ) {
                     ajax({
                         method : "get",
-                        url : "/advert"
+                        url : "/api/advert"
                     }).then(( response ) => {
                         if ( response.data.adverts ) {
                             this.adverts = response.data.adverts;
@@ -22,7 +22,7 @@ function advertControllersInit ( module ) {
                 } else {
                     ajax({
                         method : "get",
-                        url : `/advertiser/${user_id}/adverts`
+                        url : `/api/advertiser/${user_id}/adverts`
                     }).then(( response ) => {
                         console.log(response);
                         if ( response.data.adverts ) {
@@ -59,7 +59,7 @@ function advertControllersInit ( module ) {
             this.create = () => {
                 ajax({
                     method : "post",
-                    url : "/advert",
+                    url : "/api/advert",
                     data : this.advert
                 }).then(( response ) => {
                     console.log(response.data);
@@ -78,7 +78,7 @@ function advertControllersInit ( module ) {
             this.getAdvert = ( advert_id ) => {
                 ajax({
                     method : "get",
-                    url : `/advert/api/${advert_id}`
+                    url : `/api/advert/api/${advert_id}`
                 }).then(( response ) => {
                     if ( response.data.success && response.data.advert ) {
                         this.advert = response.data.advert;
@@ -97,7 +97,7 @@ function advertControllersInit ( module ) {
             this.save = () => {
                 ajax({
                     method : "put",
-                    url : `/advert/api/${$scope.advert_id}`,
+                    url : `/api/advert/api/${$scope.advert_id}`,
                     data : this.advert
                 }).then(( response ) => {
                     if ( response.data.success && response.data.advert ) {
