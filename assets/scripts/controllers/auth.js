@@ -17,11 +17,11 @@ function authControllersInit ( module ) {
                 $scope[ form ].email.$setTouched();
                 $scope[ form ].password.$setTouched();
 
-                const url = form === "registration" ? "/api/advertiser" : "/api/advertiser/login";
+                //const url = form === "registration" ? "/api/advertiser" : "/api/advertiser/login";
 
                 if ( $scope[ form ].$valid ) {
 
-                    authService.authenticate(url, { email : this.email, password : this.password })
+                    authService.authenticate(form, { email : this.email, password : this.password })
                                .then(( response ) => {
                                    if ( response.data.success ) {
                                        $timeout(() => {
@@ -64,7 +64,7 @@ function authControllersInit ( module ) {
             this.logout = () => {
                 $http({
                     method : "GET",
-                    url : "/api/advertiser/logout"
+                    url : "/auth/logout"
                 }).then(( response ) => {
                     if ( response.data.success ) {
                         document.location.reload();
