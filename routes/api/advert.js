@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.get("/", ( req, res, next ) => {
     Advert.find({})
-          .sort({ "publicationDate" : "desc" })
           .then(( adverts ) => {
               res.json({
                   adverts,

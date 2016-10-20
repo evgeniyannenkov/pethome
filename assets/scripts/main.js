@@ -23,7 +23,8 @@ const modules = getModules();
 const components = {
     services : [
         authServicesInit,
-        advertiserServicesInit
+        advertiserServicesInit,
+        advertServicesInit
     ],
     auth : [
         authControllersInit
