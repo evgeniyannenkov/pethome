@@ -6,7 +6,7 @@ nav
             a.nav-link(href='/') Home
         if !currentUser
             li.nav-item(popup type="registration")
-                popup-trigger.nav-item.nav-link Sign Up
+                popup-trigger.nav-link Sign Up
                 popup-content
                     .popup__content
                         +authForm("registration")
