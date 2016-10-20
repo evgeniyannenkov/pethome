@@ -25,20 +25,6 @@ router.get("/:id", ( req, res, next ) => {
     const _id = req.params.id;
     Advert.findById(_id)
           .then(( advert ) => {
-              res.render("advert-single", { advert });
-          })
-          .catch(( error ) => {
-              res.json({
-                  success : false,
-                  message : error.message
-              });
-          });
-});
-
-router.get("/api/:id", ( req, res, next ) => {
-    const _id = req.params.id;
-    Advert.findById(_id)
-          .then(( advert ) => {
               res.json({ advert, success : true });
           })
           .catch(( error ) => {
@@ -49,7 +35,7 @@ router.get("/api/:id", ( req, res, next ) => {
           });
 });
 
-router.put("/api/:id", ( req, res, next ) => {
+router.put("/:id", ( req, res, next ) => {
     const _id = req.params.id;
     const advert = req.body || {};
     let updateData = {};
