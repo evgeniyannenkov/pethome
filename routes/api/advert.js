@@ -7,7 +7,6 @@ const response = require("../../middleware/response");
 
 router.get("/", ( req, res, next ) => {
     Advert.find({})
-          .sort({"publicationDate" : "desc"})
           .then(( adverts ) => {
               res.json({
                   adverts,
