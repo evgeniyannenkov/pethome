@@ -101,10 +101,11 @@ router.get('/:id/adverts', ( req, res, next ) => {
     }
 });
 
-router.get("/:id/delete", ( req, res, next ) => {
+//Advertiser Delete
+router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
     const _id = req.params.id;
 
-    if ( req.user && req.user._id == _id ) {
+    if ( req.user._id == _id ) {
         Advertiser.findByIdAndRemove(_id)
                   .then(() => {
                       Advert.remove({ advertiserID : _id })
@@ -130,7 +131,7 @@ router.get("/:id/delete", ( req, res, next ) => {
     } else {
         res.json({
             success : false,
-            message : "You must be logged in."
+            message : "Delete User: id isn't correct"
         });
     }
 });
