@@ -3,10 +3,11 @@
 const express = require('express');
 const Advert = require('../../schemas/advert');
 const router = express.Router();
+const response = require("../../middleware/response");
 
 router.get("/", ( req, res, next ) => {
     Advert.find({})
-          .sort({ "publicationDate" : "desc" })
+          .sort({"publicationDate" : "desc"})
           .then(( adverts ) => {
               res.json({
                   adverts,
@@ -25,7 +26,7 @@ router.get("/:id", ( req, res, next ) => {
     const _id = req.params.id;
     Advert.findById(_id)
           .then(( advert ) => {
-              res.json({ advert, success : true });
+              res.json({advert, success : true});
           })
           .catch(( error ) => {
               res.json({
@@ -35,34 +36,22 @@ router.get("/:id", ( req, res, next ) => {
           });
 });
 
-router.put("/:id", ( req, res, next ) => {
+router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
     const _id = req.params.id;
     const advert = req.body || {};
-    let updateData = {};
-    if ( _id && advert._id && advert._id == _id && req.user && advert.advertiserID && advert.advertiserID == req.user._id ) {
 
-        if ( advert.name ) {
-            updateData.name = advert.name;
-        }
-        if ( advert.age ) {
-            updateData.age = advert.age;
-        }
-        if ( advert.breed ) {
-            updateData.breed = advert.breed;
-        }
-        if ( advert.gender ) {
-            updateData.gender = advert.gender;
-        }
-        if ( advert.info ) {
-            updateData.info = advert.info;
-        }
-        if ( advert.type ) {
-            updateData.type = advert.type;
-        }
+    if ( _id && advert._id && advert._id == _id ) {
 
-        Advert.findByIdAndUpdate(_id, updateData, { new : true })
+        Advert.findOneAndUpdate({_id, advertiserID : req.user.id}, advert, {new : true})
               .then(( advert ) => {
-                  res.json({ advert, success : true });
+                  if ( advert ) {
+                      res.json({advert, success : true});
+                  } else {
+                      res.json({
+                          message: "Update Advert: not found",
+                          success: false
+                      });
+                  }
               })
               .catch(( error ) => {
                   res.json({
@@ -70,6 +59,11 @@ router.put("/:id", ( req, res, next ) => {
                       message : error.message
                   });
               });
+    } else {
+        res.json({
+            message : "Update Advert: id isn't correct",
+            success : false
+        });
     }
 });
 
