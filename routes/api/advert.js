@@ -48,8 +48,8 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
                       res.json({advert, success : true});
                   } else {
                       res.json({
-                          message: "Update Advert: not found",
-                          success: false
+                          message : "Update Advert: not found",
+                          success : false
                       });
                   }
               })
@@ -67,45 +67,39 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
     }
 });
 
-//Registration Route
-router.post('/', ( req, res, next ) => {
-    if ( req.user ) {
-        const advert = new Advert();
+router.post('/', response.ifLoggedOut(), ( req, res, next ) => {
 
-        advert.type = req.body.type || "dog";
-        advert.gender = req.body.gender || "boy";
-        advert.age = req.body.age || "1";
-        advert.name = req.body.name || `${advert.type}, ${advert.gender} ${advert.age}`;
-        advert.publicationDate = new Date();
-        advert.advertiserID = req.user._id;
+    const advert = new Advert();
 
-        if ( req.body.breed ) {
-            advert.breed = req.body.breed;
-        }
+    advert.type = req.body.type || "dog";
+    advert.gender = req.body.gender || "boy";
+    advert.age = req.body.age || "1";
+    advert.name = req.body.name || `${advert.type}, ${advert.gender} ${advert.age}`;
+    advert.publicationDate = new Date();
+    advert.advertiserID = req.user._id;
 
-        if ( req.body.info ) {
-            advert.info = req.body.info;
-        }
-
-        advert.save()
-              .then(( data )=> {
-                  res.json({
-                      success : true,
-                      advert : data
-                  });
-              })
-              .catch(( error )=> {
-                  res.json({
-                      success : false,
-                      message : error.message
-                  });
-              });
-    } else {
-        res.json({
-            success : false,
-            message : "you should be logged in"
-        });
+    if ( req.body.breed ) {
+        advert.breed = req.body.breed;
     }
+
+    if ( req.body.info ) {
+        advert.info = req.body.info;
+    }
+
+    advert.save()
+          .then(( data )=> {
+              res.json({
+                  success : true,
+                  advert : data
+              });
+          })
+          .catch(( error )=> {
+              res.json({
+                  success : false,
+                  message : error.message
+              });
+          });
+
 });
 
 module.exports = router;
