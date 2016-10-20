@@ -7,43 +7,29 @@ const Advertiser = require('../../schemas/advertiser');
 const Advert = require('../../schemas/advert');
 const router = express.Router();
 
-//Registration Route
-router.post('/', passport.authenticate('local-register', routesConfig.passportMiddlewareFail), ( req, res, next ) => {
-    res.json({
-        message : "Registration: success",
-        success : true
-    });
-});
+router.get('/:id', ( req, res, next ) => {
+    const _id = req.params.id || 0;
 
-//Login Route
-router.post('/login', passport.authenticate('local-login', routesConfig.passportMiddlewareFail), ( req, res, next ) => {
-    res.json({
-        message : "Login: success",
-        success : true
-    });
+    Advertiser.findById(_id)
+              .then((user)=>{
+                  if(user) {
+                      res.json(user);
+                  } else {
+                      res.json({
+                          message: "Get User: user not found",
+                          success: false
+                      });
+                  }
+              })
+              .catch((error)=>{
+                  if(error) {
+                      res.json({
+                          message: error.message,
+                          success: false
+                      });
+                  }
+              });
 });
-
-//Logout Router
-router.get('/logout', ( req, res, next ) => {
-    if ( req.session ) {
-        req.logout();
-        req.session.destroy(( err ) => {
-            if ( err ) {
-                res.json({
-                    message : "Logout failed",
-                    success : false
-                });
-            } else {
-                res.json({
-                    message : "User logged out",
-                    success : true
-                });
-            }
-        });
-    }
-});
-
-//Logout Router
 router.get('/:id/adverts', ( req, res, next ) => {
     const _id = req.params.id || 0;
 
@@ -53,7 +39,7 @@ router.get('/:id/adverts', ( req, res, next ) => {
             success : false
         });
     } else {
-        Advert.find({ "advertiserID" : _id }).sort({ "publicationDate" : "desc" })
+        Advert.find({"advertiserID" : _id}).sort({"publicationDate" : "desc"})
               .then(( adverts ) => {
                   res.json({
                       adverts,
