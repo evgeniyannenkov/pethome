@@ -1,17 +1,18 @@
 "use strict";
 
 function apiGenServicesInit ( module ) {
-    module.factory("apiGen", [
+    module.factory("api", [
         "$http", ( ajax ) => {
             let options = {
-                api_base : "/api"
+                api_base : "",
+                url : ""
             };
 
             let calls = {};
 
             const generateCall = ( method, call_options ) => {
                 method = method.toUpperCase();
-                call_options.url = call_options.url || "";
+                call_options.url = call_options.url || options.url;
 
                 let requestData = {
                     method,
@@ -30,7 +31,6 @@ function apiGenServicesInit ( module ) {
                         }
                     }
 
-                    console.log(requestData);
                     return ajax(requestData);
                 };
             };

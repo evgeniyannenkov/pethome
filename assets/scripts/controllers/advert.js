@@ -1,45 +1,34 @@
 "use strict";
 
 function advertControllersInit ( module ) {
+    const api_base = "/api/:schema";
+    const schema = "advert";
 
     module.controller('advertsFeedCtrl', [
-        "$http", "$scope", "adverts", "apiGen",
-        function ( ajax, $scope, adverts, apiGen ) {
-            this.order = "-publicationDate";
-
-            const api = apiGen.generate({
-                "options" : {
-                    api_base : "/api/:document"
+        "$http", "$scope", "api",
+        function ( ajax, $scope, api ) {
+            const adverts = api.generate({
+                options : {
+                    api_base
                 },
-                "calls" : {
-                    "get" : {
-                        "getAll" : {
-                            url : ""
-                        },
-                        "get" : {
+                calls : {
+                    get : {
+                        one : {
                             url : "/:id"
-                        }
-                    },
-                    "post" : {
-                        "create" : {
-                            url : ""
                         },
-                        "createAdvert" : {}
+                        all : {},
+                        user : {
+                            url : "/:user_id/adverts"
+                        }
                     }
                 }
             });
 
-            api.createAdvert({
-                document : "advert"
-            }).then(( response )=> {
-                console.log(response);
-            }).catch(( response )=> {
-                console.log(response);
-            });
+            this.order = "-publicationDate";
 
             this.getAdverts = ( user_id ) => {
                 if ( !user_id ) {
-                    adverts.getAll()
+                    adverts.all({ schema })
                            .then(( response ) => {
                                if ( response.data.adverts ) {
                                    this.adverts = response.data.adverts;
@@ -49,13 +38,11 @@ function advertControllersInit ( module ) {
                                    console.log(err);
                                }
                            );
-
                 } else {
-                    ajax({
-                        method : "get",
-                        url : `/api/advertiser/${user_id}/adverts`
+                    adverts.user({
+                        user_id,
+                        schema : "advertiser"
                     }).then(( response ) => {
-                        console.log(response);
                         if ( response.data.adverts ) {
                             this.adverts = response.data.adverts;
                         }
@@ -79,15 +66,26 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('newAdvertCtrl', [
-        "adverts",
-        function ( adverts ) {
+        "api",
+        function ( api ) {
+            const adverts = api.generate({
+                options : {
+                    api_base
+                },
+                calls : {
+                    post : {
+                        create : {}
+                    }
+                }
+            });
+
             this.advert = {
                 gender : "boy",
                 type : "dog",
                 age : 1
             };
             this.create = () => {
-                adverts.create(this.advert)
+                adverts.create({ schema, data : this.advert })
                        .then(( response ) => {
                            if ( response.data.success ) {
                                document.location.href = `/advert/${response.data.advert._id}`;
@@ -101,12 +99,29 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('editAdvertCtrl', [
-        "$scope", "adverts",
-        function ( $scope, adverts ) {
+        "$scope", "api",
+        function ( $scope, api ) {
+            const adverts = api.generate({
+                options : {
+                    api_base
+                },
+                calls : {
+                    get : {
+                        get : {
+                            url : "/:id"
+                        }
+                    },
+                    put : {
+                        update : {
+                            url : "/:id"
+                        }
+                    }
+                }
+            });
 
             let current_advert = {};
             this.save = () => {
-                adverts.update($scope.advert_id, this.advert)
+                adverts.update({ schema, id : $scope.advert_id, data : this.advert })
                        .then(( response ) => {
                            if ( response.data.success && response.data.advert ) {
                                this.advert = response.data.advert;
@@ -124,7 +139,7 @@ function advertControllersInit ( module ) {
                 this.advert = JSON.parse(JSON.stringify(current_advert));
             };
 
-            adverts.get($scope.advert_id)
+            adverts.get({ schema, id : $scope.advert_id })
                    .then(( response ) => {
                        if ( response.data.success && response.data.advert ) {
                            this.advert = response.data.advert;
@@ -141,10 +156,24 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('advertRemoveCtrl', [
-        "$scope", "adverts",
-        function ( $scope, adverts ) {
-            this.remove = ( _id ) => {
-                adverts.remove(_id)
+        "$scope", "api",
+        function ( $scope, api ) {
+
+            const adverts = api.generate({
+                options : {
+                    api_base
+                },
+                calls : {
+                    get : {
+                        remove : {
+                            url : "/:id/delete"
+                        }
+                    }
+                }
+            });
+
+            this.remove = ( id ) => {
+                adverts.remove({ id, schema })
                        .then(( response ) => {
                            if ( response.data.success && response.data.redirect ) {
                                document.location.href = response.data.redirect;
@@ -156,6 +185,7 @@ function advertControllersInit ( module ) {
                            console.log(err);
                        });
             };
+
             this.cancel = () => {
                 $scope.$parent.$parent.popup.active = false;
             };
