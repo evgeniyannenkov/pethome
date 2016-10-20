@@ -18,7 +18,6 @@ function authServicesInit ( module ) {
                         break;
                 }
 
-                console.log(type);
                 return requestData;
 
             };
@@ -26,8 +25,6 @@ function authServicesInit ( module ) {
             const authenticate = ( type, data ) => {
 
                 const requestData = getRequestData(type);
-
-                console.log(requestData);
 
                 return new Promise(( resolve, reject ) => {
                     $http({

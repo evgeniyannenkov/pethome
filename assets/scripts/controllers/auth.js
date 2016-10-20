@@ -17,7 +17,6 @@ function authControllersInit ( module ) {
                 $scope[ form ].email.$setTouched();
                 $scope[ form ].password.$setTouched();
 
-                //const url = form === "registration" ? "/api/advertiser" : "/api/advertiser/login";
 
                 if ( $scope[ form ].$valid ) {
 
