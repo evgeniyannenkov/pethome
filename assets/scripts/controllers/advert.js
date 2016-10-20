@@ -49,8 +49,8 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('newAdvertCtrl', [
-        "$http", "adverts",
-        function ( ajax, adverts ) {
+        "adverts",
+        function ( adverts ) {
             this.advert = {
                 gender : "boy",
                 type : "dog",
@@ -71,8 +71,8 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('editAdvertCtrl', [
-        "$http", "$scope", "adverts",
-        function ( ajax, $scope, adverts ) {
+        "$scope", "adverts",
+        function ( $scope, adverts ) {
 
             let current_advert = {};
             this.save = () => {
