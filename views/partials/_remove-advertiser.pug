@@ -1,0 +1,7 @@
+div(popup type="Remove Account")
+    popup-trigger
+        button Remove
+    popup-content(ng-controller="advertiserRemoveCtrl as remover")
+        form.popup__content
+            button(type="button" ng-click="remover.remove('" + currentUser._id + "');") Remove
+            button(type="button" ng-click="remover.cancel();") Cancel

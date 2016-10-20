@@ -37,26 +37,28 @@ router.get("/:id", ( req, res, next ) => {
 
 router.get("/:id/delete", ( req, res, next ) => {
     const _id = req.params.id;
-
-    Advert.findById(_id)
-          .then(( advert ) => {
-              advert.remove()
-                    .then(() => {
-                        res.json({ success : true, redirect : "/profile" });
-                    })
-                    .catch(( error ) => {
-                        res.json({
-                            success : false,
-                            message : error.message
-                        });
-                    });
-          })
-          .catch(( error ) => {
-              res.json({
-                  success : false,
-                  message : error.message
+    if ( req.user && _id ) {
+        Advert.findOneAndRemove({ _id, advertiserID : req.user._id })
+              .then(( advert ) => {
+                  if ( advert ) {
+                      res.json({ success : true, advert, redirect : "/profile" });
+                  } else {
+                      res.json({ success : false, message : "No advert was removed." });
+                  }
+              })
+              .catch(( error ) => {
+                  res.json({
+                      success : false,
+                      message : error.message
+                  });
               });
-          });
+    } else {
+        res.json({
+            success : false,
+            message : "You must be logged in."
+        });
+
+    }
 });
 
 router.put("/:id", ( req, res, next ) => {

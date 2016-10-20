@@ -128,6 +128,8 @@ function advertControllersInit ( module ) {
                 }).then(( response ) => {
                     if ( response.data.success && response.data.redirect ) {
                         document.location.href = response.data.redirect;
+                    } else if ( response.data.message ) {
+                        console.log(response.data);
                     }
                 }).catch(( err ) => {
                     console.log(err);

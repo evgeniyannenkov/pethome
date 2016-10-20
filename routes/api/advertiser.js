@@ -69,4 +69,38 @@ router.get('/:id/adverts', ( req, res, next ) => {
     }
 });
 
+router.get("/:id/delete", ( req, res, next ) => {
+    const _id = req.params.id;
+
+    if ( req.user && req.user._id == _id ) {
+        Advertiser.findByIdAndRemove(_id)
+                  .then(() => {
+                      Advert.remove({ advertiserID : _id })
+                            .then(( data ) => {
+                                res.json({
+                                    success : true,
+                                    data
+                                });
+                            })
+                            .catch(( error ) => {
+                                res.json({
+                                    success : false,
+                                    message : error.message
+                                });
+                            });
+                  })
+                  .catch(( error ) => {
+                      res.json({
+                          success : false,
+                          message : error.message
+                      });
+                  });
+    } else {
+        res.json({
+            success : false,
+            message : "You must be logged in."
+        });
+    }
+});
+
 module.exports = router;
