@@ -15,7 +15,6 @@ const mongoStore = require('connect-mongo')(session);
 
 //Routes
 const routes = require('./routes/index');
-const advertiser = require('./routes/advertiser');
 const advert = require('./routes/advert');
 const auth = require('./routes/auth');
 const api = require('./routes/api');
@@ -61,7 +60,6 @@ app.use(( req, res, next ) => {
 });
 
 app.use('/', routes);
-app.use('/advertiser', advertiser);
 app.use('/advert', advert);
 app.use('/auth', auth);
 app.use("/api", api);

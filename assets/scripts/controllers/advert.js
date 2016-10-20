@@ -78,7 +78,7 @@ function advertControllersInit ( module ) {
             this.getAdvert = ( advert_id ) => {
                 ajax({
                     method : "get",
-                    url : `/api/advert/api/${advert_id}`
+                    url : `/api/advert/${advert_id}`
                 }).then(( response ) => {
                     if ( response.data.success && response.data.advert ) {
                         this.advert = response.data.advert;
@@ -97,7 +97,7 @@ function advertControllersInit ( module ) {
             this.save = () => {
                 ajax({
                     method : "put",
-                    url : `/api/advert/api/${$scope.advert_id}`,
+                    url : `/api/advert/${$scope.advert_id}`,
                     data : this.advert
                 }).then(( response ) => {
                     if ( response.data.success && response.data.advert ) {
