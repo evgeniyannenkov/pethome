@@ -117,4 +117,25 @@ function advertControllersInit ( module ) {
             };
         }
     ]);
+
+    module.controller('advertRemoveCtrl', [
+        "$http", "$scope",
+        function ( ajax, $scope ) {
+            this.remove = ( _id ) => {
+                ajax({
+                    method : "get",
+                    url : `/api/advert/${_id}/delete`
+                }).then(( response ) => {
+                    if ( response.data.success && response.data.redirect ) {
+                        document.location.href = response.data.redirect;
+                    }
+                }).catch(( err ) => {
+                    console.log(err);
+                });
+            };
+            this.cancel = () => {
+                $scope.$parent.$parent.popup.active = false;
+            };
+        }
+    ]);
 }

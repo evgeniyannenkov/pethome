@@ -1,5 +1,13 @@
 include ../../views/mixins/formParts
 
+div(popup type="Remove Advert")
+    popup-trigger
+        button Remove
+    popup-content(ng-controller="advertRemoveCtrl as remover")
+        form.popup__content
+            button(type="button" ng-click="remover.remove(advert_id);") Remove
+            button(type="button" ng-click="remover.cancel();") Cancel
+
 div
     button(ng-hide = "advertEditor.edition" ng-click = "advertEditor.edition = true;") Edit
     button(ng-show = "advertEditor.edition" ng-click = "advertEditor.edition = false;advertEditor.save();") Save

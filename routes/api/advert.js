@@ -35,6 +35,30 @@ router.get("/:id", ( req, res, next ) => {
           });
 });
 
+router.get("/:id/delete", ( req, res, next ) => {
+    const _id = req.params.id;
+
+    Advert.findById(_id)
+          .then(( advert ) => {
+              advert.remove()
+                    .then(() => {
+                        res.json({ success : true, redirect : "/profile" });
+                    })
+                    .catch(( error ) => {
+                        res.json({
+                            success : false,
+                            message : error.message
+                        });
+                    });
+          })
+          .catch(( error ) => {
+              res.json({
+                  success : false,
+                  message : error.message
+              });
+          });
+});
+
 router.put("/:id", ( req, res, next ) => {
     const _id = req.params.id;
     const advert = req.body || {};
