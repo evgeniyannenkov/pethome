@@ -17,6 +17,8 @@ function popupDirectivesInit ( module ) {
                 scope : {
                     type : "@"
                 },
+                controller : "popupCtrl",
+                controllerAs : "popup"
             };
         }
     ]);

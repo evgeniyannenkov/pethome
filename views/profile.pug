@@ -5,10 +5,11 @@ block header
 
 block content
     h1 PROFILE
-    if currentUser
-        h1= currentUser.contactInfo.email
+    h1= currentUser.contactInfo.email
+
     include partials/_new-advert-form
     include partials/_form-profile-settings
+    include partials/_remove-advertiser
 
     if currentUser
         div(adverts-feed=currentUser._id)
