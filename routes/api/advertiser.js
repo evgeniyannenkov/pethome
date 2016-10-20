@@ -2,7 +2,6 @@
 
 const express = require('express');
 const passport = require('passport');
-const routesConfig = require('../../config/routes');
 const Advertiser = require('../../schemas/advertiser');
 const Advert = require('../../schemas/advert');
 const response = require("../../middleware/response");
@@ -76,6 +75,7 @@ router.put('/:id', response.ifLoggedOut(), ( req, res, next ) => {
 
 });
 
+//Advertiser Get Adverts
 router.get('/:id/adverts', ( req, res, next ) => {
     const _id = req.params.id || 0;
 
