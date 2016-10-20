@@ -79,26 +79,19 @@ router.put('/:id', response.ifLoggedOut(), ( req, res, next ) => {
 router.get('/:id/adverts', ( req, res, next ) => {
     const _id = req.params.id || 0;
 
-    if ( !_id ) {
-        res.json({
-            message : "No user id provided.",
-            success : false
-        });
-    } else {
-        Advert.find({"advertiserID" : _id}).sort({"publicationDate" : "desc"})
-              .then(( adverts ) => {
-                  res.json({
-                      adverts,
-                      success : true
-                  });
-              })
-              .catch(( error ) => {
-                  res.json({
-                      success : false,
-                      message : error.message
-                  });
+    Advert.find({"advertiserID" : _id})
+          .then(( adverts ) => {
+              res.json({
+                  adverts,
+                  success : true
               });
-    }
+          })
+          .catch(( error ) => {
+              res.json({
+                  success : false,
+                  message : error.message
+              });
+          });
 });
 
 //Advertiser Delete
@@ -108,7 +101,7 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
     if ( req.user._id == _id ) {
         Advertiser.findByIdAndRemove(_id)
                   .then(() => {
-                      Advert.remove({ advertiserID : _id })
+                      Advert.remove({advertiserID : _id})
                             .then(( data ) => {
                                 res.json({
                                     success : true,
