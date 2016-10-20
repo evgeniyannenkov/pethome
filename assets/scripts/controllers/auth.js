@@ -2,25 +2,24 @@
 function authControllersInit ( module ) {
 
     module.controller('authCtrl', [
-        "$scope", "$http", "$timeout", "authService",
-        function ( $scope, $http, $timeout, authService ) {
+        "$scope", "$timeout", "authService",
+        function ( $scope, $timeout, authService ) {
 
             this.emailRegex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
             this.passwordRegex = /.*\S.*/;
 
             this.checkForm = ( form ) => {
-                this.error = !$scope[ form ].$valid;
-                this.validClass = $scope[ form ].$valid ? "valid" : "error";
+                this.error = !$scope[form].$valid;
+                this.validClass = $scope[form].$valid ? "valid" : "error";
             };
 
             this.submit = ( form ) => {
-                $scope[ form ].email.$setTouched();
-                $scope[ form ].password.$setTouched();
+                $scope[form].email.$setTouched();
+                $scope[form].password.$setTouched();
 
+                if ( $scope[form].$valid ) {
 
-                if ( $scope[ form ].$valid ) {
-
-                    authService.authenticate(form, { email : this.email, password : this.password })
+                    authService.authenticate(form, {email : this.email, password : this.password})
                                .then(( response ) => {
                                    if ( response.data.success ) {
                                        $timeout(() => {
@@ -28,7 +27,7 @@ function authControllersInit ( module ) {
                                            document.location.reload();
                                        }, 2000);
                                    } else {
-                                       console.log(`${$scope[ form ]}: failed`);
+                                       console.log(`${$scope[form]}: failed`);
                                        console.log(response);
                                    }
                                })
@@ -43,7 +42,7 @@ function authControllersInit ( module ) {
                                    }
                                });
                 } else {
-                    console.log(`${$scope[ form ]} form invalid`);
+                    console.log(`${$scope[form]} form invalid`);
                 }
             };
 
@@ -57,24 +56,25 @@ function authControllersInit ( module ) {
     ]);
 
     module.controller('logoutCtrl', [
-        "$http",
-        function ( $http ) {
+        "authService",
+        function ( authService ) {
 
             this.logout = () => {
-                $http({
-                    method : "GET",
-                    url : "/auth/logout"
-                }).then(( response ) => {
-                    if ( response.data.success ) {
-                        document.location.reload();
-                    } else {
-                        console.log(response.data.message);
-                    }
-                }).catch(( err ) => {
-                    console.log(err);
-                });
+
+                authService.authenticate('logout')
+                           .then(( response ) => {
+                               if ( response.data.success ) {
+                                   document.location.reload();
+                               } else {
+                                   console.log(response.data.message);
+                               }
+                           })
+                           .catch(( err ) => {
+                               console.log(err);
+                           });
+
             };
 
         }
-    ])
+    ]);
 }

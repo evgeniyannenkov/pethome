@@ -4,7 +4,7 @@ function authServicesInit ( module ) {
     module.factory('authService', [
         "$http", ( $http ) => {
 
-            const getRequestData = ( type ) => {
+            const getRequestData = ( type, data ) => {
                 const requestData = {};
 
                 switch ( type ) {
@@ -16,6 +16,14 @@ function authServicesInit ( module ) {
                         requestData.method = "POST";
                         requestData.url = "/auth";
                         break;
+                    case "logout" :
+                        requestData.method = "GET";
+                        requestData.url = "/auth/logout";
+                        break;
+                }
+
+                if ( data ) {
+                    requestData.data = data;
                 }
 
                 return requestData;
@@ -24,16 +32,13 @@ function authServicesInit ( module ) {
 
             const authenticate = ( type, data ) => {
 
-                const requestData = getRequestData(type);
+                const requestData = getRequestData(type, data);
 
                 return new Promise(( resolve, reject ) => {
-                    $http({
-                        method : requestData.method,
-                        url : requestData.url,
-                        data : data
-                    }).then(( response ) => {
-                        resolve(response);
-                    }).catch(( err ) => {
+                    $http(requestData)
+                        .then(( response ) => {
+                            resolve(response);
+                        }).catch(( err ) => {
                         reject(err);
                     });
                 });
