@@ -35,7 +35,7 @@ mixin radios(block_title, block_inputs)
                             input.form__radio(type="radio" name=name ,value = value)&attributes(attributes)
 
 //Select mixin
-mixin select(label, options)
+mixin select(label, options, without_other)
     .form__item
         div.form__title= label
         div
@@ -44,5 +44,6 @@ mixin select(label, options)
                         each label,value in inputs
                             option(value = value)
                                 | #{label}
-                        option(value = "other")
-                            | Other
+                        if !without_other
+                            option(value = "other")
+                                | Other

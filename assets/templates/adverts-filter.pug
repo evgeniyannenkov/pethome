@@ -1,0 +1,25 @@
+include ../../views/mixins/_form-parts
+
+div(ng-hide="filter.extended")
+    +input("General")(ng-model="filter_fields")
+div(ng-show="filter.extended")
+    +input("Name")(ng-model="filter_fields.name")
+    +select("Type", {
+        "type" : {
+            "" : "All",
+            "dog" : "Dog",
+            "cat" : "Cat",
+            "hamster" : "Hamster"
+        }
+    })(ng-model = "filter_fields.type")
+    +radios("Gender", {
+        "gender" : {
+            "" : "Both",
+            "boy" : "Boy",
+            "girl" : "Girl"
+        }
+    })(ng-model = "filter_fields.gender")
+    +input("Breed")(ng-model = "filter_fields.breed")
+    +textarea("Info")(ng-model = "filter_fields.info")
+button(ng-click="filter_fields = filter.defaults;filter.extended = true;" ng-hide="filter.extended") Extended
+button(ng-click="filter_fields = '';filter.extended = false;" ng-show="filter.extended") General

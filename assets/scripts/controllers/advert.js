@@ -5,6 +5,8 @@ function advertControllersInit ( module ) {
     module.controller('advertsFeedCtrl', [
         "$http", "$scope",
         function ( ajax, $scope ) {
+            this.order = "-publicationDate";
+
             this.getAdverts = ( user_id ) => {
                 if ( !user_id ) {
                     ajax({
@@ -28,11 +30,21 @@ function advertControllersInit ( module ) {
                         }
                     }).catch(( err ) => {
                         console.log(err);
-                    })
+                    });
                 }
             };
 
             this.getAdverts($scope.user_id);
+        }
+    ]);
+
+    module.controller('advertsFeedFilterCtrl', [
+        "$http", "$scope",
+        function ( ajax, $scope ) {
+            this.defaults = {
+                gender : "",
+                type : "",
+            };
         }
     ]);
 
