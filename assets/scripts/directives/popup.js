@@ -4,8 +4,7 @@ function popupDirectivesInit ( module ) {
     const templatesFolder = "/assets/templates";
 
     module.directive('popup', [
-        "$http",
-        function ( ajax ) {
+        function (  ) {
 
             return {
                 restrict : 'A',

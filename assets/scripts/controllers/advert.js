@@ -25,7 +25,6 @@ function advertControllersInit ( module ) {
                         method : "get",
                         url : `/api/advertiser/${user_id}/adverts`
                     }).then(( response ) => {
-                        console.log(response);
                         if ( response.data.adverts ) {
                             this.adverts = response.data.adverts;
                         }
