@@ -2,11 +2,11 @@
 function authControllersInit ( module ) {
 
     module.controller('authCtrl', [
-        "$scope", "$timeout", "authService",
-        function ( $scope, $timeout, authService ) {
+        "$scope", "$timeout", "authService", "validate",
+        function ( $scope, $timeout, authService, validate ) {
 
-            this.emailRegex = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-            this.passwordRegex = /.*\S.*/;
+            this.emailRegex = validate.email();
+            this.passwordRegex = validate.password();
 
             this.checkForm = ( form ) => {
                 this.error = !$scope[form].$valid;
