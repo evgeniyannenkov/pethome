@@ -28,6 +28,11 @@ const components = {
         advertiserServicesInit,
         advertServicesInit
     ],
+    notifier : [
+        notifierControllersInit,
+        notifierServicesInit,
+        notifierDirectivesInit
+    ],
     auth : [
         authControllersInit
     ],

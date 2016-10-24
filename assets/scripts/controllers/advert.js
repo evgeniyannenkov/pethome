@@ -48,8 +48,8 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('newAdvertCtrl', [
-        "adverts",
-        function ( adverts ) {
+        "adverts", "notify", "$timeout",
+        function ( adverts, notify, $timeout ) {
             this.advert = {
                 gender : "boy",
                 type : "dog",
@@ -59,7 +59,10 @@ function advertControllersInit ( module ) {
                 adverts.create({ data : this.advert })
                        .then(( response ) => {
                            if ( response.data.success ) {
-                               document.location.href = `/advert/${response.data.advert._id}`;
+                               notify.success("New Advert created.", 900);
+                               setTimeout(function () {
+                                   document.location.href = `/advert/${response.data.advert._id}`;
+                               }, 1000);
                            }
                        })
                        .catch(( err ) => {

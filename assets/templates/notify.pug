@@ -1,0 +1,3 @@
+div(class="notifier" class = "{{notifier.state}}" ng-class="{visible : notifier.active}")
+    div.notifier__message {{notifier.message}}
+        i(ng-click="notifier.close();" class="notifier__close fa fa-times" aria-hidden="true")

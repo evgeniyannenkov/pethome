@@ -1,0 +1,50 @@
+@import "../../common/variables";
+
+.notifier {
+  visibility  : hidden;
+  text-align  : center;
+  position    : fixed;
+  top         : 30px;
+  right       : 0;
+  max-width   : 300px;
+  perspective : 1000px;
+  z-index     : 100;
+  transition  : visibility 0.2s;
+
+  .notifier__message {
+    padding          : 20px 40px;
+    background-color : $blue;
+    color            : white;
+    transform        : rotateY(-90deg);
+    transform-origin : right center;
+    transition       : transform 0.2s;
+  }
+
+  .notifier__close {
+    color    : inherit;
+    position : absolute;
+    right    : 5px;
+    top      : 5px;
+    z-index  : 110;
+    cursor   : pointer;
+  }
+
+  &.error {
+    .notifier__message {
+      background-color : $red;
+    }
+  }
+
+  &.success {
+    .notifier__message {
+      background-color : $green;
+    }
+  }
+
+  &.visible {
+    visibility : visible;
+    .notifier__message {
+      transform : rotateY(0deg);
+    }
+  }
+}

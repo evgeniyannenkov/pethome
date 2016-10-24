@@ -17,8 +17,8 @@ function advertiserControllersInit ( module ) {
         }
     ]);
     module.controller('advertiserEditCtrl', [
-        "advertiser", "$scope",
-        function ( advertiser, $scope ) {
+        "advertiser", "$scope", "notify",
+        function ( advertiser, $scope, notify ) {
 
             this.temporary_data = JSON.parse(JSON.stringify($scope.user));
 
@@ -30,11 +30,12 @@ function advertiserControllersInit ( module ) {
                 advertiser.update({ id : $scope.user._id, data : this.temporary_data })
                           .then(( response )=> {
                               if ( response.data.success ) {
+                                  notify.success("Updated", 1000);
                                   $scope.user = JSON.parse(JSON.stringify(this.temporary_data));
                               }
                           })
                           .catch(( error )=> {
-                             console.log(error);
+                              console.log(error);
                           });
             };
         }
@@ -44,7 +45,7 @@ function advertiserControllersInit ( module ) {
         "advertiser", "$scope",
         function ( advertiser, $scope ) {
             this.remove = () => {
-                advertiser.remove({id : $scope.user._id})
+                advertiser.remove({ id : $scope.user._id })
                           .then(( response ) => {
                               if ( response.data.success ) {
                                   document.location.href = "/";

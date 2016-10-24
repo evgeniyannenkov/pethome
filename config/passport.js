@@ -50,7 +50,7 @@ module.exports = () => {
                         }
                     });
                 } else {
-                    done(null, false, {success : false, message : "Registration: Email is already taken"});
+                    done(null, false, {success : false, message : "Email is already taken."});
                 }
             });
         }

@@ -10,5 +10,5 @@ function popupControllersInit ( module ) {
             }
 
         }
-    ])
+    ]);
 }

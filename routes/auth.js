@@ -25,7 +25,8 @@ router.post('/', passport.authenticate('local-register', routesConfig.passportMi
 router.post('/login', passport.authenticate('local-login', routesConfig.passportMiddlewareFail), ( req, res, next ) => {
     res.json({
         message : "Login: success",
-        success : true
+        success : true,
+        user : req.user
     });
 });
 
@@ -53,7 +54,7 @@ router.get('/logout', ( req, res, next ) => {
 router.get('/fail', ( req, res, next ) => {
     res.status(400).json({
         success : false,
-        message : req.session.flash.error[req.session.flash.error.length - 1]
+        message : req.session.flash.error[ req.session.flash.error.length - 1 ]
     });
 });
 
