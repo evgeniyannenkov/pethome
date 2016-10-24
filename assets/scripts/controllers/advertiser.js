@@ -4,30 +4,39 @@ function advertiserControllersInit ( module ) {
 
     module.controller('advertiserCtrl', [
         "advertiser", "$scope",
-        function ( advertisers, $scope ) {
-            advertisers.api.get({ id : $scope.user_id })
-                       .then(( response ) => {
-                           if ( response.data.success ) {
-                               this.info = response.data.advertiser;
-                           }
-                       })
-                       .catch(( response ) => {
-                           console.log(response);
-                       });
+        function ( advertiser, $scope ) {
+            advertiser.get({ id : $scope.user_id })
+                      .then(( response ) => {
+                          if ( response.data.success ) {
+                              this.info = response.data.advertiser;
+                          }
+                      })
+                      .catch(( response ) => {
+                          console.log(response);
+                      });
         }
     ]);
     module.controller('advertiserEditCtrl', [
         "advertiser", "$scope",
         function ( advertiser, $scope ) {
 
+            this.temporary_data = JSON.parse(JSON.stringify($scope.user));
+
+            this.cancel = () => {
+                this.temporary_data = JSON.parse(JSON.stringify($scope.user));
+            };
+
             this.edit = () => {
-                advertiser.api.update({ id : $scope.user._id, data : $scope.user })
-                           .then(( response )=> {
-                               console.log(response.data);
-                           })
-                           .catch(( response )=> {
-                               console.log(response);
-                           });
+                advertiser.update({ id : $scope.user._id, data : this.temporary_data })
+                          .then(( response )=> {
+                              if ( response.data.success ) {
+                                  $scope.user = JSON.parse(JSON.stringify(this.temporary_data));
+                                  console.log(response.data);
+                              }
+                          })
+                          .catch(( response )=> {
+                              console.log(response);
+                          });
             };
         }
     ]);

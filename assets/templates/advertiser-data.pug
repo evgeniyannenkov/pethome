@@ -7,4 +7,4 @@ div(popup type="profile" ng-if="edit")
         button Edit Profile
     popup-content
         .popup__content
-            div(advertiser-edit="$parent.$parent.$parent.advertiser.info")
+            div(advertiser-edit="$parent.$parent.$parent.advertiser.info" popup-close="$parent.popup.close();")

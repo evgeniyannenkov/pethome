@@ -24,7 +24,8 @@ function advertiserDirectivesInit ( module ) {
                 restrict : 'A',
                 templateUrl : `${templatesFolder}/advertiser-edit.html`,
                 scope : {
-                    user : "=advertiserEdit"
+                    user : "=advertiserEdit",
+                    popupClose : "&"
                 },
                 controller : "advertiserEditCtrl",
                 controllerAs : "editor"

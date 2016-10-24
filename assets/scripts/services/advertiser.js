@@ -1,11 +1,11 @@
 "use strict";
 
 function advertiserServicesInit ( module ) {
-    module.service('advertiser', [
+    module.factory('advertiser', [
         "api",
         function ( api ) {
 
-            this.api = api.generate({
+            return api.generate({
                 options : {
                     api_base : "/api/advertiser"
                 },
