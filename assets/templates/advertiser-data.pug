@@ -8,3 +8,9 @@ div(popup type="profile" ng-if="edit")
     popup-content
         .popup__content
             div(advertiser-edit="$parent.$parent.$parent.advertiser.info" popup-close="$parent.popup.close();")
+div(popup type="Remove Profile" ng-if="remove")
+    popup-trigger
+        button Remove Profile
+    popup-content
+        .popup__content
+            div(advertiser-remove="$parent.$parent.$parent.advertiser.info" popup-close="$parent.popup.close();")

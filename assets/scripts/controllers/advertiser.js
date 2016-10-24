@@ -31,11 +31,10 @@ function advertiserControllersInit ( module ) {
                           .then(( response )=> {
                               if ( response.data.success ) {
                                   $scope.user = JSON.parse(JSON.stringify(this.temporary_data));
-                                  console.log(response.data);
                               }
                           })
-                          .catch(( response )=> {
-                              console.log(response);
+                          .catch(( error )=> {
+                             console.log(error);
                           });
             };
         }
@@ -43,20 +42,17 @@ function advertiserControllersInit ( module ) {
 
     module.controller('advertiserRemoveCtrl', [
         "advertiser", "$scope",
-        function ( advertisers, $scope ) {
-            this.remove = ( id ) => {
-                advertisers.remove({ id })
-                           .then(( response ) => {
-                               if ( response.data.success ) {
-                                   document.location.href = "/";
-                               }
-                           })
-                           .catch(( err ) => {
-                               console.log(err);
-                           });
-            };
-            this.cancel = () => {
-                $scope.$parent.$parent.popup.active = false;
+        function ( advertiser, $scope ) {
+            this.remove = () => {
+                advertiser.remove({id : $scope.user._id})
+                          .then(( response ) => {
+                              if ( response.data.success ) {
+                                  document.location.href = "/";
+                              }
+                          })
+                          .catch(( err ) => {
+                              console.log(err);
+                          });
             };
         }
     ]);

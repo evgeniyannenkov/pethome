@@ -6,10 +6,9 @@ block header
 block content
     h1 PROFILE
 
-    div(advertiser=currentUser._id edit="true")
+    div(advertiser=currentUser._id edit="true" remove="true")
 
     include partials/_new-advert-form
-    include partials/_remove-advertiser
 
     if currentUser
         div(adverts-feed=currentUser._id)
