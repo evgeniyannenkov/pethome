@@ -40,9 +40,6 @@ const components = {
     ],
     advertiser : [
         advertiserControllersInit
-    ],
-    profile : [
-        profileControllersInit
     ]
 };
 

@@ -5,8 +5,8 @@ function advertiserControllersInit ( module ) {
     module.controller('advertiserRemoveCtrl', [
         "advertiser", "$scope",
         function ( advertiser, $scope ) {
-            this.remove = ( _id ) => {
-                advertiser.remove(_id)
+            this.remove = ( id ) => {
+                advertiser.remove({ id })
                           .then(( response ) => {
                               if ( response.data.success ) {
                                   document.location.href = "/";
