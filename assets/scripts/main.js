@@ -24,6 +24,7 @@ const components = {
     services : [
         apiGenServicesInit,
         authServicesInit,
+        validationServicesInit,
         advertiserServicesInit,
         advertServicesInit
     ],
