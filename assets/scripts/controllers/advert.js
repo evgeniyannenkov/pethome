@@ -73,34 +73,44 @@ function advertControllersInit ( module ) {
         "$scope", "adverts",
         function ( $scope, adverts ) {
 
-            let current_advert = {};
+            this.temporaryData = JSON.parse(JSON.stringify($scope.advertData));
+
             this.save = () => {
-                adverts.update({ id : $scope.advert_id, data : this.advert })
+                adverts.update({ id : $scope.advertData._id, data : this.temporaryData })
                        .then(( response ) => {
                            if ( response.data.success && response.data.advert ) {
-                               this.advert = response.data.advert;
-                               if ( this.advert.age ) {
-                                   this.advert.age = parseInt(this.advert.age);
+                               $scope.advertData = response.data.advert;
+                               if ( $scope.advertData.age ) {
+                                   $scope.advertData.age = parseInt($scope.advertData.age);
                                }
-                               current_advert = JSON.parse(JSON.stringify(this.advert));
+                               $scope.popupClose();
                            }
                        })
                        .catch(( err ) => {
                            console.log(err);
                        });
             };
-            this.reset = () => {
-                this.advert = JSON.parse(JSON.stringify(current_advert));
+            this.cancel = () => {
+                this.temporaryData = JSON.parse(JSON.stringify($scope.advertData));
             };
+        }
+    ]);
+
+
+    module.controller('advertCtrl', [
+        "$scope", "adverts",
+        function ( $scope, adverts ) {
+
+            let current_advert = {};
 
             adverts.get({ id : $scope.advert_id })
                    .then(( response ) => {
                        if ( response.data.success && response.data.advert ) {
-                           this.advert = response.data.advert;
-                           if ( this.advert.age ) {
-                               this.advert.age = parseInt(this.advert.age);
+                           this.advertData = response.data.advert;
+                           if ( this.advertData.age ) {
+                               this.advertData.age = parseInt(this.advertData.age);
                            }
-                           current_advert = JSON.parse(JSON.stringify(this.advert));
+                           current_advert = JSON.parse(JSON.stringify(this.advertData));
                        }
                    })
                    .catch(( err ) => {

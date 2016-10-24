@@ -51,9 +51,24 @@ function advertDirectivesInit ( module ) {
         function () {
             return {
                 restrict : 'A',
-                templateUrl : `${templatesFolder}/edit-advert.html`,
+                templateUrl : `${templatesFolder}/advert-data.html`,
                 scope : {
                     advert_id : "@advertSingle"
+                },
+                controller : "advertCtrl",
+                controllerAs : "advert"
+            };
+        }
+    ]);
+
+    module.directive('advertEdit', [
+        function () {
+            return {
+                restrict : 'A',
+                templateUrl : `${templatesFolder}/advert-edit.html`,
+                scope : {
+                    advertData : "=advertEdit",
+                    popupClose : "&popupClose"
                 },
                 controller : "editAdvertCtrl",
                 controllerAs : "advertEditor"

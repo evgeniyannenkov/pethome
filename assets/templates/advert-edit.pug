@@ -1,0 +1,21 @@
+include ../../views/mixins/formParts
+form.form(ng-submit="advertEditor.save();" name="advertiserEditForm")
+    +input("Name")(ng-model="advertEditor.temporaryData.name" name="name" autocomplete="off")
+    +select("Type", {
+        "type" : {
+            "dog" : "Dog",
+            "cat" : "Cat",
+            "hamster" : "Hamster"
+        }
+    })(ng-model = "advertEditor.temporaryData.type")
+    +radios("Gender", {
+        "gender" : {
+            "boy" : "Boy",
+            "girl" : "Girl"
+        }
+    })(ng-model = "advertEditor.temporaryData.gender")
+    +input("Age")(type="number" ng-model = "advertEditor.temporaryData.age")
+    +input("Breed")(ng-model = "advertEditor.temporaryData.breed")
+    +textarea("Info")(ng-model = "advertEditor.temporaryData.info")
+    +button("Edit")
+    +button("Cancel")(type="button" ng-click="popupClose();advertEditor.cancel();")

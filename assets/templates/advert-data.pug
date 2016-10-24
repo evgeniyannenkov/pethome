@@ -1,0 +1,29 @@
+include ../../views/mixins/formParts
+
+div(popup type="Remove Advert")
+    popup-trigger
+        button Remove
+    popup-content(ng-controller="advertRemoveCtrl as remover")
+        form.popup__content
+            button(type="button" ng-click="remover.remove(advert_id);") Remove
+            button(type="button" ng-click="remover.cancel();") Cancel
+
+div(popup type="Edit Advert")
+    popup-trigger
+        button Edit
+    popup-content
+        .popup__content
+            div(advert-edit="$parent.$parent.advert.advertData" popup-close="$parent.popup.close();")
+
+div.advert__field
+    h3 Name : {{advert.advertData.name}}
+div.advert__field
+    h3 Type : {{advert.advertData.type}}
+div.advert__field
+    h3 Gender : {{advert.advertData.gender}}
+div.advert__field
+    h3 age : {{advert.advertData.age}}
+div.advert__field
+    h3 breed : {{advert.advertData.breed}}
+div.advert__field
+    h3 info : {{advert.advertData.info}}
