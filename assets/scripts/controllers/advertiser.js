@@ -5,7 +5,6 @@ function advertiserControllersInit ( module ) {
     module.controller('advertiserCtrl', [
         "advertiser", "$scope",
         function ( advertisers, $scope ) {
-
             advertisers.get({ id : $scope.user_id })
                        .then(( response ) => {
                            if ( response.data.success ) {
@@ -15,7 +14,22 @@ function advertiserControllersInit ( module ) {
                        .catch(( response ) => {
                            console.log(response);
                        });
+        }
+    ]);
+    module.controller('advertiserEditCtrl', [
+        "advertiser", "$scope",
+        function ( advertisers, $scope ) {
 
+            this.edit = () => {
+                console.log($scope.user);
+            };
+
+        }
+    ]);
+
+    module.controller('advertiserRemoveCtrl', [
+        "advertiser", "$scope",
+        function ( advertisers, $scope ) {
             this.remove = ( id ) => {
                 advertisers.remove({ id })
                            .then(( response ) => {

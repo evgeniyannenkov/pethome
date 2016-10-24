@@ -1,0 +1,10 @@
+h3 {{advertiser.info.name}}
+h3 {{advertiser.info.contactInfo.email}}
+h3 {{advertiser.info.contactInfo.phone}}
+
+div(popup type="profile" ng-if="edit")
+    popup-trigger
+        button Edit Profile
+    popup-content
+        .popup__content
+            div(advertiser-edit="$parent.$parent.$parent.advertiser.info")

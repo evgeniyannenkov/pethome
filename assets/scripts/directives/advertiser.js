@@ -7,12 +7,27 @@ function advertiserDirectivesInit ( module ) {
         function () {
             return {
                 restrict : 'A',
-                templateUrl : `${templatesFolder}/advertiser.html`,
+                templateUrl : `${templatesFolder}/advertiser-data.html`,
                 scope : {
-                    user_id : "@advertiser"
+                    user_id : "@advertiser",
+                    edit : "="
                 },
                 controller : "advertiserCtrl",
                 controllerAs : "advertiser"
+            };
+        }
+    ]);
+
+    module.directive('advertiserEdit', [
+        function () {
+            return {
+                restrict : 'A',
+                templateUrl : `${templatesFolder}/advertiser-edit.html`,
+                scope : {
+                    user : "=advertiserEdit"
+                },
+                controller : "advertiserEditCtrl",
+                controllerAs : "editor"
             };
         }
     ]);
