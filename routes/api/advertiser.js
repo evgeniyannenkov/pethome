@@ -41,8 +41,6 @@ router.put('/:id', response.ifLoggedOut(), ( req, res, next ) => {
 
     const advertiser = req.body || {};
 
-    console.log(req.user);
-
     if ( _id && advertiser._id && (_id === advertiser._id.toString() && _id === req.user._id.toString()) ) {
 
         Advertiser.findByIdAndUpdate(_id, advertiser, {new : true})

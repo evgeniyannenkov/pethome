@@ -1,8 +1,8 @@
 include ../../views/mixins/formParts
 
-form.form(novalidate)
+form.form(ng-submit="editor.edit();" name="test")
     +input("Name")(ng-model="user.name" name="name" autocomplete="off")
     +input("Email")(name="email" ng-required="true" ng-model="user.contactInfo.email" type="email" autocomplete="off")
     +input("Password")(name="password" ng-required="true" ng-model="user.password" type="password" autocomplete="off")
     +input("Phone Number")(name="phone" ng-model="user.contactInfo.phone" autocomplete="off")
-    +button("Edit")(ng-click="editor.edit();")
+    +button("Edit")(ng-click="test.$submit();")

@@ -5,7 +5,7 @@ function advertiserControllersInit ( module ) {
     module.controller('advertiserCtrl', [
         "advertiser", "$scope",
         function ( advertisers, $scope ) {
-            advertisers.get({ id : $scope.user_id })
+            advertisers.api.get({ id : $scope.user_id })
                        .then(( response ) => {
                            if ( response.data.success ) {
                                this.info = response.data.advertiser;
@@ -18,12 +18,17 @@ function advertiserControllersInit ( module ) {
     ]);
     module.controller('advertiserEditCtrl', [
         "advertiser", "$scope",
-        function ( advertisers, $scope ) {
+        function ( advertiser, $scope ) {
 
             this.edit = () => {
-                console.log($scope.user);
+                advertiser.api.update({ id : $scope.user._id, data : $scope.user })
+                           .then(( response )=> {
+                               console.log(response.data);
+                           })
+                           .catch(( response )=> {
+                               console.log(response);
+                           });
             };
-
         }
     ]);
 
