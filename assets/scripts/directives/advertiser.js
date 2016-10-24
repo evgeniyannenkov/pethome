@@ -10,7 +10,8 @@ function advertiserDirectivesInit ( module ) {
                 templateUrl : `${templatesFolder}/advertiser-data.html`,
                 scope : {
                     user_id : "@advertiser",
-                    edit : "="
+                    edit : "=",
+                    remove: "="
                 },
                 controller : "advertiserCtrl",
                 controllerAs : "advertiser"
@@ -28,6 +29,21 @@ function advertiserDirectivesInit ( module ) {
                 },
                 controller : "advertiserEditCtrl",
                 controllerAs : "editor"
+            };
+        }
+    ]);
+
+    module.directive('advertiserRemove', [
+        function () {
+            return {
+                restrict : 'A',
+                templateUrl : `${templatesFolder}/advertiser-remove.html`,
+                scope : {
+                    user : "=advertiserRemove",
+                    popupClose : "&popupClose"
+                },
+                controller : "advertiserRemoveCtrl",
+                controllerAs : "remover"
             };
         }
     ]);

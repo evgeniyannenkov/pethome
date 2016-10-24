@@ -9,7 +9,9 @@ block content
     div(advertiser=currentUser._id edit="true")
 
     include partials/_new-advert-form
-    include partials/_remove-advertiser
+
+    div(advertiser=currentUser._id remove="true")
+
 
     if currentUser
         div(adverts-feed=currentUser._id)
