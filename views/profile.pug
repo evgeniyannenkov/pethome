@@ -5,7 +5,8 @@ block header
 
 block content
     h1 PROFILE
-    h1= currentUser.contactInfo.email
+
+    div(advertiser=currentUser._id)
 
     include partials/_new-advert-form
     include partials/_form-profile-settings

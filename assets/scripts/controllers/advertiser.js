@@ -2,19 +2,30 @@
 
 function advertiserControllersInit ( module ) {
 
-    module.controller('advertiserRemoveCtrl', [
+    module.controller('advertiserCtrl', [
         "advertiser", "$scope",
-        function ( advertiser, $scope ) {
+        function ( advertisers, $scope ) {
+
+            advertisers.get({ id : $scope.user_id })
+                       .then(( response ) => {
+                           if ( response.data.success ) {
+                               this.info = response.data.advertiser;
+                           }
+                       })
+                       .catch(( response ) => {
+                           console.log(response);
+                       });
+
             this.remove = ( id ) => {
-                advertiser.remove({ id })
-                          .then(( response ) => {
-                              if ( response.data.success ) {
-                                  document.location.href = "/";
-                              }
-                          })
-                          .catch(( err ) => {
-                              console.log(err);
-                          });
+                advertisers.remove({ id })
+                           .then(( response ) => {
+                               if ( response.data.success ) {
+                                   document.location.href = "/";
+                               }
+                           })
+                           .catch(( err ) => {
+                               console.log(err);
+                           });
             };
             this.cancel = () => {
                 $scope.$parent.$parent.popup.active = false;

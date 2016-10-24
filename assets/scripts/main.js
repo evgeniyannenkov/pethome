@@ -39,7 +39,8 @@ const components = {
         advertDirectivesInit
     ],
     advertiser : [
-        advertiserControllersInit
+        advertiserControllersInit,
+        advertiserDirectivesInit
     ]
 };
 
