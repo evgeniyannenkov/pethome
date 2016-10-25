@@ -70,11 +70,10 @@ router.post('/', response.ifLoggedOut(), ( req, res, next ) => {
 
     const advert = new Advert();
 
-    advert.type = req.body.type || "dog";
-    advert.gender = req.body.gender || "boy";
-    advert.age = req.body.age || "1";
+    advert.type = req.body.type || advert.type;
+    advert.gender = req.body.gender || advert.gender;
+    advert.age = req.body.age || advert.age;
     advert.name = req.body.name || `${advert.type}, ${advert.gender} ${advert.age}`;
-    advert.publicationDate = new Date();
     advert.advertiserID = req.user._id;
 
     if ( req.body.breed ) {
