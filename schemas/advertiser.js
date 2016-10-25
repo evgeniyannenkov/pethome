@@ -5,7 +5,7 @@ const hasher = require('password-hash-and-salt');
 const advertiserSchema = new mongoose.Schema({
     "oauthID" : Number,
     "avatar" : String,
-    "name": String,
+    "name" : String,
     "contactInfo" : {
         "email" : {
             type : String,
@@ -16,7 +16,7 @@ const advertiserSchema = new mongoose.Schema({
                 },
                 "message" : '{VALUE} is not a valid email!'
             },
-            required : [true, 'email required'],
+            required : [ true, 'email required' ],
             unique : true
         },
         "phone" : String
@@ -29,19 +29,24 @@ const advertiserSchema = new mongoose.Schema({
             },
             "message" : '{VALUE} empty'
         },
-        required : [true, 'password required']
+        required : [ true, 'password required' ]
     },
+    language : {
+        type : String,
+        default : "ru"
+    }
 });
 
 advertiserSchema.methods.validatePassword = function ( password ) {
-    return new Promise((resolve, reject) => {
-        hasher(password).verifyAgainst(this.password, function(err, verified) {
-            if(err)
+    return new Promise(( resolve, reject ) => {
+        hasher(password).verifyAgainst(this.password, function ( err, verified ) {
+            if ( err ) {
                 reject(err);
-            if(!verified) {
-                resolve({success: false, message: "Login: Wrong Password"});
+            }
+            if ( !verified ) {
+                resolve({ success : false, message : "Login: Wrong Password" });
             } else {
-                resolve({success: true, message: "Login: Correct Password"});
+                resolve({ success : true, message : "Login: Correct Password" });
             }
         });
     });
