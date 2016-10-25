@@ -3,8 +3,8 @@
 function notifierControllersInit ( module ) {
 
     module.controller('notifierCtrl', [
-        "notify", "$scope",
-        function ( notify, $scope ) {
+        "notify", "$scope", "$sce",
+        function ( notify, $scope, $sce ) {
 
             this.close = () => {
                 notify.active = false;
@@ -14,7 +14,7 @@ function notifierControllersInit ( module ) {
                 return notify.active;
             }, ( active ) => {
                 this.state = false;
-                this.message = notify.message;
+                this.message = $sce.trustAsHtml(notify.message);
                 this.active = active;
                 this.state = notify.state;
             });
