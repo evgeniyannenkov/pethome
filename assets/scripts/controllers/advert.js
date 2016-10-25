@@ -59,10 +59,10 @@ function advertControllersInit ( module ) {
                 adverts.create({ data : this.advert })
                        .then(( response ) => {
                            if ( response.data.success ) {
-                               notify.success("New Advert created.", 900);
+                               notify.success(`Created ${response.data.advert.name} <i class="fa fa-check" aria-hidden="true"></i>`, 1200);
                                setTimeout(function () {
                                    document.location.href = `/advert/${response.data.advert._id}`;
-                               }, 1000);
+                               }, 1500);
                            }
                        })
                        .catch(( err ) => {
@@ -73,14 +73,15 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('editAdvertCtrl', [
-        "$scope", "adverts",
-        function ( $scope, adverts ) {
+        "$scope", "adverts", "notify",
+        function ( $scope, adverts, notify ) {
 
             this.temporaryData = JSON.parse(JSON.stringify($scope.advertData));
 
             this.save = () => {
                 adverts.update({ id : $scope.advertData._id, data : this.temporaryData })
                        .then(( response ) => {
+                           notify.success(`Updated  <i class="fa fa-check" aria-hidden="true"></i>`, 1500);
                            if ( response.data.success && response.data.advert ) {
                                $scope.advertData = response.data.advert;
                                if ( $scope.advertData.age ) {
@@ -123,13 +124,16 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('advertRemoveCtrl', [
-        "$scope", "adverts",
-        function ( $scope, adverts ) {
+        "$scope", "adverts", "notify",
+        function ( $scope, adverts, notify ) {
             this.remove = ( id ) => {
                 adverts.remove({ id })
                        .then(( response ) => {
                            if ( response.data.success && response.data.redirect ) {
-                               document.location.href = response.data.redirect;
+                               notify.success(`Removed  <i class="fa fa-check" aria-hidden="true"></i>`, 1200);
+                               setTimeout(()=> {
+                                   document.location.href = response.data.redirect;
+                               }, 1200);
                            } else if ( response.data.message ) {
                                console.log(response.data);
                            }

@@ -19,26 +19,32 @@ function authControllersInit ( module ) {
 
                 if ( $scope[ form ].$valid ) {
 
+
                     authService.authenticate(form, { email : this.email, password : this.password })
                                .then(( response ) => {
                                    if ( response.data.success ) {
-                                       if ( response.data.user.name ) {
-                                           notify.success("Hello, " + response.data.user.name);
+
+                                       if ( response.data.user && response.data.user.name ) {
+                                           notify.success("Welcome back, " + response.data.user.name);
                                        } else {
-                                           notify.success("Logged in.");
+                                           if ( form == "registration" ) {
+                                               notify.success("Welcome.");
+                                           } else if ( form == "login" ) {
+                                               notify.success("Welcome back.");
+                                           }
                                        }
 
                                        $timeout(() => {
                                            this.responseClass = "success";
-                                           document.location.reload();
-                                       }, 2000);
+                                           document.location.href = "/profile";
+                                       }, 5000);
                                    } else {
                                        console.log(`${$scope[ form ]}: failed`);
                                        console.log(response);
                                    }
                                })
                                .catch(( err ) => {
-                                   if ( !err.data.success ) {
+                                   if ( !err.data || !err.data.success ) {
                                        notify.error(err.data.message);
                                        $timeout(() => {
                                            this.responseClass = "fail";
