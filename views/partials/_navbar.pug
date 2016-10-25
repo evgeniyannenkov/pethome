@@ -3,23 +3,24 @@ include ../mixins/authForms
 nav
     ul
         li.nav-item
-            a.nav-link(href='/') Home
+            a.nav-link(href='/' translate="HOME_BTN")
         if !currentUser
             li.nav-item(popup type="registration")
-                popup-trigger.nav-link Sign Up
+                popup-trigger.nav-link(translate="SIGN_UP_BTN")
                 popup-content
                     .popup__content
                         +authForm("registration")
             li.nav-item(popup type="login")
-                popup-trigger.nav-link Login
+                popup-trigger.nav-link(translate="LOGIN_BTN")
                 popup-content
                     .popup__content
                         +authForm("login")
         else
             li.nav-item
-                a.nav-link(href='/profile') My Profile
+                a.nav-link(href='/profile' translate="PROFILE_BTN")
             li.nav-item
-                a.nav-link(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") Logout
-    .lang
+                a.nav-link(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();" translate="LOGOUT_BTN")
+
+    .lang(ng-controller="translationCtrl as translate")
         button(type="button" ng-click="translate.changeLanguage('en');" translate="BUTTON_LANG_EN")
         button(type="button" ng-click="translate.changeLanguage('ru');" translate="BUTTON_LANG_RU")
