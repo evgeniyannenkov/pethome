@@ -32,6 +32,7 @@
     "libs.js": {
       "bower": [
         "angular",
+        "angular-translate",
         "es6-promise-polyfill",
         "js-md5"
       ]
