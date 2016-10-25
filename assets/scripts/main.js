@@ -52,7 +52,8 @@ const components = {
         applicationConfig
     ],
     translation : [
-        translationControllersInit
+        translationControllersInit,
+        languagesDirectivesInit
     ]
 };
 
