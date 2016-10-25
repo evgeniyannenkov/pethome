@@ -20,3 +20,6 @@ nav
                 a.nav-link(href='/profile') My Profile
             li.nav-item
                 a.nav-link(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") Logout
+    .lang
+        button(type="button" ng-click="translate.changeLanguage('en');" translate="BUTTON_LANG_EN")
+        button(type="button" ng-click="translate.changeLanguage('ru');" translate="BUTTON_LANG_RU")
