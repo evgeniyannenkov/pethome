@@ -8,6 +8,8 @@ function getModules () {
         popup : angular.module("popup", []),
         advert : angular.module("advert", []),
         advertiser : angular.module("advertiser", []),
-        app : angular.module("app", [ "services", "notifier", "auth", "popup", "advert", "advertiser" ])
+        config : angular.module("config", []),
+        translation : angular.module("translation", []),
+        app : angular.module("app", ["pascalprecht.translate", "services", "notifier", "auth", "popup", "advert", "advertiser", "config", "translation" ])
     };
 }

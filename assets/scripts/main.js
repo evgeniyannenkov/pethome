@@ -47,6 +47,12 @@ const components = {
     advertiser : [
         advertiserControllersInit,
         advertiserDirectivesInit
+    ],
+    config : [
+        applicationConfig
+    ],
+    translation : [
+        translationControllersInit
     ]
 };
 
