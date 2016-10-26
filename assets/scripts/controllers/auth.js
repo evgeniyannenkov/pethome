@@ -30,14 +30,14 @@ function authControllersInit ( module ) {
                                            if ( form == "registration" ) {
                                                notify.success("Welcome.");
                                            } else if ( form == "login" ) {
-                                               notify.success("Welcome back.");
+                                               notify.success("Welcome back.", 1000, 900);
                                            }
                                        }
 
                                        $timeout(() => {
                                            this.responseClass = "success";
                                            document.location.href = "/profile";
-                                       }, 5000);
+                                       }, 2000);
                                    } else {
                                        console.log(`${$scope[ form ]}: failed`);
                                        console.log(response);
