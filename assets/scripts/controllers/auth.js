@@ -9,18 +9,17 @@ function authControllersInit ( module ) {
             this.passwordRegex = validate.password();
 
             this.checkForm = ( form ) => {
-                this.error = !$scope[ form ].$valid;
-                this.validClass = $scope[ form ].$valid ? "valid" : "error";
+                this.error = !$scope[form].$valid;
+                this.validClass = $scope[form].$valid ? "valid" : "error";
             };
 
             this.submit = ( form ) => {
-                $scope[ form ].email.$setTouched();
-                $scope[ form ].password.$setTouched();
+                $scope[form].email.$setTouched();
+                $scope[form].password.$setTouched();
 
-                if ( $scope[ form ].$valid ) {
+                if ( $scope[form].$valid ) {
 
-
-                    authService.authenticate(form, { email : this.email, password : this.password })
+                    authService.authenticate(form, {email : this.email, password : this.password})
                                .then(( response ) => {
                                    if ( response.data.success ) {
 
@@ -34,21 +33,25 @@ function authControllersInit ( module ) {
                                            }
                                        }
 
-                                       $timeout(() => {
-                                           this.responseClass = "success";
-                                           document.location.href = "/profile";
-                                       }, 2000);
+                                       $timeout(2000)
+                                           .then(() => {
+                                               this.responseClass = "success";
+                                               document.location.href = "/profile";
+                                           });
                                    } else {
-                                       console.log(`${$scope[ form ]}: failed`);
+                                       console.log(`${$scope[form]}: failed`);
                                        console.log(response);
                                    }
                                })
                                .catch(( err ) => {
                                    if ( !err.data || !err.data.success ) {
                                        notify.error(err.data.message);
-                                       $timeout(() => {
-                                           this.responseClass = "fail";
-                                       }, 500);
+
+                                       $timeout(500)
+                                           .then(() => {
+                                               this.responseClass = "fail";
+                                           });
+
                                    } else {
                                        console.log(err);
                                    }

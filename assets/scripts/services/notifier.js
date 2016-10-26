@@ -19,14 +19,16 @@ function notifierServicesInit ( module ) {
                     this.state = state || "inform";
                     duration = duration || this.duration;
 
-                    $timeout(() => {
-                        this.active = true;
-                    }, delay);
+                    $timeout(delay)
+                        .then(() => {
+                            this.active = true;
+                        });
 
                     if ( duration > 0 ) {
-                        $timeout(() => {
-                            this.active = false;
-                        }, duration + delay);
+                        $timeout(duration + delay)
+                            .then(() => {
+                                this.active = false;
+                            });
                     }
                 }
 
