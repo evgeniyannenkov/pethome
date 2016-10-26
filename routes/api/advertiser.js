@@ -7,6 +7,14 @@ const Advert = require('../../schemas/advert');
 const response = require("../../middleware/response");
 const router = express.Router();
 
+//Advertiser Get Current
+router.get('/current', response.ifLoggedOut(), ( req, res, next ) => {
+    res.json({
+        success : true,
+        user : req.user
+    });
+});
+
 //Advertiser Get
 router.get('/:id', ( req, res, next ) => {
     const _id = req.params.id || 0;
