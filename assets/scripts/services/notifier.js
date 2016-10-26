@@ -14,8 +14,8 @@ function notifierServicesInit ( module ) {
                     this.duration = 0;
                 }
 
-                say ( new_message, state, duration, delay = 0 ) {
-                    this.message = new_message || this.message;
+                say ( state, { message, duration, delay = 0 } ) {
+                    this.message = message || this.message;
                     this.state = state || "inform";
                     duration = duration || this.duration;
 
@@ -32,16 +32,16 @@ function notifierServicesInit ( module ) {
                     }
                 }
 
-                inform ( new_message, duration, delay ) {
-                    this.say(new_message, "inform", duration, delay);
+                inform ( data ) {
+                    this.say("inform", data);
                 }
 
-                error ( new_message, duration, delay ) {
-                    this.say(new_message, "error", duration, delay);
+                error ( data ) {
+                    this.say("error", data);
                 }
 
-                success ( new_message, duration, delay ) {
-                    this.say(new_message, "success", duration, delay);
+                success ( data ) {
+                    this.say("success", data);
                 }
 
                 close () {

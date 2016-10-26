@@ -30,7 +30,10 @@ function advertiserControllersInit ( module ) {
                 advertiser.update({ id : $scope.user._id, data : this.temporary_data })
                           .then(( response )=> {
                               if ( response.data.success ) {
-                                  notify.success(`Updated  <i class="fa fa-check" aria-hidden="true"></i>`, 1500);
+                                  notify.success({
+                                      message : `Updated  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                      duration : 1500
+                                  });
                                   $scope.user = JSON.parse(JSON.stringify(this.temporary_data));
                                   $scope.popupClose();
                               }
@@ -49,7 +52,10 @@ function advertiserControllersInit ( module ) {
                 advertiser.remove({ id : $scope.user._id })
                           .then(( response ) => {
                               if ( response.data.success ) {
-                                  notify.success(`Removed  <i class="fa fa-check" aria-hidden="true"></i>`, 1000);
+                                  notify.success({
+                                      message : `Removed  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                      duration : 1000
+                                  });
                                   setTimeout(()=> {
                                       document.location.href = "/";
                                   }, 1200);

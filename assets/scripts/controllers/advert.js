@@ -59,7 +59,10 @@ function advertControllersInit ( module ) {
                 adverts.create({ data : this.advert })
                        .then(( response ) => {
                            if ( response.data.success ) {
-                               notify.success(`Created ${response.data.advert.name} <i class="fa fa-check" aria-hidden="true"></i>`, 1200);
+                               notify.success({
+                                   message : `Created ${response.data.advert.name} <i class="fa fa-check" aria-hidden="true"></i>`,
+                                   duration : 1200
+                               });
                                setTimeout(function () {
                                    document.location.href = `/advert/${response.data.advert._id}`;
                                }, 1500);
@@ -81,7 +84,10 @@ function advertControllersInit ( module ) {
             this.save = () => {
                 adverts.update({ id : $scope.advertData._id, data : this.temporaryData })
                        .then(( response ) => {
-                           notify.success(`Updated  <i class="fa fa-check" aria-hidden="true"></i>`, 1500);
+                           notify.success({
+                               message : `Updated  <i class="fa fa-check" aria-hidden="true"></i>`,
+                               duration : 1500
+                           });
                            if ( response.data.success && response.data.advert ) {
                                $scope.advertData = response.data.advert;
                                if ( $scope.advertData.age ) {
@@ -130,7 +136,10 @@ function advertControllersInit ( module ) {
                 adverts.remove({ id })
                        .then(( response ) => {
                            if ( response.data.success && response.data.redirect ) {
-                               notify.success(`Removed  <i class="fa fa-check" aria-hidden="true"></i>`, 1200);
+                               notify.success({
+                                   message : `Removed  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                   duration : 1200
+                               });
                                setTimeout(()=> {
                                    document.location.href = response.data.redirect;
                                }, 1200);

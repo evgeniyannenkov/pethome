@@ -14,7 +14,6 @@ function notifierControllersInit ( module ) {
                 return notify.active;
             }, ( active ) => {
                 this.state = false;
-                console.log(notify.message);
                 this.message = $sce.trustAsHtml(notify.message);
                 this.active = active;
                 this.state = notify.state;
