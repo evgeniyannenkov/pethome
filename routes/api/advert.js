@@ -4,6 +4,9 @@ const express = require('express');
 const Advert = require('../../schemas/advert');
 const router = express.Router();
 const response = require("../../middleware/response");
+const uploader = require("../../config/uploader");
+
+
 
 router.get("/", ( req, res, next ) => {
     Advert.find({})
@@ -124,6 +127,11 @@ router.get("/:id/delete", ( req, res, next ) => {
         });
 
     }
+});
+
+
+router.post("/:id/images", uploader.imagesUpload.single('images'), (req, res, next) => {
+    res.json(req.body);
 });
 
 module.exports = router;
