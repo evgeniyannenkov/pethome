@@ -6,6 +6,7 @@
         "scripts/blocks/**/*.js",
         "scripts/common/*.js",
         "scripts/modules/*.js",
+        "scripts/config/*.js",
         "scripts/services/*.js",
         "scripts/directives/*.js",
         "scripts/controllers/*.js"
