@@ -26,7 +26,8 @@ const components = {
         authServicesInit,
         validationServicesInit,
         advertiserServicesInit,
-        advertServicesInit
+        advertServicesInit,
+        currentUserServicesInit
     ],
     notifier : [
         notifierControllersInit,

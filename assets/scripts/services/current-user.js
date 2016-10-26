@@ -1,25 +1,26 @@
 "use strict";
 
-function advertiserServicesInit ( module ) {
-    module.factory('advertiser', [
+function advertServicesInit ( module ) {
+    module.factory('adverts', [
         "api",
         function ( api ) {
 
             return api.generate({
                 options : {
-                    api_base : "/api/advertiser"
+                    api_base : "/api/advert"
                 },
                 calls : {
                     "GET" : {
-                        remove : {
-                            url : "/:id/delete"
-                        },
                         get : {
                             url : "/:id"
                         },
-                        getCurrent : {
-                            url : "/current"
+                        getAll : {},
+                        remove : {
+                            url : "/:id/delete"
                         }
+                    },
+                    "POST" : {
+                        create : {}
                     },
                     "PUT" : {
                         update : {
@@ -29,6 +30,5 @@ function advertiserServicesInit ( module ) {
                 }
             });
         }
-
     ]);
 }
