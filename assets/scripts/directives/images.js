@@ -10,7 +10,7 @@ function imagesDirectivesInit ( module ) {
                 restrict : 'A',
                 templateUrl : `${templatesFolder}/images-upload.html`,
                 scope : {
-                    advert : "=imagesUpload",
+                    advert_id : "@advertId",
                 },
                 controller : "imagesUploadCtrl",
                 controllerAs : "uploader"
