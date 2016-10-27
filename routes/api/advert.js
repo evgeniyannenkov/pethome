@@ -131,7 +131,9 @@ router.get("/:id/delete", ( req, res, next ) => {
 
 
 router.post("/:id/images", uploader.imagesUpload.single('images'), (req, res, next) => {
-    res.json(req.body);
+    res.json({
+        success: true
+    });
 });
 
 module.exports = router;
