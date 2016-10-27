@@ -2,55 +2,53 @@
 
 function notifierServicesInit ( module ) {
 
-    module.factory('notify', [
-        "$timeout",
-        function ( $timeout ) {
+    module.service('notify', [
+        "$timeout", "$rootScope",
+        function ( $timeout, $rootScope ) {
 
-            class Notifier {
-                constructor () {
-                    this.message = "";
-                    this.active = false;
-                    this.state = "inform";
-                    this.duration = 0;
-                }
+            this.messages = [];
 
-                say ( state, { message, duration, delay = 0 } ) {
-                    this.message = message || this.message;
-                    this.state = state || "inform";
-                    duration = duration || this.duration;
+            this.say = ( state = "inform", { message, duration = this.duration, delay = 0 } ) => {
+                let last_message_index;
 
-                    $timeout(delay)
+                last_message_index = this.messages.length;
+
+                this.messages.push({
+                    time : Date.now(),
+                    message,
+                    duration,
+                    delay,
+                    state
+                });
+
+                $timeout(delay)
+                    .then(() => {
+                        this.messages[ last_message_index ].closed = false;
+                    });
+
+                if ( duration > 0 ) {
+                    $timeout(duration + delay)
                         .then(() => {
-                            this.active = true;
+                            this.messages[ last_message_index ].closed = true;
                         });
-
-                    if ( duration > 0 ) {
-                        $timeout(duration + delay)
-                            .then(() => {
-                                this.active = false;
-                            });
-                    }
                 }
+            };
 
-                inform ( data ) {
-                    this.say("inform", data);
-                }
+            this.inform = ( data ) => {
+                this.say("inform", data);
+            };
 
-                error ( data ) {
-                    this.say("error", data);
-                }
+            this.error = ( data ) => {
+                this.say("error", data);
+            };
 
-                success ( data ) {
-                    this.say("success", data);
-                }
+            this.success = ( data ) => {
+                this.say("success", data);
+            };
 
-                close () {
-                    this.active = false;
-                }
-            }
-
-            return new Notifier();
-
+            this.close = () => {
+                this.active = false;
+            };
         }
     ]);
 }

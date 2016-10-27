@@ -1,4 +1,3 @@
-div(class="notifier" class = "{{notifier.state}}" ng-class="{visible : notifier.active}")
-    div.notifier__message
-        i(ng-click="notifier.close();" class="notifier__close fa fa-times" aria-hidden="true")
-        span(ng-bind-html="notifier.message")
+div(class="notifier")
+    div.notifier__message(ng-click="message.closed = true;" class = "{{message.state}}" ng-repeat="message in notifier.messages | orderBy : '$index' : true" ng-class="{visible : !message.closed, closed : message.closed}")
+        span.notifier__content(ng-bind="message.message")

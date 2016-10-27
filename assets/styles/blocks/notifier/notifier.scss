@@ -1,7 +1,42 @@
 @import "../../common/variables";
 
+@keyframes show {
+  0% {
+    transform  : rotateY(-90deg);
+    visibility : hidden;
+  }
+  100% {
+    transform  : rotateY(0deg);
+    visibility : visible;
+  }
+}
+
+@keyframes hide {
+  0% {
+    transform  : rotateY(0deg);
+    visibility : visible;
+  }
+  35% {
+    transform  : rotateY(0deg) scale(0.8);
+    visibility : visible;
+  }
+  40% {
+    height     : auto;
+    padding    : 20px;
+    visibility : hidden;
+    transform  : scale(1) rotateY(0deg) rotateX(-90deg);
+  }
+  60% {
+    height  : auto;
+    padding : 20px;
+  }
+  100% {
+    height  : 0;
+    padding : 0;
+  }
+}
+
 .notifier {
-  visibility  : hidden;
   text-align  : center;
   position    : fixed;
   top         : 30px;
@@ -9,15 +44,38 @@
   max-width   : 300px;
   perspective : 1000px;
   z-index     : 100;
-  transition  : visibility 0.2s;
 
   .notifier__message {
+    border-top       : 1px solid white;
+    border-bottom    : 1px solid white;
+    visibility       : hidden;
     padding          : 20px 40px;
     background-color : $blue;
     color            : white;
     transform        : rotateY(-90deg);
     transform-origin : right center;
-    transition       : transform 0.2s;
+    cursor           : pointer;
+
+    &.error {
+      background-color : $red;
+    }
+
+    &.success {
+      background-color : $green;
+    }
+
+    &.visible {
+      animation : show 0.3s forwards;
+      //display: block;
+    }
+
+    &.closed {
+      border-top-width    : 0;
+      border-bottom-width : 0;
+      transform-origin    : center top;
+      animation           : hide 0.5s forwards;
+      //display: none;
+    }
   }
 
   .notifier__close {
@@ -27,24 +85,5 @@
     top      : 5px;
     z-index  : 110;
     cursor   : pointer;
-  }
-
-  &.error {
-    .notifier__message {
-      background-color : $red;
-    }
-  }
-
-  &.success {
-    .notifier__message {
-      background-color : $green;
-    }
-  }
-
-  &.visible {
-    visibility : visible;
-    .notifier__message {
-      transform : rotateY(0deg);
-    }
   }
 }

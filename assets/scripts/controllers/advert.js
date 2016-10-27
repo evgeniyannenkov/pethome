@@ -85,8 +85,7 @@ function advertControllersInit ( module ) {
                 adverts.update({ id : $scope.advertData._id, data : this.temporaryData })
                        .then(( response ) => {
                            notify.success({
-                               message : `Updated  <i class="fa fa-check" aria-hidden="true"></i>`,
-                               duration : 1500
+                               message : `${this.temporaryData.name}`
                            });
                            if ( response.data.success && response.data.advert ) {
                                $scope.advertData = response.data.advert;
