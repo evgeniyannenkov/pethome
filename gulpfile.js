@@ -1,49 +1,49 @@
 // ## Globals
-var argv = require('minimist')(process.argv.slice(2));
-var autoprefixer = require('gulp-autoprefixer');
-var browserSync = require('browser-sync').create();
-var babel = require('gulp-babel');
-var changed = require('gulp-changed');
-var concat = require('gulp-concat');
-var checkFilesize = require("gulp-check-filesize");
-var childProcess = require("child_process");
-var flatten = require('gulp-flatten');
-var gulp = require('gulp');
-var gulpif = require('gulp-if');
-var imagemin = require('gulp-imagemin');
-var insert = require('gulp-insert');
-var jshint = require('gulp-jshint');
-var lazypipe = require('lazypipe');
-var less = require('gulp-less');
-var merge = require('merge-stream');
-var nodemon = require('gulp-nodemon');
-var cssNano = require('gulp-cssnano');
-var plumber = require('gulp-plumber');
-var rename = require('gulp-rename');
-var replace = require('gulp-replace');
-var rev = require('gulp-rev');
-var runSequence = require('run-sequence');
-var sass = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var uglify = require('gulp-uglify');
-//var dotenv = require('dotenv').config({ path : './.env' });
-var fs = require('fs');
-var gulpFile = require('gulp-file');
-var concatFilenames = require('gulp-concat-filenames');
-var notify = require("gulp-notify");
-var watch = require('gulp-watch');
-var modifyCssUrls = require('gulp-modify-css-urls');
-var pug = require('gulp-pug');
+const argv = require('minimist')(process.argv.slice(2));
+const autoprefixer = require('gulp-autoprefixer');
+const browserSync = require('browser-sync').create();
+const babel = require('gulp-babel');
+const changed = require('gulp-changed');
+const concat = require('gulp-concat');
+const checkFilesize = require("gulp-check-filesize");
+const childProcess = require("child_process");
+const flatten = require('gulp-flatten');
+const gulp = require('gulp');
+const gulpif = require('gulp-if');
+const imagemin = require('gulp-imagemin');
+const insert = require('gulp-insert');
+const jshint = require('gulp-jshint');
+const lazypipe = require('lazypipe');
+const less = require('gulp-less');
+const merge = require('merge-stream');
+const nodemon = require('gulp-nodemon');
+const cssNano = require('gulp-cssnano');
+const plumber = require('gulp-plumber');
+const rename = require('gulp-rename');
+const replace = require('gulp-replace');
+const rev = require('gulp-rev');
+const runSequence = require('run-sequence');
+const sass = require('gulp-sass');
+const sourcemaps = require('gulp-sourcemaps');
+const uglify = require('gulp-uglify');
+//const dotenv = require('dotenv').config({ path : './.env' });
+const fs = require('fs');
+const gulpFile = require('gulp-file');
+const concatFilenames = require('gulp-concat-filenames');
+const notify = require("gulp-notify");
+const watch = require('gulp-watch');
+const modifyCssUrls = require('gulp-modify-css-urls');
+const pug = require('gulp-pug');
 
 // See https://github.com/austinpray/asset-builder
-var manifest = require('asset-builder')('./assets/manifest.json');
+const manifest = require('asset-builder')('./assets/manifest.json');
 
 // `path` - Paths to base asset directories. With trailing slashes.
 // - `path.source` - Path to the source files. Default: `assets/`
 // - `path.dist` - Path to the build directory. Default: `dist/`
-var path = manifest.paths;
+const path = manifest.paths;
 
-var files = {
+const files = {
     main_sass : 'main.scss',
     libs_sass : 'libs.scss',
     libs_less : 'libs.less',
@@ -51,7 +51,7 @@ var files = {
     main_js : 'main.js'
 };
 
-var sassPaths = {
+const sassPaths = {
     blocksFolder : './assets/styles/blocks',
     stylesFolder : './assets/styles',
     sassFiles : [
@@ -74,7 +74,7 @@ var sassPaths = {
 };
 
 // `config` - Store arbitrary configuration values here.
-var config = manifest.config || {};
+const config = manifest.config || {};
 
 // `globs` - These ultimately end up in their respective `gulp.src`.
 // - `globs.js` - Array of asset-builder JS dependency objects. Example:
@@ -88,15 +88,15 @@ var config = manifest.config || {};
 // - `globs.fonts` - Array of font path globs.
 // - `globs.images` - Array of image path globs.
 // - `globs.bower` - Array of all the main Bower files.
-var globs = manifest.globs;
+const globs = manifest.globs;
 
 // `project` - paths to first-party assets.
 // - `project.js` - Array of first-party JS assets.
 // - `project.css` - Array of first-party CSS assets.
-var project = manifest.getProjectGlobs();
+const project = manifest.getProjectGlobs();
 
 // CLI options
-var enabled = {
+const enabled = {
     // Enable static asset revisioning when `--production`
     rev : argv.production,
     // Disable source maps when `--production`
@@ -114,32 +114,25 @@ var enabled = {
 };
 
 // Path to the compiled assets manifest in the dist directory
-var revManifest = path.dist + 'assets.json';
+const revManifest = path.dist + 'assets.json';
 
-var getCleanFileName = function ( url ) {
-    var fileNameStart = url.lastIndexOf("/") + 1;
-    var fileName = url.substring(fileNameStart);
+const getCleanFileName = function ( url ) {
+    const fileNameStart = url.lastIndexOf("/") + 1;
+    const fileName = url.substring(fileNameStart);
 
     return fileName.split('?')[0];
 };
 
-var isInBowerFiles = function ( cleanFileName, bowerFiles ) {
+const isInBowerFiles = function ( cleanFileName, bowerFiles ) {
 
-    var filtered = bowerFiles.filter(function ( file ) {
+    const filtered = bowerFiles.filter(function ( file ) {
         return file.indexOf(cleanFileName) !== -1;
     });
 
     return filtered.length !== 0;
 };
 
-// ### CSS processing pipeline
-// Example
-// ```
-// gulp.src(cssFiles)
-//   .pipe(cssTasks('main.css')
-//   .pipe(gulp.dest(path.dist + 'styles'))
-// ```
-var cssTasks = function ( filename ) {
+const cssTasks = function ( filename ) {
     return lazypipe()
         .pipe(function () {
             return gulpif(!enabled.failStyleTask, plumber());
@@ -147,9 +140,9 @@ var cssTasks = function ( filename ) {
         .pipe(function () {
             return gulpif(enabled.maps, sourcemaps.init());
         })
-        .pipe(function () {
-            return gulpif('*.less', less());
-        })
+        // .pipe(function () {
+        //     return gulpif('*.less', less());
+        // })
         .pipe(function () {
             return gulpif('*.scss', sass({
                 outputStyle : 'nested', // libsass doesn't support expanded yet
@@ -179,7 +172,7 @@ var cssTasks = function ( filename ) {
         .pipe(function () {
             return modifyCssUrls({
                 modify : function ( url, filePath ) {
-                    var cleanFileName = getCleanFileName(url);
+                    const cleanFileName = getCleanFileName(url);
                     if ( isInBowerFiles(cleanFileName, globs.fonts.concat(globs.images)) ) {
                         return '../fonts/' + cleanFileName;
                     }
@@ -213,7 +206,7 @@ var cssTasks = function ( filename ) {
 //   .pipe(criticalTasks('critical.css')
 //   .pipe(gulp.dest(path.dist + 'critical'))
 // ```
-var criticalTasks = function ( filename ) {
+const criticalTasks = function ( filename ) {
     return lazypipe()
         .pipe(function () {
             return gulpif(!enabled.failStyleTask, plumber());
@@ -273,7 +266,7 @@ var criticalTasks = function ( filename ) {
 //   .pipe(jsTasks('main.js')
 //   .pipe(gulp.dest(path.dist + 'scripts'))
 // ```
-var jsTasks = function ( filename ) {
+const jsTasks = function ( filename ) {
     return lazypipe()
         .pipe(function () {
             return gulpif(enabled.maps, sourcemaps.init());
@@ -310,7 +303,7 @@ var jsTasks = function ( filename ) {
 // ### Write to rev manifest
 // If there are any revved files then write them to the rev manifest.
 // See https://github.com/sindresorhus/gulp-rev
-var writeToManifest = function ( directory ) {
+const writeToManifest = function ( directory ) {
     return lazypipe()
         .pipe(gulp.dest, path.dist + directory)
         .pipe(browserSync.stream, {match : '**/*.{js,css}'})
@@ -324,7 +317,7 @@ var writeToManifest = function ( directory ) {
 // ## Gulp tasks
 // Run `gulp -T` for a task summary
 
-var blocksList = function ( config ) {
+const blocksList = function ( config ) {
     return gulp.src(config.files)
                .pipe(concatFilenames(config.blocksFile, {
                    root : 'assets/styles',
@@ -334,7 +327,7 @@ var blocksList = function ( config ) {
                .pipe(gulp.dest(config.dest));
 };
 
-var libsList = function ( config ) {
+const libsList = function ( config ) {
     return gulp.src(config.files)
                .pipe(concatFilenames(config.blocksFile, {
                    root : './',
@@ -344,9 +337,9 @@ var libsList = function ( config ) {
                .pipe(gulp.dest(config.dest));
 };
 
-var getLibsFiles = function ( extention ) {
-    var paths = [];
-    for ( var i = 0; i < globs.bower.length; i++ ) {
+const getLibsFiles = function ( extention ) {
+    const paths = [];
+    for ( let i = 0; i < globs.bower.length; i++ ) {
         if ( globs.bower[i].indexOf(extention) !== -1 ) {
             paths.push(globs.bower[i]);
         }
@@ -391,10 +384,10 @@ gulp.task('sass:import:watch', function () {
 });
 
 gulp.task('styles', ['sass:import:libs', 'less:import:libs'], function () {
-    var merged = merge();
+    const merged = merge();
     manifest.forEachDependency('css', function ( dep ) {
         if ( !dep.name.startsWith('critical') ) {
-            var cssTasksInstance = cssTasks(dep.name);
+            const cssTasksInstance = cssTasks(dep.name);
             if ( !enabled.failStyleTask ) {
                 cssTasksInstance.on('error', function ( err ) {
                     console.error(err.message);
@@ -411,7 +404,7 @@ gulp.task('styles', ['sass:import:libs', 'less:import:libs'], function () {
 });
 
 gulp.task('styles:watch', function () {
-    var dep = manifest.getDependencyByName('main.css');
+    const dep = manifest.getDependencyByName('main.css');
     gulp.src(dep.globs)
         .pipe(cssTasks(dep.name).on('error', function ( err ) {
             console.error(err.message);
@@ -424,7 +417,7 @@ gulp.task('styles:watch', function () {
 // `gulp scripts` - Runs JSHint then compiles, combines, and optimizes Bower JS
 // and project JS.
 gulp.task('scripts', function () {
-    var merged = merge();
+    const merged = merge();
     manifest.forEachDependency('js', function ( dep ) {
         merged.add(
             gulp.src(dep.globs, {base : 'scripts'})
@@ -436,7 +429,7 @@ gulp.task('scripts', function () {
 });
 
 gulp.task('scripts:watch', function () {
-    var dep = manifest.getDependencyByName(files.main_js);
+    const dep = manifest.getDependencyByName(files.main_js);
     gulp.src(dep.globs)
         .pipe(jsTasks(dep.name))
         .pipe(writeToManifest('scripts'));
@@ -447,7 +440,7 @@ gulp.task('scripts:watch', function () {
 gulp.task('critical', function () {
     manifest.forEachDependency('css', function ( dep ) {
         if ( dep.name.startsWith('critical') ) {
-            var criticalTasksInstance = criticalTasks(dep.name);
+            const criticalTasksInstance = criticalTasks(dep.name);
             if ( !enabled.failStyleTask ) {
                 criticalTasksInstance.on('error', function ( err ) {
                     console.error(err.message);
@@ -508,8 +501,8 @@ gulp.task('jshint', function () {
 //Editing Manifest
 gulp.task('dotenv', function () {
 
-    var manifestSrc = './assets/manifest.json';
-    var manifestRaw = JSON.parse(fs.readFileSync(manifestSrc, 'utf8'));
+    const manifestSrc = './assets/manifest.json';
+    const manifestRaw = JSON.parse(fs.readFileSync(manifestSrc, 'utf8'));
 
     manifestRaw.config.devUrl = process.env.SITE_URL;
 
