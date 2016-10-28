@@ -11,7 +11,8 @@ function advertDirectivesInit ( module ) {
                 templateUrl : `${templatesFolder}/adverts-feed.html`,
                 scope : {
                     user_id : "@advertsFeed",
-                    filter_enabled : "=enableFilter"
+                    filter_enabled : "=enableFilter",
+                    hideFields : "="
                 },
                 controller : "advertsFeedCtrl",
                 controllerAs : "feed"
@@ -42,7 +43,8 @@ function advertDirectivesInit ( module ) {
                 templateUrl : `${templatesFolder}/advert.html`,
                 scope : {
                     advert : "=",
-                    author : "=advertAuthor"
+                    author : "=advertAuthor",
+                    hide : "=hideFields"
                 }
             };
         }
