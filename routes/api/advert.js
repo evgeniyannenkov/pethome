@@ -57,6 +57,7 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
                                       .catch(( error ) => {
                                           console.log(err);
                                       });
+                              advert.mainImage = advert.mainImage == image ? "" : advert.mainImage;
                           } else if ( !advert.mainImage ) {
                               advert.mainImage = image;
                           }

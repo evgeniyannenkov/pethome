@@ -11,7 +11,7 @@ function imagesDirectivesInit ( module ) {
                 templateUrl : `${templatesFolder}/images-upload.html`,
                 scope : {
                     advert_id : "@advertId",
-                    advertImages : "=advertImages"
+                    advert : "=advertData"
                 },
                 controller : "imagesUploadCtrl",
                 controllerAs : "uploader"

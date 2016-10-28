@@ -7,7 +7,7 @@ function advertiserDirectivesInit ( module ) {
         function () {
             return {
                 restrict : 'A',
-                templateUrl : `${templatesFolder}/advertiser-data.html`,
+                templateUrl : `${templatesFolder}/advertiser.html`,
                 scope : {
                     user_id : "@advertiser",
                     edit : "=",

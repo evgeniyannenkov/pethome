@@ -51,7 +51,7 @@ function advertDirectivesInit ( module ) {
         function () {
             return {
                 restrict : 'A',
-                templateUrl : `${templatesFolder}/advert-data.html`,
+                templateUrl : `${templatesFolder}/advert-single.html`,
                 scope : {
                     advert_id : "@advertSingle"
                 },

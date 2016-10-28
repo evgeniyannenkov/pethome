@@ -56,7 +56,7 @@ function advertControllersInit ( module ) {
                 age : 1
             };
             this.create = () => {
-                adverts.create({data : this.advert})
+                adverts.create({ data : this.advert })
                        .then(( response ) => {
                            if ( response.data.success ) {
                                notify.success({
@@ -82,7 +82,7 @@ function advertControllersInit ( module ) {
             this.temporaryData = JSON.parse(JSON.stringify($scope.advertData));
 
             this.save = () => {
-                adverts.update({id : $scope.advertData._id, data : this.temporaryData})
+                adverts.update({ id : $scope.advertData._id, data : this.temporaryData })
                        .then(( response ) => {
                            notify.success({
                                message : `${this.temporaryData.name}`
@@ -111,7 +111,7 @@ function advertControllersInit ( module ) {
 
             let current_advert = {};
 
-            adverts.get({id : $scope.advert_id})
+            adverts.get({ id : $scope.advert_id })
                    .then(( response ) => {
                        if ( response.data.success && response.data.advert ) {
                            this.advertData = response.data.advert;
@@ -131,8 +131,12 @@ function advertControllersInit ( module ) {
                         return element;
                     }
                 });
-                console.log(this.advertData.images);
-                adverts.update({id : this.advertData._id, data : this.advertData})
+                adverts.update({ id : this.advertData._id, data : this.advertData })
+                       .then(( response ) => {
+                           if ( response.data.success ) {
+                               this.advertData = response.data.newAdvert;
+                           }
+                       });
             };
         }
     ]);
@@ -141,7 +145,7 @@ function advertControllersInit ( module ) {
         "$scope", "adverts", "notify",
         function ( $scope, adverts, notify ) {
             this.remove = ( id ) => {
-                adverts.remove({id})
+                adverts.remove({ id })
                        .then(( response ) => {
                            if ( response.data.success && response.data.redirect ) {
                                notify.success({
