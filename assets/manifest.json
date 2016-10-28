@@ -34,6 +34,7 @@
       "bower": [
         "angular",
         "angular-translate",
+        "angular-file-upload",
         "es6-promise-polyfill",
         "js-md5"
       ]

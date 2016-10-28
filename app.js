@@ -49,6 +49,7 @@ passportConfigure();
 
 
 app.use('/assets', express.static(path.join(__dirname, '/dist')));
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
 
 //Globals

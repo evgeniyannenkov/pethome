@@ -55,6 +55,10 @@ const components = {
     translation : [
         translationControllersInit,
         languagesDirectivesInit
+    ],
+    images: [
+        imagesDirectivesInit,
+        imageUploadControllersInit
     ]
 };
 
