@@ -33,4 +33,8 @@ div.advert__field
 div.advert__field
     div(ng-repeat="image in advert.advertData.images" style="width: 30%; display: inline-block; height: 100px; background: url('/{{image}}'); background-size: cover;")
         button(ng-click="advert.removeImage(image);") Remove
+        div
+            label
+                span Main image
+                input(type="radio" ng-change="advert.save();" name="main-image" ng-model="advert.advertData.mainImage" value="{{image}}")
 div(images-upload advert-id="{{advert_id}}" advert-data="advert.advertData")

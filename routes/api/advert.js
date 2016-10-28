@@ -57,13 +57,12 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
                                       .catch(( error ) => {
                                           console.log(err);
                                       });
-                              advert.mainImage = advert.mainImage == image ? "" : advert.mainImage;
-                          } else if ( !advert.mainImage ) {
-                              advert.mainImage = image;
+                              newAdvert.mainImage = newAdvert.mainImage == image ? "" : newAdvert.mainImage;
+                          } else if ( !newAdvert.mainImage ) {
+                              newAdvert.mainImage = image;
                           }
                       }
-                      advert.images = newAdvert.images;
-                      advert.save()
+                      Advert.findOneAndUpdate({ _id }, newAdvert, { new : true })
                             .then(( newAdvert ) => {
                                 res.json({ newAdvert, success : true, message : "Update Advert: saved" });
                             })

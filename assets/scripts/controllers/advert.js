@@ -87,8 +87,8 @@ function advertControllersInit ( module ) {
                            notify.success({
                                message : `${this.temporaryData.name}`
                            });
-                           if ( response.data.success && response.data.advert ) {
-                               $scope.advertData = response.data.advert;
+                           if ( response.data.success && response.data.newAdvert ) {
+                               $scope.advertData = response.data.newAdvert;
                                if ( $scope.advertData.age ) {
                                    $scope.advertData.age = parseInt($scope.advertData.age);
                                }
@@ -106,8 +106,8 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('advertCtrl', [
-        "$scope", "adverts",
-        function ( $scope, adverts ) {
+        "$scope", "adverts", "notify",
+        function ( $scope, adverts, notify ) {
 
             let current_advert = {};
 
@@ -124,6 +124,25 @@ function advertControllersInit ( module ) {
                    .catch(( err ) => {
                        console.log(err);
                    });
+
+            this.save = () => {
+                adverts.update({ id : this.advertData._id, data : this.advertData })
+                       .then(( response ) => {
+                           notify.inform({
+                               message : `${this.advertData.name} updated.`,
+                               duration : 2000
+                           });
+                           if ( response.data.success && response.data.newAdvert ) {
+                               this.advertData = response.data.newAdvert;
+                               if ( this.advertData.age ) {
+                                   this.advertData.age = parseInt(this.advertData.age);
+                               }
+                           }
+                       })
+                       .catch(( err ) => {
+                           console.log(err);
+                       });
+            };
 
             this.removeImage = ( image ) => {
                 this.advertData.images = this.advertData.images.filter(function ( element ) {
