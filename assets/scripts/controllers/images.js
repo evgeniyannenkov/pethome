@@ -3,8 +3,8 @@
 function imageUploadControllersInit ( module ) {
 
     module.controller('imagesUploadCtrl', [
-        "$scope", "FileUploader",
-        function ( $scope, FileUploader ) {
+        "$scope", "FileUploader", "notify",
+        function ( $scope, FileUploader, notify ) {
 
             $scope.fileUploader = new FileUploader({
                 url : `/api/advert/${$scope.advert_id}/images`,
@@ -29,11 +29,14 @@ function imageUploadControllersInit ( module ) {
             };
 
             $scope.fileUploader.onProgressAll = function ( response ) {
-                console.info(response);
+                console.log(response);
             };
 
             $scope.fileUploader.onCompleteAll = function ( response ) {
-                console.info("onCompleteAll");
+                notify.success({
+                    message : `Images added.`,
+                    duration : 1500
+                });
             };
         }
     ]);

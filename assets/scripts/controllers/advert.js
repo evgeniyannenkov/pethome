@@ -81,24 +81,6 @@ function advertControllersInit ( module ) {
 
             this.temporaryData = JSON.parse(JSON.stringify($scope.advertData));
 
-            this.save = () => {
-                adverts.update({ id : $scope.advertData._id, data : this.temporaryData })
-                       .then(( response ) => {
-                           notify.success({
-                               message : `${this.temporaryData.name}`
-                           });
-                           if ( response.data.success && response.data.newAdvert ) {
-                               $scope.advertData = response.data.newAdvert;
-                               if ( $scope.advertData.age ) {
-                                   $scope.advertData.age = parseInt($scope.advertData.age);
-                               }
-                               $scope.popupClose();
-                           }
-                       })
-                       .catch(( err ) => {
-                           console.log(err);
-                       });
-            };
             this.cancel = () => {
                 this.temporaryData = JSON.parse(JSON.stringify($scope.advertData));
             };
@@ -125,11 +107,11 @@ function advertControllersInit ( module ) {
                        console.log(err);
                    });
 
-            this.save = () => {
-                adverts.update({ id : this.advertData._id, data : this.advertData })
+            this.save = ( data = this.advertData ) => {
+                adverts.update({ id : data._id, data })
                        .then(( response ) => {
                            notify.inform({
-                               message : `${this.advertData.name} updated.`,
+                               message : `${data.name} updated.`,
                                duration : 2000
                            });
                            if ( response.data.success && response.data.newAdvert ) {
@@ -150,12 +132,7 @@ function advertControllersInit ( module ) {
                         return element;
                     }
                 });
-                adverts.update({ id : this.advertData._id, data : this.advertData })
-                       .then(( response ) => {
-                           if ( response.data.success ) {
-                               this.advertData = response.data.newAdvert;
-                           }
-                       });
+                this.save();
             };
         }
     ]);

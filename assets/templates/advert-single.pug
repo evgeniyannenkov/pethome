@@ -13,7 +13,7 @@ div(popup type="Edit Advert")
         button Edit
     popup-content
         .popup__content
-            div(advert-edit="$parent.$parent.advert.advertData" popup-close="$parent.popup.close();")
+            div(advert-edit="$parent.$parent.advert.advertData" advert-update="$parent.$parent.advert.save(data);" popup-close="$parent.popup.close();")
 
 div.advert__field(ng-if="advert.advertData.mainImage")
     h3 Main image

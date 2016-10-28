@@ -68,7 +68,8 @@ function advertDirectivesInit ( module ) {
                 templateUrl : `${templatesFolder}/advert-edit.html`,
                 scope : {
                     advertData : "=advertEdit",
-                    popupClose : "&popupClose"
+                    popupClose : "&popupClose",
+                    advertUpdate : "&advertUpdate"
                 },
                 controller : "editAdvertCtrl",
                 controllerAs : "advertEditor"

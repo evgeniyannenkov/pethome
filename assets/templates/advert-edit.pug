@@ -1,5 +1,5 @@
 include ../../views/mixins/formParts
-form.form(ng-submit="advertEditor.save();" name="advertiserEditForm")
+form.form(ng-submit="advertUpdate({data : advertEditor.temporaryData});popupClose();" name="advertiserEditForm")
     +input("Name")(ng-model="advertEditor.temporaryData.name" name="name" autocomplete="off")
     +select("Type", {
         "type" : {
