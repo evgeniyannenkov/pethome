@@ -13,3 +13,6 @@ div.advert__field(ng-if="advert.breed")
     | {{advert.breed}}
 div.advert__field(ng-if="advert.info")
     | {{advert.info}}
+div.advert__field
+    | Posted by
+    a(href="/advertiser/{{advert.advertiserID}}") {{advert.advertiserID}}
