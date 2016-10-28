@@ -9,6 +9,8 @@ block content
     if currentUser && advert.advertiserID.toString() == currentUser._id.toString()
         div(advert-single=advert._id)
     else
+        if advert.mainImage
+            h1= advert.mainImage
         if advert.name
             h1= advert.name
         if advert.type
