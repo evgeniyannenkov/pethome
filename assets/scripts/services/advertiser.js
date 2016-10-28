@@ -17,6 +17,9 @@ function advertiserServicesInit ( module ) {
                         get : {
                             url : "/:id"
                         },
+                        getAll : {
+                            url : ""
+                        },
                         getCurrent : {
                             url : "/current"
                         }

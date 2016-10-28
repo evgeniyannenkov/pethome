@@ -3,9 +3,14 @@
 function advertControllersInit ( module ) {
 
     module.controller('advertsFeedCtrl', [
-        "$http", "$scope", "adverts",
-        function ( ajax, $scope, adverts ) {
+        "$http", "$scope", "adverts", "advertiser",
+        function ( ajax, $scope, adverts, advertiser ) {
             this.order = "-publicationDate";
+
+            advertiser.getAll()
+                      .then(( response ) => {
+                          this.authors = response.data.advertisers;
+                      });
 
             this.getAdverts = ( user_id ) => {
                 if ( !user_id ) {

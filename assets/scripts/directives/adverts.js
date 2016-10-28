@@ -41,7 +41,8 @@ function advertDirectivesInit ( module ) {
                 restrict : 'A',
                 templateUrl : `${templatesFolder}/advert.html`,
                 scope : {
-                    advert : "="
+                    advert : "=",
+                    author : "="
                 }
             };
         }

@@ -7,6 +7,37 @@ const Advert = require('../../schemas/advert');
 const response = require("../../middleware/response");
 const router = express.Router();
 
+//Advertiser Get All
+router.get('/', ( req, res, next ) => {
+    Advertiser.find({})
+              .then(( advertisersArray )=> {
+                  if ( advertisersArray ) {
+                      let advertisers = {},
+                          advertiser;
+
+                      for ( let index = 0; index < advertisersArray.length; index++ ) {
+                          advertiser = advertisersArray[ index ];
+                          advertisers[ advertiser._id ] = advertiser;
+                      }
+
+                      res.json({
+                          success : true,
+                          advertisers
+                      });
+                  } else {
+                      res.json({
+                          success : false,
+                          user : "Get users : No users"
+                      });
+                  }
+              })
+              .catch(( error )=> {
+                  res.json({
+                      success : false,
+                      message : error.message
+                  });
+              });
+});
 //Advertiser Get Current
 router.get('/current', response.ifLoggedOut(), ( req, res, next ) => {
     res.json({
@@ -51,7 +82,7 @@ router.put('/:id', response.ifLoggedOut(), ( req, res, next ) => {
 
     if ( _id && advertiser._id && (_id === advertiser._id.toString() && _id === req.user._id.toString()) ) {
 
-        Advertiser.findByIdAndUpdate(_id, advertiser, {new : true})
+        Advertiser.findByIdAndUpdate(_id, advertiser, { new : true })
                   .then(( advertiser )=> {
                       if ( advertiser ) {
                           res.json({
@@ -87,7 +118,7 @@ router.put('/:id', response.ifLoggedOut(), ( req, res, next ) => {
 router.get('/:id/adverts', ( req, res, next ) => {
     const _id = req.params.id || 0;
 
-    Advert.find({"advertiserID" : _id})
+    Advert.find({ "advertiserID" : _id })
           .then(( adverts ) => {
               res.json({
                   adverts,
@@ -109,7 +140,7 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
     if ( req.user._id == _id ) {
         Advertiser.findByIdAndRemove(_id)
                   .then(() => {
-                      Advert.remove({advertiserID : _id})
+                      Advert.remove({ advertiserID : _id })
                             .then(( data ) => {
                                 res.json({
                                     success : true,
