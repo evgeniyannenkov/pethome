@@ -30,7 +30,7 @@ function authorControllersInit ( module ) {
                 author.update({ id : $scope.user._id, data : this.temporary_data })
                           .then(( response )=> {
                               if ( response.data.success ) {
-                                  notify.success({
+                                  notify.inform({
                                       message : `Updated  <i class="fa fa-check" aria-hidden="true"></i>`,
                                       duration : 1500
                                   });
@@ -52,7 +52,7 @@ function authorControllersInit ( module ) {
                 author.remove({ id : $scope.user._id })
                           .then(( response ) => {
                               if ( response.data.success ) {
-                                  notify.success({
+                                  notify.inform({
                                       message : `Removed  <i class="fa fa-check" aria-hidden="true"></i>`,
                                       duration : 1000
                                   });

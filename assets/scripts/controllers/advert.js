@@ -64,7 +64,7 @@ function advertControllersInit ( module ) {
                 adverts.create({ data : this.advert })
                        .then(( response ) => {
                            if ( response.data.success ) {
-                               notify.success({
+                               notify.inform({
                                    message : `Created ${response.data.advert.name} <i class="fa fa-check" aria-hidden="true"></i>`,
                                    duration : 1200
                                });
@@ -149,7 +149,7 @@ function advertControllersInit ( module ) {
                 adverts.remove({ id })
                        .then(( response ) => {
                            if ( response.data.success && response.data.redirect ) {
-                               notify.success({
+                               notify.inform({
                                    message : `Removed  <i class="fa fa-check" aria-hidden="true"></i>`,
                                    duration : 1200
                                });

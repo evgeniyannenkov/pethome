@@ -33,7 +33,7 @@ function imageUploadControllersInit ( module ) {
             };
 
             $scope.fileUploader.onCompleteAll = function ( response ) {
-                notify.success({
+                notify.inform({
                     message : `Images added.`,
                     duration : 1500
                 });
