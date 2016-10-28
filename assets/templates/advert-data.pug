@@ -27,5 +27,7 @@ div.advert__field
     h3 breed : {{advert.advertData.breed}}
 div.advert__field
     h3 info : {{advert.advertData.info}}
-
-div(images-upload advert-id="{{advert_id}}")
+div.advert__field
+    div(ng-repeat="image in advert.advertData.images" style="width: 30%; display: inline-block; height: 100px; background: url('/{{image}}'); background-size: cover;")
+        button(ng-click="advert.removeImage(image);") Remove
+div(images-upload advert-id="{{advert_id}}" advert-images="advert.advertData.images")

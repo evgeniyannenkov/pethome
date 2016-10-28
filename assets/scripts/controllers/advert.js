@@ -56,7 +56,7 @@ function advertControllersInit ( module ) {
                 age : 1
             };
             this.create = () => {
-                adverts.create({ data : this.advert })
+                adverts.create({data : this.advert})
                        .then(( response ) => {
                            if ( response.data.success ) {
                                notify.success(`Created ${response.data.advert.name} <i class="fa fa-check" aria-hidden="true"></i>`, 1200);
@@ -79,7 +79,7 @@ function advertControllersInit ( module ) {
             this.temporaryData = JSON.parse(JSON.stringify($scope.advertData));
 
             this.save = () => {
-                adverts.update({ id : $scope.advertData._id, data : this.temporaryData })
+                adverts.update({id : $scope.advertData._id, data : this.temporaryData})
                        .then(( response ) => {
                            notify.success(`Updated  <i class="fa fa-check" aria-hidden="true"></i>`, 1500);
                            if ( response.data.success && response.data.advert ) {
@@ -100,14 +100,13 @@ function advertControllersInit ( module ) {
         }
     ]);
 
-
     module.controller('advertCtrl', [
         "$scope", "adverts",
         function ( $scope, adverts ) {
 
             let current_advert = {};
 
-            adverts.get({ id : $scope.advert_id })
+            adverts.get({id : $scope.advert_id})
                    .then(( response ) => {
                        if ( response.data.success && response.data.advert ) {
                            this.advertData = response.data.advert;
@@ -120,6 +119,16 @@ function advertControllersInit ( module ) {
                    .catch(( err ) => {
                        console.log(err);
                    });
+
+            this.removeImage = ( image ) => {
+                this.advertData.images = this.advertData.images.filter(function ( element ) {
+                    if ( image !== element ) {
+                        return element;
+                    }
+                });
+                console.log(this.advertData.images);
+                adverts.update({id : this.advertData._id, data : this.advertData})
+            };
         }
     ]);
 
@@ -127,7 +136,7 @@ function advertControllersInit ( module ) {
         "$scope", "adverts", "notify",
         function ( $scope, adverts, notify ) {
             this.remove = ( id ) => {
-                adverts.remove({ id })
+                adverts.remove({id})
                        .then(( response ) => {
                            if ( response.data.success && response.data.redirect ) {
                                notify.success(`Removed  <i class="fa fa-check" aria-hidden="true"></i>`, 1200);

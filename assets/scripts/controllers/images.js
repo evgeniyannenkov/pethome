@@ -25,6 +25,7 @@ function imageUploadControllersInit ( module ) {
             $scope.fileUploader.onSuccessItem = function ( fileItem, response, status, headers ) {
                 fileItem.remove();
                 console.info(response);
+                $scope.advertImages = response.newAdvert.images;
             };
 
             $scope.fileUploader.onProgressAll = function ( response ) {

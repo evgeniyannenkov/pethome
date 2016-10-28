@@ -22,8 +22,8 @@ const advertSchema = new mongoose.Schema({
         default : "1"
     },
     "publicationDate" : {
-        type : Date,
-        default : new Date()
+        type : Number,
+        default :  new Date().getTime()
     },
     "breed" : String,
     "info" : String,
@@ -35,7 +35,7 @@ const advertSchema = new mongoose.Schema({
         type : String
     },
     "images" : {
-        type : Array,
+        type : [String],
         default: []
     }
 });
