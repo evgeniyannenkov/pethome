@@ -4,6 +4,7 @@ const express = require('express');
 const Advert = require('../../schemas/advert');
 const router = express.Router();
 const response = require("../../middleware/response");
+const uploader = require("../../config/uploader");
 
 router.get("/", ( req, res, next ) => {
     Advert.find({})
@@ -37,14 +38,39 @@ router.get("/:id", ( req, res, next ) => {
 
 router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
     const _id = req.params.id;
-    const advert = req.body || {};
+    const newAdvert = req.body || {};
 
-    if ( _id && advert._id && advert._id == _id ) {
+    let image;
 
-        Advert.findOneAndUpdate({_id, advertiserID : req.user.id}, advert, {new : true})
+    if ( newAdvert._id && newAdvert._id == _id ) {
+
+        Advert.findOne({_id, advertiserID : req.user.id})
               .then(( advert ) => {
                   if ( advert ) {
-                      res.json({advert, success : true});
+                      for ( let i = 0; i < advert.images.length; i++ ) {
+                          image = advert.images[i];
+                          if ( newAdvert.images.indexOf(image) === -1 ) {
+                              uploader.deleteFile(image)
+                                  .then(( response ) => {
+                                      console.log(response.data.success);
+                                  })
+                                  .catch(( error ) => {
+                                      console.log(err);
+                                  });
+                          }
+                      }
+                      advert.images = newAdvert.images;
+                      advert.save()
+                            .then(( newAdvert ) => {
+                                res.json({newAdvert, success : true, message: "Update Advert: saved"});
+                            })
+                            .catch(( err ) => {
+                                res.json({
+                                    message : "Update Advert: not saved",
+                                    error_message : err.message,
+                                    success : false
+                                });
+                            });
                   } else {
                       res.json({
                           message : "Update Advert: not found",
@@ -100,30 +126,75 @@ router.post('/', response.ifLoggedOut(), ( req, res, next ) => {
 
 });
 
-router.get("/:id/delete", ( req, res, next ) => {
+router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
     const _id = req.params.id;
-    if ( req.user && _id ) {
-        Advert.findOneAndRemove({ _id, advertiserID : req.user._id })
-              .then(( advert ) => {
-                  if ( advert ) {
-                      res.json({ success : true, advert, redirect : "/profile" });
-                  } else {
-                      res.json({ success : false, message : "No advert was removed." });
-                  }
-              })
-              .catch(( error ) => {
-                  res.json({
-                      success : false,
-                      message : error.message
-                  });
-              });
-    } else {
-        res.json({
-            success : false,
-            message : "You must be logged in."
-        });
 
-    }
+    let image;
+
+    Advert.findOneAndRemove({_id, advertiserID : req.user._id})
+          .then(( advert ) => {
+              if ( advert ) {
+                  for ( let i = 0; i < advert.images.length; i++ ) {
+                      image = advert.images[i];
+                      uploader.deleteFile(image)
+                          .then(( response ) => {
+                              console.log(response.data.success);
+                          })
+                          .catch(( error ) => {
+                              console.log(err);
+                          });
+                  }
+                  res.json({success : true, advert, redirect : "/profile"});
+              } else {
+                  res.json({success : false, message : "No advert was removed."});
+              }
+          })
+          .catch(( error ) => {
+              res.json({
+                  success : false,
+                  message : error.message
+              });
+          });
+});
+
+router.post("/:id/images", response.ifLoggedOut(), uploader.imagesUpload.single('images'), ( req, res, next ) => {
+    const _id = req.params.id;
+    const uploads = "uploads/";
+    const src = uploads + req.file.filename;
+
+    Advert.findOne({_id})
+          .then(( advert ) => {
+              if ( advert ) {
+                  advert.images.push(src);
+                  if ( !advert.mainImage ) {
+                      advert.mainImage = src;
+                  }
+                  advert.save()
+                        .then(( newAdvert ) => {
+                            res.json({newAdvert, success : true});
+                        })
+                        .catch(( err ) => {
+                            res.json({
+                                message : "Save Advert: not saved",
+                                error_message : err.message,
+                                success : false
+                            });
+                        });
+
+              } else {
+                  res.json({
+                      message : "Find Advert: not found",
+                      success : false
+                  });
+              }
+          })
+          .catch(( error ) => {
+              res.json({
+                  success : false,
+                  message : error.message
+              });
+          });
+
 });
 
 module.exports = router;

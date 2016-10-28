@@ -10,6 +10,21 @@ function getModules () {
         advertiser : angular.module("advertiser", []),
         config : angular.module("config", []),
         translation : angular.module("translation", []),
-        app : angular.module("app", ["pascalprecht.translate", "services", "notifier", "auth", "popup", "advert", "advertiser", "config", "translation" ])
+        images : angular.module("images", []),
+        app : angular.module("app",
+            [
+                "pascalprecht.translate",
+                "angularFileUpload",
+                "services",
+                "notifier",
+                "auth",
+                "popup",
+                "advert",
+                "advertiser",
+                "config",
+                "translation",
+                "images"
+            ]
+        )
     };
 }
