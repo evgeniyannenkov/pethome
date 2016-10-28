@@ -2,7 +2,7 @@
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const Advertiser = require('../schemas/advertiser');
+const Author = require('../schemas/author');
 const hasher = require('password-hash-and-salt');
 
 module.exports = () => {
@@ -14,7 +14,7 @@ module.exports = () => {
 
     //Get user by id from session
     passport.deserializeUser(( userId, done ) => {
-        Advertiser.findById(userId, ( err, user ) => {
+        Author.findById(userId, ( err, user ) => {
             done(err, user);
         });
     });
@@ -24,7 +24,7 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            Advertiser.findOne({"contactInfo.email" : email}, ( err, user ) => {
+            Author.findOne({"contactInfo.email" : email}, ( err, user ) => {
                 if ( err ) {
                     done(err);
                 }
@@ -34,7 +34,7 @@ module.exports = () => {
                             done(err);
                         }
                         else {
-                            user = new Advertiser({
+                            user = new Author({
                                 password : hash,
                                 contactInfo : {
                                     email
@@ -61,7 +61,7 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            Advertiser.findOne({"contactInfo.email" : email}, ( err, user ) => {
+            Author.findOne({"contactInfo.email" : email}, ( err, user ) => {
                 if ( err ) {
                     done(err);
                 }

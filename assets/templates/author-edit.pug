@@ -1,5 +1,5 @@
 include ../../views/mixins/formParts
-form.form(ng-submit="editor.edit();" name="advertiserEditForm")
+form.form(ng-submit="editor.edit();" name="authorEditForm")
     +input("Name")(ng-model="editor.temporary_data.name" name="name" autocomplete="off")
     +input("Email")(name="email" ng-required="true" ng-model="editor.temporary_data.contactInfo.email" type="email" autocomplete="off")
     //+input("Password")(name="password" ng-required="true" ng-model="editor.temporary_data.password" type="password" autocomplete="off")

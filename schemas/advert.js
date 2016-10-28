@@ -28,9 +28,9 @@ const advertSchema = new mongoose.Schema({
     "breed" : String,
     "info" : String,
     "location" : String,
-    "advertiserID" : {
+    "author" : {
         type : mongoose.Schema.Types.ObjectId,
-        required : [ true, 'advertiserID required' ],
+        required : [ true, 'author required' ],
     },
     "mainImage" : {
         type : String

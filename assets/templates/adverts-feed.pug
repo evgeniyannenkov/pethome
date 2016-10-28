@@ -8,4 +8,4 @@ adverts-filter(ng-if="filter_enabled" feed-filter="feed.filter")
     }
 }, true)(ng-model = "feed.order")
 div.adverts-feed
-    div.advert(ng-repeat="(index, advert) in feed.adverts | filter: feed.filter | orderBy : feed.order" advert="advert" author="feed.authors[advert.advertiserID]")
+    div.advert(ng-repeat="(index, advert) in feed.adverts | filter: feed.filter | orderBy : feed.order" advert="advert" advert-author="feed.authors[advert.author]")

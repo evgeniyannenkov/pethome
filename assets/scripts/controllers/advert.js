@@ -3,13 +3,13 @@
 function advertControllersInit ( module ) {
 
     module.controller('advertsFeedCtrl', [
-        "$http", "$scope", "adverts", "advertiser",
-        function ( ajax, $scope, adverts, advertiser ) {
+        "$http", "$scope", "adverts", "author",
+        function ( ajax, $scope, adverts, author ) {
             this.order = "-publicationDate";
 
-            advertiser.getAll()
+            author.getAll()
                       .then(( response ) => {
-                          this.authors = response.data.advertisers;
+                          this.authors = response.data.authors;
                       });
 
             this.getAdverts = ( user_id ) => {
@@ -28,7 +28,7 @@ function advertControllersInit ( module ) {
                 } else {
                     ajax({
                         method : "get",
-                        url : `/api/advertiser/${user_id}/adverts`
+                        url : `/api/author/${user_id}/adverts`
                     }).then(( response ) => {
                         if ( response.data.adverts ) {
                             this.adverts = response.data.adverts;

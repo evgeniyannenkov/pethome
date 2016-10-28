@@ -1,6 +1,5 @@
-a(href="/advert/{{advert._id}}") Go To
 div.advert__field(ng-if="advert.name")
-    | {{advert.name}}
+    a(href="/advert/{{advert._id}}") {{advert.name}}
 div.advert__field(ng-if="advert.type")
     | {{advert.type}}
 div.advert__field(ng-if="advert.gender")
@@ -14,5 +13,6 @@ div.advert__field(ng-if="advert.breed")
 div.advert__field(ng-if="advert.info")
     | {{advert.info}}
 div.advert__field
-    | Posted by :
-    a(href="/advertiser/{{author._id}}") {{author.name}}
+    span(ng-show="author.name") Author :
+    a(href="/author/{{author._id}}" ng-hide="author.name") Author
+    a(href="/author/{{author._id}}" ng-show="author.name")  {{author.name}}

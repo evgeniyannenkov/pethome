@@ -6,7 +6,7 @@ block header
 block content
     h1= title
 
-    if currentUser && advert.advertiserID.toString() == currentUser._id.toString()
+    if currentUser && advert.author.toString() == currentUser._id.toString()
         div(advert-single=advert._id)
     else
         if advert.mainImage

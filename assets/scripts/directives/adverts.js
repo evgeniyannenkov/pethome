@@ -42,7 +42,7 @@ function advertDirectivesInit ( module ) {
                 templateUrl : `${templatesFolder}/advert.html`,
                 scope : {
                     advert : "=",
-                    author : "="
+                    author : "=advertAuthor"
                 }
             };
         }

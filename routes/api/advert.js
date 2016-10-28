@@ -44,7 +44,7 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
 
     if ( newAdvert._id && newAdvert._id == _id ) {
 
-        Advert.findOne({ _id, advertiserID : req.user.id })
+        Advert.findOne({ _id, author : req.user.id })
               .then(( advert ) => {
                   if ( advert ) {
                       for ( let i = 0; i < advert.images.length; i++ ) {
@@ -102,7 +102,7 @@ router.post('/', response.ifLoggedOut(), ( req, res, next ) => {
     advert.gender = req.body.gender || advert.gender;
     advert.age = req.body.age || advert.age;
     advert.name = req.body.name || `${advert.type}, ${advert.gender} ${advert.age}`;
-    advert.advertiserID = req.user._id;
+    advert.author = req.user._id;
 
     if ( req.body.breed ) {
         advert.breed = req.body.breed;
@@ -133,7 +133,7 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
 
     let image;
 
-    Advert.findOneAndRemove({ _id, advertiserID : req.user._id })
+    Advert.findOneAndRemove({ _id, author : req.user._id })
           .then(( advert ) => {
               if ( advert ) {
                   for ( let i = 0; i < advert.images.length; i++ ) {
