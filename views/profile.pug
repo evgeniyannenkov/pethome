@@ -10,7 +10,7 @@ block content
 
     include partials/_new-advert-form
 
-    div(adverts-feed=currentUser._id hide-fields="{author:true, publicationDate:true}")
+    feed(user-id=currentUser._id hide-fields="{author:true, publicationDate:true}")
 
 block footer
     include partials/_footer

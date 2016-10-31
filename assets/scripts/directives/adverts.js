@@ -3,22 +3,17 @@
 function advertDirectivesInit ( module ) {
     const templatesFolder = "/assets/templates";
 
-    module.directive('advertsFeed', [
-        function () {
-
-            return {
-                restrict : 'A',
-                templateUrl : `${templatesFolder}/adverts-feed.html`,
-                scope : {
-                    user_id : "@advertsFeed",
-                    filter_enabled : "=enableFilter",
-                    hideFields : "="
-                },
-                controller : "advertsFeedCtrl",
-                controllerAs : "feed"
-            };
-        }
-    ]);
+    module.component('feed', {
+        restrict : 'A',
+        templateUrl : `${templatesFolder}/adverts-feed.html`,
+        bindings : {
+            user_id : "@userId",
+            filter_enabled : "=enableFilter",
+            hideFields : "="
+        },
+        controller : "advertsFeedCtrl",
+        controllerAs : "feed"
+    } );
 
     module.directive('advertsFilter', [
         function () {
