@@ -1,13 +1,11 @@
 "use strict";
 
-function formComponentsInit ( module ) {
-
-    const templatesFolder = "/assets/templates";
+function formComponentsInit ( module, constants ) {
 
     module.component("popupForm", {
-        templateUrl : `${templatesFolder}/popup-form.html`,
+        templateUrl : `${constants.templatesFolder}/popup-form.html`,
         require : {
-            popup: "^^?popup"
+            popup : "^^?popup"
         },
         transclude : true,
         controllerAs : "form"
