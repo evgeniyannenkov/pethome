@@ -12,7 +12,7 @@ function advertDirectivesInit ( module ) {
         },
         controller : "advertsFeedCtrl",
         controllerAs : "feed"
-    } );
+    });
 
     module.component('filter', {
         templateUrl : `${templatesFolder}/adverts-filter.html`,
@@ -23,20 +23,15 @@ function advertDirectivesInit ( module ) {
         controllerAs : "filter"
     });
 
-    module.directive('advert', [
-        function () {
-
-            return {
-                restrict : 'A',
-                templateUrl : `${templatesFolder}/advert.html`,
-                scope : {
-                    advert : "=",
-                    author : "=advertAuthor",
-                    hide : "=hideFields"
-                }
-            };
-        }
-    ]);
+    module.component('advert', {
+        templateUrl : `${templatesFolder}/advert.html`,
+        bindings : {
+            fields : "=",
+            author : "=advertAuthor",
+            hide : "=hideFields"
+        },
+        controllerAs: "advert"
+    });
 
     module.directive('advertSingle', [
         function () {
