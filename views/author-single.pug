@@ -1,12 +1,12 @@
 extends layout
 
 block header
-    include partials/_navbar
+    include partials/_header
 
 block content
-    div(author=author._id)
+    author(author-id=author._id)
 
-    div(adverts-feed=author._id)
+    feed(author-id=author._id hide-fields="{author:true}")
 
 block footer
     include partials/_footer

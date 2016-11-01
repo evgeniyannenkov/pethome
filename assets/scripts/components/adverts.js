@@ -5,7 +5,7 @@ function advertComponentsInit ( module, constants ) {
     module.component('feed', {
         templateUrl : `${constants.templatesFolder}/adverts-feed.html`,
         bindings : {
-            id : "@userId",
+            id : "@authorId",
             filter_enabled : "=enableFilter",
             hideFields : "="
         },
