@@ -1,10 +1,9 @@
 "use strict";
 
-function authorComponentsInit ( module ) {
-    const templatesFolder = "/assets/templates";
+function authorComponentsInit (  module, constants  ) {
 
     module.component('author', {
-        templateUrl : `${templatesFolder}/author.html`,
+        templateUrl : `${constants.templatesFolder}/author.html`,
         bindings : {
             id : "@authorId",
             edit : "=",
@@ -15,7 +14,7 @@ function authorComponentsInit ( module ) {
     });
 
     module.component('authorEdit', {
-        templateUrl : `${templatesFolder}/author-edit.html`,
+        templateUrl : `${constants.templatesFolder}/author-edit.html`,
         require : {
             popup: "^^?popup"
         },
@@ -27,7 +26,7 @@ function authorComponentsInit ( module ) {
     });
 
     module.component('authorRemove', {
-        templateUrl : `${templatesFolder}/author-remove.html`,
+        templateUrl : `${constants.templatesFolder}/author-remove.html`,
         require : {
             popup: "^^?popup"
         },

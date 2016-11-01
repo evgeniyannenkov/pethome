@@ -1,10 +1,9 @@
 "use strict";
 
-function languagesComponentsInit ( module ) {
-    const templatesFolder = "/assets/templates";
+function languagesComponentsInit (  module, constants  ) {
 
     module.component('language', {
-        templateUrl : `${templatesFolder}/languages-select.html`,
+        templateUrl : `${constants.templatesFolder}/languages-select.html`,
         controller : "translationCtrl",
         controllerAs : "translator"
     });

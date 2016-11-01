@@ -1,10 +1,9 @@
 "use strict";
 
-function imagesComponentsInit ( module ) {
-    const templatesFolder = "/assets/templates";
+function imagesComponentsInit (  module, constants  ) {
 
     module.component('imagesUploader', {
-        templateUrl : `${templatesFolder}/images-upload.html`,
+        templateUrl : `${constants.templatesFolder}/images-upload.html`,
         bindings : {
             advert_id : "@advertId",
             advert : "="

@@ -1,10 +1,9 @@
 "use strict";
 
-function advertComponentsInit ( module ) {
-    const templatesFolder = "/assets/templates";
+function advertComponentsInit ( module, constants ) {
 
     module.component('feed', {
-        templateUrl : `${templatesFolder}/adverts-feed.html`,
+        templateUrl : `${constants.templatesFolder}/adverts-feed.html`,
         bindings : {
             id : "@userId",
             filter_enabled : "=enableFilter",
@@ -15,7 +14,7 @@ function advertComponentsInit ( module ) {
     });
 
     module.component('filter', {
-        templateUrl : `${templatesFolder}/adverts-filter.html`,
+        templateUrl : `${constants.templatesFolder}/adverts-filter.html`,
         bindings : {
             fields : "=feedFilter"
         },
@@ -24,7 +23,7 @@ function advertComponentsInit ( module ) {
     });
 
     module.component('advert', {
-        templateUrl : `${templatesFolder}/advert.html`,
+        templateUrl : `${constants.templatesFolder}/advert.html`,
         bindings : {
             fields : "=",
             author : "=",
@@ -34,7 +33,7 @@ function advertComponentsInit ( module ) {
     });
 
     module.component('advertSingle', {
-        templateUrl : `${templatesFolder}/advert-single.html`,
+        templateUrl : `${constants.templatesFolder}/advert-single.html`,
         bindings : {
             id : "@advertId"
         },
@@ -46,7 +45,7 @@ function advertComponentsInit ( module ) {
         require : {
             popup : "^^?popup"
         },
-        templateUrl : `${templatesFolder}/advert-edit.html`,
+        templateUrl : `${constants.templatesFolder}/advert-edit.html`,
         bindings : {
             fields : "=advert",
             advertUpdate : "&advertUpdate"
@@ -59,7 +58,7 @@ function advertComponentsInit ( module ) {
         require : {
             popup : "^^?popup"
         },
-        templateUrl : `${templatesFolder}/advert-remove.html`,
+        templateUrl : `${constants.templatesFolder}/advert-remove.html`,
         bindings : {
             id : "@advertId"
         },
@@ -71,7 +70,7 @@ function advertComponentsInit ( module ) {
         require : {
             popup : "^^?popup"
         },
-        templateUrl : `${templatesFolder}/advert-create.html`,
+        templateUrl : `${constants.templatesFolder}/advert-create.html`,
         controller : "newAdvertCtrl",
         controllerAs : "new"
     });
