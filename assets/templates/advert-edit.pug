@@ -1,21 +1,21 @@
 include ../../views/mixins/formParts
-form.form(ng-submit="advertUpdate({data : advertEditor.temporaryData});popupClose();" name="authorEditForm")
-    +input("Name")(ng-model="advertEditor.temporaryData.name" name="name" autocomplete="off")
+form.form(ng-submit="editor.advertUpdate({data : editor.temporaryData});editor.popupClose();" name="authorEditForm")
+    +input("Name")(ng-model="editor.temporaryData.name" name="name" autocomplete="off")
     +select("Type", {
         "type" : {
             "dog" : "Dog",
             "cat" : "Cat",
             "hamster" : "Hamster"
         }
-    })(ng-model = "advertEditor.temporaryData.type")
+    })(ng-model = "editor.temporaryData.type")
     +radios("Gender", {
         "gender" : {
             "boy" : "Boy",
             "girl" : "Girl"
         }
-    })(ng-model = "advertEditor.temporaryData.gender")
-    +input("Age")(type="number" ng-model = "advertEditor.temporaryData.age")
-    +input("Breed")(ng-model = "advertEditor.temporaryData.breed")
-    +textarea("Info")(ng-model = "advertEditor.temporaryData.info")
+    })(ng-model = "editor.temporaryData.gender")
+    +input("Age")(type="number" ng-model = "editor.temporaryData.age")
+    +input("Breed")(ng-model = "editor.temporaryData.breed")
+    +textarea("Info")(ng-model = "editor.temporaryData.info")
     +button("Edit")
-    +button("Cancel")(type="button" ng-click="popupClose();advertEditor.cancel();")
+    +button("Cancel")(type="button" ng-click="editor.popupClose();editor.cancel();")

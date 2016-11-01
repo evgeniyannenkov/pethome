@@ -3,38 +3,37 @@ include ../../views/mixins/formParts
 div(popup type="Remove Advert")
     popup-trigger
         button Remove
-    popup-content(ng-controller="advertRemoveCtrl as remover")
-        form.popup__content
-            button(type="button" ng-click="remover.remove(advert_id);") Remove
-            button(type="button" ng-click="remover.cancel();") Cancel
+    popup-content
+        .popup__content
+            advert-remove(advert-id="{{advert.id}}" popup-close="$parent.popup.close();")
 
 div(popup type="Edit Advert")
     popup-trigger
         button Edit
     popup-content
         .popup__content
-            div(advert-edit="$parent.$parent.advert.advertData" advert-update="$parent.$parent.advert.save(data);" popup-close="$parent.popup.close();")
+            advert-edit(advert="$parent.$parent.advert.fields" advert-update="$parent.$parent.advert.save(data);" popup-close="$parent.popup.close();")
 
-div.advert__field(ng-if="advert.advertData.mainImage")
+div.advert__field(ng-if="advert.fields.mainImage")
     h3 Main image
-    img(style="max-width:300px;" src="/{{advert.advertData.mainImage}}")
+    img(style="max-width:300px;" src="/{{advert.fields.mainImage}}")
 div.advert__field
-    h3 Name : {{advert.advertData.name}}
+    h3 Name : {{advert.fields.name}}
 div.advert__field
-    h3 Type : {{advert.advertData.type}}
+    h3 Type : {{advert.fields.type}}
 div.advert__field
-    h3 Gender : {{advert.advertData.gender}}
+    h3 Gender : {{advert.fields.gender}}
 div.advert__field
-    h3 age : {{advert.advertData.age}}
+    h3 age : {{advert.fields.age}}
 div.advert__field
-    h3 breed : {{advert.advertData.breed}}
+    h3 breed : {{advert.fields.breed}}
 div.advert__field
-    h3 info : {{advert.advertData.info}}
+    h3 info : {{advert.fields.info}}
 div.advert__field
-    div(ng-repeat="image in advert.advertData.images" style="width: 30%; display: inline-block; height: 100px; background: url('/{{image}}'); background-size: cover;")
+    div(ng-repeat="image in advert.fields.images" style="width: 30%; display: inline-block; height: 100px; background: url('/{{image}}'); background-size: cover;")
         button(ng-click="advert.removeImage(image);") Remove
         div
             label
                 span Main image
-                input(type="radio" ng-change="advert.save();" name="main-image" ng-model="advert.advertData.mainImage" value="{{image}}")
-div(images-upload advert-id="{{advert_id}}" advert-data="advert.advertData")
+                input(type="radio" ng-change="advert.save();" name="main-image" ng-model="advert.fields.mainImage" value="{{image}}")
+div(images-upload advert-id="{{advert.id}}" advert-data="advert.fields")

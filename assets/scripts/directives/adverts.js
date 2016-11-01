@@ -33,33 +33,33 @@ function advertDirectivesInit ( module ) {
         controllerAs: "advert"
     });
 
-    module.directive('advertSingle', [
-        function () {
-            return {
-                restrict : 'A',
-                templateUrl : `${templatesFolder}/advert-single.html`,
-                scope : {
-                    advert_id : "@advertSingle"
-                },
-                controller : "advertCtrl",
-                controllerAs : "advert"
-            };
-        }
-    ]);
+    module.component('advertSingle', {
+        templateUrl : `${templatesFolder}/advert-single.html`,
+        bindings : {
+            id : "@advertId"
+        },
+        controller : "advertCtrl",
+        controllerAs : "advert"
+    });
 
-    module.directive('advertEdit', [
-        function () {
-            return {
-                restrict : 'A',
-                templateUrl : `${templatesFolder}/advert-edit.html`,
-                scope : {
-                    advertData : "=advertEdit",
-                    popupClose : "&popupClose",
-                    advertUpdate : "&advertUpdate"
-                },
-                controller : "editAdvertCtrl",
-                controllerAs : "advertEditor"
-            };
-        }
-    ]);
+    module.component('advertEdit', {
+        templateUrl : `${templatesFolder}/advert-edit.html`,
+        bindings : {
+            fields : "=advert",
+            popupClose : "&popupClose",
+            advertUpdate : "&advertUpdate"
+        },
+        controller : "editAdvertCtrl",
+        controllerAs : "editor"
+    });
+
+    module.component('advertRemove', {
+        templateUrl : `${templatesFolder}/advert-remove.html`,
+        bindings : {
+            id : "@advertId",
+            cancel : "&popupClose"
+        },
+        controller : "advertRemoveCtrl",
+        controllerAs : "remover"
+    });
 }
