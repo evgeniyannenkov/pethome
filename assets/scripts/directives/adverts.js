@@ -44,7 +44,7 @@ function advertDirectivesInit ( module ) {
 
     module.component('advertEdit', {
         require : {
-            popup : "^^popup"
+            popup : "^^?popup"
         },
         templateUrl : `${templatesFolder}/advert-edit.html`,
         bindings : {
@@ -57,7 +57,7 @@ function advertDirectivesInit ( module ) {
 
     module.component('advertRemove', {
         require : {
-            popup : "^^popup"
+            popup : "^^?popup"
         },
         templateUrl : `${templatesFolder}/advert-remove.html`,
         bindings : {
@@ -69,7 +69,7 @@ function advertDirectivesInit ( module ) {
 
     module.component('advertCreate', {
         require : {
-            popup : "^^popup"
+            popup : "^^?popup"
         },
         templateUrl : `${templatesFolder}/advert-create.html`,
         controller : "newAdvertCtrl",

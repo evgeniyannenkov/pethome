@@ -2,6 +2,56 @@
 
 function advertControllersInit ( module ) {
 
+    module.controller('advertCtrl', [
+        "adverts", "notify",
+        function ( adverts, notify ) {
+
+            let current_advert = {};
+
+            adverts.get({id : this.id})
+                   .then(( response ) => {
+                       if ( response.data.success && response.data.advert ) {
+                           this.fields = response.data.advert;
+                           if ( this.fields.age ) {
+                               this.fields.age = parseInt(this.fields.age);
+                           }
+                           current_advert = JSON.parse(JSON.stringify(this.fields));
+                       }
+                   })
+                   .catch(( err ) => {
+                       console.log(err);
+                   });
+
+            this.save = ( data = this.fields ) => {
+                adverts.update({id : data._id, data})
+                       .then(( response ) => {
+                           notify.inform({
+                               message : `${data.name} updated.`,
+                               duration : 2000
+                           });
+                           if ( response.data.success && response.data.newAdvert ) {
+                               this.fields = response.data.newAdvert;
+                               if ( this.fields.age ) {
+                                   this.fields.age = parseInt(this.fields.age);
+                               }
+                           }
+                       })
+                       .catch(( err ) => {
+                           console.log(err);
+                       });
+            };
+
+            this.removeImage = ( image ) => {
+                this.fields.images = this.fields.images.filter(function ( element ) {
+                    if ( image !== element ) {
+                        return element;
+                    }
+                });
+                this.save();
+            };
+        }
+    ]);
+
     module.controller('advertsFeedCtrl', [
         "$http", "adverts", "author",
         function ( ajax, adverts, author ) {
@@ -78,8 +128,10 @@ function advertControllersInit ( module ) {
                        });
             };
 
-            this.cancel = () =>{
-                this.popup.close();
+            this.cancel = () => {
+                if ( this.popup ) {
+                    this.popup.close();
+                }
             };
         }
     ]);
@@ -91,57 +143,9 @@ function advertControllersInit ( module ) {
 
             this.cancel = () => {
                 this.temporaryData = JSON.parse(JSON.stringify(this.fields));
-                this.popup.close();
-            };
-        }
-    ]);
-
-    module.controller('advertCtrl', [
-        "adverts", "notify",
-        function ( adverts, notify ) {
-
-            let current_advert = {};
-
-            adverts.get({id : this.id})
-                   .then(( response ) => {
-                       if ( response.data.success && response.data.advert ) {
-                           this.fields = response.data.advert;
-                           if ( this.fields.age ) {
-                               this.fields.age = parseInt(this.fields.age);
-                           }
-                           current_advert = JSON.parse(JSON.stringify(this.fields));
-                       }
-                   })
-                   .catch(( err ) => {
-                       console.log(err);
-                   });
-
-            this.save = ( data = this.fields ) => {
-                adverts.update({id : data._id, data})
-                       .then(( response ) => {
-                           notify.inform({
-                               message : `${data.name} updated.`,
-                               duration : 2000
-                           });
-                           if ( response.data.success && response.data.newAdvert ) {
-                               this.fields = response.data.newAdvert;
-                               if ( this.fields.age ) {
-                                   this.fields.age = parseInt(this.fields.age);
-                               }
-                           }
-                       })
-                       .catch(( err ) => {
-                           console.log(err);
-                       });
-            };
-
-            this.removeImage = ( image ) => {
-                this.fields.images = this.fields.images.filter(function ( element ) {
-                    if ( image !== element ) {
-                        return element;
-                    }
-                });
-                this.save();
+                if ( this.popup ) {
+                    this.popup.close();
+                }
             };
         }
     ]);
@@ -170,7 +174,9 @@ function advertControllersInit ( module ) {
             };
 
             this.cancel = () => {
-                this.popup.close();
+                if ( this.popup ) {
+                    this.popup.close();
+                }
             };
         }
     ]);
