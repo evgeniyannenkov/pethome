@@ -18,4 +18,4 @@ form.form(ng-submit="editor.advertUpdate({data : editor.temporaryData});editor.p
     +input("Breed")(ng-model = "editor.temporaryData.breed")
     +textarea("Info")(ng-model = "editor.temporaryData.info")
     +button("Edit")
-    +button("Cancel")(type="button" ng-click="editor.cancel();")
+    +button("Cancel")(class="form__btn--cancel" type="button" ng-click="editor.cancel();")
