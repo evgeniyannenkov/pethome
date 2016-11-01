@@ -1,13 +1,14 @@
 "use strict";
 
 class Builder {
-    constructor ( modules ) {
+    constructor ( modules, constants = {} ) {
         this.modules = modules;
+        this.constants = constants;
     }
 
     initComponents ( module, components ) {
         for ( let index = 0; index < components.length; index++ ) {
-            components[ index ](this.modules[ module ]);
+            components[ index ](this.modules[ module ], this.constants);
         }
     }
 
@@ -19,7 +20,12 @@ class Builder {
         }
     }
 }
+
 const modules = getModules();
+const constants = {
+    templatesFolder : "/assets/templates"
+};
+
 const components = {
     services : [
         apiGenServicesInit,
@@ -56,7 +62,7 @@ const components = {
         translationControllersInit,
         languagesComponentsInit
     ],
-    images: [
+    images : [
         imagesComponentsInit,
         imageUploadControllersInit
     ],
@@ -65,6 +71,6 @@ const components = {
     ]
 };
 
-const builder = new Builder(modules);
+const builder = new Builder(modules, constants);
 
 builder.init(components);

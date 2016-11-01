@@ -8,7 +8,7 @@ function advertControllersInit ( module ) {
 
             let current_advert = {};
 
-            adverts.get({id : this.id})
+            adverts.get({ id : this.id })
                    .then(( response ) => {
                        if ( response.data.success && response.data.advert ) {
                            this.fields = response.data.advert;
@@ -23,7 +23,7 @@ function advertControllersInit ( module ) {
                    });
 
             this.save = ( data = this.fields ) => {
-                adverts.update({id : data._id, data})
+                adverts.update({ id : data._id, data })
                        .then(( response ) => {
                            notify.inform({
                                message : `${data.name} updated.`,
@@ -111,7 +111,7 @@ function advertControllersInit ( module ) {
                 age : 1
             };
             this.create = () => {
-                adverts.create({data : this.advert})
+                adverts.create({ data : this.advert })
                        .then(( response ) => {
                            if ( response.data.success ) {
                                notify.inform({
@@ -154,7 +154,7 @@ function advertControllersInit ( module ) {
         "adverts", "notify",
         function ( adverts, notify ) {
             this.remove = ( id ) => {
-                adverts.remove({id})
+                adverts.remove({ id })
                        .then(( response ) => {
                            if ( response.data.success && response.data.redirect ) {
                                notify.inform({
