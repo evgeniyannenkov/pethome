@@ -3,21 +3,15 @@
 function imagesDirectivesInit ( module ) {
     const templatesFolder = "/assets/templates";
 
-    module.directive('imagesUpload', [
-        function () {
-
-            return {
-                restrict : 'A',
-                templateUrl : `${templatesFolder}/images-upload.html`,
-                scope : {
-                    advert_id : "@advertId",
-                    advert : "=advertData"
-                },
-                controller : "imagesUploadCtrl",
-                controllerAs : "uploader"
-            };
-        }
-    ]);
+    module.component('imagesUploader', {
+        templateUrl : `${templatesFolder}/images-upload.html`,
+        bindings : {
+            advert_id : "@advertId",
+            advert : "="
+        },
+        controller : "imagesUploadCtrl",
+        controllerAs : "images"
+    });
 
 
 

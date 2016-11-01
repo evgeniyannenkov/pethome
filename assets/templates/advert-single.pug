@@ -36,4 +36,4 @@ div.advert__field
             label
                 span Main image
                 input(type="radio" ng-change="advert.save();" name="main-image" ng-model="advert.fields.mainImage" value="{{image}}")
-div(images-upload advert-id="{{advert.id}}" advert-data="advert.fields")
+images-uploader(advert-id="{{advert.id}}" advert="advert.fields")

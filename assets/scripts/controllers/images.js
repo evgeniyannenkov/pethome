@@ -3,18 +3,18 @@
 function imageUploadControllersInit ( module ) {
 
     module.controller('imagesUploadCtrl', [
-        "$scope", "FileUploader", "notify",
-        function ( $scope, FileUploader, notify ) {
+        "FileUploader", "notify",
+        function ( FileUploader, notify ) {
 
-            $scope.fileUploader = new FileUploader({
-                url : `/api/advert/${$scope.advert_id}/images`,
+            this.fileUploader = new FileUploader({
+                url : `/api/advert/${this.advert_id}/images`,
                 alias : "images",
                 queueLimit : 10
             });
 
             // FILTERS
 
-            $scope.fileUploader.filters.push({
+            this.fileUploader.filters.push({
                 name : 'imageFilter',
                 fn : function ( item /*{File|FileLikeObject}*/, options ) {
                     const type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
@@ -22,17 +22,17 @@ function imageUploadControllersInit ( module ) {
                 }
             });
 
-            $scope.fileUploader.onSuccessItem = function ( fileItem, response, status, headers ) {
+            this.fileUploader.onSuccessItem = ( fileItem, response, status, headers ) => {
                 fileItem.remove();
-                $scope.advert.images = response.newAdvert.images;
-                $scope.advert.mainImage = response.newAdvert.mainImage;
+                this.advert.images = response.newAdvert.images;
+                this.advert.mainImage = response.newAdvert.mainImage;
             };
 
-            $scope.fileUploader.onProgressAll = function ( response ) {
+            this.fileUploader.onProgressAll = ( response ) => {
                 console.log(response);
             };
 
-            $scope.fileUploader.onCompleteAll = function ( response ) {
+            this.fileUploader.onCompleteAll = ( response ) => {
                 notify.inform({
                     message : `Images added.`,
                     duration : 1500
