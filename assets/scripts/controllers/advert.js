@@ -77,6 +77,10 @@ function advertControllersInit ( module ) {
                            console.log(err);
                        });
             };
+
+            this.cancel = () =>{
+                this.popup.close();
+            };
         }
     ]);
 
@@ -87,6 +91,7 @@ function advertControllersInit ( module ) {
 
             this.cancel = () => {
                 this.temporaryData = JSON.parse(JSON.stringify(this.fields));
+                this.popup.close();
             };
         }
     ]);
@@ -143,7 +148,7 @@ function advertControllersInit ( module ) {
 
     module.controller('advertRemoveCtrl', [
         "adverts", "notify",
-        function (adverts, notify ) {
+        function ( adverts, notify ) {
             this.remove = ( id ) => {
                 adverts.remove({id})
                        .then(( response ) => {
@@ -162,6 +167,10 @@ function advertControllersInit ( module ) {
                        .catch(( err ) => {
                            console.log(err);
                        });
+            };
+
+            this.cancel = () => {
+                this.popup.close();
             };
         }
     ]);

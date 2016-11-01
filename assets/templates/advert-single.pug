@@ -1,18 +1,18 @@
 include ../../views/mixins/formParts
 
-div(popup type="Remove Advert")
+popup(type="Remove Advert")
     popup-trigger
         button Remove
     popup-content
         .popup__content
-            advert-remove(advert-id="{{advert.id}}" popup-close="$parent.popup.close();")
+            advert-remove(advert-id="{{advert.id}}")
 
-div(popup type="Edit Advert")
+popup(type="Edit Advert")
     popup-trigger
         button Edit
     popup-content
         .popup__content
-            advert-edit(advert="$parent.$parent.advert.fields" advert-update="$parent.$parent.advert.save(data);" popup-close="$parent.popup.close();")
+            advert-edit(advert="$parent.$parent.advert.fields" advert-update="$parent.$parent.advert.save(data);")
 
 div.advert__field(ng-if="advert.fields.mainImage")
     h3 Main image

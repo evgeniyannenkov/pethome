@@ -30,7 +30,7 @@ function advertDirectivesInit ( module ) {
             author : "=advertAuthor",
             hide : "=hideFields"
         },
-        controllerAs: "advert"
+        controllerAs : "advert"
     });
 
     module.component('advertSingle', {
@@ -43,10 +43,12 @@ function advertDirectivesInit ( module ) {
     });
 
     module.component('advertEdit', {
+        require : {
+            popup : "^^popup"
+        },
         templateUrl : `${templatesFolder}/advert-edit.html`,
         bindings : {
             fields : "=advert",
-            popupClose : "&popupClose",
             advertUpdate : "&advertUpdate"
         },
         controller : "editAdvertCtrl",
@@ -54,20 +56,22 @@ function advertDirectivesInit ( module ) {
     });
 
     module.component('advertRemove', {
+        require : {
+            popup : "^^popup"
+        },
         templateUrl : `${templatesFolder}/advert-remove.html`,
         bindings : {
-            id : "@advertId",
-            cancel : "&popupClose"
+            id : "@advertId"
         },
         controller : "advertRemoveCtrl",
         controllerAs : "remover"
     });
 
     module.component('advertCreate', {
-        templateUrl : `${templatesFolder}/advert-create.html`,
-        bindings : {
-            cancel : "&popupClose"
+        require : {
+            popup : "^^popup"
         },
+        templateUrl : `${templatesFolder}/advert-create.html`,
         controller : "newAdvertCtrl",
         controllerAs : "new"
     });

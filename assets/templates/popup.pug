@@ -1,7 +1,7 @@
 include ../../views/mixins/authForms
 div(ng-transclude="trigger" ng-click="popup.active=true;")
-.popup(ng-class="{visible : popup.active}")
-    .popup__close(ng-click="popup.active=false")
+.popup(ng-class="{visible : popup.active}" ng-click="popup.close($event);")
+    .popup__close(ng-click="popup.close();")
     .popup__inner(ng-class="{active : popup.active}")
-        .popup__header {{type}}
+        .popup__header {{popup.type}}
         div(ng-transclude="content")
