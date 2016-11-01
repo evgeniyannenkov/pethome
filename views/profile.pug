@@ -8,7 +8,12 @@ block content
 
     div(author=currentUser._id edit="true" remove="true")
 
-    include partials/_new-advert-form
+    div(popup type="New Advert")
+        popup-trigger
+            button New Advert
+        popup-content
+            .popup__content
+                advert-create(popup-close="$parent.popup.close();")
 
     feed(user-id=currentUser._id hide-fields="{author:true, publicationDate:true}")
 

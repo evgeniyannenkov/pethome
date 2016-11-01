@@ -62,4 +62,13 @@ function advertDirectivesInit ( module ) {
         controller : "advertRemoveCtrl",
         controllerAs : "remover"
     });
+
+    module.component('advertCreate', {
+        templateUrl : `${templatesFolder}/advert-create.html`,
+        bindings : {
+            cancel : "&popupClose"
+        },
+        controller : "newAdvertCtrl",
+        controllerAs : "new"
+    });
 }

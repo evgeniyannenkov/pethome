@@ -53,8 +53,8 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('newAdvertCtrl', [
-        "adverts", "notify", "$timeout",
-        function ( adverts, notify, $timeout ) {
+        "adverts", "notify",
+        function ( adverts, notify ) {
             this.advert = {
                 gender : "boy",
                 type : "dog",
