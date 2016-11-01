@@ -1,0 +1,23 @@
+include ../mixins/authForms
+header.header
+    a.header__logo(href='/') PetHome
+
+    ul.header__menu
+        if !currentUser
+            li.header-menu__item(popup type="registration")
+                popup-trigger.header-menu__link(translate="SIGN_UP_BTN")
+                popup-content
+                    .popup__content
+                        +authForm("registration")
+            li.header-menu__item(popup type="login")
+                popup-trigger.header-menu__link(translate="LOGIN_BTN")
+                popup-content
+                    .popup__content
+                        +authForm("login")
+        else
+            li.header-menu__item
+                a.header-menu__link(href='/profile' translate="PROFILE_BTN")
+            li.header-menu__item
+                a.header-menu__link(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();" translate="LOGOUT_BTN")
+
+    .lang.header__lang(language-select)
