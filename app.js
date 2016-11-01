@@ -12,9 +12,8 @@ const flash = require('connect-flash');
 const dbConnection = require('./config/database');
 const mongoStore = require('connect-mongo')(session);
 
-
 //Routes
-const routes = require('./routes/index');
+const routes = require('./routes/main');
 const advert = require('./routes/advert');
 const author = require('./routes/author');
 const auth = require('./routes/auth');

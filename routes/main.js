@@ -4,7 +4,7 @@ const redirect = require("../middleware/redirect");
 
 /* GET home page. */
 router.get('/', ( req, res, next ) => {
-    res.render('index', { title : 'Home' });
+    res.render('main', { title : 'Home' });
 });
 
 /* GET profile page. */

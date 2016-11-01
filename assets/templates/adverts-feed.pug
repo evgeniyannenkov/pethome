@@ -1,6 +1,6 @@
 include ../../views/mixins/formParts
 
-adverts-filter(ng-if="filter_enabled" feed-filter="feed.filter")
+adverts-filter(ng-if="feed.filter_enabled" feed-filter="feed.filter")
 +select("Date", {
     "type" : {
         "-publicationDate" : "Newer",
@@ -8,4 +8,4 @@ adverts-filter(ng-if="filter_enabled" feed-filter="feed.filter")
     }
 }, true)(ng-model = "feed.order")
 div.adverts-feed
-    div.advert(ng-repeat="(index, advert) in feed.adverts | filter: feed.filter | orderBy : feed.order" hide-fields="hideFields" advert="advert" advert-author="feed.authors[advert.author]")
+    div.advert(ng-repeat="(index, advert) in feed.adverts | filter: feed.filter | orderBy : feed.order" hide-fields="feed.hideFields" advert="advert" advert-author="feed.authors[advert.author]")

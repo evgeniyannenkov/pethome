@@ -4,10 +4,9 @@ function advertDirectivesInit ( module ) {
     const templatesFolder = "/assets/templates";
 
     module.component('feed', {
-        restrict : 'A',
         templateUrl : `${templatesFolder}/adverts-feed.html`,
         bindings : {
-            user_id : "@userId",
+            id : "@userId",
             filter_enabled : "=enableFilter",
             hideFields : "="
         },

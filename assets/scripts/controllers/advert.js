@@ -3,8 +3,8 @@
 function advertControllersInit ( module ) {
 
     module.controller('advertsFeedCtrl', [
-        "$http", "$scope", "adverts", "author",
-        function ( ajax, $scope, adverts, author ) {
+        "$http", "adverts", "author",
+        function ( ajax, adverts, author ) {
             this.order = "-publicationDate";
 
             author.getAll()
@@ -39,7 +39,7 @@ function advertControllersInit ( module ) {
                 }
             };
 
-            this.getAdverts($scope.user_id);
+            this.getAdverts(this.id);
         }
     ]);
 
