@@ -55,6 +55,12 @@
   margin-bottom : 15px;
 }
 
+.form__item--btn {
+  display       : inline-block;
+  width         : 100%;
+  margin-bottom : 0;
+}
+
 .form__input {
   @include roboto-condensed;
   width         : 100%;
@@ -86,6 +92,7 @@
 .form__btn-wrap {
   margin-top : 15px;
   display    : inline-block;
+  width      : 100%;
 }
 
 .form__progress-bar {
@@ -125,7 +132,7 @@
   padding          : 10px;
   overflow         : hidden;
   z-index          : 2;
-  width            : 150px;
+  width            : 100%;
   height           : 45px;
   background-color : $blue;
   border           : 1px solid $blue;
@@ -174,6 +181,16 @@
   }
 }
 
+.form__btn--cancel {
+  background-color : $red !important;
+  border           : 1px solid $red;
+  .form__btn-icon {
+    &:before {
+      content : "\f00d";
+    }
+  }
+}
+
 .form__btn-icon {
   font                    : normal normal normal 14px/1 FontAwesome;
   text-rendering          : auto;
@@ -203,4 +220,15 @@
   @include roboto-regular;
   color      : $white;
   transition : left 0.3s;
+}
+
+@media screen and (min-width : 500px) {
+  .form__item--btn {
+    width         : auto;
+    margin-right  : 15px;
+    margin-bottom : 15px;
+  }
+  .form__btn {
+    width : 150px;
+  }
 }
