@@ -2,12 +2,43 @@
 
 const express = require('express');
 const passport = require('passport');
-const Advertiser = require('../../schemas/advertiser');
+const Author = require('../../schemas/author');
 const Advert = require('../../schemas/advert');
 const response = require("../../middleware/response");
 const router = express.Router();
 
-//Advertiser Get Current
+//Author Get All
+router.get('/', ( req, res, next ) => {
+    Author.find({})
+              .then(( authorsArray )=> {
+                  if ( authorsArray ) {
+                      let authors = {},
+                          author;
+
+                      for ( let index = 0; index < authorsArray.length; index++ ) {
+                          author = authorsArray[ index ];
+                          authors[ author._id ] = author;
+                      }
+
+                      res.json({
+                          success : true,
+                          authors
+                      });
+                  } else {
+                      res.json({
+                          success : false,
+                          user : "Get users : No users"
+                      });
+                  }
+              })
+              .catch(( error )=> {
+                  res.json({
+                      success : false,
+                      message : error.message
+                  });
+              });
+});
+//Author Get Current
 router.get('/current', response.ifLoggedOut(), ( req, res, next ) => {
     res.json({
         success : true,
@@ -15,15 +46,15 @@ router.get('/current', response.ifLoggedOut(), ( req, res, next ) => {
     });
 });
 
-//Advertiser Get
+//Author Get
 router.get('/:id', ( req, res, next ) => {
     const _id = req.params.id || 0;
 
-    Advertiser.findById(_id)
-              .then(( advertiser )=> {
-                  if ( advertiser ) {
+    Author.findById(_id)
+              .then(( author )=> {
+                  if ( author ) {
                       res.json({
-                          advertiser,
+                          author,
                           success : true
                       });
                   } else {
@@ -43,19 +74,19 @@ router.get('/:id', ( req, res, next ) => {
               });
 });
 
-//Advertiser Update
+//Author Update
 router.put('/:id', response.ifLoggedOut(), ( req, res, next ) => {
     const _id = req.params.id || 0;
 
-    const advertiser = req.body || {};
+    const author = req.body || {};
 
-    if ( _id && advertiser._id && (_id === advertiser._id.toString() && _id === req.user._id.toString()) ) {
+    if ( _id && author._id && (_id === author._id.toString() && _id === req.user._id.toString()) ) {
 
-        Advertiser.findByIdAndUpdate(_id, advertiser, {new : true})
-                  .then(( advertiser )=> {
-                      if ( advertiser ) {
+        Author.findByIdAndUpdate(_id, author, { new : true })
+                  .then(( author )=> {
+                      if ( author ) {
                           res.json({
-                              advertiser,
+                              author,
                               success : true
                           });
                       } else {
@@ -83,11 +114,11 @@ router.put('/:id', response.ifLoggedOut(), ( req, res, next ) => {
 
 });
 
-//Advertiser Get Adverts
+//Author Get Adverts
 router.get('/:id/adverts', ( req, res, next ) => {
     const _id = req.params.id || 0;
 
-    Advert.find({"advertiserID" : _id})
+    Advert.find({ "author" : _id })
           .then(( adverts ) => {
               res.json({
                   adverts,
@@ -102,14 +133,14 @@ router.get('/:id/adverts', ( req, res, next ) => {
           });
 });
 
-//Advertiser Delete
+//Author Delete
 router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
     const _id = req.params.id;
 
     if ( req.user._id == _id ) {
-        Advertiser.findByIdAndRemove(_id)
+        Author.findByIdAndRemove(_id)
                   .then(() => {
-                      Advert.remove({advertiserID : _id})
+                      Advert.remove({ author : _id })
                             .then(( data ) => {
                                 res.json({
                                     success : true,

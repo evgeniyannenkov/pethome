@@ -24,20 +24,20 @@ function authControllersInit ( module ) {
                                    if ( response.data.success ) {
 
                                        if ( response.data.user && response.data.user.name ) {
-                                           notify.success({
+                                           notify.inform({
                                                message : `Welcome back, ${response.data.user.name}`,
                                                duration : 1000,
                                                delay : 900
                                            });
                                        } else {
                                            if ( form == "registration" ) {
-                                               notify.success({
+                                               notify.inform({
                                                    message : "Welcome",
                                                    duration : 1000,
                                                    delay : 900
                                                });
                                            } else if ( form == "login" ) {
-                                               notify.success({
+                                               notify.inform({
                                                    message : "Welcome back.",
                                                    duration : 1000,
                                                    delay : 900

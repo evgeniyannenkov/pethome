@@ -3,8 +3,8 @@
 function translationControllersInit ( module ) {
 
     module.controller('translationCtrl', [
-        "$scope", "$translate", "advertiser", "currentUser",
-        function ( $scope, $translate, advertiser, currentUser ) {
+        "$scope", "$translate", "author", "currentUser",
+        function ( $scope, $translate, author, currentUser ) {
 
             let current_user;
             currentUser.get(( err, user ) => {
@@ -22,7 +22,7 @@ function translationControllersInit ( module ) {
                 $translate.use(key);
                 if ( current_user ) {
                     current_user.language = key;
-                    advertiser.update({id : current_user._id, data : current_user});
+                    author.update({id : current_user._id, data : current_user});
                 }
             };
         }

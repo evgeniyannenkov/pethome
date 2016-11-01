@@ -1,15 +1,19 @@
-a(href="/advert/{{advert._id}}") Go To
-div.advert__field(ng-if="advert.name")
-    | {{advert.name}}
-div.advert__field(ng-if="advert.type")
+div.advert__field(ng-show="advert.name" ng-if="!hide.name")
+    a(href="/advert/{{advert._id}}") {{advert.name}}
+div.advert__field(ng-show="advert.type" ng-if="!hide.type")
     | {{advert.type}}
-div.advert__field(ng-if="advert.gender")
+div.advert__field(ng-show="advert.gender" ng-if="!gehide.nder")
     | {{advert.gender}}
-div.advert__field(ng-if="advert.age")
+div.advert__field(ng-show="advert.age" ng-if="!hide.age")
     | {{advert.age}}
-div.advert__field(ng-if="advert.publicationDate")
+div.advert__field(ng-show="advert.publicationDate" ng-if="!hide.publicationDate")
     | {{advert.publicationDate}}
-div.advert__field(ng-if="advert.breed")
+div.advert__field(ng-show="advert.breed" ng-if="!bhide.reed")
     | {{advert.breed}}
-div.advert__field(ng-if="advert.info")
+div.advert__field(ng-show="advert.info" ng-if="!hide.info")
     | {{advert.info}}
+    span {{hide.author}}
+div.advert__field(ng-if="!hide.author")
+    span(ng-show="author.name") Author :
+    a(href="/author/{{author._id}}" ng-hide="author.name") Author
+    a(href="/author/{{author._id}}" ng-show="author.name")  {{author.name}}

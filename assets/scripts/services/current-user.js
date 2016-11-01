@@ -2,8 +2,8 @@
 
 function currentUserServicesInit ( module ) {
     module.factory('currentUser', [
-        "advertiser", "$rootScope",
-        function ( advertiser, $rootScope ) {
+        "author", "$rootScope",
+        function ( author, $rootScope ) {
 
             let current = {
                 getting_user : false
@@ -22,7 +22,7 @@ function currentUserServicesInit ( module ) {
                     });
                 } else {
                     current.getting_user = true;
-                    advertiser.getCurrent()
+                    author.getCurrent()
                               .then(( response )=> {
                                   if ( response.data.success && response.data.user ) {
                                       current.getting_user = false;

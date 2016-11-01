@@ -1,0 +1,12 @@
+extends layout
+
+block header
+    include partials/_navbar
+
+block content
+    div(author=author._id)
+
+    div(adverts-feed=author._id)
+
+block footer
+    include partials/_footer

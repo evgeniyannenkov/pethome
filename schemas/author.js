@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const hasher = require('password-hash-and-salt');
 
-const advertiserSchema = new mongoose.Schema({
+const authorSchema = new mongoose.Schema({
     "oauthID" : Number,
     "avatar" : String,
     "name" : String,
@@ -37,7 +37,7 @@ const advertiserSchema = new mongoose.Schema({
     }
 });
 
-advertiserSchema.methods.validatePassword = function ( password ) {
+authorSchema.methods.validatePassword = function ( password ) {
     return new Promise(( resolve, reject ) => {
         hasher(password).verifyAgainst(this.password, function ( err, verified ) {
             if ( err ) {
@@ -52,4 +52,4 @@ advertiserSchema.methods.validatePassword = function ( password ) {
     });
 };
 
-module.exports = mongoose.model('Advertiser', advertiserSchema);
+module.exports = mongoose.model('Author', authorSchema);

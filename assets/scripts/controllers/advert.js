@@ -3,9 +3,14 @@
 function advertControllersInit ( module ) {
 
     module.controller('advertsFeedCtrl', [
-        "$http", "$scope", "adverts",
-        function ( ajax, $scope, adverts ) {
+        "$http", "$scope", "adverts", "author",
+        function ( ajax, $scope, adverts, author ) {
             this.order = "-publicationDate";
+
+            author.getAll()
+                      .then(( response ) => {
+                          this.authors = response.data.authors;
+                      });
 
             this.getAdverts = ( user_id ) => {
                 if ( !user_id ) {
@@ -23,7 +28,7 @@ function advertControllersInit ( module ) {
                 } else {
                     ajax({
                         method : "get",
-                        url : `/api/advertiser/${user_id}/adverts`
+                        url : `/api/author/${user_id}/adverts`
                     }).then(( response ) => {
                         if ( response.data.adverts ) {
                             this.adverts = response.data.adverts;
@@ -56,10 +61,10 @@ function advertControllersInit ( module ) {
                 age : 1
             };
             this.create = () => {
-                adverts.create({data : this.advert})
+                adverts.create({ data : this.advert })
                        .then(( response ) => {
                            if ( response.data.success ) {
-                               notify.success({
+                               notify.inform({
                                    message : `Created ${response.data.advert.name} <i class="fa fa-check" aria-hidden="true"></i>`,
                                    duration : 1200
                                });
@@ -81,24 +86,6 @@ function advertControllersInit ( module ) {
 
             this.temporaryData = JSON.parse(JSON.stringify($scope.advertData));
 
-            this.save = () => {
-                adverts.update({id : $scope.advertData._id, data : this.temporaryData})
-                       .then(( response ) => {
-                           notify.success({
-                               message : `${this.temporaryData.name}`
-                           });
-                           if ( response.data.success && response.data.advert ) {
-                               $scope.advertData = response.data.advert;
-                               if ( $scope.advertData.age ) {
-                                   $scope.advertData.age = parseInt($scope.advertData.age);
-                               }
-                               $scope.popupClose();
-                           }
-                       })
-                       .catch(( err ) => {
-                           console.log(err);
-                       });
-            };
             this.cancel = () => {
                 this.temporaryData = JSON.parse(JSON.stringify($scope.advertData));
             };
@@ -106,12 +93,12 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('advertCtrl', [
-        "$scope", "adverts",
-        function ( $scope, adverts ) {
+        "$scope", "adverts", "notify",
+        function ( $scope, adverts, notify ) {
 
             let current_advert = {};
 
-            adverts.get({id : $scope.advert_id})
+            adverts.get({ id : $scope.advert_id })
                    .then(( response ) => {
                        if ( response.data.success && response.data.advert ) {
                            this.advertData = response.data.advert;
@@ -125,14 +112,32 @@ function advertControllersInit ( module ) {
                        console.log(err);
                    });
 
+            this.save = ( data = this.advertData ) => {
+                adverts.update({ id : data._id, data })
+                       .then(( response ) => {
+                           notify.inform({
+                               message : `${data.name} updated.`,
+                               duration : 2000
+                           });
+                           if ( response.data.success && response.data.newAdvert ) {
+                               this.advertData = response.data.newAdvert;
+                               if ( this.advertData.age ) {
+                                   this.advertData.age = parseInt(this.advertData.age);
+                               }
+                           }
+                       })
+                       .catch(( err ) => {
+                           console.log(err);
+                       });
+            };
+
             this.removeImage = ( image ) => {
                 this.advertData.images = this.advertData.images.filter(function ( element ) {
                     if ( image !== element ) {
                         return element;
                     }
                 });
-                console.log(this.advertData.images);
-                adverts.update({id : this.advertData._id, data : this.advertData})
+                this.save();
             };
         }
     ]);
@@ -141,10 +146,10 @@ function advertControllersInit ( module ) {
         "$scope", "adverts", "notify",
         function ( $scope, adverts, notify ) {
             this.remove = ( id ) => {
-                adverts.remove({id})
+                adverts.remove({ id })
                        .then(( response ) => {
                            if ( response.data.success && response.data.redirect ) {
-                               notify.success({
+                               notify.inform({
                                    message : `Removed  <i class="fa fa-check" aria-hidden="true"></i>`,
                                    duration : 1200
                                });

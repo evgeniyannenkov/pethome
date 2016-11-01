@@ -7,7 +7,7 @@ function getModules () {
         auth : angular.module("auth", []),
         popup : angular.module("popup", []),
         advert : angular.module("advert", []),
-        advertiser : angular.module("advertiser", []),
+        author : angular.module("author", []),
         config : angular.module("config", []),
         translation : angular.module("translation", []),
         images : angular.module("images", []),
@@ -20,7 +20,7 @@ function getModules () {
                 "auth",
                 "popup",
                 "advert",
-                "advertiser",
+                "author",
                 "config",
                 "translation",
                 "images"

@@ -3,21 +3,17 @@
 function advertDirectivesInit ( module ) {
     const templatesFolder = "/assets/templates";
 
-    module.directive('advertsFeed', [
-        function () {
-
-            return {
-                restrict : 'A',
-                templateUrl : `${templatesFolder}/adverts-feed.html`,
-                scope : {
-                    user_id : "@advertsFeed",
-                    filter_enabled : "=enableFilter"
-                },
-                controller : "advertsFeedCtrl",
-                controllerAs : "feed"
-            };
-        }
-    ]);
+    module.component('feed', {
+        restrict : 'A',
+        templateUrl : `${templatesFolder}/adverts-feed.html`,
+        bindings : {
+            user_id : "@userId",
+            filter_enabled : "=enableFilter",
+            hideFields : "="
+        },
+        controller : "advertsFeedCtrl",
+        controllerAs : "feed"
+    } );
 
     module.directive('advertsFilter', [
         function () {
@@ -41,7 +37,9 @@ function advertDirectivesInit ( module ) {
                 restrict : 'A',
                 templateUrl : `${templatesFolder}/advert.html`,
                 scope : {
-                    advert : "="
+                    advert : "=",
+                    author : "=advertAuthor",
+                    hide : "=hideFields"
                 }
             };
         }
@@ -51,7 +49,7 @@ function advertDirectivesInit ( module ) {
         function () {
             return {
                 restrict : 'A',
-                templateUrl : `${templatesFolder}/advert-data.html`,
+                templateUrl : `${templatesFolder}/advert-single.html`,
                 scope : {
                     advert_id : "@advertSingle"
                 },
@@ -68,7 +66,8 @@ function advertDirectivesInit ( module ) {
                 templateUrl : `${templatesFolder}/advert-edit.html`,
                 scope : {
                     advertData : "=advertEdit",
-                    popupClose : "&popupClose"
+                    popupClose : "&popupClose",
+                    advertUpdate : "&advertUpdate"
                 },
                 controller : "editAdvertCtrl",
                 controllerAs : "advertEditor"

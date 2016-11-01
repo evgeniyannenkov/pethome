@@ -2,10 +2,10 @@
 
 const router = require('express').Router();
 
-const advertiser = require('./api/advertiser');
+const author = require('./api/author');
 const advert = require('./api/advert');
 
-router.use("/advertiser", advertiser);
+router.use("/author", author);
 router.use("/advert", advert);
 
 module.exports = router;

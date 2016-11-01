@@ -3,8 +3,8 @@
 function imageUploadControllersInit ( module ) {
 
     module.controller('imagesUploadCtrl', [
-        "$scope", "FileUploader",
-        function ( $scope, FileUploader ) {
+        "$scope", "FileUploader", "notify",
+        function ( $scope, FileUploader, notify ) {
 
             $scope.fileUploader = new FileUploader({
                 url : `/api/advert/${$scope.advert_id}/images`,
@@ -24,16 +24,19 @@ function imageUploadControllersInit ( module ) {
 
             $scope.fileUploader.onSuccessItem = function ( fileItem, response, status, headers ) {
                 fileItem.remove();
-                console.info(response);
-                $scope.advertImages = response.newAdvert.images;
+                $scope.advert.images = response.newAdvert.images;
+                $scope.advert.mainImage = response.newAdvert.mainImage;
             };
 
             $scope.fileUploader.onProgressAll = function ( response ) {
-                console.info(response);
+                console.log(response);
             };
 
             $scope.fileUploader.onCompleteAll = function ( response ) {
-                console.info("onCompleteAll");
+                notify.inform({
+                    message : `Images added.`,
+                    duration : 1500
+                });
             };
         }
     ]);

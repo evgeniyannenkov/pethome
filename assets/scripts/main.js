@@ -25,7 +25,7 @@ const components = {
         apiGenServicesInit,
         authServicesInit,
         validationServicesInit,
-        advertiserServicesInit,
+        authorServicesInit,
         advertServicesInit,
         currentUserServicesInit
     ],
@@ -45,9 +45,9 @@ const components = {
         advertControllersInit,
         advertDirectivesInit
     ],
-    advertiser : [
-        advertiserControllersInit,
-        advertiserDirectivesInit
+    author : [
+        authorControllersInit,
+        authorDirectivesInit
     ],
     config : [
         applicationConfig

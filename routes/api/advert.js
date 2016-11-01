@@ -26,7 +26,7 @@ router.get("/:id", ( req, res, next ) => {
     const _id = req.params.id;
     Advert.findById(_id)
           .then(( advert ) => {
-              res.json({advert, success : true});
+              res.json({ advert, success : true });
           })
           .catch(( error ) => {
               res.json({
@@ -44,25 +44,27 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
 
     if ( newAdvert._id && newAdvert._id == _id ) {
 
-        Advert.findOne({_id, advertiserID : req.user.id})
+        Advert.findOne({ _id, author : req.user.id })
               .then(( advert ) => {
                   if ( advert ) {
                       for ( let i = 0; i < advert.images.length; i++ ) {
-                          image = advert.images[i];
+                          image = advert.images[ i ];
                           if ( newAdvert.images.indexOf(image) === -1 ) {
                               uploader.deleteFile(image)
-                                  .then(( response ) => {
-                                      console.log(response.data.success);
-                                  })
-                                  .catch(( error ) => {
-                                      console.log(err);
-                                  });
+                                      .then(( response ) => {
+                                          console.log(response.data.success);
+                                      })
+                                      .catch(( error ) => {
+                                          console.log(err);
+                                      });
+                              newAdvert.mainImage = newAdvert.mainImage == image ? "" : newAdvert.mainImage;
+                          } else if ( !newAdvert.mainImage ) {
+                              newAdvert.mainImage = image;
                           }
                       }
-                      advert.images = newAdvert.images;
-                      advert.save()
+                      Advert.findOneAndUpdate({ _id }, newAdvert, { new : true })
                             .then(( newAdvert ) => {
-                                res.json({newAdvert, success : true, message: "Update Advert: saved"});
+                                res.json({ newAdvert, success : true, message : "Update Advert: saved" });
                             })
                             .catch(( err ) => {
                                 res.json({
@@ -100,7 +102,7 @@ router.post('/', response.ifLoggedOut(), ( req, res, next ) => {
     advert.gender = req.body.gender || advert.gender;
     advert.age = req.body.age || advert.age;
     advert.name = req.body.name || `${advert.type}, ${advert.gender} ${advert.age}`;
-    advert.advertiserID = req.user._id;
+    advert.author = req.user._id;
 
     if ( req.body.breed ) {
         advert.breed = req.body.breed;
@@ -131,22 +133,22 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
 
     let image;
 
-    Advert.findOneAndRemove({_id, advertiserID : req.user._id})
+    Advert.findOneAndRemove({ _id, author : req.user._id })
           .then(( advert ) => {
               if ( advert ) {
                   for ( let i = 0; i < advert.images.length; i++ ) {
-                      image = advert.images[i];
+                      image = advert.images[ i ];
                       uploader.deleteFile(image)
-                          .then(( response ) => {
-                              console.log(response.data.success);
-                          })
-                          .catch(( error ) => {
-                              console.log(err);
-                          });
+                              .then(( response ) => {
+                                  console.log(response.data.success);
+                              })
+                              .catch(( error ) => {
+                                  console.log(err);
+                              });
                   }
-                  res.json({success : true, advert, redirect : "/profile"});
+                  res.json({ success : true, advert, redirect : "/profile" });
               } else {
-                  res.json({success : false, message : "No advert was removed."});
+                  res.json({ success : false, message : "No advert was removed." });
               }
           })
           .catch(( error ) => {
@@ -162,7 +164,7 @@ router.post("/:id/images", response.ifLoggedOut(), uploader.imagesUpload.single(
     const uploads = "uploads/";
     const src = uploads + req.file.filename;
 
-    Advert.findOne({_id})
+    Advert.findOne({ _id })
           .then(( advert ) => {
               if ( advert ) {
                   advert.images.push(src);
@@ -171,7 +173,7 @@ router.post("/:id/images", response.ifLoggedOut(), uploader.imagesUpload.single(
                   }
                   advert.save()
                         .then(( newAdvert ) => {
-                            res.json({newAdvert, success : true});
+                            res.json({ newAdvert, success : true });
                         })
                         .catch(( err ) => {
                             res.json({

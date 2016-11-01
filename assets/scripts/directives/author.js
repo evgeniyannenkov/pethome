@@ -1,49 +1,49 @@
 "use strict";
 
-function advertiserDirectivesInit ( module ) {
+function authorDirectivesInit ( module ) {
     const templatesFolder = "/assets/templates";
 
-    module.directive('advertiser', [
+    module.directive('author', [
         function () {
             return {
                 restrict : 'A',
-                templateUrl : `${templatesFolder}/advertiser-data.html`,
+                templateUrl : `${templatesFolder}/author.html`,
                 scope : {
-                    user_id : "@advertiser",
+                    user_id : "@author",
                     edit : "=",
                     remove: "="
                 },
-                controller : "advertiserCtrl",
-                controllerAs : "advertiser"
+                controller : "authorCtrl",
+                controllerAs : "author"
             };
         }
     ]);
 
-    module.directive('advertiserEdit', [
+    module.directive('authorEdit', [
         function () {
             return {
                 restrict : 'A',
-                templateUrl : `${templatesFolder}/advertiser-edit.html`,
+                templateUrl : `${templatesFolder}/author-edit.html`,
                 scope : {
-                    user : "=advertiserEdit",
+                    user : "=authorEdit",
                     popupClose : "&"
                 },
-                controller : "advertiserEditCtrl",
+                controller : "authorEditCtrl",
                 controllerAs : "editor"
             };
         }
     ]);
 
-    module.directive('advertiserRemove', [
+    module.directive('authorRemove', [
         function () {
             return {
                 restrict : 'A',
-                templateUrl : `${templatesFolder}/advertiser-remove.html`,
+                templateUrl : `${templatesFolder}/author-remove.html`,
                 scope : {
-                    user : "=advertiserRemove",
+                    user : "=authorRemove",
                     popupClose : "&popupClose"
                 },
-                controller : "advertiserRemoveCtrl",
+                controller : "authorRemoveCtrl",
                 controllerAs : "remover"
             };
         }
