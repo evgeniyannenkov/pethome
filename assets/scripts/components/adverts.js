@@ -1,6 +1,6 @@
 "use strict";
 
-function advertDirectivesInit ( module ) {
+function advertComponentsInit ( module ) {
     const templatesFolder = "/assets/templates";
 
     module.component('feed', {
@@ -27,7 +27,7 @@ function advertDirectivesInit ( module ) {
         templateUrl : `${templatesFolder}/advert.html`,
         bindings : {
             fields : "=",
-            author : "=advertAuthor",
+            author : "=",
             hide : "=hideFields"
         },
         controllerAs : "advert"

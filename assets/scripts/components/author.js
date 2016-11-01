@@ -1,6 +1,6 @@
 "use strict";
 
-function authorDirectivesInit ( module ) {
+function authorComponentsInit ( module ) {
     const templatesFolder = "/assets/templates";
 
     module.component('author', {

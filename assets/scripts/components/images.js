@@ -1,6 +1,6 @@
 "use strict";
 
-function imagesDirectivesInit ( module ) {
+function imagesComponentsInit ( module ) {
     const templatesFolder = "/assets/templates";
 
     module.component('imagesUploader', {

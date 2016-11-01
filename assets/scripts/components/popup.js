@@ -1,6 +1,6 @@
 "use strict";
 
-function popupDirectivesInit ( module ) {
+function popupComponentsInit ( module ) {
     const templatesFolder = "/assets/templates";
 
     module.component('popup', {

@@ -1,6 +1,6 @@
 "use strict";
 
-function languagesDirectivesInit ( module ) {
+function languagesComponentsInit ( module ) {
     const templatesFolder = "/assets/templates";
 
     module.component('language', {

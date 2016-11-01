@@ -1,6 +1,6 @@
 "use strict";
 
-class Portfolio {
+class Builder {
     constructor ( modules ) {
         this.modules = modules;
     }
@@ -32,36 +32,36 @@ const components = {
     notifier : [
         notifierControllersInit,
         notifierServicesInit,
-        notifierDirectivesInit
+        notifierComponentsInit
     ],
     auth : [
         authControllersInit
     ],
     popup : [
         popupControllersInit,
-        popupDirectivesInit
+        popupComponentsInit
     ],
     advert : [
         advertControllersInit,
-        advertDirectivesInit
+        advertComponentsInit
     ],
     author : [
         authorControllersInit,
-        authorDirectivesInit
+        authorComponentsInit
     ],
     config : [
         applicationConfig
     ],
     translation : [
         translationControllersInit,
-        languagesDirectivesInit
+        languagesComponentsInit
     ],
     images: [
-        imagesDirectivesInit,
+        imagesComponentsInit,
         imageUploadControllersInit
     ]
 };
 
-const portfolio = new Portfolio(modules);
+const builder = new Builder(modules);
 
-portfolio.init(components);
+builder.init(components);

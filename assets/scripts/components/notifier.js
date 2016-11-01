@@ -1,6 +1,6 @@
 "use strict";
 
-function notifierDirectivesInit ( module ) {
+function notifierComponentsInit ( module ) {
     const templatesFolder = "/assets/templates";
 
     module.component('notify', {

@@ -8,7 +8,7 @@
         "scripts/modules/*.js",
         "scripts/config/*.js",
         "scripts/services/*.js",
-        "scripts/directives/*.js",
+        "scripts/components/*.js",
         "scripts/controllers/*.js"
       ]
     },
