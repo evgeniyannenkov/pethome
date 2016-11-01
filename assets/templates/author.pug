@@ -1,16 +1,16 @@
-h3 {{author.info.name}}
-h3 {{author.info.contactInfo.email}}
-h3 {{author.info.contactInfo.phone}}
+h3 {{author.fields.name}}
+h3 {{author.fields.contactInfo.email}}
+h3 {{author.fields.contactInfo.phone}}
 
-popup(type="profile" ng-if="edit")
+popup(type="profile" ng-if="author.edit")
     popup-trigger
         button Edit Profile
     popup-content
         .popup__content
-            div(author-edit="$parent.$parent.$parent.author.info")
-popup(type="Remove Profile" ng-if="remove")
+            author-edit(author="$parent.$parent.$parent.author.fields")
+popup(type="Remove Profile" ng-if="author.remove")
     popup-trigger
         button Remove Profile
     popup-content
         .popup__content
-            div(author-remove="$parent.$parent.$parent.author.info")
+            author-remove(author="$parent.$parent.$parent.author.fields")
