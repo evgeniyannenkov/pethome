@@ -20,10 +20,10 @@ function authorControllersInit ( module ) {
         "author", "notify",
         function ( author, notify ) {
 
-            this.temporary_data = JSON.parse(JSON.stringify(this.author));
+            this.temporary_data = angular.copy(this.author);
 
             this.cancel = () => {
-                this.temporary_data = JSON.parse(JSON.stringify(this.author));
+                this.temporary_data = angular.copy(this.author);
                 if ( this.popup ) {
                     this.popup.close();
                 }
@@ -37,7 +37,7 @@ function authorControllersInit ( module ) {
                                   message : `Updated  <i class="fa fa-check" aria-hidden="true"></i>`,
                                   duration : 1500
                               });
-                              this.author = JSON.parse(JSON.stringify(this.temporary_data));
+                              this.author = angular.copy(this.temporary_data);
                               if ( this.popup ) {
                                   this.popup.close();
                               }

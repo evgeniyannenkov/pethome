@@ -15,7 +15,7 @@ function advertControllersInit ( module ) {
                            if ( this.fields.age ) {
                                this.fields.age = parseInt(this.fields.age);
                            }
-                           current_advert = JSON.parse(JSON.stringify(this.fields));
+                           current_advert = angular.copy(this.fields);
                        }
                    })
                    .catch(( err ) => {
@@ -139,10 +139,10 @@ function advertControllersInit ( module ) {
     module.controller('editAdvertCtrl', [
         function () {
 
-            this.temporaryData = JSON.parse(JSON.stringify(this.fields));
+            this.temporaryData = angular.copy(this.fields);
 
             this.cancel = () => {
-                this.temporaryData = JSON.parse(JSON.stringify(this.fields));
+                this.temporaryData = angular.copy(this.fields);
                 if ( this.popup ) {
                     this.popup.close();
                 }
