@@ -14,20 +14,14 @@ function advertDirectivesInit ( module ) {
         controllerAs : "feed"
     } );
 
-    module.directive('advertsFilter', [
-        function () {
-
-            return {
-                restrict : 'AE',
-                templateUrl : `${templatesFolder}/adverts-filter.html`,
-                scope : {
-                    filter_fields : "=feedFilter"
-                },
-                controller : "advertsFeedFilterCtrl",
-                controllerAs : "filter"
-            };
-        }
-    ]);
+    module.component('filter', {
+        templateUrl : `${templatesFolder}/adverts-filter.html`,
+        bindings : {
+            fields : "=feedFilter"
+        },
+        controller : "advertsFeedFilterCtrl",
+        controllerAs : "filter"
+    });
 
     module.directive('advert', [
         function () {
