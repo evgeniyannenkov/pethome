@@ -59,6 +59,9 @@ const components = {
     images: [
         imagesComponentsInit,
         imageUploadControllersInit
+    ],
+    form : [
+        formComponentsInit
     ]
 };
 

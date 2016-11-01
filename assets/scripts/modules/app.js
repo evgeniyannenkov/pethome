@@ -11,6 +11,7 @@ function getModules () {
         config : angular.module("config", []),
         translation : angular.module("translation", []),
         images : angular.module("images", []),
+        form : angular.module("form", []),
         app : angular.module("app",
             [
                 "pascalprecht.translate",
@@ -23,7 +24,8 @@ function getModules () {
                 "author",
                 "config",
                 "translation",
-                "images"
+                "images",
+                "form"
             ]
         )
     };

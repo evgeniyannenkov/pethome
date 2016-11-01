@@ -57,7 +57,8 @@ function advertComponentsInit ( module ) {
 
     module.component('advertRemove', {
         require : {
-            popup : "^^?popup"
+            popup : "^^?popup",
+            form : "^^?form"
         },
         templateUrl : `${templatesFolder}/advert-remove.html`,
         bindings : {
