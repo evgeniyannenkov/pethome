@@ -1,6 +1,6 @@
 "use strict";
 
-function authorComponentsInit (  module, constants  ) {
+function authorComponentsInit ( module, constants ) {
 
     module.component('author', {
         templateUrl : `${constants.templatesFolder}/author.html`,
@@ -16,7 +16,7 @@ function authorComponentsInit (  module, constants  ) {
     module.component('authorEdit', {
         templateUrl : `${constants.templatesFolder}/author-edit.html`,
         require : {
-            popup: "^^?popup"
+            popup : "^^?popup"
         },
         bindings : {
             author : "="
@@ -28,7 +28,7 @@ function authorComponentsInit (  module, constants  ) {
     module.component('authorRemove', {
         templateUrl : `${constants.templatesFolder}/author-remove.html`,
         require : {
-            popup: "^^?popup"
+            popup : "^^?popup"
         },
         bindings : {
             author : "="
