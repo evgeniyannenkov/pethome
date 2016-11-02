@@ -9,7 +9,7 @@ block content
     else
         author(author-id=author._id)
 
-    feed(author-id=author._id hide-fields="{author:true}")
+    feed(author-id=author._id hide-fields="{author:true}" all-allowed="true")
 
     h1= author.blocked
 

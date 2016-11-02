@@ -7,7 +7,8 @@ function advertComponentsInit ( module, constants ) {
         bindings : {
             id : "@authorId",
             filter_enabled : "=enableFilter",
-            hideFields : "="
+            hideFields : "=",
+            allAllowed : "="
         },
         controller : "advertsFeedCtrl",
         controllerAs : "feed"
