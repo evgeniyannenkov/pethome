@@ -7,7 +7,7 @@ const router = express.Router();
 router.use(redirect.ifNotAdmin);
 
 router.get("/", ( req, res, next ) => {
-    res.render("admin", { title : "admin" });
+    res.render("admin", { title : "Admin Area" });
 });
 
 module.exports = router;
