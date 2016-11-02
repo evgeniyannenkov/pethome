@@ -1,6 +1,57 @@
 .lang__btn {
-  background-color : $blue;
-  border           : 1px solid transparent;
-  border-radius    : 3px;
-  text-transform   : capitalize;
+  position        : relative;
+  width           : auto;
+  height          : 40px;
+  border-radius   : 3px;
+  display         : flex;
+  flex-flow       : row nowrap;
+  justify-content : flex-start;
+  align-items     : center;
+  text-transform  : capitalize;
+  cursor          : pointer;
+  &:before {
+    position   : absolute;
+    content    : "";
+    top        : 50%;
+    margin-top : -10px;
+    left       : 10px;
+    width      : 30px;
+    height     : 20px;
+    background   : {
+      image      : url("images/flag-language-sprite.png");
+      color      : transparent;
+      position-x : 0;
+      repeat     : no-repeat;
+    }
+  }
+  span {
+    padding : 0 10px 0 50px;
+  }
+  &:hover {
+    background-color : $whiteSmoke;
+  }
+}
+
+.lang__btn--ru {
+  &:before {
+    background   : {
+      position-y : -360px;
+    }
+  }
+}
+
+.lang__btn--en {
+  &:before {
+    background   : {
+      position-y : -440px;
+    }
+  }
+}
+
+.lang__btn--ua {
+  &:before {
+    background   : {
+      position-y : -660px;
+    }
+  }
 }

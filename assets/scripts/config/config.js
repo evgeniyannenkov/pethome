@@ -8,6 +8,7 @@ function applicationConfig ( module ) {
             $translateProvider.translations('en', {
                 BUTTON_LANG_EN : 'english',
                 BUTTON_LANG_RU : 'russian',
+                BUTTON_LANG_UA : 'ukrainian',
                 SIGN_UP_BTN : "Sign Up",
                 LOGIN_BTN : "Login",
                 HOME_BTN : "Home",
@@ -17,6 +18,7 @@ function applicationConfig ( module ) {
             $translateProvider.translations('ru', {
                 BUTTON_LANG_EN : 'Английский',
                 BUTTON_LANG_RU : 'Русский',
+                BUTTON_LANG_UA : 'Українська',
                 SIGN_UP_BTN : "Регистрация",
                 LOGIN_BTN : "Вход",
                 HOME_BTN : "Главная",

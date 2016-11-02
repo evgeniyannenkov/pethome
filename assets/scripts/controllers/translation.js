@@ -7,6 +7,7 @@ function translationControllersInit ( module ) {
         function ( $scope, $translate, author, currentUser ) {
 
             let current_user;
+            this.key = 'ru';
             currentUser.get(( err, user ) => {
                 if ( err ) {
                     console.log(err);
@@ -14,11 +15,13 @@ function translationControllersInit ( module ) {
                     current_user = user;
                     localStorage.setItem("preferred_language", user.language);
                     $translate.use(user.language);
+                    this.key = user.language;
                 }
             });
 
             this.changeLanguage = ( key ) => {
                 localStorage.setItem("preferred_language", key);
+                this.key = key;
                 $translate.use(key);
                 if ( current_user ) {
                     current_user.language = key;
