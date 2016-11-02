@@ -19,7 +19,7 @@ defaultData.forEach(( element )=> {
            .then(( response ) => {
                console.log(response);
            })
-           .catch(( response ) => {
-               // console.log(response);
+           .catch(( error ) => {
+               // console.log(error.message);
            });
 });

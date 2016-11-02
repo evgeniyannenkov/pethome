@@ -29,11 +29,15 @@ module.exports = () => {
                        if ( response.success ) {
                            done(null, response.author);
                        } else {
-                           done(null, false, response.message);
+                           done(null, false, { message : response.message });
                        }
                    })
                    .catch(( error ) => {
-                       done(error);
+                       if ( error.message.indexOf(email) == -1 && error.message.indexOf("duplicate") == -1 ) {
+                           done(error);
+                       } else {
+                           done(null, false, { message : "This Email is taken." });
+                       }
                    });
         }
     ));
