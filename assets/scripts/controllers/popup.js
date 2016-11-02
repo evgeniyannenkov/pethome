@@ -3,7 +3,8 @@
 function popupControllersInit ( module ) {
 
     module.controller('popupCtrl', [
-        function () {
+        "$scope",
+        function ($scope) {
             this.close = ( event ) => {
                 if ( event ) {
                     if ( angular.element(event.target).hasClass("popup") ) {
@@ -12,6 +13,10 @@ function popupControllersInit ( module ) {
                 } else {
                     this.active = false;
                 }
+            }
+            this.open = () => {
+                this.active = true;
+                $scope.$broadcast("popup_open", this.type.toLowerCase());
             }
         }
     ]);
