@@ -23,7 +23,6 @@ function authorControllersInit(module) {
             $scope.$on("popup_open", ($event, type) => {
                 if (type == "profile") {
                     this.temporaryData = angular.copy(this.author);
-                    console.log(this.temporaryData);
                 }
             });
 
