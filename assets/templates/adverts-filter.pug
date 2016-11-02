@@ -1,9 +1,9 @@
 include ../../views/mixins/formParts
 
 div(ng-hide="filter.extended")
-    +input("General")(ng-model="filter.fields")
+    +input("General")(ng-model = "filter.fields")
 div(ng-show="filter.extended")
-    +input("Name")(ng-model="filter.fields.name")
+    +input("Name")(ng-change = "filter.fieldChange('name')" ng-model = "filter.fields.name")
     +select("Type", {
         "type" : {
             "" : "All",
@@ -11,15 +11,15 @@ div(ng-show="filter.extended")
             "cat" : "Cat",
             "hamster" : "Hamster"
         }
-    })(ng-model = "filter.fields.type")
+    })(ng-change = "filter.fieldChange('type')" ng-model = "filter.fields.type")
     +radios("Gender", {
         "gender" : {
             "" : "Both",
             "boy" : "Boy",
             "girl" : "Girl"
         }
-    })(ng-model = "filter.fields.gender")
-    +input("Breed")(ng-model = "filter.fields.breed")
-    +textarea("Info")(ng-model = "filter.fields.info")
+    })(ng-change = "filter.fieldChange('gender')" ng-model = "filter.fields.gender")
+    +input("Breed")(ng-change = "filter.fieldChange('breed')" ng-model = "filter.fields.breed")
+    +textarea("Info")(ng-change = "filter.fieldChange('info')" ng-model = "filter.fields.info")
 button(ng-click="filter.fields = filter.defaults;filter.extended = true;" ng-hide="filter.extended") Extended
 button(ng-click="filter.fields = '';filter.extended = false;" ng-show="filter.extended") General

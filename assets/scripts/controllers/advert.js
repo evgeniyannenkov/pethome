@@ -99,6 +99,13 @@ function advertControllersInit ( module ) {
         gender : "",
         type : "",
       };
+
+      this.fieldChange = (field) => {
+        if(this.fields[field] == ""){
+          this.fields[field] = undefined;
+        }
+      };
+
     }
     ]);
 
