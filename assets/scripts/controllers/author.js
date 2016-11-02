@@ -45,6 +45,8 @@ function authorControllersInit ( module ) {
                               if ( this.popup ) {
                                   this.popup.close();
                               }
+                          } else {
+                              console.log(response);
                           }
                       })
                       .catch(( error ) => {

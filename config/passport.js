@@ -3,7 +3,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const Author = require('../schemas/author');
-const hasher = require('password-hash-and-salt');
+const authors = require("../controllers/author");
 
 module.exports = () => {
 
@@ -24,35 +24,17 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            Author.findOne({"contactInfo.email" : email}, ( err, user ) => {
-                if ( err ) {
-                    done(err);
-                }
-                if ( !user ) {
-                    hasher(password).hash(( err, hash ) => {
-                        if ( err ) {
-                            done(err);
-                        }
-                        else {
-                            user = new Author({
-                                password : hash,
-                                contactInfo : {
-                                    email
-                                }
-                            });
-                            user.save()
-                                .then(( user )=> {
-                                    done(null, user);
-                                })
-                                .catch(( err ) => {
-                                    done(err);
-                                });
-                        }
-                    });
-                } else {
-                    done(null, false, {success : false, message : "Email is already taken."});
-                }
-            });
+            authors.create({ "contactInfo.email" : email, password })
+                   .then(( response ) => {
+                       if ( response.success ) {
+                           done(null, response.author);
+                       } else {
+                           done(null, false, response.message);
+                       }
+                   })
+                   .catch(( error ) => {
+                       done(error);
+                   });
         }
     ));
 
@@ -61,7 +43,7 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            Author.findOne({"contactInfo.email" : email}, ( err, user ) => {
+            Author.findOne({ "contactInfo.email" : email }, ( err, user ) => {
                 if ( err ) {
                     done(err);
                 }
@@ -73,11 +55,11 @@ module.exports = () => {
                             if ( data.success ) {
                                 done(null, user);
                             } else {
-                                done(null, false, {message : data.message})
+                                done(null, false, { message : data.message });
                             }
                         })
                         .catch(( err ) => {
-                            done(err);
+                            done(null, false, { message : err });
                         });
                 }
             });

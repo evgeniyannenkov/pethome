@@ -31,6 +31,10 @@ const authorSchema = new mongoose.Schema({
         },
         required : [ true, 'password required' ]
     },
+    is_admin : {
+        type : Boolean,
+        default : false
+    },
     language : {
         type : String,
         default : "ru"
