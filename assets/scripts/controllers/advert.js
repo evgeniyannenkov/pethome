@@ -101,7 +101,7 @@ function advertControllersInit ( module ) {
       };
 
       this.fieldChange = (field) => {
-        if(this.fields[field] == ""){
+        if(field !== "type" && field !== "gender" && this.fields[field] == ""){
           this.fields[field] = undefined;
         }
       };
