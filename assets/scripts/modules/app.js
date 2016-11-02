@@ -13,6 +13,7 @@ function getModules () {
         translation : angular.module("translation", []),
         images : angular.module("images", []),
         form : angular.module("form", []),
+        header : angular.module("header", []),
         app : angular.module("app",
             [
                 "pascalprecht.translate",
@@ -27,7 +28,8 @@ function getModules () {
                 "config",
                 "translation",
                 "images",
-                "form"
+                "form",
+                "header"
             ]
         )
     };

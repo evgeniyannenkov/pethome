@@ -71,6 +71,9 @@ const components = {
     ],
     form : [
         formComponentsInit
+    ],
+    header : [
+        headerComponentsInit
     ]
 };
 
