@@ -50,17 +50,21 @@ module.exports = () => {
                 if ( !user ) {
                     done(null, false, "Login: User not found");
                 } else {
-                    user.validatePassword(password)
-                        .then(( data ) => {
-                            if ( data.success ) {
-                                done(null, user);
-                            } else {
-                                done(null, false, { message : data.message });
-                            }
-                        })
-                        .catch(( err ) => {
-                            done(null, false, { message : err });
-                        });
+                    if ( !user.blocked ) {
+                        user.validatePassword(password)
+                            .then(( data ) => {
+                                if ( data.success ) {
+                                    done(null, user);
+                                } else {
+                                    done(null, false, { message : data.message });
+                                }
+                            })
+                            .catch(( err ) => {
+                                done(null, false, { message : err });
+                            });
+                    } else {
+                        done(null, false, { message : "This account is blocked." });
+                    }
                 }
             });
         }

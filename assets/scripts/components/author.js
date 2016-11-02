@@ -36,4 +36,17 @@ function authorComponentsInit ( module, constants ) {
         controller : "authorRemoveCtrl",
         controllerAs : "remover"
     });
+
+    module.component('authorBlock', {
+        templateUrl : `${constants.templatesFolder}/author-block.html`,
+        require : {
+            popup : "^^?popup"
+        },
+        bindings : {
+            authorId : "@",
+            action : "@"
+        },
+        controller : "authorBlockCtrl",
+        controllerAs : "blocker"
+    });
 }

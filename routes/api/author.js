@@ -80,7 +80,7 @@ router.put('/:id', response.ifLoggedOut(), ( req, res, next ) => {
 
     const author = req.body || {};
 
-    if ( _id && author._id && (_id === author._id.toString() && _id === req.user._id.toString()) ) {
+    if ( _id && author._id && req.user && (_id === author._id.toString() && (_id === req.user._id.toString() || req.user.is_admin)) ) {
 
         Author.findOneAndUpdate({ _id, is_admin : author.is_admin }, author, { new : true })
               .then(( author )=> {
@@ -165,6 +165,66 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
         res.json({
             success : false,
             message : "Delete User: id isn't correct"
+        });
+    }
+});
+
+//Author Block
+router.get("/:id/block", response.ifNotAdmin(), ( req, res, next ) => {
+    const _id = req.params.id;
+
+    if ( req.user._id != _id ) {
+        Author.findByIdAndUpdate(_id, { blocked : true })
+              .then(( author ) => {
+                  if ( author ) {
+                      res.json({ success : true, message : "Author Block : Blocked." });
+                  } else {
+                      res.json({
+                          success : false,
+                          message : "Author Block : Not Found."
+                      });
+                  }
+              })
+              .catch(( error ) => {
+                  res.json({
+                      success : false,
+                      message : error.message
+                  });
+              });
+    } else {
+        res.json({
+            success : false,
+            message : "Author Block : Can Not Block Yourself, stupido"
+        });
+    }
+});
+
+//Author Unblock
+router.get("/:id/unblock", response.ifNotAdmin(), ( req, res, next ) => {
+    const _id = req.params.id;
+
+    if ( req.user._id != _id ) {
+        Author.findByIdAndUpdate(_id, { blocked : false })
+              .then(( author ) => {
+                  if ( author ) {
+                      res.json({ success : true, message : "Author Block : Unblocked." });
+                  } else {
+                      res.json({
+                          success : false,
+                          message : "Author Block : Not Found."
+                      });
+                  }
+              })
+              .catch(( error ) => {
+                  res.json({
+                      success : false,
+                      message : error.message
+                  });
+              });
+    } else {
+        res.json({
+            success : false,
+            message : "Author Block : Can Not Unblock Yourself, stupido"
         });
     }
 });

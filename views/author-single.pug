@@ -4,9 +4,30 @@ block header
     include partials/_header
 
 block content
-    author(author-id=author._id)
+    if currentUser && currentUser.is_admin
+        author(author-id=author._id edit="true" remove="true")
+    else
+        author(author-id=author._id)
 
     feed(author-id=author._id hide-fields="{author:true}")
+
+    h1= author.blocked
+
+    if currentUser && currentUser.is_admin
+        if !author.blocked
+            popup(type="Block : " + author._id)
+                popup-trigger
+                    button Block
+                popup-content
+                    .popup__content
+                        author-block(author-id = author._id action="block")
+        else
+            popup(type="Unblock : " + author._id)
+                popup-trigger
+                    button Unblock
+                popup-content
+                    .popup__content
+                        author-block(author-id = author._id action="unblock")
 
 block footer
     include partials/_footer

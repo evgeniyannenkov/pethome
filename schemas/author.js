@@ -35,6 +35,10 @@ const authorSchema = new mongoose.Schema({
         type : Boolean,
         default : false
     },
+    blocked : {
+        type : Boolean,
+        default : false
+    },
     language : {
         type : String,
         default : "ru"

@@ -22,6 +22,12 @@ function authorServicesInit ( module ) {
                         },
                         getCurrent : {
                             url : "/current"
+                        },
+                        block : {
+                            url : "/:id/block"
+                        },
+                        unblock : {
+                            url : "/:id/unblock"
                         }
                     },
                     "PUT" : {

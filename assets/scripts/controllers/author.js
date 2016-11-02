@@ -85,4 +85,50 @@ function authorControllersInit ( module ) {
 
         }
     ]);
+
+    module.controller('authorBlockCtrl', [
+        "author", "notify",
+        function ( author, notify ) {
+
+            this.block = () => {
+                author.block({ id : this.authorId })
+                      .then(( response ) => {
+                          if ( response.data.success ) {
+                              notify.inform({
+                                  message : response.data.message,
+                                  duration : 2000
+                              });
+                          } else {
+                              console.log(response);
+                          }
+                      })
+                      .catch(( err ) => {
+                          console.log(err);
+                      });
+            };
+            this.unblock = () => {
+                author.unblock({ id : this.authorId })
+                      .then(( response ) => {
+                          if ( response.data.success ) {
+                              notify.inform({
+                                  message : response.data.message,
+                                  duration : 2000
+                              });
+                          } else {
+                              console.log(response);
+                          }
+                      })
+                      .catch(( err ) => {
+                          console.log(err);
+                      });
+            };
+
+            this.cancel = () => {
+                if ( this.popup ) {
+                    this.popup.close();
+                }
+            };
+
+        }
+    ]);
 }
