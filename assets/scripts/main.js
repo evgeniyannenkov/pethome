@@ -35,6 +35,9 @@ const components = {
         advertServicesInit,
         currentUserServicesInit
     ],
+    filters : [
+        appFiltersInit,
+    ],
     notifier : [
         notifierControllersInit,
         notifierServicesInit,

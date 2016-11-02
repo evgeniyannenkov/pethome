@@ -3,13 +3,7 @@
     "main.js": {
       "files": [
         "scripts/main.js",
-        "scripts/blocks/**/*.js",
-        "scripts/common/*.js",
-        "scripts/modules/*.js",
-        "scripts/config/*.js",
-        "scripts/services/*.js",
-        "scripts/components/*.js",
-        "scripts/controllers/*.js"
+        "scripts/**/*.js"
       ]
     },
     "main.css": {

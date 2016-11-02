@@ -3,6 +3,7 @@
 function getModules () {
     return {
         services : angular.module("services", []),
+        filters : angular.module("filters", []),
         notifier : angular.module("notifier", []),
         auth : angular.module("auth", []),
         popup : angular.module("popup", []),
@@ -17,6 +18,7 @@ function getModules () {
                 "pascalprecht.translate",
                 "angularFileUpload",
                 "services",
+                "filters",
                 "notifier",
                 "auth",
                 "popup",

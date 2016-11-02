@@ -1,6 +1,5 @@
 "use strict";
 function authControllersInit ( module ) {
-
     module.controller('authCtrl', [
         "$scope", "$timeout", "authService", "validate", "notify",
         function ( $scope, $timeout, authService, validate, notify ) {
@@ -110,20 +109,4 @@ function authControllersInit ( module ) {
 
         }
     ]);
-
-    module.filter("feed", () => {
-        return ( adverts, authors ) => {
-            let allowed = [];
-
-            angular.forEach(adverts, ( advert ) => {
-
-                if ( !authors[ advert.author ].blocked && advert.published ) {
-                    allowed.push(advert);
-                }
-
-            });
-
-            return allowed;
-        };
-    });
 }

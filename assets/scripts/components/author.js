@@ -13,6 +13,12 @@ function authorComponentsInit ( module, constants ) {
         controllerAs : "author"
     });
 
+    module.component('authorsList', {
+        templateUrl : `${constants.templatesFolder}/authors.html`,
+        controller : "authorsListCtrl",
+        controllerAs : "list"
+    });
+
     module.component('authorEdit', {
         templateUrl : `${constants.templatesFolder}/author-edit.html`,
         require : {

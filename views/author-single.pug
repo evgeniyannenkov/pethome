@@ -11,8 +11,6 @@ block content
 
     feed(author-id=author._id hide-fields="{author:true}" all-allowed="true")
 
-    h1= author.blocked
-
     if currentUser && currentUser.is_admin
         if !author.blocked
             popup(type="Block : " + author._id)

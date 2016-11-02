@@ -1,0 +1,1 @@
+<h3>Authors :</h3><p ng-repeat="(id, author) in list.authors"><a href="/author/{{id}}"><span ng-if="author.name">{{author.name}}</span><span ng-if="!author.name">{{id}}</span></a><span>{{author.blocked ? "(blocked)" : ""}}</span></p>

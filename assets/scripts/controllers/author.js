@@ -16,6 +16,22 @@ function authorControllersInit ( module ) {
                   });
         }
     ]);
+
+    module.controller('authorsListCtrl', [
+        "author",
+        function ( author ) {
+            author.getAll()
+                  .then(( response ) => {
+                      if ( response.data.success ) {
+                          this.authors = response.data.authors;
+                      }
+                  })
+                  .catch(( response ) => {
+                      console.log(response);
+                  });
+        }
+    ]);
+
     module.controller('authorEditCtrl', [
         "author", "notify", "$scope",
         function ( author, notify, $scope ) {
@@ -96,8 +112,11 @@ function authorControllersInit ( module ) {
                           if ( response.data.success ) {
                               notify.inform({
                                   message : response.data.message,
-                                  duration : 2000
+                                  duration : 1400
                               });
+                              setTimeout(()=> {
+                                  document.location.reload();
+                              }, 1600);
                           } else {
                               console.log(response);
                           }
@@ -112,8 +131,11 @@ function authorControllersInit ( module ) {
                           if ( response.data.success ) {
                               notify.inform({
                                   message : response.data.message,
-                                  duration : 2000
+                                  duration : 1400
                               });
+                              setTimeout(()=> {
+                                  document.location.reload();
+                              }, 1600);
                           } else {
                               console.log(response);
                           }
