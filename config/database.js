@@ -3,6 +3,7 @@
 const mongoose = require('mongoose');
 const dbName = 'pethome_db';
 
+mongoose.Promise = global.Promise;
 mongoose.connect(`mongodb://localhost/${dbName}`, (error) => {
     if(error) {
         console.log('Connection Failed');
