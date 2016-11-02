@@ -4,6 +4,10 @@ block header
     include partials/_header
 
 block content
+
+    if author.blocked
+        h1 (Blocked)
+
     if currentUser && currentUser.is_admin
         author(author-id=author._id edit="true" remove="true")
     else
