@@ -38,6 +38,10 @@ const advertSchema = new mongoose.Schema({
     "images" : {
         type : [ String ],
         default : []
+    },
+    "published" : {
+        type : Boolean,
+        default : true
     }
 });
 

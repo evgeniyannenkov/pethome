@@ -42,9 +42,12 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
 
     let image;
 
-    if ( newAdvert._id && newAdvert._id == _id ) {
+    console.log(req.user._id);
+    console.log(req.user._id == newAdvert.author || req.user.is_admin);
 
-        Advert.findOne({ _id, author : req.user.id })
+    if ( newAdvert._id && newAdvert._id == _id && (req.user._id == newAdvert.author || req.user.is_admin) ) {
+
+        Advert.findOne({ _id, author : newAdvert.author })
               .then(( advert ) => {
                   if ( advert ) {
                       for ( let i = 0; i < advert.images.length; i++ ) {

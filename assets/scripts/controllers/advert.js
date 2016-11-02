@@ -25,15 +25,20 @@ function advertControllersInit ( module ) {
             this.save = ( data = this.fields ) => {
                 adverts.update({ id : data._id, data })
                        .then(( response ) => {
-                           notify.inform({
-                               message : `${data.name} updated.`,
-                               duration : 2000
-                           });
                            if ( response.data.success && response.data.newAdvert ) {
+                               notify.inform({
+                                   message : `${data.name} updated.`,
+                                   duration : 2000
+                               });
                                this.fields = response.data.newAdvert;
                                if ( this.fields.age ) {
                                    this.fields.age = parseInt(this.fields.age);
                                }
+                           } else {
+                               notify.error({
+                                   message : response.data.message,
+                                   duration : 2000
+                               });
                            }
                        })
                        .catch(( err ) => {
