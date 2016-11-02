@@ -12,16 +12,13 @@ const ifLoggedOut = ( url ) => {
     };
 };
 
-const ifNotAdmin = ( url ) => {
-
-    url = url || "/";
-
-    return ( req, res, next ) => {
-        if ( req.user && req.user.is_admin ) {
-            return next();
-        }
-        return res.redirect(url);
-    };
+const ifNotAdmin = ( req, res, next ) => {
+    if ( req.user && req.user.is_admin ) {
+        return next();
+    }
+    return res.render('error', {
+        message : "Not found"
+    });
 };
 
 module.exports = {

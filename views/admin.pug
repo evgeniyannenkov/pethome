@@ -1,0 +1,12 @@
+extends layout
+
+block header
+    include partials/_header
+
+block content
+    h1= title
+
+    feed(enable-filter="true")
+
+block footer
+    include partials/_footer

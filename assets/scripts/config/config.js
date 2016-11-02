@@ -13,6 +13,7 @@ function applicationConfig ( module ) {
                 HOME_BTN : "Home",
                 PROFILE_BTN : "Profile",
                 LOGOUT_BTN : "Logout",
+                ADMIN_BTN : "Admin",
             });
             $translateProvider.translations('ru', {
                 BUTTON_LANG_EN : 'Английский',
@@ -22,6 +23,7 @@ function applicationConfig ( module ) {
                 HOME_BTN : "Главная",
                 PROFILE_BTN : "Профиль",
                 LOGOUT_BTN : "Выход",
+                ADMIN_BTN : "Управление",
             });
             $translateProvider.preferredLanguage(preferred);
         }

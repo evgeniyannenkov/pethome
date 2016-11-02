@@ -4,8 +4,10 @@ const express = require('express');
 const redirect = require("../middleware/redirect");
 const router = express.Router();
 
-router.get("/", redirect.ifNotAdmin(), ( req, res, next ) => {
-    res.send("ADMIN");
+router.use(redirect.ifNotAdmin);
+
+router.get("/", ( req, res, next ) => {
+    res.render("admin", { title : "admin" });
 });
 
 module.exports = router;
