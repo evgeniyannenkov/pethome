@@ -17,5 +17,10 @@ form.form(ng-submit="editor.advertUpdate({data : editor.temporaryData});editor.p
     +input("Age")(type="number" ng-model = "editor.temporaryData.age")
     +input("Breed")(ng-model = "editor.temporaryData.breed")
     +textarea("Info")(ng-model = "editor.temporaryData.info")
+    +checkboxes("Published", {
+        "published" : {
+            "published" : "Published"
+        }
+    }, true)(ng-model = "editor.temporaryData.published")
     +button("Edit")
     +button("Cancel")(class="form__btn--cancel" type="button" ng-click="editor.cancel();")
