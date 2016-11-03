@@ -8,7 +8,8 @@ function advertComponentsInit ( module, constants ) {
             id : "@authorId",
             filter_enabled : "=enableFilter",
             hideFields : "=",
-            allAllowed : "="
+            allAllowed : "=",
+            customFilter : "="
         },
         controller : "advertsFeedCtrl",
         controllerAs : "feed"

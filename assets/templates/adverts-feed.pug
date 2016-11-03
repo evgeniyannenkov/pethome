@@ -8,5 +8,8 @@ filter(ng-if="feed.filter_enabled" feed-filter="feed.filter")
     }
 }, true)(ng-model = "feed.order")
 div.adverts-feed
-    advert.advert(ng-repeat="(index, advert) in feed.adverts | filter: feed.filter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]" ng-if="feed.allAllowed")
-    advert.advert(ng-repeat="(index, advert) in feed.adverts | feed : feed.authors | filter: feed.filter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]" ng-if="!feed.allAllowed")
+    div(ng-if="!feed.customFilter")
+        advert.advert(ng-repeat="(index, advert) in feed.adverts | filter: feed.filter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]" ng-if="feed.allAllowed")
+        advert.advert(ng-repeat="(index, advert) in feed.adverts | feed : feed.authors | filter: feed.filter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]" ng-if="!feed.allAllowed")
+    div(ng-if="feed.customFilter")
+        advert.advert(ng-repeat="(index, advert) in feed.adverts | filter: feed.customFilter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]")
