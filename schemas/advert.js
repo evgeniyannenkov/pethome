@@ -42,6 +42,10 @@ const advertSchema = new mongoose.Schema({
     "published" : {
         type : Boolean,
         default : true
+    },
+    "reviewed" : {
+        type : Boolean,
+        default : false
     }
 });
 
