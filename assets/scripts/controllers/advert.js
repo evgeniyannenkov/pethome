@@ -122,6 +122,7 @@ function advertControllersInit ( module ) {
                 type : "dog",
                 age : 1
             };
+
             this.create = () => {
                 adverts.create({ data : this.advert })
                        .then(( response ) => {
@@ -133,6 +134,11 @@ function advertControllersInit ( module ) {
                                setTimeout(function () {
                                    document.location.href = `/advert/${response.data.advert._id}`;
                                }, 1500);
+                           } else {
+                               notify.error({
+                                   message : response.data.message,
+                                   duration : 3000
+                               });
                            }
                        })
                        .catch(( err ) => {

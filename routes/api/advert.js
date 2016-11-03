@@ -99,35 +99,43 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
 
 router.post('/', response.ifLoggedOut(), ( req, res, next ) => {
 
-    const advert = new Advert();
+    if ( !req.user.blocked ) {
 
-    advert.type = req.body.type || advert.type;
-    advert.gender = req.body.gender || advert.gender;
-    advert.age = req.body.age || advert.age;
-    advert.name = req.body.name || `${advert.type}, ${advert.gender} ${advert.age}`;
-    advert.author = req.user._id;
+        const advert = new Advert();
 
-    if ( req.body.breed ) {
-        advert.breed = req.body.breed;
-    }
+        advert.type = req.body.type || advert.type;
+        advert.gender = req.body.gender || advert.gender;
+        advert.age = req.body.age || advert.age;
+        advert.name = req.body.name || `${advert.type}, ${advert.gender} ${advert.age}`;
+        advert.author = req.user._id;
 
-    if ( req.body.info ) {
-        advert.info = req.body.info;
-    }
+        if ( req.body.breed ) {
+            advert.breed = req.body.breed;
+        }
 
-    advert.save()
-          .then(( data )=> {
-              res.json({
-                  success : true,
-                  advert : data
+        if ( req.body.info ) {
+            advert.info = req.body.info;
+        }
+
+        advert.save()
+              .then(( data )=> {
+                  res.json({
+                      success : true,
+                      advert : data
+                  });
+              })
+              .catch(( error )=> {
+                  res.json({
+                      success : false,
+                      message : error.message
+                  });
               });
-          })
-          .catch(( error )=> {
-              res.json({
-                  success : false,
-                  message : error.message
-              });
-          });
+    } else {
+        res.json({
+            success : false,
+            message : "This account is blocked, you can't create new advert."
+        });
+    }
 
 });
 
@@ -136,7 +144,7 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
 
     let image;
     let searchData = { _id };
-    
+
     if ( !req.user.is_admin ) {
         searchData.author = req.user._id;
     }
