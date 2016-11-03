@@ -34,6 +34,18 @@ mixin radios(block_title, block_inputs)
                             span= label
                             input.form__radio(type="radio" name=name ,value = value)&attributes(attributes)
 
+//Checkboxes mixin
+mixin checkboxes(block_title, block_inputs, hide_title)
+    .form__item
+        if !hide_title
+            div.form__title= block_title
+        div
+            each inputs, name in block_inputs
+                    each label,value in inputs
+                        label.form__label
+                            span= label
+                            input.form__radio(type="checkbox" name=name ,value = value)&attributes(attributes)
+
 //Select mixin
 mixin select(label, options, without_other)
     .form__item
