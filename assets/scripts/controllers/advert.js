@@ -30,7 +30,6 @@ function advertControllersInit ( module ) {
                                    message : `${data.name} updated.`,
                                    duration : 2000
                                });
-                               console.log(response.data.newAdvert);
 
                                this.fields = response.data.newAdvert;
                                if ( this.fields.age ) {
