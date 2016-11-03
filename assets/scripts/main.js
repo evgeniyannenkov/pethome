@@ -44,7 +44,8 @@ const components = {
         notifierComponentsInit
     ],
     auth : [
-        authControllersInit
+        authControllersInit,
+        authComponentsInit
     ],
     popup : [
         popupControllersInit,
