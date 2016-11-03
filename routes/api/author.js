@@ -138,7 +138,7 @@ router.get('/:id/adverts', ( req, res, next ) => {
 router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
     const _id = req.params.id;
 
-    if ( req.user._id == _id ) {
+    if ( req.user._id == _id || req.user.is_admin ) {
         Author.findByIdAndRemove(_id)
               .then(() => {
                   Advert.remove({ author : _id })
