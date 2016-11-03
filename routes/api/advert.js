@@ -42,9 +42,6 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
 
     let image;
 
-    console.log(req.user._id);
-    console.log(req.user._id == newAdvert.author || req.user.is_admin);
-
     if ( newAdvert._id && newAdvert._id == _id && (req.user._id == newAdvert.author || req.user.is_admin) ) {
 
         Advert.findOne({ _id, author : newAdvert.author })
@@ -65,6 +62,7 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
                               newAdvert.mainImage = image;
                           }
                       }
+                      newAdvert.reviewed = false;
                       Advert.findOneAndUpdate({ _id }, newAdvert, { new : true })
                             .then(( newAdvert ) => {
                                 res.json({ newAdvert, success : true, message : "Update Advert: saved" });
@@ -95,6 +93,29 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
             success : false
         });
     }
+});
+
+router.put("/:id/review", response.ifNotAdmin(), ( req, res, next ) => {
+    const _id = req.params.id;
+
+    Advert.findByIdAndUpdate(_id, { reviewed : true }, { new : true })
+          .then(( advert ) => {
+              console.log("HELLo");
+              if ( advert ) {
+                  res.json({ advert, success : true, message : "Review Advert: Reviewed." });
+              } else {
+                  res.json({
+                      message : "Review Advert: not found",
+                      success : false
+                  });
+              }
+          })
+          .catch(( error ) => {
+              res.json({
+                  success : false,
+                  message : error.message
+              });
+          });
 });
 
 router.post('/', response.ifLoggedOut(), ( req, res, next ) => {

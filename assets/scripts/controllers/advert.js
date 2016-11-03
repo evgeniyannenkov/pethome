@@ -30,6 +30,8 @@ function advertControllersInit ( module ) {
                                    message : `${data.name} updated.`,
                                    duration : 2000
                                });
+                               console.log(response.data.newAdvert);
+
                                this.fields = response.data.newAdvert;
                                if ( this.fields.age ) {
                                    this.fields.age = parseInt(this.fields.age);
@@ -169,6 +171,26 @@ function advertControllersInit ( module ) {
                 if ( this.popup ) {
                     this.popup.close();
                 }
+            };
+        }
+    ]);
+
+    module.controller('reviewAdvertCtrl', [
+        "adverts", "notify",
+        function ( adverts, notify ) {
+            this.save = () => {
+                adverts.review({ id : this.id })
+                       .then(( response )=> {
+                           if ( response.data.success ) {
+                               notify.inform({
+                                   message : response.data.message,
+                                   duration : 2000
+                               });
+                           }
+                       })
+                       .catch(( response )=> {
+                           console.log(response);
+                       });
             };
         }
     ]);

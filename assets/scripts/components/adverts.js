@@ -37,7 +37,8 @@ function advertComponentsInit ( module, constants ) {
     module.component('advertSingle', {
         templateUrl : `${constants.templatesFolder}/advert-single.html`,
         bindings : {
-            id : "@advertId"
+            id : "@advertId",
+            review : "="
         },
         controller : "advertCtrl",
         controllerAs : "advert"
@@ -54,6 +55,16 @@ function advertComponentsInit ( module, constants ) {
         },
         controller : "editAdvertCtrl",
         controllerAs : "editor"
+    });
+
+    module.component('advertReview', {
+        templateUrl : `${constants.templatesFolder}/advert-review.html`,
+        bindings : {
+            id : "@advertId",
+            reviewed : "="
+        },
+        controller : "reviewAdvertCtrl",
+        controllerAs : "reviewer"
     });
 
     module.component('advertRemove', {

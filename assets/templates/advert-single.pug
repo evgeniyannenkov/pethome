@@ -13,7 +13,6 @@ popup(type="Edit Advert")
     popup-content
         .popup__content
             advert-edit(advert="$parent.$parent.advert.fields" advert-update="$parent.$parent.advert.save(data);")
-
 div(ng-if="!advert.fields.published")
     h2 (Not Published)
 div.advert__field
@@ -35,4 +34,7 @@ div.advert__field
             label
                 span Main image
                 input(type="radio" ng-change="advert.save();" name="main-image" ng-model="advert.fields.mainImage" value="{{image}}")
+
+advert-review.advert__field(advert-id="{{advert.id}}" reviewed="advert.fields.reviewed" ng-if="advert.review && !advert.fields.reviewed")
+
 images-uploader(advert-id="{{advert.id}}" advert="advert.fields")

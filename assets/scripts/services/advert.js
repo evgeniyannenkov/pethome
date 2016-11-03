@@ -25,6 +25,9 @@ function advertServicesInit ( module ) {
                     "PUT" : {
                         update : {
                             url : "/:id"
+                        },
+                        review : {
+                            url : "/:id/review"
                         }
                     }
                 }

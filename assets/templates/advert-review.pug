@@ -1,0 +1,7 @@
+include ../../views/mixins/formParts
+.advert__field
+    +checkboxes("Reviewed", {
+        "reviewed" : {
+            "reviewed" : "Reviewed"
+        }
+    })(ng-change="reviewer.save();" ng-model = "reviewer.reviewed")

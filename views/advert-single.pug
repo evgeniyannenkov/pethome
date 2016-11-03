@@ -6,7 +6,9 @@ block header
 block content
     h1= title
 
-    if currentUser && (advert.author.toString() == currentUser._id.toString() || currentUser.is_admin)
+    if currentUser && currentUser.is_admin
+        advert-single(advert-id=advert._id review="true")
+    else if currentUser && (advert.author.toString() == currentUser._id.toString())
         advert-single(advert-id=advert._id)
     else
         if advert.mainImage
