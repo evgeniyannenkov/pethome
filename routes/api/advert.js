@@ -135,8 +135,13 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
     const _id = req.params.id;
 
     let image;
+    let searchData = { _id };
+    
+    if ( !req.user.is_admin ) {
+        searchData.author = req.user._id;
+    }
 
-    Advert.findOneAndRemove({ _id, author : req.user._id })
+    Advert.findOneAndRemove(searchData)
           .then(( advert ) => {
               if ( advert ) {
                   for ( let i = 0; i < advert.images.length; i++ ) {
