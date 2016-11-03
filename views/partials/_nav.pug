@@ -5,13 +5,13 @@ ul.header__menu
                 popup-trigger.header-menu__link(translate="SIGN_UP_BTN")
                 popup-content
                     .popup__content
-                        +authForm("registration")
+                        auth-form(form="registration" title="sign up")
         li.header-menu__item
             popup(type="login")
                 popup-trigger.header-menu__link(translate="LOGIN_BTN")
                 popup-content
                     .popup__content
-                        +authForm("login")
+                        auth-form(form="login" title="login")
     else
         if currentUser.is_admin
             li.header-menu__item

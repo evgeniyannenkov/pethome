@@ -1,0 +1,6 @@
+include ../../views/mixins/formParts
+
+popup-form(novalidate name="{{auth.form}}" ng-submit="auth.submit(auth.form);")
+    +input("Email")(name="email" ng-required="true" ng-model="auth.email" ng-change="auth.reset();" ng-focus="auth.error=false;" ng-pattern="auth.emailRegex" type="email" autocomplete="off")
+    +input("Password")(name="password" ng-required="true" ng-model="auth.password" ng-change="auth.reset();" ng-focus="auth.error=false;" ng-pattern="auth.passwordRegex" type="password" autocomplete="off")
+    +button("{{auth.title}}")(ng-click="auth.checkForm(auth.form);" class="{{auth.validClass}} {{auth.responseClass}}")

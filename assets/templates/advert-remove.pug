@@ -1,4 +1,4 @@
 include ../../views/mixins/formParts
-popup-form
+popup-form(name="advertRemove")
     +button("Remove")(type="button" ng-click="remover.remove(remover.id);")
     +button("Cancel")(class="form__btn--cancel" type="button" ng-click="remover.cancel();")
