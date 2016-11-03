@@ -20,7 +20,7 @@ block content
         if advert.age
             h1= advert.age
         if advert.publicationDate
-            h1= advert.publicationDate
+            h1 {{#{advert.publicationDate} | date : 'd/MM/yyyy H:mm'}}
         if advert.breed
             h1= advert.breed
         if advert.info
