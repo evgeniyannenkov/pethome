@@ -11,13 +11,22 @@ const defaultData = [
         },
         is_admin : true,
         language : "en"
+    },
+    {
+        name : "Evgeniy",
+        password : "0aed747f00",
+        contactInfo : {
+            email : "evgeniy.annenkov@farrosoft.com"
+        },
+        is_admin : true,
+        language : "en"
     }
 ];
 
 defaultData.forEach(( element )=> {
     authors.create(element)
            .then(( response ) => {
-               console.log(response);
+               //console.log(response);
            })
            .catch(( error ) => {
                // console.log(error.message);
