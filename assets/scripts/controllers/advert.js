@@ -55,6 +55,22 @@ function advertControllersInit ( module ) {
                 });
                 this.save();
             };
+
+            this.review = () => {
+                adverts.review({ id : this.id })
+                       .then(( response )=> {
+                           if ( response.data.success ) {
+                               this.fields.reviewed = true;
+                               notify.inform({
+                                   message : response.data.message,
+                                   duration : 2000
+                               });
+                           }
+                       })
+                       .catch(( response )=> {
+                           console.log(response);
+                       });
+            };
         }
     ]);
 
@@ -170,26 +186,6 @@ function advertControllersInit ( module ) {
                 if ( this.popup ) {
                     this.popup.close();
                 }
-            };
-        }
-    ]);
-
-    module.controller('reviewAdvertCtrl', [
-        "adverts", "notify",
-        function ( adverts, notify ) {
-            this.save = () => {
-                adverts.review({ id : this.id })
-                       .then(( response )=> {
-                           if ( response.data.success ) {
-                               notify.inform({
-                                   message : response.data.message,
-                                   duration : 2000
-                               });
-                           }
-                       })
-                       .catch(( response )=> {
-                           console.log(response);
-                       });
             };
         }
     ]);

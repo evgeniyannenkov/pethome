@@ -34,7 +34,7 @@ div.advert__field
             label
                 span Main image
                 input(type="radio" ng-change="advert.save();" name="main-image" ng-model="advert.fields.mainImage" value="{{image}}")
-
-advert-review.advert__field(advert-id="{{advert.id}}" reviewed="advert.fields.reviewed" ng-if="advert.review && !advert.fields.reviewed")
+div.advert__field(ng-if="advert.reviewEnabled && !advert.fields.reviewed")
+    +button("Mark Reviewed")(ng-click="advert.review();")
 
 images-uploader(advert-id="{{advert.id}}" advert="advert.fields")
