@@ -14,9 +14,8 @@ popup(type="Edit Advert")
         .popup__content
             advert-edit(advert="$parent.$parent.advert.fields" advert-update="$parent.$parent.advert.save(data);")
 
-div.advert__field(ng-if="advert.fields.mainImage")
-    h3 Main image
-    img(style="max-width:300px;" src="/{{advert.fields.mainImage}}")
+div(ng-if="!advert.fields.published")
+    h2 (Not Published)
 div.advert__field
     h3 Name : {{advert.fields.name}}
 div.advert__field
