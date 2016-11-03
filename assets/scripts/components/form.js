@@ -7,6 +7,9 @@ function formComponentsInit ( module, constants ) {
         require : {
             popup : "^^?popup"
         },
+        bindings : {
+            name: "@"
+        },
         transclude : true,
         controllerAs : "form"
     });
