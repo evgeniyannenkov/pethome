@@ -5,8 +5,7 @@ function authComponentsInit ( module, constants ) {
     module.component("authForm", {
         templateUrl : `${constants.templatesFolder}/auth.html`,
         require : {
-            popup : "^^?popup",
-            form : "^^?form"
+            popup : "^^?popup"
         },
         bindings : {
             form : "@",

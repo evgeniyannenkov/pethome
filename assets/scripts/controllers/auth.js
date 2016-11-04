@@ -1,87 +1,64 @@
 "use strict";
 function authControllersInit ( module ) {
     module.controller('authCtrl', [
-        "$scope", "$timeout", "authService", "validate", "notify",
-        function ( $scope, $timeout, authService, validate, notify ) {
+        "$scope", "$timeout", "authService", "notify",
+        function ( $scope, $timeout, authService, notify ) {
 
-            this.emailRegex = validate.email();
-            this.passwordRegex = validate.password();
+            this.authenticate = ( fields, name ) => {
 
-            this.checkForm = ( form ) => {
-                this.error = !$scope[ form ].$valid;
-                this.validClass = $scope[ form ].$valid ? "valid" : "error";
-            };
 
-            this.submit = ( form ) => {
-                $scope[ form ].email.$setTouched();
-                $scope[ form ].password.$setTouched();
+                authService.authenticate(name, {email : fields.email, password : fields.password})
+                           .then(( response ) => {
+                               if ( response.data.success ) {
 
-                if ( $scope[ form ].$valid ) {
-
-                    authService.authenticate(form, { email : this.email, password : this.password })
-                               .then(( response ) => {
-                                   if ( response.data.success ) {
-
-                                       if ( response.data.user && response.data.user.name ) {
+                                   if ( response.data.user && response.data.user.name ) {
+                                       notify.inform({
+                                           message : `Welcome back, ${response.data.user.name}`,
+                                           duration : 1000,
+                                           delay : 900
+                                       });
+                                   } else {
+                                       if ( name == "registration" ) {
                                            notify.inform({
-                                               message : `Welcome back, ${response.data.user.name}`,
+                                               message : "Welcome",
                                                duration : 1000,
                                                delay : 900
                                            });
-                                       } else {
-                                           if ( form == "registration" ) {
-                                               notify.inform({
-                                                   message : "Welcome",
-                                                   duration : 1000,
-                                                   delay : 900
-                                               });
-                                           } else if ( form == "login" ) {
-                                               notify.inform({
-                                                   message : "Welcome back.",
-                                                   duration : 1000,
-                                                   delay : 900
-                                               });
-                                           }
-                                       }
-
-                                       $timeout(2000)
-                                           .then(() => {
-                                               this.responseClass = "success";
-                                               document.location.href = "/profile";
+                                       } else if ( name == "login" ) {
+                                           notify.inform({
+                                               message : "Welcome back.",
+                                               duration : 1000,
+                                               delay : 900
                                            });
-                                   } else {
-                                       console.log(`${$scope[ form ]}: failed`);
-                                       console.log(response);
+                                       }
                                    }
-                               })
-                               .catch(( err ) => {
-                                   if ( !err.data || !err.data.success ) {
-                                       notify.error({
-                                           message : err.data.message,
-                                           duration : 2000
+
+                                   $timeout(2000)
+                                       .then(() => {
+                                           this.responseClass = "success";
+                                           document.location.href = "/profile";
+                                       });
+                               } else {
+                                   console.log(`${name}: failed`);
+                                   console.log(response);
+                               }
+                           })
+                           .catch(( err ) => {
+                               if ( !err.data || !err.data.success ) {
+                                   notify.error({
+                                       message : err.data.message,
+                                       duration : 2000
+                                   });
+
+                                   $timeout(500)
+                                       .then(() => {
+                                           this.responseClass = "fail";
                                        });
 
-                                       $timeout(500)
-                                           .then(() => {
-                                               this.responseClass = "fail";
-                                           });
-
-                                   } else {
-                                       console.log(err);
-                                   }
-                               });
-                } else {
-                    notify.error({
-                        message : `${form} form invalid`,
-                        duration : 2000
-                    });
-                }
-            };
-
-            this.reset = () => {
-                this.error = false;
-                this.validClass = '';
-                this.responseClass = '';
+                               } else {
+                                   console.log(err);
+                               }
+                           });
             };
 
         }

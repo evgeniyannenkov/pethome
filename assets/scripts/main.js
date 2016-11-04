@@ -71,7 +71,8 @@ const components = {
         imageUploadControllersInit
     ],
     form : [
-        formComponentsInit
+        formComponentsInit,
+        formControllersInit
     ],
     header : [
         headerComponentsInit
