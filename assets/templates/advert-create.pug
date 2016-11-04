@@ -18,23 +18,3 @@ popup-form(name="newAdvert" submit-function="new.create();" label="Create")
     form-input(type="number" name="age" min="0" value="new.advert.age")
     form-input(type="text" name="breed" required="false" value="new.advert.breed")
     form-textarea(name="info" value="new.advert.info")
-//form.form(ng-submit="new.create();")
-    +input("Name*")(ng-model="new.advert.name")
-    +select("Type*", {
-        "type" : {
-            "dog" : "Dog",
-            "cat" : "Cat",
-            "hamster" : "Hamster"
-        }
-    })(ng-model="new.advert.type")
-    +radios("Gender*", {
-        "gender" : {
-            "boy" : "Boy",
-            "girl" : "Girl"
-        }
-    })(ng-model="new.advert.gender")
-    +input("Age*")(type="number" min=0 ng-model="new.advert.age")
-    +input("Breed")(ng-model="new.advert.breed")
-    +textarea("Info")(ng-model="new.advert.info")
-    +button("Create")
-    +button("Cancel")(class="form__btn--cancel" type="button" ng-click="new.cancel();")
