@@ -13,7 +13,6 @@ function formControllersInit ( module ) {
             $scope.$on("popup_open", ( event, data ) => {
                 if ( data ) {
                     this.$form = $scope[this.name];
-                    console.log(this.$form);
                 }
             });
 
