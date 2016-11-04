@@ -1,5 +1,5 @@
 include ../../views/mixins/formParts
 
-popup-form(name="{{auth.form}}" submit-function="auth.authenticate(fields, name);" label="{{auth.form=='login' ? 'login' : 'sign up'}}")
-    form-input(type="email")
-    form-input(type="password")
+popup-form(name="{{auth.form}}" submit-function="auth.authenticate(name);" label="{{auth.form=='login' ? 'login' : 'sign up'}}")
+    form-input(type="email" name="email" required="true" value="auth.email")
+    form-input(type="password" name="xpassword" required="true" value="auth.password")

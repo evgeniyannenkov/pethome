@@ -24,7 +24,10 @@ function formComponentsInit ( module, constants ) {
             form : "^^?popupForm"
         },
         bindings : {
-            type : "@"
+            type : "@",
+            name : "@",
+            required : "@",
+            value: "="
         },
         controller : "formFieldCtrl",
         controllerAs : "field"
