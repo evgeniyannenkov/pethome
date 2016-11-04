@@ -6,7 +6,6 @@ function authControllersInit ( module ) {
 
             this.authenticate = ( fields, name ) => {
 
-
                 authService.authenticate(name, {email : fields.email, password : fields.password})
                            .then(( response ) => {
                                if ( response.data.success ) {
@@ -35,7 +34,9 @@ function authControllersInit ( module ) {
 
                                    $timeout(2000)
                                        .then(() => {
-                                           this.responseClass = "success";
+                                           $scope.$broadcast("formResponse", {
+                                               responseClass: "success"
+                                           });
                                            document.location.href = "/profile";
                                        });
                                } else {
@@ -52,7 +53,9 @@ function authControllersInit ( module ) {
 
                                    $timeout(500)
                                        .then(() => {
-                                           this.responseClass = "fail";
+                                           $scope.$broadcast("formResponse", {
+                                               responseClass: "fail"
+                                           });
                                        });
 
                                } else {

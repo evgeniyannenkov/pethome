@@ -22,6 +22,12 @@ function formControllersInit ( module ) {
                 }
             };
 
+            this.check = () => {
+                if ( this.$form ) {
+                    this.validClass = this.$form.$valid ? "valid" : "error";
+                }
+            };
+
             this.submit = () => {
 
                 angular.forEach(this.fields, ( value, key ) => {
@@ -31,6 +37,11 @@ function formControllersInit ( module ) {
                 if ( this.$form && this.$form.$valid ) {
 
                     this.submitFunction({fields : this.fields, name : this.name});
+
+                    $scope.$on("formResponse", ( event, data ) => {
+                        this.responseClass = data.responseClass;
+                        console.log(data.responseClass);
+                    })
 
                 } else {
                     notify.error({
@@ -58,15 +69,9 @@ function formControllersInit ( module ) {
             };
 
             this.check = () => {
-
-                if ( this.form.$form[this.type] ) {
-                    this.form.error = !this.form.$form[this.type].$valid;
-                }
-
-                if(this.form && this.form.fields) {
+                if ( this.form && this.form.fields ) {
                     this.form.fields[this.type] = this[this.type];
                 }
-
             }
 
         }

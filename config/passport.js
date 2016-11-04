@@ -33,7 +33,6 @@ module.exports = () => {
                        }
                    })
                    .catch(( error ) => {
-                       console.log(error);
                        if ( error.message.indexOf(email) == -1 && error.message.indexOf("duplicate") == -1 ) {
                            done(error);
                        } else {
