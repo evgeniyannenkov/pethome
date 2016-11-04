@@ -27,6 +27,22 @@ function formComponentsInit ( module, constants ) {
             type : "@",
             name : "@",
             required : "@",
+            value: "=",
+            min: "@",
+            max: "@"
+        },
+        controller : "formFieldCtrl",
+        controllerAs : "field"
+    });
+
+    module.component("formTextarea", {
+        templateUrl : `${constants.templatesFolder}/form-parts/form-textarea.html`,
+        require : {
+            form : "^^?popupForm"
+        },
+        bindings : {
+            name : "@",
+            required : "@",
             value: "="
         },
         controller : "formFieldCtrl",

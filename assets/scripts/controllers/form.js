@@ -61,7 +61,8 @@ function formControllersInit ( module ) {
             this.regex = {
                 email : validate.email(),
                 password : validate.password(),
-                text: ""
+                text: validate.text(),
+                textarea: validate.textarea()
             };
 
             this.reset = () => {
