@@ -9,6 +9,7 @@ function formComponentsInit ( module, constants ) {
             },
             bindings : {
                 name : "@",
+                label: "@",
                 submitFunction : "&"
             },
             transclude : true,
