@@ -16,7 +16,8 @@ function getModules () {
         header : angular.module("header", []),
         app : angular.module("app",
             [
-                "pascalprecht.translate",
+                // "pascalprecht.translate",
+                "config",
                 "angularFileUpload",
                 "services",
                 "filters",
@@ -25,7 +26,6 @@ function getModules () {
                 "popup",
                 "advert",
                 "author",
-                "config",
                 "translation",
                 "images",
                 "form",
