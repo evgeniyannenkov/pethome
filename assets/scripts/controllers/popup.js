@@ -13,7 +13,7 @@ function popupControllersInit ( module ) {
                 } else {
                     this.active = false;
                 }
-            }
+            };
             this.open = () => {
                 this.active = true;
                 $scope.$broadcast("popup_open", this.type.toLowerCase());

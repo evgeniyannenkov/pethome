@@ -1,1 +1,5 @@
-form.form(ng-transclude name="{{form.name}}")
+include ../../views/mixins/formParts
+form.form(novalidate ng-submit="form.submit();" name="{{form.name}}")
+    div(ng-transclude)
+    +button("{{form.name}}")(ng-click="check()" class="{{form.validClass}} {{form.responseClass}}")
+    +button("Cancel")(class="form__btn--cancel" type="button" ng-click="form.cancel();")

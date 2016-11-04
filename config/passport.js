@@ -24,19 +24,20 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            authors.create({ "contactInfo.email" : email, password })
+            authors.create({"contactInfo.email" : email, password})
                    .then(( response ) => {
                        if ( response.success ) {
                            done(null, response.author);
                        } else {
-                           done(null, false, { message : response.message });
+                           done(null, false, {message : response.message});
                        }
                    })
                    .catch(( error ) => {
+                       console.log(error);
                        if ( error.message.indexOf(email) == -1 && error.message.indexOf("duplicate") == -1 ) {
                            done(error);
                        } else {
-                           done(null, false, { message : "This Email is taken." });
+                           done(null, false, {message : "This Email is taken."});
                        }
                    });
         }
@@ -47,7 +48,7 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            Author.findOne({ "contactInfo.email" : email }, ( err, user ) => {
+            Author.findOne({"contactInfo.email" : email}, ( err, user ) => {
                 if ( err ) {
                     done(err);
                 }
@@ -60,14 +61,14 @@ module.exports = () => {
                                 if ( data.success ) {
                                     done(null, user);
                                 } else {
-                                    done(null, false, { message : data.message });
+                                    done(null, false, {message : data.message});
                                 }
                             })
                             .catch(( err ) => {
-                                done(null, false, { message : err });
+                                done(null, false, {message : err});
                             });
                     } else {
-                        done(null, false, { message : "This account is blocked." });
+                        done(null, false, {message : "This account is blocked."});
                     }
                 }
             });

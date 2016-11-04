@@ -3,14 +3,29 @@
 function formComponentsInit ( module, constants ) {
 
     module.component("popupForm", {
-        templateUrl : `${constants.templatesFolder}/popup-form.html`,
+            templateUrl : `${constants.templatesFolder}/popup-form.html`,
+            require : {
+                popup : "^^?popup"
+            },
+            bindings : {
+                name : "@",
+                submitFunction : "&"
+            },
+            transclude : true,
+            controller : "formCtrl",
+            controllerAs : "form",
+        }
+    );
+
+    module.component("formInput", {
+        templateUrl : `${constants.templatesFolder}/form-parts/form-input.html`,
         require : {
-            popup : "^^?popup"
+            form : "^^?popupForm"
         },
         bindings : {
-            name: "@"
+            type : "@"
         },
-        transclude : true,
-        controllerAs : "form"
+        controller : "formFieldCtrl",
+        controllerAs : "field"
     });
 }
