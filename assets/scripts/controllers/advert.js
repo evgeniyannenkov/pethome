@@ -191,8 +191,8 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('advertRemoveCtrl', [
-        "adverts", "notify",
-        function ( adverts, notify ) {
+        "$scope", "adverts", "notify", "$timeout",
+        function ( $scope, adverts, notify, $timeout ) {
             this.remove = ( id ) => {
                 adverts.remove({ id })
                        .then(( response ) => {
@@ -201,23 +201,29 @@ function advertControllersInit ( module ) {
                                    message : `Removed  <i class="fa fa-check" aria-hidden="true"></i>`,
                                    duration : 1200
                                });
-                               setTimeout(()=> {
-                                   document.location.href = response.data.redirect;
-                               }, 1200);
+                               $timeout(1200)
+                                   .then(() => {
+                                       $scope.$broadcast("formResponse", {
+                                           responseClass: "success"
+                                       });
+                                       document.location.href = response.data.redirect;
+                                   });
                            } else if ( response.data.message ) {
                                console.log(response.data);
                            }
                        })
                        .catch(( err ) => {
                            console.log(err);
+
+                           $timeout(500)
+                               .then(() => {
+                                   $scope.$broadcast("formResponse", {
+                                       responseClass: "fail"
+                                   });
+                               });
                        });
             };
 
-            this.cancel = () => {
-                if ( this.popup ) {
-                    this.popup.close();
-                }
-            };
         }
     ]);
 }
