@@ -35,6 +35,9 @@ const components = {
         advertServicesInit,
         currentUserServicesInit
     ],
+    providers : [
+        translatorProviderInit
+    ],
     filters : [
         appFiltersInit,
     ],

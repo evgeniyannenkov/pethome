@@ -7,7 +7,7 @@ div.advert__field(ng-if="advert.fields.gender && !advert.hide.gender")
 div.advert__field(ng-if="advert.fields.age && !advert.hide.age")
     | {{advert.fields.age}}
 div.advert__field(ng-if="advert.fields.publicationDate && !advert.hide.publicationDate")
-    | {{advert.fields.publicationDate | date : 'd/MM/yyyy H:mm'}}
+    | {{advert.fields.publicationDate  | translate : 'date'}}
 div.advert__field(ng-if="advert.fields.breed && !advert.hide.breed")
     | {{advert.fields.breed}}
 div.advert__field(ng-if="advert.fields.info && !advert.hide.info")
