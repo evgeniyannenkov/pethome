@@ -1,21 +1,21 @@
 include ../../views/mixins/formParts
 
 form.form(ng-submit="new.create();")
-    +input("Name*")(ng-model="new.advert.name")
-    +select("Type*", {
+    +input("Name")(ng-model="new.advert.name")
+    +select("Type", {
         "type" : {
             "dog" : "Dog",
             "cat" : "Cat",
             "hamster" : "Hamster"
         }
     })(ng-model="new.advert.type")
-    +radios("Gender*", {
+    +radios("Gender", {
         "gender" : {
             "boy" : "Boy",
             "girl" : "Girl"
         }
     })(ng-model="new.advert.gender")
-    +input("Age*")(type="number" min=0 ng-model="new.advert.age")
+    +input("Age")(type="number" min=0 ng-model="new.advert.age")
     +input("Breed")(ng-model="new.advert.breed")
     +textarea("Info")(ng-model="new.advert.info")
     +button("Create")

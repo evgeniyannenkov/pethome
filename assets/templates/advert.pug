@@ -13,6 +13,6 @@ div.advert__field(ng-if="advert.fields.breed && !advert.hide.breed")
 div.advert__field(ng-if="advert.fields.info && !advert.hide.info")
     | {{advert.fields.info}}
 div.advert__field(ng-if="advert.fields.author && !advert.hide.author")
-    span(ng-show="advert.author.name") Author :
-    a(href="/author/{{advert.author._id}}" ng-hide="advert.author.name") Author
+    span(ng-show="advert.author.name") {{'Author' | translate}} :
+    a(href="/author/{{advert.author._id}}" ng-hide="advert.author.name") {{'Author' | translate}}
     a(href="/author/{{advert.author._id}}" ng-show="advert.author.name")  {{advert.author.name}}

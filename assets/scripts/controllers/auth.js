@@ -12,20 +12,20 @@ function authControllersInit ( module ) {
 
                                    if ( response.data.user && response.data.user.name ) {
                                        notify.inform({
-                                           message : `Welcome back, ${response.data.user.name}`,
+                                           message : `[[Welcome back]], ${response.data.user.name}`,
                                            duration : 1000,
                                            delay : 900
                                        });
                                    } else {
                                        if ( name == "registration" ) {
                                            notify.inform({
-                                               message : "Welcome",
+                                               message : "[[Welcome]].",
                                                duration : 1000,
                                                delay : 900
                                            });
                                        } else if ( name == "login" ) {
                                            notify.inform({
-                                               message : "Welcome back.",
+                                               message : "[[Welcome back]].",
                                                duration : 1000,
                                                delay : 900
                                            });

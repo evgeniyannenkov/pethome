@@ -4,13 +4,13 @@ h3 {{author.fields.contactInfo.phone}}
 
 popup(type="profile" ng-if="author.edit")
     popup-trigger
-        button Edit Profile
+        button {{'Edit Profile' | translate}}
     popup-content
         .popup__content
             author-edit(author="$parent.$parent.$parent.author.fields")
 popup(type="Remove Profile" ng-if="author.remove")
     popup-trigger
-        button Remove Profile
+        button {{'Remove Profile' | translate}}
     popup-content
         .popup__content
             author-remove(author="$parent.$parent.$parent.author.fields")

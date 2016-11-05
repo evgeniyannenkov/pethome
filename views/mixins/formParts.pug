@@ -4,7 +4,14 @@ include ../vars/common
 mixin input(label)
     .form__item
         label.form__label
-            div.form__title= label
+            div.form__title {{'#{label}' | translate}}
+            input.form__input&attributes(attributes)
+
+//Angular Input mixin
+mixin ng-input(label)
+    .form__item
+        label.form__label
+            div.form__title {{#{label} | translate}}
             input.form__input&attributes(attributes)
 
 //Button mixin
@@ -13,49 +20,58 @@ mixin button(label)
         .form__btn-wrap
             button.form__btn&attributes(attributes)
                 span.form__btn-icon
-                span.form__btn-title= label
+                span.form__btn-title {{'#{label}' | translate}}
+            .form__progress-bar
+
+//Angular Button mixin
+mixin ng-button(label)
+    .form__item.form__item--btn
+        .form__btn-wrap
+            button.form__btn&attributes(attributes)
+                span.form__btn-icon
+                span.form__btn-title {{#{label} | translate}}
             .form__progress-bar
 
 //Textarea mixin
 mixin textarea(label)
     .form__item
         label.form__label
-            div.form__title= label
+            div.form__title {{'#{label}' | translate}}
             textarea.form__textarea&attributes(attributes)
 
 //Radios mixin
 mixin radios(block_title, block_inputs)
     .form__item
-        div.form__title= block_title
+        div.form__title {{'#{block_title}' | translate}}
         div
             each inputs, name in block_inputs
                     each label,value in inputs
                         label.form__label
-                            span= label
+                            span {{'#{label}' | translate}}
                             input.form__radio(type="radio" name=name ,value = value)&attributes(attributes)
 
 //Checkboxes mixin
 mixin checkboxes(block_title, block_inputs, hide_title)
     .form__item
         if !hide_title
-            div.form__title= block_title
+            div.form__title {{'#{block_title}' | translate}}
         div
             each inputs, name in block_inputs
                     each label,value in inputs
                         label.form__label
-                            span= label
-                            input.form__radio(type="checkbox" name=name ,value = value)&attributes(attributes)
+                            span {{'#{label}' | translate}}
+                            input.form__radio(type="checkbox" name=name ,value = "{{'#{value}' | translate}}")&attributes(attributes)
 
 //Select mixin
 mixin select(label, options, without_other)
     .form__item
-        div.form__title= label
+        div.form__title {{'#{label}' | translate}}
         div
             each inputs, name in options
                     select.form__select(name = name)&attributes(attributes)
                         each label,value in inputs
                             option(value = value)
-                                | #{label}
+                                | {{'#{label}' | translate}}
                         if !without_other
                             option(value = "other")
-                                | Other
+                                | {{'Other' | translate}}
