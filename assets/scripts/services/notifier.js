@@ -3,8 +3,8 @@
 function notifierServicesInit ( module ) {
 
     module.service('notify', [
-        "$timeout", "$sce",
-        function ( $timeout, $sce ) {
+        "$timeout", "$sce", "$translator",
+        function ( $timeout, $sce, $translator ) {
 
             this.messages = [];
 
@@ -15,7 +15,7 @@ function notifierServicesInit ( module ) {
 
                 this.messages.push({
                     time : Date.now(),
-                    message : $sce.trustAsHtml(message),
+                    message : $sce.trustAsHtml($translator.translateAllMatches(message)),
                     duration,
                     delay,
                     state

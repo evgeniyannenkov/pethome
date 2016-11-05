@@ -27,7 +27,7 @@ function advertControllersInit ( module ) {
                        .then(( response ) => {
                            if ( response.data.success && response.data.newAdvert ) {
                                notify.inform({
-                                   message : `${data.name} updated.`,
+                                   message : `${data.name} [[updated]].`,
                                    duration : 2000
                                });
 

@@ -21,7 +21,7 @@ function appFiltersInit ( module ) {
         "$translator", "$rootScope",
         function ( translator, $rootScope ) {
             function translationFilter ( content ) {
-                return translator.translateAllMatches(content);
+                return translator.translate(content);
             }
 
             translationFilter.$stateful = true;

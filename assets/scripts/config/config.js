@@ -25,12 +25,9 @@ function applicationConfig ( module ) {
             };
 
             this.translateAllMatches = function ( content ) {
-                var str = "this is [test] line i [want] text [inside] square [brackets]";
-                var res = str.replace(/[^[\]]+(?=])/g, ( match ) => {
-                    return this.translate(match);
+                return content.replace(/\[\[(.*?)\]\]/g, ( match ) => {
+                    return this.translate(match.substr(2, match.length - 4));
                 });
-                console.log(res);
-                return this.dictionary[ this.locale ] && this.dictionary[ this.locale ][ content.toLowerCase() ] || content;
             };
 
             this.$get = function () {
@@ -50,8 +47,7 @@ function applicationConfig ( module ) {
                 "Profile" : "Профиль",
                 "Logout" : "Выход",
                 "Welcome back" : "Хули приперся",
-                "test" : "TEESST!",
-                "inside" : "INSIDE!!!"
+                "Updated" : "Обновлен",
             });
 
             translator.setLocale(preferred);
