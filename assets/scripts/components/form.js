@@ -9,8 +9,8 @@ function formComponentsInit ( module, constants ) {
             },
             bindings : {
                 name : "@",
-                submitFunction : "&",
-                button : "@"
+                label: "@",
+                submitFunction : "&"
             },
             transclude : true,
             controller : "formCtrl",
@@ -24,7 +24,26 @@ function formComponentsInit ( module, constants ) {
             form : "^^?popupForm"
         },
         bindings : {
-            type : "@"
+            type : "@",
+            name : "@",
+            required : "@",
+            value: "=",
+            min: "@",
+            max: "@"
+        },
+        controller : "formFieldCtrl",
+        controllerAs : "field"
+    });
+
+    module.component("formTextarea", {
+        templateUrl : `${constants.templatesFolder}/form-parts/form-textarea.html`,
+        require : {
+            form : "^^?popupForm"
+        },
+        bindings : {
+            name : "@",
+            required : "@",
+            value: "="
         },
         controller : "formFieldCtrl",
         controllerAs : "field"

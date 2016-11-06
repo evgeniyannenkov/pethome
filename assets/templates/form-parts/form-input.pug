@@ -1,3 +1,3 @@
 include ../../../views/mixins/formParts
 
-+ng-input("field.type")(name="{{field.type}}" ng-model="field[field.type]" ng-required="true" ng-change="field.check();" ng-focus="field.reset();" ng-pattern="field.regex[field.type]" type="{{field.type}}" autocomplete="off")
++ng-input("field.name")(name="{{field.name}}" ng-model="field.value" ng-required="{{field.required}}" ng-change="field.check();" ng-focus="field.reset();" ng-pattern="field.regex[field.type]" type="{{field.type}}" min="{{field.min}}" max="{{field.max}}" autocomplete="off")

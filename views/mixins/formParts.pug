@@ -32,6 +32,13 @@ mixin ng-button(label)
                 span.form__btn-title {{#{label} | translate}}
             .form__progress-bar
 
+//Angular Textarea mixin
+mixin ng-textarea(label)
+    .form__item
+        label.form__label
+            div.form__title {{#{label} | translate}}
+            textarea.form__textarea&attributes(attributes)
+
 //Textarea mixin
 mixin textarea(label)
     .form__item

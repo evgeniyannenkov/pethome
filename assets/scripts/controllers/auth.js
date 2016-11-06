@@ -4,9 +4,9 @@ function authControllersInit ( module ) {
         "$scope", "$timeout", "authService", "notify",
         function ( $scope, $timeout, authService, notify ) {
 
-            this.authenticate = ( fields, name ) => {
+            this.authenticate = ( name ) => {
 
-                authService.authenticate(name, {email : fields.email, password : fields.password})
+                authService.authenticate(name, {email : this.email, password : this.password})
                            .then(( response ) => {
                                if ( response.data.success ) {
 

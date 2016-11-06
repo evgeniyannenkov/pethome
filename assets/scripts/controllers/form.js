@@ -36,7 +36,7 @@ function formControllersInit ( module ) {
 
                 if ( this.$form && this.$form.$valid ) {
 
-                    this.submitFunction({fields : this.fields, name : this.name});
+                    this.submitFunction({name : this.name});
 
                     $scope.$on("formResponse", ( event, data ) => {
                         this.responseClass = data.responseClass;
@@ -55,12 +55,14 @@ function formControllersInit ( module ) {
     ]);
 
     module.controller("formFieldCtrl", [
-        "$scope", "validate", "notify",
-        function ( $scope, validate, notify ) {
+        "$scope", "validate",
+        function ( $scope, validate ) {
 
             this.regex = {
                 email : validate.email(),
                 password : validate.password(),
+                text: validate.text(),
+                textarea: validate.textarea()
             };
 
             this.reset = () => {
@@ -70,7 +72,7 @@ function formControllersInit ( module ) {
 
             this.check = () => {
                 if ( this.form && this.form.fields ) {
-                    this.form.fields[this.type] = this[this.type];
+                    this.form.fields[this.name] = this[this.name];
                 }
             }
 
