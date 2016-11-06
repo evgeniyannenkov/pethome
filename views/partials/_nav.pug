@@ -2,22 +2,22 @@ ul.header__menu
     if !currentUser
         li.header-menu__item
             popup(type="registration")
-                popup-trigger.header-menu__link(translate="SIGN_UP_BTN")
+                popup-trigger.header-menu__link {{'Sign Up' | translate}}
                 popup-content
                     .popup__content
                         auth-form(form="registration" title="sign up")
         li.header-menu__item
             popup(type="login")
-                popup-trigger.header-menu__link(translate="LOGIN_BTN")
+                popup-trigger.header-menu__link {{'Login' | translate}}
                 popup-content
                     .popup__content
                         auth-form(form="login" title="login")
     else
         if currentUser.is_admin
             li.header-menu__item
-                a.header-menu__link(href='/admin' translate="ADMIN_BTN")
+                a.header-menu__link(href='/admin') {{'Admin' | translate}}
         li.header-menu__item
-            a.header-menu__link(href='/profile' translate="PROFILE_BTN")
+            a.header-menu__link(href='/profile') {{'Profile' | translate}}
 
         li.header-menu__item
-            a.header-menu__link(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();" translate="LOGOUT_BTN")
+            a.header-menu__link(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") {{'Logout' | translate}}

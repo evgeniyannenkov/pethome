@@ -2,14 +2,14 @@ include ../../views/mixins/formParts
 
 popup(type="Remove Advert")
     popup-trigger
-        button Remove
+        button {{'Remove' | translate}}
     popup-content
         .popup__content
             advert-remove(advert-id="{{advert.id}}")
 
 popup(type="Edit Advert")
     popup-trigger
-        button Edit
+        button {{'Edit' | translate}}
     popup-content
         .popup__content
             advert-edit(advert="$parent.$parent.advert.fields" advert-update="$parent.$parent.advert.save(data);")

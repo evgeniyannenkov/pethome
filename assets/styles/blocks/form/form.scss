@@ -1,5 +1,23 @@
 @import "../../common/variables";
 
+@mixin input {
+  @include roboto-condensed;
+  width         : 100%;
+  border        : 1px solid #e1e6f0;
+  color         : $metallicGray;
+  border-radius : 3px;
+  font-size     : 0.8em;
+  background    : $white;
+  padding       : 10px 7px 10px 10px;
+  &:focus {
+    border  : 1px solid $blue;
+    outline : none;
+  }
+  &.ng-invalid.ng-touched {
+    border : 1px solid $red;
+  }
+}
+
 @keyframes load {
   0% {
     left  : 0;
@@ -62,21 +80,15 @@
 }
 
 .form__input {
-  @include roboto-condensed;
-  width         : 100%;
-  border        : 1px solid #e1e6f0;
-  color         : $metallicGray;
-  border-radius : 3px;
-  font-size     : 0.8em;
-  background    : $white;
-  padding       : 10px 7px 10px 10px;
-  &:focus {
-    border  : 1px solid $blue;
-    outline : none;
-  }
-  &.ng-invalid.ng-touched {
-    border : 1px solid $red;
-  }
+  @include input;
+}
+
+.form__textarea {
+  @include input;
+  resize     : vertical;
+  min-height : 6em;
+  max-height : 15em;
+
 }
 
 .form__label {

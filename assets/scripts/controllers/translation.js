@@ -3,18 +3,18 @@
 function translationControllersInit ( module ) {
 
     module.controller('translationCtrl', [
-        "$scope", "$translate", "author", "currentUser",
-        function ( $scope, $translate, author, currentUser ) {
+        "$scope", "$translator", "author", "currentUser",
+        function ( $scope, $translator, author, currentUser ) {
 
             let current_user;
-            this.key = 'ru';
+            this.key = localStorage[ "preferred_language" ] || 'ru';
             currentUser.get(( err, user ) => {
                 if ( err ) {
                     console.log(err);
                 } else {
                     current_user = user;
                     localStorage.setItem("preferred_language", user.language);
-                    $translate.use(user.language);
+                    $translator.setLocale(user.language);
                     this.key = user.language;
                 }
             });
@@ -22,10 +22,10 @@ function translationControllersInit ( module ) {
             this.changeLanguage = ( key ) => {
                 localStorage.setItem("preferred_language", key);
                 this.key = key;
-                $translate.use(key);
+                $translator.setLocale(key);
                 if ( current_user ) {
                     current_user.language = key;
-                    author.update({id : current_user._id, data : current_user});
+                    author.update({ id : current_user._id, data : current_user });
                 }
             };
         }

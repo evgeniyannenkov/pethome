@@ -101,7 +101,7 @@ router.put("/:id/review", response.ifNotAdmin(), ( req, res, next ) => {
     Advert.findByIdAndUpdate(_id, { reviewed : true }, { new : true })
           .then(( advert ) => {
               if ( advert ) {
-                  res.json({ advert, success : true, message : "Review Advert: Reviewed." });
+                  res.json({ advert, success : true, message : "[[Reviewed]]." });
               } else {
                   res.json({
                       message : "Review Advert: not found",

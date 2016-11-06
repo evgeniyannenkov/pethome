@@ -27,7 +27,7 @@ function advertControllersInit ( module ) {
                        .then(( response ) => {
                            if ( response.data.success && response.data.newAdvert ) {
                                notify.inform({
-                                   message : `${data.name} updated.`,
+                                   message : `${data.name} [[updated]].`,
                                    duration : 2000
                                });
 
@@ -145,7 +145,7 @@ function advertControllersInit ( module ) {
                        .then(( response ) => {
                            if ( response.data.success ) {
                                notify.inform({
-                                   message : `Created ${response.data.advert.name} <i class="fa fa-check" aria-hidden="true"></i>`,
+                                   message : `[[Created]] ${response.data.advert.name} <i class="fa fa-check" aria-hidden="true"></i>`,
                                    duration : 1200
                                });
                                $timeout(1500)
@@ -209,7 +209,7 @@ function advertControllersInit ( module ) {
                        .then(( response ) => {
                            if ( response.data.success && response.data.redirect ) {
                                notify.inform({
-                                   message : `Removed  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                   message : `[[Removed]]  <i class="fa fa-check" aria-hidden="true"></i>`,
                                    duration : 1200
                                });
                                $timeout(1200)

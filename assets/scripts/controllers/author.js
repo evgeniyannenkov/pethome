@@ -80,7 +80,7 @@ function authorControllersInit ( module ) {
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({
-                                  message : `Removed  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                  message : `[[Removed]]  <i class="fa fa-check" aria-hidden="true"></i>`,
                                   duration : 1000
                               });
                               setTimeout(() => {
