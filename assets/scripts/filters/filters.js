@@ -29,6 +29,10 @@ function appFiltersInit ( module ) {
                         method = "translateAllMatches";
                         break;
                     }
+                    case "all" : {
+                        method = "translateAll";
+                        break;
+                    }
                     case "date" : {
                         return $filter("date")(content, translator.getDateFormat());
                     }

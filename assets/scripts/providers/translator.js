@@ -4,6 +4,8 @@ function translatorProviderInit ( module ) {
 
     module.provider('$translator', [
         function () {
+            this.matchRegex = /\[\[(.*?)\]\]/g;
+            this.wordRegex = /\b[^\d\W]+\b/g;
             this.dictionary = {};
             this.dateFormats = {
                 default : "d/MM/yyyy H:mm"
@@ -36,9 +38,19 @@ function translatorProviderInit ( module ) {
             };
 
             this.translateAllMatches = function ( content ) {
-                return content.replace(/\[\[(.*?)\]\]/g, ( match ) => {
+                return content.replace(this.matchRegex, ( match ) => {
                     return this.translate(match.substr(2, match.length - 4));
                 });
+            };
+
+            this.translateAllWords = function ( content ) {
+                return content.replace(this.wordRegex, ( match ) => {
+                    return this.translate(match);
+                });
+            };
+
+            this.translateAll = function ( content ) {
+                return this.translateAllWords(this.translateAllMatches(content));
             };
 
             this.$get = function () {
