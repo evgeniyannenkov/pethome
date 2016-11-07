@@ -19,11 +19,16 @@ function validationServicesInit ( module ) {
                 return /^[^\*/\\\\<>]*$/;
             };
 
+            const tel = () => {
+                return /\+?1?\s*\(?-*\.*(\d{3})\)?\.*-*\s*(\d{3})\.*-*\s*(\d{4})$/;
+            };
+
             return {
                 email,
                 password,
                 text,
-                textarea
+                textarea,
+                tel
             }
 
         }

@@ -65,7 +65,8 @@ function formControllersInit ( module ) {
                 email : validate.email(),
                 password : validate.password(),
                 text: validate.text(),
-                textarea: validate.textarea()
+                textarea: validate.textarea(),
+                tel: validate.tel()
             };
 
             this.reset = () => {

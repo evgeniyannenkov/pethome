@@ -1,7 +1,5 @@
 include ../../views/mixins/formParts
-form.form(ng-submit="editor.edit();" name="authorEditForm")
-    +input("Name")(ng-model="editor.temporaryData.name" name="name" autocomplete="off")
-    +input("Email")(name="email" ng-required="true" ng-model="editor.temporaryData.contactInfo.email" type="email" autocomplete="off")
-    +input("Phone Number")(name="phone" ng-model="editor.temporaryData.contactInfo.phone" autocomplete="off")
-    +button("Edit")
-    +button("Cancel")(class="form__btn--cancel" type="button" ng-click="editor.cancel();")
+popup-form(name="authorEditForm" submit-function="editor.edit();" label="Edit")
+    form-input(type="text" name="name" required="false" value="editor.temporaryData.name")
+    form-input(type="email" name="email" required="true" value="editor.temporaryData.contactInfo.email")
+    form-input(type="tel" name="phone" required="true" value="editor.temporaryData.contactInfo.phone")

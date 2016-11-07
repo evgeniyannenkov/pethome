@@ -5,7 +5,7 @@ function authorControllersInit ( module ) {
     module.controller('authorCtrl', [
         "author",
         function ( author ) {
-            author.get({ id : this.id })
+            author.get({id : this.id})
                   .then(( response ) => {
                       if ( response.data.success ) {
                           this.fields = response.data.author;
@@ -33,8 +33,8 @@ function authorControllersInit ( module ) {
     ]);
 
     module.controller('authorEditCtrl', [
-        "author", "notify", "$scope",
-        function ( author, notify, $scope ) {
+        "author", "notify", "$scope", "$timeout",
+        function ( author, notify, $scope, $timeout ) {
 
             $scope.$on("popup_open", ( $event, type ) => {
                 if ( type == "profile" ) {
@@ -42,15 +42,8 @@ function authorControllersInit ( module ) {
                 }
             });
 
-            this.cancel = () => {
-                this.temporaryData = angular.copy(this.temporaryData);
-                if ( this.popup ) {
-                    this.popup.close();
-                }
-            };
-
             this.edit = () => {
-                author.update({ id : this.author._id, data : this.temporaryData })
+                author.update({id : this.author._id, data : this.temporaryData})
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({
@@ -61,12 +54,28 @@ function authorControllersInit ( module ) {
                               if ( this.popup ) {
                                   this.popup.close();
                               }
+                              $scope.$broadcast("formResponse", {
+                                  responseClass : "",
+                                  reset : true
+                              });
                           } else {
                               console.log(response);
+                              $timeout(500)
+                                  .then(() => {
+                                      $scope.$broadcast("formResponse", {
+                                          responseClass : "fail"
+                                      });
+                                  });
                           }
                       })
                       .catch(( error ) => {
                           console.log(error);
+                          $timeout(500)
+                              .then(() => {
+                                  $scope.$broadcast("formResponse", {
+                                      responseClass : "fail"
+                                  });
+                              });
                       });
             };
         }
@@ -76,7 +85,7 @@ function authorControllersInit ( module ) {
         "author", "notify",
         function ( author, notify ) {
             this.remove = () => {
-                author.remove({ id : this.author._id })
+                author.remove({id : this.author._id})
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({
@@ -93,12 +102,6 @@ function authorControllersInit ( module ) {
                       });
             };
 
-            this.cancel = () => {
-                if ( this.popup ) {
-                    this.popup.close();
-                }
-            };
-
         }
     ]);
 
@@ -107,7 +110,7 @@ function authorControllersInit ( module ) {
         function ( author, notify ) {
 
             this.block = () => {
-                author.block({ id : this.authorId })
+                author.block({id : this.authorId})
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({
@@ -126,7 +129,7 @@ function authorControllersInit ( module ) {
                       });
             };
             this.unblock = () => {
-                author.unblock({ id : this.authorId })
+                author.unblock({id : this.authorId})
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({
