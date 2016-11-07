@@ -1,4 +1,1 @@
-include ../../views/mixins/formParts
-
-button(type="button" ng-click="blocker[blocker.action]();") {{blocker.action}}
-button(type="button" ng-click="blocker.cancel();") Cancel
+popup-form(name="authorBlock" submit-function="blocker[blocker.action]();;" label="{{blocker.action}}")

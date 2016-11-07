@@ -82,8 +82,8 @@ function authorControllersInit ( module ) {
     ]);
 
     module.controller('authorRemoveCtrl', [
-        "author", "notify",
-        function ( author, notify ) {
+        "author", "notify", "$scope", "$timeout",
+        function ( author, notify, $scope, $timeout ) {
             this.remove = () => {
                 author.remove({id : this.author._id})
                       .then(( response ) => {
@@ -92,13 +92,23 @@ function authorControllersInit ( module ) {
                                   message : `[[Removed]]  <i class="fa fa-check" aria-hidden="true"></i>`,
                                   duration : 1000
                               });
-                              setTimeout(() => {
-                                  document.location.href = "/";
-                              }, 1200);
+                              $timeout(1200)
+                                  .then(() => {
+                                      $scope.$broadcast("formResponse", {
+                                          responseClass : "success"
+                                      });
+                                      document.location.href = "/";
+                                  });
                           }
                       })
                       .catch(( err ) => {
                           console.log(err);
+                          $timeout(500)
+                              .then(() => {
+                                  $scope.$broadcast("formResponse", {
+                                      responseClass : "fail"
+                                  });
+                              });
                       });
             };
 
@@ -106,8 +116,8 @@ function authorControllersInit ( module ) {
     ]);
 
     module.controller('authorBlockCtrl', [
-        "author", "notify",
-        function ( author, notify ) {
+        "author", "notify", "$scope", "$timeout",
+        function ( author, notify, $scope, $timeout ) {
 
             this.block = () => {
                 author.block({id : this.authorId})
@@ -117,15 +127,31 @@ function authorControllersInit ( module ) {
                                   message : response.data.message,
                                   duration : 1400
                               });
-                              setTimeout(()=> {
-                                  document.location.reload();
-                              }, 1600);
+                              $timeout(1600)
+                                  .then(() => {
+                                      $scope.$broadcast("formResponse", {
+                                          responseClass : "success"
+                                      });
+                                      document.location.reload();
+                                  });
                           } else {
                               console.log(response);
+                              $timeout(500)
+                                  .then(() => {
+                                      $scope.$broadcast("formResponse", {
+                                          responseClass : "fail"
+                                      });
+                                  });
                           }
                       })
                       .catch(( err ) => {
                           console.log(err);
+                          $timeout(500)
+                              .then(() => {
+                                  $scope.$broadcast("formResponse", {
+                                      responseClass : "fail"
+                                  });
+                              });
                       });
             };
             this.unblock = () => {
@@ -136,22 +162,32 @@ function authorControllersInit ( module ) {
                                   message : response.data.message,
                                   duration : 1400
                               });
-                              setTimeout(()=> {
-                                  document.location.reload();
-                              }, 1600);
+                              $timeout(1600)
+                                  .then(() => {
+                                      $scope.$broadcast("formResponse", {
+                                          responseClass : "success"
+                                      });
+                                      document.location.reload();
+                                  });
                           } else {
                               console.log(response);
+                              $timeout(500)
+                                  .then(() => {
+                                      $scope.$broadcast("formResponse", {
+                                          responseClass : "fail"
+                                      });
+                                  });
                           }
                       })
                       .catch(( err ) => {
                           console.log(err);
+                          $timeout(500)
+                              .then(() => {
+                                  $scope.$broadcast("formResponse", {
+                                      responseClass : "fail"
+                                  });
+                              });
                       });
-            };
-
-            this.cancel = () => {
-                if ( this.popup ) {
-                    this.popup.close();
-                }
             };
 
         }
