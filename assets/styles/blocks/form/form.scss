@@ -88,17 +88,84 @@
   resize     : vertical;
   min-height : 6em;
   max-height : 15em;
+}
 
+.form__select {
+  @include input;
+  padding : 10px 7px;
+}
+
+.form__radio {
+  display : none;
+  &:checked {
+    & + .form__label--radio {
+      span {
+        color : $blue;
+      }
+      .form__radio-btn {
+        border : 2px solid $blue;
+        &:before {
+          transform : scale(1);
+        }
+      }
+    }
+  }
+}
+
+.form__radio-wrap {
+  display         : flex;
+  flex-flow       : row wrap;
+  justify-content : center;
+  align-items     : center;
 }
 
 .form__label {
   display : block;
 }
 
+.form__label--radio {
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  margin-right    : 15px;
+  span {
+    @include roboto-condensed;
+    font-size   : 0.8em;
+    margin-left : 5px;
+    color       : $metallicGray;
+    transition  : color .2s;
+  }
+
+}
+
+.form__radio-btn {
+  position        : relative;
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  width           : 25px;
+  height          : 25px;
+  border-radius   : 100%;
+  border          : 2px solid $metallicGray;
+  cursor          : pointer;
+  transition      : border .2s;
+  &:before {
+    content          : "";
+    display          : inline-block;
+    width            : 50%;
+    height           : 50%;
+    border-radius    : 100%;
+    background-color : $blue;
+    transform        : scale(0);
+    transition       : transform .2s;
+  }
+}
+
 .form__title {
-  font-size     : 0.8em;
-  color         : $blue;
-  margin-bottom : 5px;
+  font-size      : 0.8em;
+  color          : $blue;
+  margin-bottom  : 5px;
+  text-transform : capitalize;
 }
 
 .form__btn-wrap {

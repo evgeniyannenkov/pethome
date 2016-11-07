@@ -41,6 +41,7 @@ function formComponentsInit ( module, constants ) {
             form : "^^?popupForm"
         },
         bindings : {
+            type : "@",
             name : "@",
             required : "@",
             value: "="

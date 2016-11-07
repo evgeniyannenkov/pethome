@@ -50,12 +50,13 @@ mixin textarea(label)
 mixin radios(block_title, block_inputs)
     .form__item
         div.form__title {{'#{block_title}' | translate}}
-        div
+        div.form__radio-wrap
             each inputs, name in block_inputs
                     each label,value in inputs
-                        label.form__label
+                        input.form__radio(id=value type="radio" name=name ,value = value)&attributes(attributes)
+                        label(for=value).form__label.form__label--radio
+                            div.form__radio-btn
                             span {{'#{label}' | translate}}
-                            input.form__radio(type="radio" name=name ,value = value)&attributes(attributes)
 
 //Checkboxes mixin
 mixin checkboxes(block_title, block_inputs, hide_title)
