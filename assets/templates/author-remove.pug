@@ -1,4 +1,1 @@
-include ../../views/mixins/formParts
-
-button(type="button" ng-click="remover.remove();") {{'Remove' | translate}}
-button(type="button" ng-click="remover.cancel();") {{'Cancel' | translate}}
+popup-form(name="authorRemove" submit-function="remover.remove();" label="remove")
