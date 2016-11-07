@@ -50,8 +50,7 @@ function advertComponentsInit ( module, constants ) {
         },
         templateUrl : `${constants.templatesFolder}/advert-edit.html`,
         bindings : {
-            fields : "=advert",
-            advertUpdate : "&advertUpdate"
+            fields : "=advert"
         },
         controller : "editAdvertCtrl",
         controllerAs : "editor"

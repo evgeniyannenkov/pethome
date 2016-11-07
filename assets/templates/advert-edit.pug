@@ -1,6 +1,6 @@
 include ../../views/mixins/formParts
-form.form(ng-submit="editor.advertUpdate({data : editor.temporaryData});editor.popup.close();" name="authorEditForm")
-    +input("Name")(ng-model="editor.temporaryData.name" name="name" autocomplete="off")
+popup-form(name="advertEditForm" submit-function="editor.update();" label="Update")
+    form-input(type="text" name="name" required="false" value="editor.temporaryData.name")
     +select("Type", {
         "type" : {
             "dog" : "Dog",
@@ -14,13 +14,11 @@ form.form(ng-submit="editor.advertUpdate({data : editor.temporaryData});editor.p
             "girl" : "Girl"
         }
     })(ng-model = "editor.temporaryData.gender")
-    +input("Age")(type="number" ng-model = "editor.temporaryData.age")
-    +input("Breed")(ng-model = "editor.temporaryData.breed")
-    +textarea("Info")(ng-model = "editor.temporaryData.info")
+    form-input(type="number" name="age" min="0" value="editor.temporaryData.age")
+    form-input(type="text" name="breed" required="false" value="editor.temporaryData.breed")
+    form-textarea(type="textarea" name="info" value="editor.temporaryData.info")
     +checkboxes("Published", {
         "published" : {
             "published" : "Published"
         }
     }, true)(ng-model = "editor.temporaryData.published")
-    +button("Edit")
-    +button("Cancel")(class="form__btn--cancel" type="button" ng-click="editor.cancel();")

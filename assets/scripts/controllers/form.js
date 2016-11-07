@@ -36,11 +36,14 @@ function formControllersInit ( module ) {
 
                 if ( this.$form && this.$form.$valid ) {
 
-                    this.submitFunction({name : this.name});
+                    this.submitFunction({name : this.name, data: this.data});
 
                     $scope.$on("formResponse", ( event, data ) => {
                         this.responseClass = data.responseClass;
-                        console.log(data.responseClass);
+                        if(data.reset) {
+                            this.validClass = "";
+                            this.cancel();
+                        }
                     })
 
                 } else {

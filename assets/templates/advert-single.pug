@@ -12,7 +12,7 @@ popup(type="Edit Advert")
         button {{'Edit' | translate}}
     popup-content
         .popup__content
-            advert-edit(advert="$parent.$parent.advert.fields" advert-update="$parent.$parent.advert.save(data);")
+            advert-edit(advert="$parent.$parent.advert.fields")
 div(ng-if="!advert.fields.published")
     h2 (Not Published)
 div.advert__field
