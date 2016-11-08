@@ -5,7 +5,7 @@ function authorControllersInit ( module ) {
     module.controller('authorCtrl', [
         "author",
         function ( author ) {
-            author.get({id : this.id})
+            author.get({ id : this.id })
                   .then(( response ) => {
                       if ( response.data.success ) {
                           this.fields = response.data.author;
@@ -39,15 +39,17 @@ function authorControllersInit ( module ) {
             $scope.$on("popup_open", ( $event, type ) => {
                 if ( type == "profile" ) {
                     this.temporaryData = angular.copy(this.author);
+                    this.temporaryData.language = localStorage[ "preferred_language" ] || 'ru'
                 }
             });
 
             this.edit = () => {
-                author.update({id : this.author._id, data : this.temporaryData})
+
+                author.update({ id : this.author._id, data : this.temporaryData })
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({
-                                  message : `Updated  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                  message : `[[Updated]]  <i class="fa fa-check" aria-hidden="true"></i>`,
                                   duration : 1500
                               });
                               this.author = angular.copy(this.temporaryData);
@@ -85,7 +87,7 @@ function authorControllersInit ( module ) {
         "author", "notify", "$scope", "$timeout",
         function ( author, notify, $scope, $timeout ) {
             this.remove = () => {
-                author.remove({id : this.author._id})
+                author.remove({ id : this.author._id })
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({
@@ -120,7 +122,7 @@ function authorControllersInit ( module ) {
         function ( author, notify, $scope, $timeout ) {
 
             this.block = () => {
-                author.block({id : this.authorId})
+                author.block({ id : this.authorId })
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({
@@ -155,7 +157,7 @@ function authorControllersInit ( module ) {
                       });
             };
             this.unblock = () => {
-                author.unblock({id : this.authorId})
+                author.unblock({ id : this.authorId })
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({
