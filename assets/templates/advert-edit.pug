@@ -1,5 +1,6 @@
 include ../../views/mixins/formParts
 popup-form(name="advertEditForm" submit-function="editor.update();" label="Update")
+    form-input(type="text" name="title" required="true" value="editor.temporaryData.title")
     form-input(type="text" name="name" required="false" value="editor.temporaryData.name")
     +select("Type", {
         "type" : {

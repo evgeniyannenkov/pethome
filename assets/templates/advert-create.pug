@@ -1,6 +1,7 @@
 include ../../views/mixins/formParts
 
 popup-form(name="newAdvert" submit-function="new.create();" label="Create")
+    form-input(type="text" name="title" required="true" value="new.advert.title")
     form-input(type="text" name="name" required="false" value="new.advert.name")
     +select("Type", {
         "type" : {
