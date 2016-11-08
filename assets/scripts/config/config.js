@@ -6,6 +6,10 @@ function applicationConfig ( module ) {
         function ( translator ) {
             const preferred = localStorage[ "preferred_language" ] || "ru";
             translator.setTranslations("ru", {
+                "language" : "язык",
+                "russian" : "русский",
+                "english" : "английский",
+                "ukrainian" : "украинский",
                 "sign up" : "Регистрация",
                 "registration" : "Регистрация",
                 "cancel" : "Отмена",
@@ -56,6 +60,10 @@ function applicationConfig ( module ) {
                 "author" : "Автор",
             });
             translator.setTranslations("ua", {
+                "language" : "мова",
+                "english" : "англійська",
+                "russian" : "російська",
+                "ukrainian" : "українська",
                 "sign up" : "Реєстрація",
                 "registration" : "Реєстрація",
                 "cancel" : "Cкасувати",

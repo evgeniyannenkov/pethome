@@ -1,14 +1,14 @@
 .lang__trigger(ng-click="translator.select = !translator.select")
     .lang__btn.lang__btn--en(ng-if="translator.key == 'en'")
-        span(translate="BUTTON_LANG_EN")
+        span english
     .lang__btn.lang__btn--ru(ng-if="translator.key == 'ru'")
-        span(translate="BUTTON_LANG_RU")
+        span русский
     .lang__btn.lang__btn--ua(ng-if="translator.key == 'ua'")
-        span(translate="BUTTON_LANG_UA")
+        span українська
     ul.lang(ng-show="translator.select")
         li.lang__btn.lang__btn--en(ng-click="translator.changeLanguage('en');")
-            span(translate="BUTTON_LANG_EN")
+            span english
         li.lang__btn.lang__btn--ru(ng-click="translator.changeLanguage('ru');")
-            span(translate="BUTTON_LANG_RU")
+            span русский
         li.lang__btn.lang__btn--ua(ng-click="translator.changeLanguage('ua');")
-            span(translate="BUTTON_LANG_UA")
+            span українська
