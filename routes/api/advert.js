@@ -123,6 +123,7 @@ router.post('/', response.ifLoggedOut(), ( req, res, next ) => {
 
         const advert = new Advert();
 
+        advert.title = req.body.title;
         advert.type = req.body.type || advert.type;
         advert.gender = req.body.gender || advert.gender;
         advert.age = req.body.age || advert.age;
