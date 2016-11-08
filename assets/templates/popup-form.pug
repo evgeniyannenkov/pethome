@@ -2,5 +2,5 @@ include ../../views/mixins/formParts
 form.form(novalidate ng-submit="form.submit();" name="{{form.name}}")
     div(ng-transclude)
     div.form__item.form__item--btn
-        +ng-button("form.label")(ng-click="form.check()" class="{{form.validClass}} {{form.responseClass}}")
-        +button("Cancel")(class="form__btn--cancel" type="button" ng-click="form.cancel();")
+        +ng-button("form.label")(ng-click="form.check()" title="{{form.label | translate}}" class="{{form.validClass}} {{form.responseClass}}")
+        +button("Cancel")(class="form__btn--cancel" title="{{'cancel' | translate}}" type="button" ng-click="form.cancel();")
