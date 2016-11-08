@@ -2,8 +2,18 @@
   background-color : white;
 }
 
+.lang__trigger {
+  border     : 1px solid transparent;
+  padding    : 5px 0;
+  background : white;
+
+  &.active {
+    border-color : $blue;
+  }
+}
+
 .lang__btn {
-  padding         : 0 10px;
+  padding         : 0 15px;
   position        : relative;
   width           : auto;
   height          : 40px;

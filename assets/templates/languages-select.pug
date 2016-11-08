@@ -1,4 +1,4 @@
-.lang__trigger(ng-click="translator.select = !translator.select")
+.lang__trigger(ng-class="{'active' : translator.select}" ng-click="translator.select = !translator.select")
     .lang__btn(ng-if="translator.key == 'en'")
         span english
         i.lang__btn-icon.lang__btn-icon--en
