@@ -1,12 +1,13 @@
 include ../../views/mixins/formParts
 
-filter(ng-if="feed.filter_enabled" feed-filter="feed.filter")
-+select("Date", {
-    "type" : {
-        "-publicationDate" : "Newer",
-        "publicationDate" : "Older"
-    }
-}, true)(ng-model = "feed.order")
+.adverts-feed__filter
+    filter(ng-if="feed.filter_enabled" feed-filter="feed.filter")
+    +select("Date", {
+        "type" : {
+            "-publicationDate" : "Newer",
+            "publicationDate" : "Older"
+        }
+    }, true)(ng-model = "feed.order" class="adverts-feed__select")
 .adverts-feed(ng-if="!feed.customFilter")
     advert.advert(ng-repeat="(index, advert) in feed.adverts | filter: feed.filter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]" ng-if="feed.allAllowed")
     advert.advert(ng-repeat="(index, advert) in feed.adverts | feed : feed.authors | filter: feed.filter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]" ng-if="!feed.allAllowed")

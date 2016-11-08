@@ -1,3 +1,5 @@
+@import "../../common/variables";
+
 .adverts-feed {
   margin          : 10px 0;
   display         : flex;
@@ -5,4 +7,23 @@
   flex-flow       : row wrap;
   align-items     : stretch;
   padding         : 10px;
+}
+
+.adverts-feed__buttons {
+  display         : flex;
+  justify-content : space-between;
+}
+
+.adverts-feed__button {
+  display          : flex;
+  background-color : lighten($blue, 20%);
+
+  &.active {
+
+  }
+}
+
+.adverts-feed__filter {
+  width : 400px;
+  float : right;
 }

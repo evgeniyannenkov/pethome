@@ -1,5 +1,9 @@
 include ../../views/mixins/formParts
 
+.adverts-feed__buttons
+    button(class = "adverts-feed__button" ng-class="{'active': filter.extended}" ng-click="filter.fields = filter.defaults;filter.extended = true;") {{'Extended Search' | translate}}
+    button(class = "adverts-feed__button" ng-class="{'active': !filter.extended}" ng-click="filter.fields = '';filter.extended = false;") {{'General Search' | translate}}
+
 div(ng-hide="filter.extended")
     +input("General Search")(ng-model = "filter.fields")
 div(ng-show="filter.extended")
@@ -21,5 +25,3 @@ div(ng-show="filter.extended")
     })(ng-change = "filter.fieldChange('gender')" ng-model = "filter.fields.gender")
     +input("Breed")(ng-change = "filter.fieldChange('breed')" ng-model = "filter.fields.breed")
     +textarea("Info")(ng-change = "filter.fieldChange('info')" ng-model = "filter.fields.info")
-button(ng-click="filter.fields = filter.defaults;filter.extended = true;" ng-hide="filter.extended") {{'Extended Search' | translate}}
-button(ng-click="filter.fields = '';filter.extended = false;" ng-show="filter.extended") {{'General Search' | translate}}
