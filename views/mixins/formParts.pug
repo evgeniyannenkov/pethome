@@ -53,8 +53,8 @@ mixin radios(block_title, block_inputs)
         div.form__radio-wrap
             each inputs, name in block_inputs
                     each label,value in inputs
-                        input.form__radio(id=value type="radio" name=name ,value = value)&attributes(attributes)
-                        label(for=value).form__label.form__label--radio
+                        input.form__radio(id=value || "empty" type="radio" name=name ,value = value)&attributes(attributes)
+                        label(for=value || "empty").form__label.form__label--radio
                             div.form__radio-btn
                             span {{'#{label}' | translate}}
 
