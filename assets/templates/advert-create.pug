@@ -2,7 +2,7 @@ include ../../views/mixins/formParts
 
 popup-form(name="newAdvert" submit-function="new.create();" label="Create")
     form-input(type="text" name="name" required="false" value="new.advert.name")
-    +select("Type*", {
+    +select("Type", {
         "type" : {
             "dog" : "Dog",
             "cat" : "Cat",
