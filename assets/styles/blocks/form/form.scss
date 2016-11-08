@@ -303,11 +303,17 @@
 
 @media screen and (min-width : 500px) {
   .form__item--btn {
-    width         : auto;
-    margin-right  : 15px;
-    margin-bottom : 15px;
+    display         : flex;
+    flex-flow       : row nowrap;
+    justify-content : space-between;
+    align-items     : center;
+    margin-bottom   : 15px;
   }
   .form__btn {
     width : 150px;
+  }
+
+  .form__btn-wrap {
+    width : auto;
   }
 }
