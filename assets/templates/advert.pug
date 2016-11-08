@@ -1,5 +1,7 @@
+div.advert__field(ng-if="advert.fields.title && !advert.hide.title")
+    a(href="/advert/{{advert.fields._id}}") {{advert.fields.title}}
 div.advert__field(ng-if="advert.fields.name && !advert.hide.name")
-    a(href="/advert/{{advert.fields._id}}") {{advert.fields.name}}
+    | {{advert.fields.name}}
 div.advert__field(ng-if="advert.fields.type && !advert.hide.type")
     | {{advert.fields.type}}
 div.advert__field(ng-if="advert.fields.gender && !advert.hide.gender")

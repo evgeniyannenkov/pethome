@@ -16,6 +16,8 @@ popup(type="Edit Advert")
 div(ng-if="!advert.fields.published")
     h2 (Not Published)
 div.advert__field
+    h3 Title : {{advert.fields.title}}
+div.advert__field
     h3 Name : {{advert.fields.name}}
 div.advert__field
     h3 Type : {{advert.fields.type}}
