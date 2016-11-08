@@ -2,23 +2,27 @@
 const mongoose = require('mongoose');
 
 const advertSchema = new mongoose.Schema({
+    "title" : {
+        type : String,
+        required : [true, 'title required']
+    },
     "name" : {
         type : String,
-        required : [ true, 'pet name required' ]
+        required : [true, 'pet name required']
     },
     "type" : {
         type : String,
-        required : [ true, 'pet type required' ],
+        required : [true, 'pet type required'],
         default : "dog"
     },
     "gender" : {
         type : String,
-        required : [ true, 'pet gender required' ],
+        required : [true, 'pet gender required'],
         default : "boy"
     },
     "age" : {
         type : String,
-        required : [ true, 'pet age required' ],
+        required : [true, 'pet age required'],
         default : "1"
     },
     "publicationDate" : {
@@ -30,13 +34,13 @@ const advertSchema = new mongoose.Schema({
     "location" : String,
     "author" : {
         type : mongoose.Schema.Types.ObjectId,
-        required : [ true, 'author required' ],
+        required : [true, 'author required'],
     },
     "mainImage" : {
         type : String
     },
     "images" : {
-        type : [ String ],
+        type : [String],
         default : []
     },
     "published" : {
