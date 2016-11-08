@@ -1,22 +1,24 @@
+.lang {
+  background-color : white;
+}
+
 .lang__btn {
+  padding         : 0 10px;
   position        : relative;
   width           : auto;
   height          : 40px;
-  border-radius   : 3px;
   display         : flex;
   flex-flow       : row nowrap;
-  justify-content : flex-start;
+  justify-content : flex-end;
   align-items     : center;
   text-transform  : capitalize;
   cursor          : pointer;
-  &:before {
-    position   : absolute;
-    content    : "";
-    top        : 50%;
-    margin-top : -10px;
-    left       : 10px;
-    width      : 30px;
-    height     : 20px;
+  transition      : background-color .2s;
+  .lang__btn-icon {
+    display     : inline-block;
+    margin-left : 10px;
+    width       : 30px;
+    height      : 20px;
     background   : {
       image      : url("images/flag-language-sprite.png");
       color      : transparent;
@@ -24,34 +26,55 @@
       repeat     : no-repeat;
     }
   }
-  span {
-    padding : 0 10px 0 50px;
-  }
   &:hover {
     background-color : $whiteSmoke;
   }
 }
 
-.lang__btn--ru {
+.lang__btn--dropdown {
+  position : relative;
+  &:after {
+    position         : absolute;
+    left             : 0;
+    top              : 0;
+    height           : 1px;
+    width            : 0;
+    background-color : $blue;
+    transition       : width .2s;
+    content          : "";
+  }
   &:before {
-    background   : {
-      position-y : -360px;
+    right            : 0;
+    bottom           : 0;
+    position         : absolute;
+    height           : 1px;
+    width            : 0;
+    background-color : $blue;
+    transition       : width .2s;
+    content          : "";
+  }
+  &:hover {
+    &:before, &:after {
+      width      : 100%;
+      transition : width .2s 0.3s;
     }
   }
 }
 
-.lang__btn--en {
-  &:before {
-    background   : {
-      position-y : -440px;
-    }
+.lang__btn-icon--ru {
+  background   : {
+    position-y : -360px;
   }
 }
 
-.lang__btn--ua {
-  &:before {
-    background   : {
-      position-y : -660px;
-    }
+.lang__btn-icon--en {
+  background   : {
+    position-y : -440px;
+  }
+}
+
+.lang__btn-icon--ua {
+  background   : {
+    position-y : -660px;
   }
 }

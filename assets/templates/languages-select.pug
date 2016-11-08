@@ -1,14 +1,20 @@
 .lang__trigger(ng-click="translator.select = !translator.select")
-    .lang__btn.lang__btn--en(ng-if="translator.key == 'en'")
+    .lang__btn(ng-if="translator.key == 'en'")
         span english
-    .lang__btn.lang__btn--ru(ng-if="translator.key == 'ru'")
+        i.lang__btn-icon.lang__btn-icon--en
+    .lang__btn(ng-if="translator.key == 'ru'")
         span русский
-    .lang__btn.lang__btn--ua(ng-if="translator.key == 'ua'")
+        i.lang__btn-icon.lang__btn-icon--ru
+    .lang__btn(ng-if="translator.key == 'ua'")
         span українська
+        i.lang__btn-icon.lang__btn-icon--ua
     ul.lang(ng-show="translator.select")
-        li.lang__btn.lang__btn--en(ng-click="translator.changeLanguage('en');")
+        li.lang__btn.lang__btn--dropdown(ng-click="translator.changeLanguage('en');")
             span english
-        li.lang__btn.lang__btn--ru(ng-click="translator.changeLanguage('ru');")
+            i.lang__btn-icon.lang__btn-icon--en
+        li.lang__btn.lang__btn--dropdown(ng-click="translator.changeLanguage('ru');")
             span русский
-        li.lang__btn.lang__btn--ua(ng-click="translator.changeLanguage('ua');")
+            i.lang__btn-icon.lang__btn-icon--ru
+        li.lang__btn.lang__btn--dropdown(ng-click="translator.changeLanguage('ua');")
             span українська
+            i.lang__btn-icon.lang__btn-icon--ua
