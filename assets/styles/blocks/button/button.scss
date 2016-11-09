@@ -1,0 +1,10 @@
+@import "../../common/mixins";
+
+.button {
+  @include button(150px, 45px);
+}
+
+.button--blue {
+  background   : $blue;
+  border-color : $blue;
+}

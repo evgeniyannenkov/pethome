@@ -1,0 +1,13 @@
+.hero {
+  @include roboto-condensed;
+}
+
+.hero__title {
+  font-size : 5em;
+  color     : white;
+}
+
+.hero__subtitle {
+  font-size : 2em;
+  color     : $whiteSmoke;
+}
