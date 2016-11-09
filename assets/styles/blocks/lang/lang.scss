@@ -4,11 +4,11 @@
 
 .lang__trigger {
   border     : 1px solid transparent;
-  padding    : 5px 0;
   background : white;
 
   &.active {
     border-color : $blue;
+    padding    : 5px 0;
   }
 }
 
