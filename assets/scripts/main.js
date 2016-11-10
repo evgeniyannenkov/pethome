@@ -78,7 +78,8 @@ const components = {
         formControllersInit
     ],
     header : [
-        headerComponentsInit
+        headerComponentsInit,
+        headerControllersInit
     ]
 };
 
