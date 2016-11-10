@@ -1,15 +1,6 @@
 .lang {
-  background-color : white;
-}
-
-.lang__trigger {
-  border     : 1px solid transparent;
-  background : white;
-
-  &.active {
-    border-color : $blue;
-    padding    : 5px 0;
-  }
+  background-color : rgba(0, 0, 0, 0.7);
+  margin-top       : 10px;
 }
 
 .lang__btn {
@@ -37,7 +28,7 @@
     }
   }
   &:hover {
-    background-color : $whiteSmoke;
+    //background-color : $whiteSmoke;
   }
 }
 
@@ -49,7 +40,7 @@
     top              : 0;
     height           : 1px;
     width            : 0;
-    background-color : $blue;
+    background-color : white;
     transition       : width .2s;
     content          : "";
   }
@@ -59,7 +50,7 @@
     position         : absolute;
     height           : 1px;
     width            : 0;
-    background-color : $blue;
+    background-color : white;
     transition       : width .2s;
     content          : "";
   }
