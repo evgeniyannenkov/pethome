@@ -1,25 +1,25 @@
 ul.header__menu
-    li.header-menu__item.header-menu__item--lang
+    li.header__menu-item.header__menu-item--lang
         language
     if !currentUser
-        li.header-menu__item
+        li.header__menu-item
             popup(type="registration")
-                popup-trigger.header-menu__link {{'Sign Up' | translate}}
+                popup-trigger.header__menu-link {{'Sign Up' | translate}}
                 popup-content
                     .popup__content
                         auth-form(form="registration" title="sign up")
-        li.header-menu__item
+        li.header__menu-item
             popup(type="login")
-                popup-trigger.header-menu__link {{'Login' | translate}}
+                popup-trigger.header__menu-link {{'Login' | translate}}
                 popup-content
                     .popup__content
                         auth-form(form="login" title="login")
     else
         if currentUser.is_admin
-            li.header-menu__item
-                a.header-menu__link(href='/admin') {{'Admin' | translate}}
-        li.header-menu__item
-            a.header-menu__link(href='/profile') {{'Profile' | translate}}
+            li.header__menu-item
+                a.header__menu-link(href='/admin') {{'Admin' | translate}}
+        li.header__menu-item
+            a.header__menu-link(href='/profile') {{'Profile' | translate}}
 
-        li.header-menu__item
-            a.header-menu__link(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") {{'Logout' | translate}}
+        li.header__menu-item
+            a.header__menu-link(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") {{'Logout' | translate}}

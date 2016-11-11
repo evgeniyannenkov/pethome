@@ -1,14 +1,5 @@
 @import "../../common/variables";
 
-@keyframes cross {
-  0% {
-    width : 0;
-  }
-  100% {
-    width : 100%;
-  }
-}
-
 .header {
   position        : fixed;
   z-index         : 10;
@@ -19,7 +10,7 @@
   display         : flex;
   flex-flow       : row nowrap;
   justify-content : space-between;
-  padding         : 0 50px;
+  padding         : 0 10px;
 }
 
 .header__logo {
@@ -33,17 +24,43 @@
 }
 
 .header__menu--mobile {
-  position   : absolute;
-  left       : 100%;
-  width      : 100vw;
-  height     : 100vh;
-  background : white;
-  transition : left 2s;
+  perspective     : 600px;
+  position        : fixed;
+  left            : 100%;
+  width           : 100%;
+  height          : 100%;
+  background      : white;
+  transition      : 0.56s cubic-bezier(0.52, 0.01, 0.16, 1);
+  display         : flex;
+  flex-flow       : row nowrap;
+  justify-content : center;
+  align-items     : center;
+  overflow        : hidden;
   &.open {
     left : 0;
+    .header__menu {
+      transform : rotateY(0deg);
+    }
   }
   .header__menu {
-    display : block;
+    transform-origin : left center;
+    display          : flex;
+    flex-flow        : column wrap;
+    justify-content  : center;
+    align-items      : center;
+    color            : black;
+    transform        : rotateY(90deg);
+    transition       : 0.43s 0.18s;
+  }
+  .header__menu-item {
+    display         : flex;
+    justify-content : center;
+    @include roboto-regular;
+    margin          : 25px 0;
+    font-size       : 1.5em;
+  }
+  .header__menu-item--lang {
+    order : 10;
   }
 }
 
@@ -51,14 +68,14 @@
   display : none;
 }
 
-.header-menu__item {
+.header__menu-item {
   display     : flex;
   align-items : center;
   height      : 40px;
   padding     : 0 15px;
 }
 
-.header-menu__item--lang {
+.header__menu-item--lang {
   align-items : flex-start;
 }
 
@@ -75,6 +92,11 @@
 }
 
 @media screen and (min-width : 600px) {
+
+  .header {
+    padding : 0 50px;
+  }
+
   .header__button {
     display : none;
   }
@@ -84,5 +106,9 @@
     display         : flex;
     align-items     : center;
     justify-content : flex-end;
+  }
+
+  .header__menu--mobile {
+    left : 100% !important;
   }
 }
