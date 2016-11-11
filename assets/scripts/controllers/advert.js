@@ -183,10 +183,10 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('editAdvertCtrl', [
-        "$scope", "adverts", "notify", "$timeout",
-        function ( $scope, adverts, notify, $timeout ) {
+        "$scope", "$rootScope", "adverts", "notify", "$timeout",
+        function ( $scope, $rootScope, adverts, notify, $timeout ) {
 
-            $scope.$on("popup_open", ( $event, type ) => {
+            $rootScope.$on("popup_open", ( $event, type ) => {
                 if ( type == "edit advert" ) {
                     this.temporaryData = angular.copy(this.fields);
                 }

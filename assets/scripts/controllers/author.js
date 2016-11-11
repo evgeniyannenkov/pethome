@@ -33,10 +33,10 @@ function authorControllersInit ( module ) {
     ]);
 
     module.controller('authorEditCtrl', [
-        "author", "notify", "$scope", "$timeout",
-        function ( author, notify, $scope, $timeout ) {
+        "author", "notify", "$scope", "$rootScope", "$timeout",
+        function ( author, notify, $scope, $rootScope, $timeout ) {
 
-            $scope.$on("popup_open", ( $event, type ) => {
+            $rootScope.$on("popup_open", ( $event, type ) => {
                 if ( type == "profile" ) {
                     this.temporaryData = angular.copy(this.author);
                     this.temporaryData.language = localStorage[ "preferred_language" ] || 'ru'

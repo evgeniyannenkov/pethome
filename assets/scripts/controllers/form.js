@@ -3,14 +3,14 @@
 function formControllersInit ( module ) {
 
     module.controller("formCtrl", [
-        "$scope", "validate", "notify", "$timeout",
-        function ( $scope, validate, notify, $timeout ) {
+        "$scope", "$rootScope", "validate", "notify",
+        function ( $scope, $rootScope, validate, notify ) {
 
             this.$form = {};
 
             this.fields = {};
 
-            $scope.$on("popup_open", ( event, data ) => {
+            $rootScope.$on("popup_open", ( event, data ) => {
                 if ( data ) {
                     this.$form = $scope[this.name];
                 }
