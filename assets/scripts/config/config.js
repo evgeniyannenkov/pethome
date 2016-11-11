@@ -58,6 +58,7 @@ function applicationConfig ( module ) {
                 "older" : "Старее",
                 "date" : "Дата",
                 "author" : "Автор",
+                "go to" : "Перейти"
             });
             translator.setTranslations("ua", {
                 "language" : "мова",
@@ -112,10 +113,15 @@ function applicationConfig ( module ) {
                 "older" : "Старіші",
                 "date" : "Дата",
                 "author" : "Автор",
+                "go to" : "Перейти"
             });
 
-            translator.setDateFormat("en", "MMM/d/yyyy h:mm a");
-            translator.setDateFormat("ru", "d/MM/yyyy H:mm");
+            translator.setFullDateFormat("en", "MMM/d/yyyy h:mm a");
+            translator.setFullDateFormat("ru", "d/MM/yyyy H:mm");
+            translator.setDateFormat("en", "MMM/d/yyyy");
+            translator.setTimeFormat("en", "h:mm a");
+            translator.setDateFormat("ru", "d/MM/yyyy");
+            translator.setTimeFormat("ru", "H:mm");
             translator.setLocale(preferred);
         } ]);
 }

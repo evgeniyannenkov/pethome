@@ -36,6 +36,12 @@ function appFiltersInit ( module ) {
                     case "date" : {
                         return $filter("date")(content, translator.getDateFormat());
                     }
+                    case "time" : {
+                        return $filter("date")(content, translator.getTimeFormat());
+                    }
+                    case "fullDate" : {
+                        return $filter("date")(content, translator.getFullDateFormat());
+                    }
                     default : {
                         method = "translate";
                         break;
@@ -46,6 +52,23 @@ function appFiltersInit ( module ) {
             }
 
             translationFilter.$stateful = true;
+
+            return translationFilter;
+        }
+    ]);
+
+    module.filter("excerpt", [
+        function () {
+            function translationFilter ( content, words = 20 ) {
+
+                let contentArray = content.split(" ");
+
+                if ( contentArray.length > words ) {
+                    return contentArray.slice(0, words).join(" ") + " ...";
+                } else {
+                    return content;
+                }
+            }
 
             return translationFilter;
         }

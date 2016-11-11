@@ -10,7 +10,9 @@ function translatorProviderInit ( module ) {
             };
             this.dictionary = {};
             this.dateFormats = {
-                default : "d/MM/yyyy H:mm"
+                default : "d/MM/yyyy H:mm",
+                defaultTime : "H:mm",
+                defaultDate : "d/MM/yyyy"
             };
 
             this.setLocale = function ( locale ) {
@@ -27,12 +29,28 @@ function translatorProviderInit ( module ) {
                 }
             };
 
+            this.setFullDateFormat = function ( locale, format ) {
+                this.dateFormats[ locale + "-full" ] = format;
+            };
+
             this.setDateFormat = function ( locale, format ) {
-                this.dateFormats[ locale ] = format;
+                this.dateFormats[ locale + "-date" ] = format;
+            };
+
+            this.setTimeFormat = function ( locale, format ) {
+                this.dateFormats[ locale + "-time" ] = format;
+            };
+
+            this.getFullDateFormat = function ( locale = this.locale ) {
+                return this.dateFormats[ locale + "-full" ] || this.dateFormats.default;
             };
 
             this.getDateFormat = function ( locale = this.locale ) {
-                return this.dateFormats[ locale ] || this.dateFormats.default;
+                return this.dateFormats[ locale + "-date" ] || this.dateFormats.defaultDate;
+            };
+
+            this.getTimeFormat = function ( locale = this.locale ) {
+                return this.dateFormats[ locale + "-time" ] || this.dateFormats.defaultTime;
             };
 
             this.translate = function ( content ) {

@@ -1,15 +1,84 @@
 @import "../../common/variables";
 
 .advert {
-  padding       : 10px;
+  border-radius : 3px 3px 0 0;
+  overflow      : hidden;
+  position      : relative;
+  width         : 100%;
   display       : flex;
-  flex-flow     : column nowrap;
+  flex-flow     : column wrap;
   align-items   : stretch;
-  border        : 1px solid $blue;
   margin-bottom : 10px;
 }
 
+.advert__head {
+  position : relative;
+}
+
+.advert__content {
+  border     : 1px solid lightgray;
+  border-top : none;
+  padding    : 5px 10px;
+}
+
 .advert__field {
+  display         : flex;
+  justify-content : space-between;
+  padding         : 10px 5px;
+  font-size       : 1.1em;
+  border-bottom   : 1px solid #d3d3d3;
+}
+
+.advert__field:last-child {
+  border-bottom : none;
+}
+
+.advert__field--title {
+  padding         : 10px 10px;
+  position        : absolute;
+  top             : 0;
+  left            : 0;
+  width           : 100%;
+  justify-content : center;
+  border-bottom   : none;
+  color           : white;
+  background      : rgba(0, 0, 0, .5);
+}
+
+.advert__field--image {
+  padding       : 0;
+  border-bottom : none;
+  img {
+    width : 100%;
+  }
+}
+
+.advert__field--time {
+  position      : absolute;
+  right         : 0;
+  bottom        : 10px;
+  border-bottom : none;
+  background    : rgba(0, 0, 0, .5);
+  color         : white;
   padding       : 5px;
-  border-bottom : 1px solid $blue;
+}
+
+.advert__field--date {
+  position      : absolute;
+  left          : 0;
+  bottom        : 10px;
+  border-bottom : none;
+  background    : rgba(0, 0, 0, .5);
+  color         : white;
+  padding       : 5px;
+}
+
+.advert__field-name {
+  display        : flex;
+  text-transform : capitalize;
+}
+
+.advert__field-content {
+  display : flex;
+
 }
