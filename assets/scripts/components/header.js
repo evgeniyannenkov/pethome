@@ -5,7 +5,11 @@ function headerComponentsInit ( module, constants ) {
     module.component("header", {
         templateUrl : `${constants.templatesFolder}/header.html`,
         controller : "headerCtrl",
-        controllerAs : "header"
+        controllerAs : "header",
+        bindings : {
+            user : "@userId",
+            isAdmin : "="
+        }
     });
 
     module.component("burgerButton", {

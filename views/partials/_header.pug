@@ -1,1 +1,4 @@
-header.header
+if currentUser
+    header(user-id=currentUser._id is-admin=currentUser.is_admin ? "true" : "").header
+else
+    header.header
