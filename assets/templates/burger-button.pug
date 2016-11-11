@@ -1,4 +1,4 @@
-.burger-button(ng-click="btn.active = !btn.active" ng-class="{'open' : btn.active}")
+.burger-button(ng-click="btn.open();" ng-class="{'open' : btn.header.mobile}" ng-hide="btn.hide")
     span.burger-button__burger
     span.burger-button__burger
     span.burger-button__burger
