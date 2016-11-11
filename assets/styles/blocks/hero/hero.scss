@@ -1,13 +1,80 @@
 .hero {
   @include roboto-condensed;
+  padding    : 80px 10px 60px;
+  text-align : center;
 }
 
 .hero__title {
-  font-size : 5em;
+  font-size : 2.8em;
   color     : white;
 }
 
 .hero__subtitle {
-  font-size : 2em;
-  color     : $whiteSmoke;
+  font-size  : 1.3em;
+  color      : $whiteSmoke;
+  margin-top : 15px;
+}
+
+.hero__btn-wrap {
+  display         : flex;
+  flex-flow       : row wrap;
+  justify-content : space-around;
+  align-items     : center;
+  width           : 100%;
+  margin-top      : 30px;
+}
+
+.hero__button {
+  width  : 100%;
+  margin : 10px 0;
+}
+
+@media screen and (min-width : 400px) {
+  .hero__button {
+    width  : auto;
+    margin : 0;
+  }
+
+  .hero__title {
+    font-size : 3em;
+  }
+
+  .hero__subtitle {
+    font-size : 1.5em;
+  }
+
+  .hero__btn-wrap {
+    margin-top : 50px;
+  }
+}
+
+@media screen and (min-width : 500px) {
+  .hero__button {
+    width  : auto;
+    margin : 0 25px;
+  }
+
+  .hero__btn-wrap {
+    justify-content : center;
+  }
+}
+
+@media screen and (min-width : 992px) {
+  .hero__title {
+    font-size : 4em;
+  }
+
+  .hero__subtitle {
+    font-size : 1.7em;
+  }
+}
+
+@media screen and (min-width : 1200px) {
+  .hero__title {
+    font-size : 5em;
+  }
+
+  .hero__subtitle {
+    font-size : 1.7em;
+  }
 }

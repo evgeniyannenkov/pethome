@@ -1,4 +1,5 @@
 include ../../views/mixins/formParts
+include ../../views/mixins/buttons
 section.video-container
     video.video-container__media(autoplay loop)
         source(src="/assets/images/cat.mp4" type="video/mp4")
@@ -7,5 +8,5 @@ section.video-container
         .hero__title Every pet needs a home
         .hero__subtitle Unified service announcements about stray animals
         .hero__btn-wrap
-            button.hero__button.button.button--blue(type="button") Hello
-            button.hero__button.button.button--blue(type="button") Hello
+            +btn-default("Get Pet")(type="button" class="hero__button button--blue")
+            +btn-default("Publish Advert")(type="button" class="hero__button button--blue")
