@@ -13,6 +13,7 @@ function headerComponentsInit ( module, constants ) {
         require : {
             header : "^^?header"
         },
+        controller: "headerBtnCtrl",
         controllerAs : "btn"
     });
 
