@@ -80,5 +80,10 @@
 
 .advert__field-content {
   display : flex;
+}
 
+@media (min-width : 700px) {
+  .advert {
+    width : 330px;
+  }
 }
