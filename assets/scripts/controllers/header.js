@@ -6,6 +6,7 @@ function headerControllersInit ( module ) {
         "$rootScope", "$window",
         function ( $rootScope, $window ) {
             this.mobile = false;
+            this.languageSelect = false;
 
             const onResize = () => {
                 $rootScope.$broadcast('resize');

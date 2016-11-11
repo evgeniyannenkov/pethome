@@ -3,6 +3,26 @@
 }
 
 .header__menu--mobile {
+  .header__menu-item {
+    overflow   : hidden;
+    transition : height 0.1s, margin 0.1s;
+
+    &.hidden {
+      height : 0;
+      margin : 0;
+    }
+  }
+  .header__menu-item--lang {
+    overflow : visible;
+    .lang__trigger {
+      transition : transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+    &.active {
+      .lang__trigger {
+        transform : translateY(-50%);
+      }
+    }
+  }
   .lang__trigger {
     perspective : none;
   }
@@ -20,7 +40,7 @@
   .lang__btn--dropdown {
     font-size  : 0.9em;
     left       : 100%;
-    transition : all 0.3s cubic-bezier(0.52, 0.01, 0.16, 1);
+    transition : all .3s cubic-bezier(0.65, 0.05, 0.36, 1);
     @for $i from 1 to 4 {
       &:nth-of-type(#{$i}) {
         transition-delay : $i * .1s;
@@ -35,7 +55,7 @@
   transform-origin : top center;
   visibility       : hidden;
   transform        : rotateX(-70deg);
-  transition       : transform 0.2s ease-out;
+  transition       : transform 0.2s ease-in, visibility 0.2s;
   &.open {
     transform  : rotateX(0deg);
     visibility : visible;

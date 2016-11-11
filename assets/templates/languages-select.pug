@@ -1,4 +1,4 @@
-.lang__trigger(ng-click="translator.select = !translator.select")
+.lang__trigger(ng-click="translator.languageSelect = !translator.languageSelect")
     .lang__btn(ng-if="translator.key == 'en'")
         span english
         i.lang__btn-icon.lang__btn-icon--en
@@ -8,7 +8,7 @@
     .lang__btn(ng-if="translator.key == 'ua'")
         span українська
         i.lang__btn-icon.lang__btn-icon--ua
-    ul.lang(ng-class="{'open' : translator.select}")
+    ul.lang(ng-class="{'open' : translator.languageSelect}")
         li.lang__btn.lang__btn--dropdown(ng-click="translator.changeLanguage('en');")
             span english
             i.lang__btn-icon.lang__btn-icon--en
