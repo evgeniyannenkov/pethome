@@ -1,0 +1,16 @@
+
+.filter {
+  padding : 10px;
+}
+
+.filter__inner {
+  border  : 1px solid lightgrey;
+  padding : 10px 25px;
+}
+
+.filter__tabs {
+  display         : flex;
+  flex-flow       : row nowrap;
+  justify-content : flex-end;
+  align-items     : flex-end;
+}
