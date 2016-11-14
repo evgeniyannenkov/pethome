@@ -5,24 +5,30 @@ function imagesComponentsInit ( module, constants ) {
     module.directive("backgroundImage", [
         function () {
             return ( scope, element, atts ) => {
+                let bg,
+                    bgSize;
+                // console.log('assets/images/bg/advert-bg-' + advert.fields.type + '.svg');
+                if ( atts.backgroundImage ) {
+                    bg = atts.backgroundImage;
+                    bgSize = "cover";
+                } else if ( atts.type ) {
+                    bg = 'assets/images/bg/advert-bg-' + atts.type + '.svg';
+                    bgSize = "30%";
+                } else {
+                    bg = 'assets/images/bg/advert-bg-other.svg';
+                    bgSize = "30%";
+                }
+
                 element.css({
-                    'background-image' : `url('/${atts.backgroundImage}')`,
-                    'background-size' : 'cover',
-                    'background-position' : 'center'
+                    'background-image' : `url('/${bg}')`,
+                    'background-size' : bgSize,
+                    'background-position' : 'center',
+                    "background-repeat" : "no-repeat",
+                    "background-color" : "#c6c5c5"
                 });
             };
         }
     ]);
-
-    // module.directive('backgroundImage', function () {
-    //     return function ( scope, element, atts ) {
-    //         element.css({
-    //             'background-image' : `url('/${atts.backgroundImage}')`,
-    //             'background-size' : 'cover',
-    //             'background-position' : 'center'
-    //         });
-    //     };
-    // });​
 
     module.component('imagesUploader', {
         templateUrl : `${constants.templatesFolder}/images-upload.html`,
