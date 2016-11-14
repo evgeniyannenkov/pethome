@@ -1,5 +1,10 @@
 @import "variables";
 
+::selection {
+  background-color : rgb(119, 119, 119);
+  color            : white;
+}
+
 body {
   margin      : 0;
   padding     : 0;
