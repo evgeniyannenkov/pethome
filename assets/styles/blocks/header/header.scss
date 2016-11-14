@@ -6,7 +6,7 @@
   color           : white;
   background      : rgba(0, 0, 0, 0.7);
   width           : 100%;
-  height          : 60px;
+  height          : $headerHeight;
   display         : flex;
   flex-flow       : row nowrap;
   justify-content : space-between;
