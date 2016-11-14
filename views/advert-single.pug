@@ -4,7 +4,6 @@ block header
     include partials/_header
 
 block content
-    h1= title
 
     if currentUser && currentUser.is_admin
         advert-single(advert-id=advert._id enable-review="true")

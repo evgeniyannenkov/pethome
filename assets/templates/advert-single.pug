@@ -17,6 +17,9 @@ div(ng-if="!advert.fields.published")
     h2 (Not Published)
 div.advert__field
     h3 Title : {{advert.fields.title}}
+div.advert__field(ng-if="advert.fields.mainImage")
+    h3 Main Image
+    img(ng-src="/{{advert.fields.mainImage}}" style="max-height: 300px;")
 div.advert__field
     h3 Name : {{advert.fields.name}}
 div.advert__field
