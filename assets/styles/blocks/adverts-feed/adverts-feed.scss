@@ -3,7 +3,7 @@
 .adverts-feed {
   margin          : 10px 0;
   display         : flex;
-  justify-content : space-between;
+  justify-content : center;
   flex-flow       : row wrap;
   align-items     : stretch;
   padding         : 10px;
@@ -11,10 +11,16 @@
 
 .adverts-feed__buttons {
   display         : flex;
-  justify-content : space-between;
+  justify-content : space-around;
 }
 
 .adverts-feed__button {
   display          : flex;
   background-color : lighten($blue, 20%);
+}
+
+@media (min-width : 700px) {
+  .adverts-feed {
+    justify-content : space-around;
+  }
 }
