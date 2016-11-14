@@ -89,6 +89,10 @@
   justify-content : flex-start;
   height          : 150px;
   padding-bottom  : 45px;
+
+  .advert__field-content {
+    font-size : 0.9em;
+  }
 }
 
 .advert__field-name {
