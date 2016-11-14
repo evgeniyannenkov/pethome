@@ -29,5 +29,5 @@ include ../../views/mixins/buttons
         a.advert__field-content(href="/author/{{advert.author._id}}")  {{advert.author.name || 'Go to' | translate}}
     .advert__field.advert__field--info
         .advert__field-name.advert__field-name--small {{'info' | translate}}
-        .advert__field-content {{advert.fields.info || 'You can look for full information here' | translate | excerpt : 10}}
+        .advert__field-content {{advert.fields.info || 'Not specified' | translate | excerpt : 10}}
         +btn-more('Read more')(type="button" class="button--read-more button--blue" href="/advert/{{advert.fields._id}}")
