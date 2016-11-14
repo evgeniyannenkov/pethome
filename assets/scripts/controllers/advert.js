@@ -47,7 +47,7 @@ function advertControllersInit ( module ) {
                        });
             };
 
-            this.removeImage = ( image ) => {
+            this.removeIge = ( image ) => {
                 this.fields.images = this.fields.images.filter(function ( element ) {
                     if ( image !== element ) {
                         return element;
@@ -135,7 +135,7 @@ function advertControllersInit ( module ) {
         "$scope", "adverts", "notify", "$timeout",
         function ( $scope, adverts, notify, $timeout ) {
             this.advert = {
-                gender : "boy",
+                gender : "male",
                 type : "dog",
                 age : 1
             };

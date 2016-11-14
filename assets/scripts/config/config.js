@@ -97,7 +97,7 @@ function applicationConfig ( module ) {
                 "phone" : "Телефон",
                 "edit" : "Редагувати",
                 "male" : "Чоловіча",
-                "girl" : "Жіноча",
+                "female" : "Жіноча",
                 "dog" : "Собака",
                 "cat" : "Кіт",
                 "bird" : "Птах",

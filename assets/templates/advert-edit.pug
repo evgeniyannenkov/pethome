@@ -16,8 +16,8 @@ popup-form(name="advertEditForm" submit-function="editor.update();" label="Updat
     })(ng-model = "editor.temporaryData.type")
     +radios("Gender", {
         "gender" : {
-            "boy" : "Boy",
-            "girl" : "Girl"
+            "male" : "Male",
+            "female" : "Female"
         }
     })(ng-model = "editor.temporaryData.gender")
     form-input(type="number" name="age" min="0" value="editor.temporaryData.age")

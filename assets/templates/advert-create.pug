@@ -17,8 +17,8 @@ popup-form(name="newAdvert" submit-function="new.create();" label="Create")
     })(ng-model="new.advert.type")
     +radios("Gender", {
         "gender" : {
-            "boy" : "Boy",
-            "girl" : "Girl"
+            "male" : "Male",
+            "female" : "Female"
         }
     })(ng-model="new.advert.gender")
     form-input(type="number" name="age" min="0" value="new.advert.age")

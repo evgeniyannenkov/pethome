@@ -21,8 +21,8 @@ include ../../views/mixins/buttons
         +radios("Gender", {
             "gender" : {
                 "" : "Both",
-                "boy" : "Boy",
-                "girl" : "Girl"
+                "male" : "Male",
+                "female" : "Female"
             }
         })(ng-change = "filter.fieldChange('gender')" ng-model = "filter.fields.gender")
         +input("Breed")(ng-change = "filter.fieldChange('breed')" ng-model = "filter.fields.breed")
