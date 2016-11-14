@@ -47,7 +47,7 @@ function advertControllersInit ( module ) {
                        });
             };
 
-            this.removeIge = ( image ) => {
+            this.removeImage = ( image ) => {
                 this.fields.images = this.fields.images.filter(function ( element ) {
                     if ( image !== element ) {
                         return element;
