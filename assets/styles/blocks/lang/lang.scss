@@ -58,6 +58,7 @@
   visibility       : hidden;
   transform        : rotateX(-70deg);
   transition       : transform 0.2s ease-in, visibility 0.2s;
+  padding          : 5px 0;
   &.open {
     transform  : rotateX(0deg);
     visibility : visible;
