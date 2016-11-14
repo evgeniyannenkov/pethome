@@ -2,13 +2,9 @@
 
 function heroComponentsInit ( module, constants ) {
 
-    module.directive("heroSection", function () {
-            return {
-                templateUrl : `${constants.templatesFolder}/section-hero.html`,
-                bindToController: true,
-                controller: "heroSectionCtrl",
-                controllerAs : "hero"
-            }
+    module.component("heroSection", {
+            templateUrl : `${constants.templatesFolder}/section-hero.html`,
+            controllerAs : "hero"
         }
     );
 }
