@@ -80,6 +80,10 @@ const components = {
     header : [
         headerComponentsInit,
         headerControllersInit
+    ],
+    hero : [
+        heroComponentsInit,
+        heroControllersInit
     ]
 };
 
