@@ -26,8 +26,7 @@ const advertSchema = new mongoose.Schema({
         default : "1"
     },
     "publicationDate" : {
-        type : Number,
-        default : new Date().getTime()
+        type : Number
     },
     "breed" : String,
     "info" : String,
