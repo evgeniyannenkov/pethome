@@ -1,3 +1,4 @@
+include ../../views/mixins/buttons
 .advert__head
     .advert__field.advert__field--title(ng-if="advert.fields.title && !advert.hide.title")
         a(href="/advert/{{advert.fields._id}}") {{advert.fields.title}}
@@ -8,23 +9,25 @@
     .advert__field.advert__field--date
         | {{advert.fields.publicationDate | translate : 'date'}}
 .advert__content
-    .advert__field(ng-if="advert.fields.name && !advert.hide.name")
-        .advert__field-name {{'name' | translate}} :
+    .advert__field
+        .advert__field-name {{'name' | translate}}
         .advert__field-content {{advert.fields.name}}
-    .advert__field(ng-if="advert.fields.type && !advert.hide.type")
-        .advert__field-name {{'type' | translate}} :
+    .advert__field
+        .advert__field-name {{'type' | translate}}
         .advert__field-content {{advert.fields.type | translate}}
-    .advert__field(ng-if="advert.fields.gender && !advert.hide.gender")
-        .advert__field-name {{'gender' | translate}} :
+    .advert__field
+        .advert__field-name {{'gender' | translate}}
         .advert__field-content {{advert.fields.gender | translate}}
-    .advert__field(ng-if="advert.fields.age && !advert.hide.age")
-        .advert__field-name {{'age' | translate}} :
-        .advert__field-content {{advert.fields.age}}
-    .advert__field(ng-if="advert.fields.breed && !advert.hide.breed")
-        .advert__field-name {{'breed' | translate}} :
-        .advert__field-content {{advert.fields.breed}}
-    .advert__field.advert__field--info(ng-if="advert.fields.info && !advert.hide.info")
-        .advert__field-content {{advert.fields.info | excerpt : 15}}
-    .advert__field(ng-if="advert.fields.author && !advert.hide.author")
-        span.advert__field-name {{'Author' | translate}} :
+    .advert__field
+        .advert__field-name {{'age' | translate}}
+        .advert__field-content {{advert.fields.age || 'Not specified' | translate}}
+    .advert__field
+        .advert__field-name {{'breed' | translate}}
+        .advert__field-content {{advert.fields.breed || 'Not specified' | translate}}
+    .advert__field
+        span.advert__field-name {{'Author' | translate}}
         a.advert__field-content(href="/author/{{advert.author._id}}")  {{advert.author.name || 'Go to' | translate}}
+    .advert__field.advert__field--info
+        .advert__field-name.advert__field-name--small {{'info' | translate}}
+        .advert__field-content {{advert.fields.info || 'You can look for full information here' | translate | excerpt : 10}}
+        +btn-more('Read more')(type="button" class="button--read-more button--blue" href="/advert/{{advert.fields._id}}")

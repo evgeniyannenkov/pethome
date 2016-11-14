@@ -28,7 +28,7 @@
   justify-content : space-between;
   padding         : 10px 5px;
   font-size       : 1.1em;
-  border-bottom   : 1px solid #d3d3d3;
+  border-bottom   : 1px solid lightGray;
 }
 
 .advert__field:last-child {
@@ -84,13 +84,22 @@
   padding       : 5px;
 }
 
-.advert__field-name {
-  display        : flex;
-  text-transform : capitalize;
+.advert__field--info {
+  flex-direction  : column;
+  justify-content : flex-start;
+  height          : 150px;
+  padding-bottom  : 45px;
 }
 
-.advert__field-content {
-  display : flex;
+.advert__field-name {
+  text-transform : capitalize;
+  color          : rgb(97, 95, 95);
+}
+
+.advert__field-name--small {
+  font-size     : 0.8em;
+  margin-bottom : 5px;
+
 }
 
 @media (min-width : 700px) {
