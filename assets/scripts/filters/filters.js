@@ -73,5 +73,27 @@ function appFiltersInit ( module ) {
             return translationFilter;
         }
     ]);
+
+    module.filter("dateRange", [
+        function () {
+            function translationFilter ( adverts, days ) {
+
+                let time = days * 24 * 60 * 60 * 1000,
+                    currentTime = Date.now(),
+                    passed = [];
+                angular.forEach(adverts, ( advert ) => {
+
+                    if ( advert.publicationDate > currentTime - time ) {
+                        passed.push(advert);
+                    }
+
+                });
+
+                return passed;
+            }
+
+            return translationFilter;
+        }
+    ]);
 }
 
