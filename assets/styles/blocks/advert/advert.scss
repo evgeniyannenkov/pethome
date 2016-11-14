@@ -12,7 +12,8 @@
 }
 
 .advert__head {
-  position : relative;
+  position    : relative;
+  padding-top : 60%;
 }
 
 .advert__content {
@@ -43,13 +44,22 @@
   border-bottom   : none;
   color           : white;
   background      : rgba(0, 0, 0, .5);
+  z-index         : 2;
 }
 
 .advert__field--image {
-  padding       : 0;
+  position      : absolute;
   border-bottom : none;
-  img {
-    width : 100%;
+  height        : 100%;
+  width         : 100%;
+  padding       : 0;
+  top           : 0;
+  left          : 0;
+  z-index       : 0;
+  border-bottom : none;
+  a {
+    width  : 100%;
+    height : 100%;
   }
 }
 

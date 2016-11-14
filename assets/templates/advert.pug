@@ -1,9 +1,8 @@
 .advert__head
     .advert__field.advert__field--title(ng-if="advert.fields.title && !advert.hide.title")
         a(href="/advert/{{advert.fields._id}}") {{advert.fields.title}}
-    .advert__field.advert__field--image(ng-if="advert.fields.mainImage && !advert.hide.mainImage")
+    .advert__field.advert__field--image(background-image="{{advert.fields.mainImage}}")
         a(href="/advert/{{advert.fields._id}}")
-            img(src="/{{advert.fields.mainImage}}")
     .advert__field.advert__field--time
         | {{advert.fields.publicationDate | translate : 'time'}}
     .advert__field.advert__field--date

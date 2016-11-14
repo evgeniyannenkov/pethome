@@ -1,6 +1,28 @@
 "use strict";
 
-function imagesComponentsInit (  module, constants  ) {
+function imagesComponentsInit ( module, constants ) {
+
+    module.directive("backgroundImage", [
+        function () {
+            return ( scope, element, atts ) => {
+                element.css({
+                    'background-image' : `url('/${atts.backgroundImage}')`,
+                    'background-size' : 'cover',
+                    'background-position' : 'center'
+                });
+            };
+        }
+    ]);
+
+    // module.directive('backgroundImage', function () {
+    //     return function ( scope, element, atts ) {
+    //         element.css({
+    //             'background-image' : `url('/${atts.backgroundImage}')`,
+    //             'background-size' : 'cover',
+    //             'background-position' : 'center'
+    //         });
+    //     };
+    // });​
 
     module.component('imagesUploader', {
         templateUrl : `${constants.templatesFolder}/images-upload.html`,
@@ -11,8 +33,6 @@ function imagesComponentsInit (  module, constants  ) {
         controller : "imagesUploadCtrl",
         controllerAs : "images"
     });
-
-
 
     module.directive('ngThumb', [
         '$window', function ( $window ) {
@@ -59,8 +79,8 @@ function imagesComponentsInit (  module, constants  ) {
                     function onLoadImage () {
                         const width = params.width || this.width / this.height * params.height;
                         const height = params.height || this.height / this.width * params.width;
-                        canvas.attr({width : width, height : height});
-                        canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
+                        canvas.attr({ width : width, height : height });
+                        canvas[ 0 ].getContext('2d').drawImage(this, 0, 0, width, height);
                     }
                 }
             };
