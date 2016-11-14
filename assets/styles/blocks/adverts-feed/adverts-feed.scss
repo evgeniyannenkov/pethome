@@ -1,7 +1,8 @@
 @import "../../common/variables";
 
 .adverts-feed {
-  margin          : 10px 0;
+  margin          : 10px auto;
+  max-width       : 2600px;
   display         : flex;
   justify-content : center;
   flex-flow       : row wrap;
