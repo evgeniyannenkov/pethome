@@ -33,10 +33,15 @@ function applicationConfig ( module ) {
                 "password" : "Пароль",
                 "phone" : "Номер телефона",
                 "edit" : "Изменить",
-                "boy" : "Мальчик",
-                "girl" : "Девочка",
-                "cat" : "Кот",
+                "male" : "Мужской",
+                "female" : "Женский",
                 "dog" : "Собака",
+                "cat" : "Кот",
+                "bird" : "Собака",
+                "rabbit" : "Кролик",
+                "fish" : "Рыба",
+                "ferret" : "Хорёк",
+                "guinea pig" : "Морская свинка",
                 "hamster" : "Хомяк",
                 "other" : "Другой",
                 "remove" : "Удалить",
@@ -58,8 +63,11 @@ function applicationConfig ( module ) {
                 "older" : "Старее",
                 "date" : "Дата",
                 "author" : "Автор",
-                "go to" : "Перейти"
+                "go to" : "Перейти",
+                "not specified" : "Не указано",
+                "read more" : "Детальнее"
             });
+
             translator.setTranslations("ua", {
                 "language" : "мова",
                 "english" : "англійська",
@@ -88,12 +96,17 @@ function applicationConfig ( module ) {
                 "password" : "Пароль",
                 "phone" : "Телефон",
                 "edit" : "Редагувати",
-                "boy" : "Хлопчик",
-                "girl" : "Дівчинка",
-                "cat" : "Кіт",
+                "male" : "Чоловіча",
+                "girl" : "Жіноча",
                 "dog" : "Собака",
+                "cat" : "Кіт",
+                "bird" : "Птах",
+                "rabbit" : "Кролик",
+                "fish" : "Риба",
+                "ferret" : "Тхір",
+                "guinea pig" : "Морська свинка",
                 "hamster" : "Хом'як",
-                "other" : "Інше",
+                "other" : "Інший",
                 "remove" : "Видалити",
                 "published" : "Опубліковано",
                 "remove advert" : "Видалити оголошення",
@@ -113,7 +126,9 @@ function applicationConfig ( module ) {
                 "older" : "Старіші",
                 "date" : "Дата",
                 "author" : "Автор",
-                "go to" : "Перейти"
+                "go to" : "Перейти",
+                "not specified" : "Не вказано",
+                "read more" : "Детальніше"
             });
 
             translator.setFullDateFormat("en", "MMM/d/yyyy h:mm a");

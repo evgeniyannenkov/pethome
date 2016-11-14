@@ -13,10 +13,10 @@ function imagesComponentsInit ( module, constants ) {
                     bgSize = "cover";
                 } else if ( atts.type ) {
                     bg = 'assets/images/bg/advert-bg-' + atts.type + '.svg';
-                    bgSize = "30%";
+                    bgSize = "20%";
                 } else {
                     bg = 'assets/images/bg/advert-bg-other.svg';
-                    bgSize = "30%";
+                    bgSize = "20%";
                 }
 
                 element.css({

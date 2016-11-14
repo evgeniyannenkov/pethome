@@ -25,7 +25,20 @@
   z-index  : 2;
 }
 
+.button--read-more {
+  position  : absolute;
+  width     : calc(100% - 20px);
+  height    : 40px;
+  left      : 10px;
+  bottom    : 10px;
+  font-size : 0.9em;
+}
+
 .button--blue {
   background   : $blue;
   border-color : $blue;
+
+  .button__title {
+    color : white;
+  }
 }
