@@ -1,0 +1,24 @@
+.tab {
+  display          : inline-flex;
+  flex-flow        : row wrap;
+  justify-content  : center;
+  align-items      : center;
+  min-height       : 40px;
+  padding          : 10px 15px;
+  border           : 1px solid lightgrey;
+  border-top-width : 3px;
+  background       : white;
+  margin-bottom    : -1px;
+  overflow         : hidden;
+  cursor           : pointer;
+  margin-right     : -1px;
+  transition       : border 0.2s, color 0.2s;
+  &:last-child {
+    margin-right : 0;
+  }
+  &.active {
+    border-bottom-color : transparent;
+    border-top-color    : $blue;
+    color               : $blue
+  }
+}

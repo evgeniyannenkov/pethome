@@ -1,3 +1,7 @@
 mixin btn-default(label)
-        button.button&attributes(attributes)
-            span.button__title {{'#{label}' | translate}}
+    button.button&attributes(attributes)
+        span.button__title {{'#{label}' | translate}}
+
+mixin btn-tab(label)
+    .tab&attributes(attributes)
+        span.tab__title {{'#{label}' | translate}}

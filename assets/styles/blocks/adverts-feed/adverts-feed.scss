@@ -9,16 +9,6 @@
   padding         : 10px;
 }
 
-.adverts-feed__buttons {
-  display         : flex;
-  justify-content : space-around;
-}
-
-.adverts-feed__button {
-  display          : flex;
-  background-color : lighten($blue, 20%);
-}
-
 @media (min-width : 700px) {
   .adverts-feed {
     justify-content : space-around;
