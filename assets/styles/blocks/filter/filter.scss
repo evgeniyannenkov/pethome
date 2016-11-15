@@ -1,11 +1,10 @@
 
 .filter {
-  padding : 10px;
 }
 
 .filter__inner {
   border  : 1px solid lightgrey;
-  padding : 10px 25px;
+  padding : 25px;
 }
 
 .filter__tabs {
@@ -13,4 +12,11 @@
   flex-flow       : row nowrap;
   justify-content : flex-end;
   align-items     : flex-end;
+}
+
+.filter__item {
+  margin-bottom : 15px;
+  &:last-child {
+    margin-bottom : 0;
+  }
 }

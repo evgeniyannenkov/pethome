@@ -1,0 +1,15 @@
+.main-content {
+  padding-top : $headerHeight;
+  max-width   : $maxContainerWidth;
+  margin      : 0 auto;
+}
+
+.main-content__container {
+  padding : 0 15px;
+}
+
+@media screen and (min-width : 1024px) {
+  .main-content__container {
+    padding : 0 50px;
+  }
+}

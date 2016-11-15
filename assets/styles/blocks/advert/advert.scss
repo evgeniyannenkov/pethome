@@ -1,7 +1,5 @@
 @import "../../common/variables";
 
-$sideMargin : 5px;
-
 .advert {
   border-radius : 3px 3px 0 0;
   overflow      : hidden;
@@ -10,7 +8,7 @@ $sideMargin : 5px;
   display       : flex;
   flex-flow     : column wrap;
   align-items   : stretch;
-  margin        : 0 $sideMargin 30px;
+  margin        : 0 0 30px;
   max-width     : 500px;
 }
 
@@ -110,25 +108,25 @@ $sideMargin : 5px;
 
 @media (min-width : 700px) {
   .advert {
-    width : calc(49% - #{2*$sideMargin});
+    width : 48%;
   }
 }
 
 @media (min-width : 900px) {
   .advert {
-    width : calc(32% - #{2*$sideMargin});
+    width : 31%;
   }
 }
 
 @media (min-width : 1400px) {
   .advert {
-    width : calc(24% - #{2*$sideMargin});
+    width : 23%;
   }
 }
 
 @media (min-width : 1700px) {
   .advert {
-    width     : calc(19% - #{2*$sideMargin});
+    width     : 18%;
     max-width : 400px;
   }
 }

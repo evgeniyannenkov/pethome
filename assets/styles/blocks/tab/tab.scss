@@ -1,5 +1,6 @@
 .tab {
   display          : inline-flex;
+  width            : 50%;
   flex-flow        : row wrap;
   justify-content  : center;
   align-items      : center;
@@ -21,4 +22,11 @@
     border-top-color    : $blue;
     color               : $blue
   }
+}
+
+@media screen and (min-width : 500px) {
+  .tab {
+    width : auto;
+  }
+
 }

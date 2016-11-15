@@ -2,28 +2,33 @@ include ../../views/mixins/formParts
 include ../../views/mixins/buttons
 
 .filter__tabs
-    +btn-tab("General Search")(class="adverts-feed__button button--blue" ng-class="{'active': !filter.extended}" ng-click="filter.fields = '';filter.extended = false;")
-    +btn-tab("Extended Search")(class="adverts-feed__button button--blue" ng-class="{'active': filter.extended}" ng-click="filter.fields = filter.defaults;filter.extended = true;")
+    +btn-tab("General Search")(ng-class="{'active': !filter.extended}" ng-click="filter.fields = '';filter.extended = false;")
+    +btn-tab("Extended Search")(ng-class="{'active': filter.extended}" ng-click="filter.fields = filter.defaults;filter.extended = true;")
 
 .filter__inner
     div(ng-hide="filter.extended")
-        +input("General Search")(ng-model = "filter.fields")
+        +input("Search")(ng-model = "filter.fields")
     div(ng-show="filter.extended")
-        +input("Name")(ng-change = "filter.fieldChange('name')" ng-model = "filter.fields.name")
-        +select("Type", {
-            "type" : {
-                "" : "All",
-                "dog" : "Dog",
-                "cat" : "Cat",
-                "hamster" : "Hamster"
-            }
-        })(ng-change = "filter.fieldChange('type')" ng-model = "filter.fields.type")
-        +radios("Gender", {
-            "gender" : {
-                "" : "Both",
-                "male" : "Male",
-                "female" : "Female"
-            }
-        })(ng-change = "filter.fieldChange('gender')" ng-model = "filter.fields.gender")
-        +input("Breed")(ng-change = "filter.fieldChange('breed')" ng-model = "filter.fields.breed")
-        +textarea("Info")(ng-change = "filter.fieldChange('info')" ng-model = "filter.fields.info")
+        .filter__item
+            +input("Name")(ng-change = "filter.fieldChange('name')" ng-model = "filter.fields.name")
+        .filter__item
+            +select("Type", {
+                "type" : {
+                    "" : "All",
+                    "dog" : "Dog",
+                    "cat" : "Cat",
+                    "hamster" : "Hamster"
+                }
+            })(ng-change = "filter.fieldChange('type')" ng-model = "filter.fields.type")
+        .filter__item
+            +radios("Gender", {
+                "gender" : {
+                    "" : "Both",
+                    "male" : "Male",
+                    "female" : "Female"
+                }
+            })(ng-change = "filter.fieldChange('gender')" ng-model = "filter.fields.gender")
+        .filter__item
+            +input("Breed")(ng-change = "filter.fieldChange('breed')" ng-model = "filter.fields.breed")
+        .filter__item
+            +textarea("Info")(ng-change = "filter.fieldChange('info')" ng-model = "filter.fields.info")
