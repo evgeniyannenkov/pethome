@@ -71,6 +71,9 @@
 
 .form__item {
   margin-bottom : 15px;
+  &:last-child {
+    margin-bottom : 0;
+  }
 }
 
 .form__item--btn {
@@ -127,7 +130,7 @@
   display         : flex;
   justify-content : center;
   align-items     : center;
-  margin-right    : 15px;
+  margin          : 10px 15px 10px 0;
   span {
     @include roboto-condensed;
     font-size   : 0.8em;

@@ -2,16 +2,15 @@
 
 .adverts-feed {
   margin          : 10px auto;
-  max-width       : 2600px;
   display         : flex;
   justify-content : center;
   flex-flow       : row wrap;
   align-items     : stretch;
-  padding         : 10px;
+  padding         : 10px 0;
 }
 
 @media (min-width : 700px) {
   .adverts-feed {
-    justify-content : space-around;
+    justify-content : space-between;
   }
 }

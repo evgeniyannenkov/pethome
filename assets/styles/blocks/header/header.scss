@@ -8,9 +8,17 @@
   width           : 100%;
   height          : $headerHeight;
   display         : flex;
+  justify-content : center;
+}
+
+.header__inner {
+  display         : flex;
+  height          : $headerHeight;
+  width           : 100%;
   flex-flow       : row nowrap;
   justify-content : space-between;
   padding         : 0 10px;
+  max-width       : $maxContainerWidth;
 }
 
 .header__logo {
@@ -96,7 +104,7 @@
 
 @media screen and (min-width : 600px) {
 
-  .header {
+  .header__inner {
     padding : 0 50px;
   }
 
@@ -106,6 +114,7 @@
 
   .header__menu {
     height          : 100%;
+    width           : 100%;
     display         : flex;
     align-items     : center;
     justify-content : flex-end;

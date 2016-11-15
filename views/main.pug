@@ -2,10 +2,9 @@ extends layout
 
 block header
     include partials/_header
+    include partials/_section-hero
 
 block content
-    hero-section
-
     feed(enable-filter="true" all-allowed="false")
 
 block footer

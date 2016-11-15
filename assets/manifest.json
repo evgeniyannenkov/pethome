@@ -30,7 +30,13 @@
         "angular-translate",
         "angular-file-upload",
         "es6-promise-polyfill",
-        "js-md5"
+        "js-md5",
+        "smoothscroll-for-websites"
+      ]
+    },
+    "smoothscroll.js": {
+      "bower": [
+        "smoothscroll-for-websites"
       ]
     }
   },
