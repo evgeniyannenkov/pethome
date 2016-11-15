@@ -19,6 +19,7 @@
     "es6-promise-polyfill": "^1.1.1",
     "js-md5": "md5#^0.4.1",
     "angular-translate": "^2.12.1",
-    "angular-file-upload": "^2.3.4"
+    "angular-file-upload": "^2.3.4",
+    "smoothscroll-for-websites": "^1.4.5"
   }
 }
