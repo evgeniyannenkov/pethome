@@ -12,3 +12,45 @@
   font-size  : 1.3em;
   text-align : center;
 }
+
+.advert-single__images {
+  display         : flex;
+  justify-content : space-between;
+  flex-flow       : row wrap;
+}
+
+.advert-single__image {
+  width     : calc(100% - 10px);
+  height    : 50vw;
+  display   : inline-block;
+  margin    : 0 5px 5px;
+  max-width : 350px;
+}
+
+@media (min-width : 600px) {
+  .advert-single__image {
+    width  : calc(50% - 10px);
+    height : 40vw;
+  }
+}
+
+@media (min-width : 900px) {
+  .advert-single__image {
+    width  : calc(32% - 10px);
+    height : 25vw;
+  }
+}
+
+@media (min-width : 1200px) {
+  .advert-single__image {
+    width  : calc(24% - 10px);
+    height : 15vw;
+  }
+}
+
+@media (min-width : 1600px) {
+  .advert-single__image {
+    width  : calc(19% - 10px);
+    height : 12vw;
+  }
+}

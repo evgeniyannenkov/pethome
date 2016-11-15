@@ -40,6 +40,24 @@ function imagesComponentsInit ( module, constants ) {
         controllerAs : "images"
     });
 
+    module.component('ngImage', {
+        template : `<div class="image" style="background-image: url('/{{image.url}}')">
+                        <div ng-if="!image.isMain" class="image__button image__button--set" ng-click="image.setMain({image : image.url});">{{"set main" | translate}}</div>
+                        <div ng-if="image.isMain" class="image__button image__button--set fa fa-check" aria-hidden="true"></div>
+                        <div class="image__button image__button--remove" ng-click="image.remove({image : image.url});">{{"remove" | translate}}</div>
+                    </div>`,
+        bindings : {
+            url : "@image",
+            remove : "&",
+            setMain : "&",
+            isMain : "="
+        },
+        controller : function () {
+
+        },
+        controllerAs : "image"
+    });
+
     module.directive('ngThumb', [
         '$window', function ( $window ) {
             const helper = {

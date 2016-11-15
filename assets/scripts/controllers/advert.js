@@ -56,6 +56,17 @@ function advertControllersInit ( module ) {
                 this.save();
             };
 
+            this.setMainImage = ( image ) => {
+                if ( image && this.fields.images.indexOf(image) != -1 ) {
+                    this.fields.mainImage = image;
+                    this.save();
+                }
+            };
+
+            this.isMainImage = ( image ) => {
+                return image == this.fields.mainImage;
+            };
+
             this.review = () => {
                 adverts.review({ id : this.id })
                        .then(( response ) => {
