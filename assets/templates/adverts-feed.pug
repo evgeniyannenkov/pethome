@@ -1,4 +1,5 @@
 include ../../views/mixins/formParts
+include ../../views/mixins/buttons
 
 .filter
     filter(ng-if="feed.filter_enabled" feed-filter="feed.filter")
@@ -8,7 +9,8 @@ include ../../views/mixins/formParts
             "publicationDate" : "Older"
         }
     }, true)(ng-model = "feed.order" class="adverts-feed__select")
-    +input("Date Range")(type="number" min=1 value=1 ng-model = "feed.dateRange" class="adverts-feed__select")
+    +btn-default("All adverts")(ng-click="feed.dateRange = 0;" ng-if="feed.dateRange" class="button--blue")
+    +input("Date Range")(type="number" min=0 value=1 ng-model = "feed.dateRange" class="adverts-feed__select")
 .adverts-feed(ng-if="!feed.customFilter")
     advert.advert(ng-repeat="(index, advert) in feed.adverts | dateRange : feed.dateRange | filter: feed.filter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]" ng-if="feed.allAllowed")
     advert.advert(ng-repeat="(index, advert) in feed.adverts | dateRange : feed.dateRange | feed : feed.authors | filter: feed.filter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]" ng-if="!feed.allAllowed")
