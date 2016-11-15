@@ -22,7 +22,8 @@ h1.advert-single__title {{advert.fields.title}}
         .advert__field-name.advert__field-name--small {{'info' | translate}}
         .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
 .advert-single__images
-    ng-image.advert-single__image(ng-repeat="image in advert.fields.images" remove="advert.removeImage(image);" set-main="advert.setMainImage(image);" is-main="advert.fields.mainImage == image;" image="{{image}}")
+    .advert-single__image(ng-repeat="image in advert.fields.images")
+        ng-image.advert-single__image-inner(remove="advert.removeImage(image);" set-main="advert.setMainImage(image);" is-main="advert.fields.mainImage == image;" image="{{image}}")
 //div(ng-if="advert.reviewEnabled && !advert.fields.reviewed")
 //    +button("Mark Reviewed")(ng-click="advert.review();")
 //.advert-single__title(ng-if="!advert.fields.published")
