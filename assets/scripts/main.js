@@ -81,9 +81,6 @@ const components = {
         headerComponentsInit,
         headerControllersInit
     ],
-    hero : [
-        heroComponentsInit
-    ],
     paralax : [
         paralaxComponentsInit
     ]
