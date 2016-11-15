@@ -54,22 +54,26 @@ function translatorProviderInit ( module ) {
             };
 
             this.translate = function ( content ) {
+                if ( !content || typeof content != "string" ) return content;
                 return this.dictionary[ this.locale ] && this.dictionary[ this.locale ][ content.toLowerCase() ] || content;
             };
 
             this.translateAllMatches = function ( content ) {
+                if ( !content || typeof content != "string" ) return content;
                 return content.replace(this.regex.match, ( match ) => {
                     return this.translate(match.substr(2, match.length - 4));
                 });
             };
 
             this.translateAllWords = function ( content ) {
+                if ( !content || typeof content != "string" ) return content;
                 return content.replace(this.regex.word, ( match ) => {
                     return this.translate(match);
                 });
             };
 
             this.translateAll = function ( content ) {
+                if ( !content || typeof content != "string" ) return content;
                 return this.translateAllWords(this.translateAllMatches(content));
             };
 
