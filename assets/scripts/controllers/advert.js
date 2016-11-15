@@ -79,6 +79,7 @@ function advertControllersInit ( module ) {
         function ( ajax, adverts, author ) {
             this.order = "-publicationDate";
             this.dateRange = 0;
+            this.tempRange = 0;
 
             author.getAll()
                   .then(( response ) => {

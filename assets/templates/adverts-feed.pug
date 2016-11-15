@@ -9,8 +9,13 @@ include ../../views/mixins/buttons
             "publicationDate" : "Older"
         }
     }, true)(ng-model = "feed.order" class="adverts-feed__select")
-    +btn-default("All adverts")(ng-click="feed.dateRange = 0;" ng-if="feed.dateRange" class="button--blue")
-    +input("Date Range")(type="number" min=0 value=1 ng-model = "feed.dateRange" class="adverts-feed__select")
+
+    +btn-default("All adverts")(ng-click="feed.dateRange = 0;" class="button--blue")
+    +btn-default("Last day")(ng-click="feed.dateRange = 1;" class="button--blue")
+    +btn-default("Last 3 days")(ng-click="feed.dateRange = 3;" class="button--blue")
+    +btn-default("Last week")(ng-click="feed.dateRange = 7;" class="button--blue")
+    +btn-default("Last month")(ng-click="feed.dateRange = 30;" class="button--blue")
+
 .adverts-feed(ng-if="!feed.customFilter")
     advert.advert(ng-repeat="(index, advert) in feed.adverts | dateRange : feed.dateRange | filter: feed.filter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]" ng-if="feed.allAllowed")
     advert.advert(ng-repeat="(index, advert) in feed.adverts | dateRange : feed.dateRange | feed : feed.authors | filter: feed.filter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]" ng-if="!feed.allAllowed")
