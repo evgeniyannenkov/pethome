@@ -1,5 +1,37 @@
 include ../../views/mixins/formParts
 
+.advert-single__main-image(style="background-image:url('/{{advert.fields.mainImage}}')")
+h1.advert-single__title {{advert.fields.title}}
+.advert-single__info
+    .advert__field
+        .advert__field-name {{'name' | translate}}
+        .advert__field-content {{advert.fields.name}}
+    .advert__field
+        .advert__field-name {{'type' | translate}}
+        .advert__field-content {{advert.fields.type | translate}}
+    .advert__field
+        .advert__field-name {{'gender' | translate}}
+        .advert__field-content {{advert.fields.gender | translate}}
+    .advert__field
+        .advert__field-name {{'age' | translate}}
+        .advert__field-content {{advert.fields.age || 'Not specified' | translate}}
+    .advert__field
+        .advert__field-name {{'breed' | translate}}
+        .advert__field-content {{advert.fields.breed || 'Not specified' | translate}}
+    .advert__field.advert__field--info.advert__field--info-full
+        .advert__field-name.advert__field-name--small {{'info' | translate}}
+        .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
+div
+    div(ng-repeat="image in advert.fields.images" style="width: 30%; display: inline-block; height: 100px; background: url('/{{image}}'); background-size: cover;")
+        button(ng-click="advert.removeImage(image);") Remove
+        div
+            label
+                span Main image
+                input(type="radio" ng-change="advert.save();" name="main-image" ng-model="advert.fields.mainImage" value="{{image}}")
+div(ng-if="advert.reviewEnabled && !advert.fields.reviewed")
+    +button("Mark Reviewed")(ng-click="advert.review();")
+//.advert-single__title(ng-if="!advert.fields.published")
+//    h2 (Not Published)
 popup(type="Remove Advert")
     popup-trigger
         button {{'Remove' | translate}}
@@ -13,33 +45,4 @@ popup(type="Edit Advert")
     popup-content
         .popup__content
             advert-edit(advert="$parent.$parent.advert.fields")
-div(ng-if="!advert.fields.published")
-    h2 (Not Published)
-div.advert__field
-    h3 Title : {{advert.fields.title}}
-div.advert__field(ng-if="advert.fields.mainImage")
-    h3 Main Image
-    img(ng-src="/{{advert.fields.mainImage}}" style="max-height: 300px;")
-div.advert__field
-    h3 Name : {{advert.fields.name}}
-div.advert__field
-    h3 Type : {{advert.fields.type}}
-div.advert__field
-    h3 Gender : {{advert.fields.gender}}
-div.advert__field
-    h3 age : {{advert.fields.age}}
-div.advert__field
-    h3 breed : {{advert.fields.breed}}
-div.advert__field
-    h3 info : {{advert.fields.info}}
-div.advert__field
-    div(ng-repeat="image in advert.fields.images" style="width: 30%; display: inline-block; height: 100px; background: url('/{{image}}'); background-size: cover;")
-        button(ng-click="advert.removeImage(image);") Remove
-        div
-            label
-                span Main image
-                input(type="radio" ng-change="advert.save();" name="main-image" ng-model="advert.fields.mainImage" value="{{image}}")
-div.advert__field(ng-if="advert.reviewEnabled && !advert.fields.reviewed")
-    +button("Mark Reviewed")(ng-click="advert.review();")
-
 images-uploader(advert-id="{{advert.id}}" advert="advert.fields")

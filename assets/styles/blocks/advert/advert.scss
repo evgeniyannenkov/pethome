@@ -89,12 +89,17 @@ $sideMargin : 5px;
 .advert__field--info {
   flex-direction  : column;
   justify-content : flex-start;
-  height          : 150px;
+  height          : 120px;
   padding-bottom  : 45px;
 
   .advert__field-content {
     font-size : 0.9em;
   }
+}
+
+.advert__field--info-full {
+  height         : auto;
+  padding-bottom : 5px;
 }
 
 .advert__field-name {

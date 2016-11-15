@@ -7,7 +7,7 @@ function imagesComponentsInit ( module, constants ) {
             return ( scope, element, atts ) => {
                 let bg,
                     bgSize;
-                // console.log('assets/images/bg/advert-bg-' + advert.fields.type + '.svg');
+                console.log(atts);
                 if ( atts.backgroundImage ) {
                     bg = atts.backgroundImage;
                     bgSize = "cover";
