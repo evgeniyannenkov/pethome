@@ -79,17 +79,17 @@ function appFiltersInit ( module ) {
             function translationFilter ( adverts, days ) {
 
                 let time = days * 24 * 60 * 60 * 1000,
-                    currentTime = Date.now(),
-                    passed = [];
-                angular.forEach(adverts, ( advert ) => {
+                    currentTime = Date.now();
 
-                    if ( advert.publicationDate > currentTime - time ) {
-                        passed.push(advert);
-                    }
+                if(!days) return adverts;
 
-                });
-
-                return passed;
+                if ( adverts ) {
+                    return adverts.filter(( advert ) => {
+                        if ( advert.publicationDate > currentTime - time ) {
+                            return advert;
+                        }
+                    });
+                }
             }
 
             return translationFilter;
