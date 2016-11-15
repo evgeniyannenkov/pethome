@@ -1,11 +1,12 @@
 @import "../../common/variables";
 
 .video-container {
-  position   : relative;
-  width      : 100%;
-  height     : 100vh;
-  max-height : 768px;
-  overflow   : hidden;
+  position         : relative;
+  width            : 100%;
+  height           : 100vh;
+  max-height       : 768px;
+  overflow         : hidden;
+  background-color : $metallicBlue;
 }
 
 .video-container__inner {
@@ -75,6 +76,6 @@
     max-height : 1080px;
   }
   .video-container__media {
-    width  : 100%;
+    width : 100%;
   }
 }

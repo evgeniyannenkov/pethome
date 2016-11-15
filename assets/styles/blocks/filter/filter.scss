@@ -2,6 +2,12 @@
 .filter {
 }
 
+.section-filter {
+  background-color : ghostwhite;
+  margin-top       : -$headerHeight;
+  padding          : 25px 0;
+}
+
 .filter__inner {
   border  : 1px solid lightgrey;
   padding : 25px;
@@ -18,5 +24,20 @@
   margin-bottom : 15px;
   &:last-child {
     margin-bottom : 0;
+  }
+}
+
+@media screen and (min-width : 600px) {
+  .filter__inner {
+    display         : flex;
+    flex-flow       : row wrap;
+    justify-content : flex-start;
+    align-items     : flex-start;
+  }
+
+  .filter__item {
+    width        : 45%;
+    max-width    : 280px;
+    margin-right : 15px;
   }
 }
