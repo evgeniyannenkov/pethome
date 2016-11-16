@@ -36,6 +36,16 @@ $editBtnIncrement : 20px;
   position     : relative;
 }
 
+.advert-single__banner-inner {
+  min-height : 500px;
+  background : {
+    size     : 10%;
+    position : 90%;
+    repeat   : no-repeat;
+    color    : #c6c5c5;
+  }
+}
+
 .advert-single__edit-btn {
   display          : flex;
   cursor           : pointer;
@@ -54,15 +64,6 @@ $editBtnIncrement : 20px;
 
   &:hover {
     animation : editBtnHoverIn 0.2s forwards;
-  }
-}
-
-.advert-single__banner-inner {
-  background : {
-    size     : 10%;
-    position : 90%;
-    repeat   : no-repeat;
-    color    : #c6c5c5;
   }
 }
 
