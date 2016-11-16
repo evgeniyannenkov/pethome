@@ -1,11 +1,59 @@
 @import "../../common/_variables";
 
+$editBtnWidth : 50px;
+$editBtnPosition : 20px;
+$editBtnIncrement : 20px;
+
+@keyframes editBtnHoverIn {
+  0% {
+    width            : $editBtnWidth;
+    height           : $editBtnWidth;
+    bottom           : $editBtnPosition;
+    right            : $editBtnPosition;
+    background-color : lighten($blue, 10%);
+  }
+  30% {
+    width  : $editBtnWidth + $editBtnIncrement;
+    height : $editBtnWidth + $editBtnIncrement;
+    bottom : $editBtnPosition - ($editBtnIncrement/2);
+    right  : $editBtnPosition - ($editBtnIncrement/2);
+  }
+  100% {
+    background-color : $blue;
+    width            : $editBtnWidth + ($editBtnIncrement/4);
+    height           : $editBtnWidth + ($editBtnIncrement/4);
+    bottom           : $editBtnPosition - ($editBtnIncrement/8);
+    right            : $editBtnPosition - ($editBtnIncrement/8);
+  }
+}
+
 .advert-single__banner {
   display      : inline-block;
   overflow     : hidden;
   width        : calc(100% + #{2*$mainContentPaddingSm});
   margin-left  : -$mainContentPaddingSm;
   margin-right : -$mainContentPaddingSm;
+  position     : relative;
+}
+
+.advert-single__edit-btn {
+  display          : flex;
+  cursor           : pointer;
+  width            : $editBtnWidth;
+  height           : $editBtnWidth;
+  position         : absolute;
+  bottom           : $editBtnPosition;
+  right            : $editBtnPosition;
+  justify-content  : center;
+  align-items      : center;
+  border-radius    : 50%;
+  background-color : lighten($blue, 10%);
+  color            : white;
+  font-size        : 1.2em;
+
+  &:hover {
+    animation : editBtnHoverIn 0.2s forwards;
+  }
 }
 
 .advert-single__banner-inner {

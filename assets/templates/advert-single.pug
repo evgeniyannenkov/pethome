@@ -21,6 +21,13 @@ include ../../views/mixins/formParts
         .advert__field.advert__field--info.advert__field--info-full
             .advert__field-name.advert__field-name--small {{'info' | translate}}
             .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
+    popup(type="Edit Advert")
+        popup-trigger
+            .advert-single__edit-btn
+                i.fa.fa-pencil(aria-hidden="true")
+        popup-content
+            .popup__content
+                advert-edit(advert="$parent.$parent.advert.fields")
 .advert-single__main-image(ng-if="advert.fields.mainImage")
     .advert-single__main-image-inner
         img(ng-src="/{{advert.fields.mainImage}}")
@@ -39,10 +46,4 @@ include ../../views/mixins/formParts
 //        .popup__content
 //            advert-remove(advert-id="{{advert.id}}")
 //
-popup(type="Edit Advert")
-    popup-trigger
-        button {{'Edit' | translate}}
-    popup-content
-        .popup__content
-            advert-edit(advert="$parent.$parent.advert.fields")
 images-uploader(advert-id="{{advert.id}}" advert="advert.fields")
