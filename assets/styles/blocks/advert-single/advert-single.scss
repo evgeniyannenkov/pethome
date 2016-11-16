@@ -1,29 +1,29 @@
 @import "../../common/_variables";
 
-$editBtnWidth : 50px;
+$editBtnSize : 50px;
 $editBtnPosition : 20px;
 $editBtnIncrement : 20px;
 
 @keyframes editBtnHoverIn {
   0% {
-    width            : $editBtnWidth;
-    height           : $editBtnWidth;
+    width            : $editBtnSize;
+    height           : $editBtnSize;
     bottom           : $editBtnPosition;
     right            : $editBtnPosition;
     background-color : lighten($blue, 10%);
   }
   30% {
-    width  : $editBtnWidth + $editBtnIncrement;
-    height : $editBtnWidth + $editBtnIncrement;
+    width  : $editBtnSize + $editBtnIncrement;
+    height : $editBtnSize + $editBtnIncrement;
     bottom : $editBtnPosition - ($editBtnIncrement/2);
     right  : $editBtnPosition - ($editBtnIncrement/2);
   }
   100% {
     background-color : $blue;
-    width            : $editBtnWidth + ($editBtnIncrement/4);
-    height           : $editBtnWidth + ($editBtnIncrement/4);
-    bottom           : $editBtnPosition - ($editBtnIncrement/8);
-    right            : $editBtnPosition - ($editBtnIncrement/8);
+    width            : $editBtnSize + ($editBtnIncrement/2);
+    height           : $editBtnSize + ($editBtnIncrement/2);
+    bottom           : $editBtnPosition - ($editBtnIncrement/4);
+    right            : $editBtnPosition - ($editBtnIncrement/4);
   }
 }
 
@@ -39,8 +39,8 @@ $editBtnIncrement : 20px;
 .advert-single__edit-btn {
   display          : flex;
   cursor           : pointer;
-  width            : $editBtnWidth;
-  height           : $editBtnWidth;
+  width            : $editBtnSize;
+  height           : $editBtnSize;
   position         : absolute;
   bottom           : $editBtnPosition;
   right            : $editBtnPosition;
@@ -50,6 +50,7 @@ $editBtnIncrement : 20px;
   background-color : lighten($blue, 10%);
   color            : white;
   font-size        : 1.2em;
+  transition       : width 0.2s;
 
   &:hover {
     animation : editBtnHoverIn 0.2s forwards;
