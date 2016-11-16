@@ -1,0 +1,33 @@
+.sort {
+  display         : flex;
+  flex-flow       : column wrap;
+  justify-content : center;
+  align-items     : center;
+}
+
+@media screen and (min-width : 400px) {
+  .sort {
+    flex-flow       : row nowrap;
+    justify-content : space-between;
+  }
+
+  .sort__item {
+    width : 45%;
+  }
+}
+
+@media screen and (min-width : 850px) {
+  .sort {
+    flex-flow       : row nowrap;
+    justify-content : flex-end;
+  }
+
+  .sort__item {
+    width        : 20%;
+    max-width    : 200px;
+    margin-right : 15px;
+    &:last-child {
+      margin-right : 0;
+    }
+  }
+}
