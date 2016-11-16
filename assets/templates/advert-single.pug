@@ -1,26 +1,30 @@
 include ../../views/mixins/formParts
 
-.advert-single__main-image(style="background-image:url('/{{advert.fields.mainImage}}')")
-h1.advert-single__title {{advert.fields.title}}
-.advert-single__info
-    .advert__field
-        .advert__field-name {{'name' | translate}}
-        .advert__field-content {{advert.fields.name}}
-    .advert__field
-        .advert__field-name {{'type' | translate}}
-        .advert__field-content {{advert.fields.type | translate}}
-    .advert__field
-        .advert__field-name {{'gender' | translate}}
-        .advert__field-content {{advert.fields.gender | translate}}
-    .advert__field
-        .advert__field-name {{'age' | translate}}
-        .advert__field-content {{advert.fields.age || 'Not specified' | translate}}
-    .advert__field
-        .advert__field-name {{'breed' | translate}}
-        .advert__field-content {{advert.fields.breed || 'Not specified' | translate}}
-    .advert__field.advert__field--info.advert__field--info-full
-        .advert__field-name.advert__field-name--small {{'info' | translate}}
-        .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
+.advert-single__banner(background-block="/assets/images/bg/advert-bg-{{advert.fields.type}}.svg" classes="advert-single__banner-inner")
+    .advert-single__info
+        h1.advert-single__title {{advert.fields.title}}
+        .advert__field
+            .advert__field-name {{'name' | translate}}
+            .advert__field-content {{advert.fields.name}}
+        .advert__field
+            .advert__field-name {{'type' | translate}}
+            .advert__field-content {{advert.fields.type | translate}}
+        .advert__field
+            .advert__field-name {{'gender' | translate}}
+            .advert__field-content {{advert.fields.gender | translate}}
+        .advert__field
+            .advert__field-name {{'age' | translate}}
+            .advert__field-content {{advert.fields.age || 'Not specified' | translate}}
+        .advert__field
+            .advert__field-name {{'breed' | translate}}
+            .advert__field-content {{advert.fields.breed || 'Not specified' | translate}}
+        .advert__field.advert__field--info.advert__field--info-full
+            .advert__field-name.advert__field-name--small {{'info' | translate}}
+            .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
+.advert-single__main-image(ng-if="advert.fields.mainImage")
+    .advert-single__main-image-inner
+        img(ng-src="/{{advert.fields.mainImage}}")
+
 .advert-single__images
     .advert-single__image(ng-repeat="image in advert.fields.images")
         ng-image.advert-single__image-inner(remove="advert.removeImage(image);" set-main="advert.setMainImage(image);" is-main="advert.fields.mainImage == image;" image="{{image}}")
@@ -35,10 +39,10 @@ h1.advert-single__title {{advert.fields.title}}
 //        .popup__content
 //            advert-remove(advert-id="{{advert.id}}")
 //
-//popup(type="Edit Advert")
-//    popup-trigger
-//        button {{'Edit' | translate}}
-//    popup-content
-//        .popup__content
-//            advert-edit(advert="$parent.$parent.advert.fields")
-//images-uploader(advert-id="{{advert.id}}" advert="advert.fields")
+popup(type="Edit Advert")
+    popup-trigger
+        button {{'Edit' | translate}}
+    popup-content
+        .popup__content
+            advert-edit(advert="$parent.$parent.advert.fields")
+images-uploader(advert-id="{{advert.id}}" advert="advert.fields")

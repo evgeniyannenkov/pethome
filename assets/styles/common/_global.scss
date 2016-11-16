@@ -42,3 +42,17 @@ ul {
   padding    : 0;
   list-style : none;
 }
+
+.full-width {
+  width        : 100vw;
+  margin-left  : -$mainContentPaddingSm;
+  margin-right : -$mainContentPaddingSm;
+}
+
+@media (min-width : 1024px) {
+  .full-width {
+    width        : 100vw;
+    margin-left  : -$mainContentPaddingLg;
+    margin-right : -$mainContentPaddingLg;
+  }
+}

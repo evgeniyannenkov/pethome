@@ -1,3 +1,4 @@
+@import "../../common/_variables";
 .main-content {
   padding-top : $headerHeight;
   max-width   : $maxContainerWidth;
@@ -5,11 +6,11 @@
 }
 
 .main-content__container {
-  padding : 0 15px;
+  padding : 0 $mainContentPaddingSm;
 }
 
 @media screen and (min-width : 1024px) {
   .main-content__container {
-    padding : 0 50px;
+    padding : 0 $mainContentPaddingLg;
   }
 }

@@ -6,9 +6,9 @@ block header
 block content
     .main-content__container
         if currentUser && currentUser.is_admin
-            advert-single(advert-id=advert._id enable-review="true")
+            advert-single.advert-single(advert-id=advert._id enable-review="true")
         else if currentUser && (advert.author.toString() == currentUser._id.toString())
-            advert-single(advert-id=advert._id)
+            advert-single.advert-single(advert-id=advert._id)
         else
             if advert.mainImage
                 h1= advert.mainImage

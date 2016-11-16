@@ -1,11 +1,44 @@
-.advert-single__main-image {
-  height : 150px;
+@import "../../common/_variables";
+
+.advert-single__banner {
+  display      : inline-block;
+  overflow     : hidden;
+  width        : calc(100% + #{2*$mainContentPaddingSm});
+  margin-left  : -$mainContentPaddingSm;
+  margin-right : -$mainContentPaddingSm;
+}
+
+.advert-single__banner-inner {
+  background : {
+    size     : 10%;
+    position : 90%;
+    repeat   : no-repeat;
+    color    : #c6c5c5;
+  }
+}
+
+.advert-single__inner {
+  display         : flex;
+  flex-flow       : row wrap;
+  align-items     : stretch;
+  justify-content : space-between;
+}
+
+.advert-single__main-image-inner {
+  height  : 150px;
+  width   : calc(100% + #{2*$mainContentPaddingSm});
+  margin  : 0 #{-$mainContentPaddingSm};
+  display : flex;
+}
+
+.advert-single__main-image-inner-inner {
   background : {
     size     : cover;
     position : center;
     repeat   : no-repeat;
     color    : #c6c5c5;
   }
+
 }
 
 .advert-single__title {
@@ -21,11 +54,11 @@
 
 .advert-single__image {
   position       : relative;
-  width          : calc(100% - 10px);
+  width          : 100%;
   height         : 0;
   padding-bottom : 60%;
   display        : inline-block;
-  margin         : 0 5px 5px;
+  margin         : 0 0 15px;
 }
 
 .advert-single__image-inner {
@@ -36,46 +69,85 @@
   height   : 100%;
 }
 
+.advert-single__info {
+  display   : flex;
+  width     : 100%;
+  flex-flow : column;
+}
+
 @media (min-width : 550px) {
   .advert-single__image {
-    width          : calc(50% - 10px);
+    width          : 49%;
     padding-bottom : 30%;
+  }
+}
+
+@media (min-width : 700px) {
+  .advert-single__main-image {
+    text-align : center;
+  }
+  .advert-single__main-image-inner {
+    float   : left;
+    display : inline-block;
+    padding : 10px;
+    border  : 2px solid $blue;
+    margin  : 0 auto;
+    width   : 400px;
+    height  : auto;
+
+    img {
+      width : 100%;
+    }
+  }
+  .advert-single__info {
+    width   : 55%;
+    padding : 30px 0 30px 10%;
+  }
+  .advert-single__images {
+    margin-top   : 40px;
+    padding-left : 10px;
   }
 }
 
 @media (min-width : 900px) {
   .advert-single__image {
-    width          : calc(32% - 10px);
+    width          : 32%;
     padding-bottom : 20%;
     max-width      : 350px;
   }
 }
 
 @media (min-width : 992px) {
+  .advert-single__title {
+    text-align : left;
+  }
   .advert-single__info {
-    width : 49%;
-    float : left;
-  }
-  .advert-single__main-image {
-    width : 49%;
-    float : right;
-  }
-  .advert-single__images {
-    width : 49%;
-    float : right;
+    background : {
+      size     : 50%;
+      repeat   : no-repeat;
+      position : center right;
+    }
   }
 }
 
 @media (min-width : 1100px) {
   .advert-single__image {
-    width          : calc(24% - 10px);
+    width          : 24%;
     padding-bottom : 15%;
+  }
+}
+
+@media (min-width : 1024px) {
+  .advert-single__banner {
+    width        : calc(100% + #{2*$mainContentPaddingLg});
+    margin-left  : -$mainContentPaddingLg;
+    margin-right : -$mainContentPaddingLg;
   }
 }
 
 @media (min-width : 1500px) {
   .advert-single__image {
-    width          : calc(19% - 10px);
+    width          : 19%;
     padding-bottom : 11%;
   }
 }
