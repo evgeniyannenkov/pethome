@@ -1,5 +1,8 @@
-input(type="file" nv-file-select uploader="images.fileUploader" multiple)
-button(ng-click="images.fileUploader.uploadAll();") {{'Upload All' | translate}}
+include ../../views/mixins/buttons
+
+label.button.button--wide.button--blue.advert-single__images-upload-btn-label(ng-if="!images.fileUploader.queue.length" for="images-upload") {{'Add photos from your computer' | translate}}
+input.advert-single__images-upload-btn(type="file" id="images-upload" nv-file-select uploader="images.fileUploader" multiple)
+button.button.button--wide.button--blue(ng-if="images.fileUploader.queue.length" ng-click="images.fileUploader.uploadAll();") {{'Upload All' | translate}}
 ul
     li(ng-repeat="item in images.fileUploader.queue") Name: {{item.file.name}}
         div(ng-thumb='{ file: item._file, height: 200 }')

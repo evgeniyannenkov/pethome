@@ -162,6 +162,14 @@ $editBtnIncrement : 20px;
   flex-flow : column;
 }
 
+.advert-single__images-upload-btn {
+  display : none;
+}
+
+.advert-single__images-upload-btn-label {
+  vertical-align : top;
+}
+
 @media (min-width : 550px) {
   .advert-single__image {
     width          : 49%;
