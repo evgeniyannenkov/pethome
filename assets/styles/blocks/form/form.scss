@@ -1,22 +1,5 @@
 @import "../../common/variables";
-
-@mixin input {
-  @include roboto-condensed;
-  width         : 100%;
-  border        : 1px solid #e1e6f0;
-  color         : $metallicGray;
-  border-radius : 3px;
-  font-size     : 0.8em;
-  background    : $white;
-  padding       : 10px 7px 10px 10px;
-  &:focus {
-    border  : 1px solid $blue;
-    outline : none;
-  }
-  &.ng-invalid.ng-touched {
-    border : 1px solid $red;
-  }
-}
+@import "../../common/mixins";
 
 @keyframes load {
   0% {
