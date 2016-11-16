@@ -37,7 +37,7 @@ function applicationConfig ( module ) {
                 "female" : "Женский",
                 "dog" : "Собака",
                 "cat" : "Кот",
-                "bird" : "Собака",
+                "bird" : "Птица",
                 "rabbit" : "Кролик",
                 "fish" : "Рыба",
                 "ferret" : "Хорёк",
@@ -65,8 +65,10 @@ function applicationConfig ( module ) {
                 "author" : "Автор",
                 "go to" : "Перейти",
                 "not specified" : "Не указано",
-                "read more" : "Детальнее"
-            });
+                "read more" : "Детальнее",
+                    "Set as main image" : "Сделать основным изображением",
+
+        });
 
             translator.setTranslations("ua", {
                 "language" : "мова",
@@ -128,7 +130,8 @@ function applicationConfig ( module ) {
                 "author" : "Автор",
                 "go to" : "Перейти",
                 "not specified" : "Не вказано",
-                "read more" : "Детальніше"
+                "read more" : "Детальніше",
+                "Set as main image" : "Зробити основним зображенням",
             });
 
             translator.setFullDateFormat("en", "MMM/d/yyyy h:mm a");
