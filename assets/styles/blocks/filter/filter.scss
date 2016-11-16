@@ -14,9 +14,20 @@
 }
 
 .filter__search {
+  display     : flex;
+  flex-flow   : row nowrap;
+  align-items : center;
   .disabled {
     color : transparent;
   }
+}
+
+.filter__search-btn {
+  margin-left : 25px;
+}
+
+.filter__search-field {
+  width : 100%;
 }
 
 .filter__item {

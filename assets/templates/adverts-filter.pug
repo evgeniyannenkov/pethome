@@ -3,8 +3,9 @@ include ../../views/mixins/buttons
 
 
 .filter__search
-    +input("Search")(ng-model = "filter.fields" ng-focus="filter.fields = '';filter.extended = false;" ng-class="{disabled: filter.extended}")
-    +btn-default("Extended Search")(ng-class="{'active': filter.extended}" ng-click="filter.fields = filter.defaults;filter.extended = true;" class="button--red")
+    .filter__search-field
+        +input("Search")(ng-model = "filter.fields" ng-focus="filter.fields = '';filter.extended = false;" ng-class="{disabled: filter.extended}")
+    button.filter__search-btn(ng-class="{'active': filter.extended}" ng-click="filter.fields = filter.defaults;filter.extended = true;") {{'Extended Search' | translate}}
 
 
 .filter__inner(ng-show="filter.extended")
