@@ -48,6 +48,7 @@ function advertControllersInit ( module ) {
             };
 
             this.removeImage = ( image ) => {
+                image = image.startsWith("/") ? image.substr(1, image.length - 1) : image;
                 this.fields.images = this.fields.images.filter(function ( element ) {
                     if ( image !== element ) {
                         return element;
@@ -57,6 +58,7 @@ function advertControllersInit ( module ) {
             };
 
             this.setMainImage = ( image ) => {
+                image = image.startsWith("/") ? image.substr(1, image.length - 1) : image;
                 if ( image && this.fields.images.indexOf(image) != -1 ) {
                     this.fields.mainImage = image;
                     this.save();
