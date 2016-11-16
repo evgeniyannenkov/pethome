@@ -8,7 +8,7 @@ function imagesComponentsInit ( module, constants ) {
                 let bg,
                     bgSize;
                 console.log(atts);
-                if ( atts.backgroundImage ) {
+                if ( atts.backgroundImage && atts.backgroundImage !== "background-image" ) {
                     bg = atts.backgroundImage;
                     bgSize = "cover";
                 } else if ( atts.type ) {
@@ -30,6 +30,40 @@ function imagesComponentsInit ( module, constants ) {
         }
     ]);
 
+    module.directive("backgroundBlock", [
+        function () {
+            return {
+                template : `<div class="background-block {{classes}}"  style="background-image: url('{{url}}');" ng-transclude></div>`,
+                scope : {
+                    url : "@backgroundBlock",
+                    classes : "@",
+                },
+                transclude : true,
+            };
+        }
+    ]);
+
+    module.component("mainImageWrapper", {
+        template : `<img main-image src="{{$ctrl.image}}" >`,
+        bindings : {
+            image : "@",
+            locate : "&locateMainImage"
+        }
+    });
+
+    module.directive("mainImage", [
+        function () {
+            return {
+                require : "^mainImageWrapper",
+                link : ( scope, element, atts, wrapper ) => {
+                    element.on("load", function ( event ) {
+                        wrapper.locate({ isThin : event.path[ 0 ].clientWidth < event.path[ 0 ].clientHeight });
+                    });
+                }
+            };
+        }
+    ]);
+
     module.component('imagesUploader', {
         templateUrl : `${constants.templatesFolder}/images-upload.html`,
         bindings : {
@@ -41,13 +75,13 @@ function imagesComponentsInit ( module, constants ) {
     });
 
     module.component('ngImage', {
-        template : `<div class="image" style="background-image: url('/{{image.url}}')">
-                        <div ng-if="!image.isMain" class="image__button image__button--set" ng-click="image.setMain({image : image.url});">{{"set main" | translate}}</div>
+        template : `<div image-overview="{{image.src}}" class="image" style="background-image: url('/{{image.src}}')">
+                        <div ng-if="!image.isMain" class="image__button image__button--set" ng-click="image.setMain({image : image.src});">{{"Set as main image" | translate}}</div>
                         <div ng-if="image.isMain" class="image__button image__button--set fa fa-check" aria-hidden="true"></div>
-                        <div class="image__button image__button--remove" ng-click="image.remove({image : image.url});">{{"remove" | translate}}</div>
+                        <div class="image__button image__button--remove" ng-click="image.remove({image : image.src});">{{"remove" | translate}}</div>
                     </div>`,
         bindings : {
-            url : "@image",
+            src : "@image",
             remove : "&",
             setMain : "&",
             isMain : "="
