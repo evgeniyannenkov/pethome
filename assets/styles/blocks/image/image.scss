@@ -48,6 +48,12 @@
   }
 }
 
+@media (min-width : 700px) {
+  .image__button {
+    font-size : 0.7em;
+  }
+}
+
 @media (min-width : 1025px) {
   .image {
     position : relative;
@@ -62,7 +68,6 @@
 
   .image__button {
     background-color : rgba(0, 0, 0, .5);
-    font-size        : 0.9em;
     opacity          : 0.7;
     transition       : background-color 0.2s, opacity 0.2s;
     height           : 30px;

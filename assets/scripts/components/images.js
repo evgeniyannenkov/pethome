@@ -88,7 +88,7 @@ function imagesComponentsInit ( module, constants ) {
             };
 
             return {
-                restrict : 'A',
+                restrict : 'AE',
                 scope : {
                     file : "=newFile",
                 },
@@ -113,7 +113,8 @@ function imagesComponentsInit ( module, constants ) {
                         const img = new Image();
                         img.src = event.target.result;
 
-                        element.prepend(img);
+                        element.append(img);
+                        console.log(element);
                     }
                 }
             };

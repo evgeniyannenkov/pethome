@@ -24,6 +24,10 @@
   width : 100%;
 }
 
+.button--quarter {
+  width : 25%;
+}
+
 .button__title {
   position : relative;
   z-index  : 2;
@@ -41,6 +45,15 @@
 .button--blue {
   background   : $blue;
   border-color : $blue;
+
+  .button__title {
+    color : white;
+  }
+}
+
+.button--red {
+  background   : $red;
+  border-color : $red;
 
   .button__title {
     color : white;

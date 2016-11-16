@@ -62,12 +62,11 @@ $editBtnIncrement : 20px;
 }
 
 .advert-single__banner-inner {
-  min-height : 60vh;
   background : {
     size     : 10%;
-    position : 90%;
+    position : 96% 4%;
     repeat   : no-repeat;
-    color    : #c6c5c5;
+    color    : white;
   }
 }
 
@@ -76,7 +75,7 @@ $editBtnIncrement : 20px;
   cursor           : pointer;
   width            : $editBtnSize;
   height           : $editBtnSize;
-  position         : absolute;
+  position         : fixed;
   bottom           : $editBtnPosition;
   right            : $editBtnPosition;
   justify-content  : center;
@@ -85,6 +84,7 @@ $editBtnIncrement : 20px;
   background-color : lighten($blue, 10%);
   color            : white;
   font-size        : 1.2em;
+  z-index          : 100;
 
   &:hover {
     animation : editBtnHoverIn 0.2s forwards;
@@ -111,26 +111,35 @@ $editBtnIncrement : 20px;
   justify-content : space-between;
 }
 
-.advert-single__main-image-inner {
-  height  : 150px;
-  width   : calc(100% + #{2*$mainContentPaddingSm});
-  margin  : 0 #{-$mainContentPaddingSm};
-  display : flex;
+.advert-single__main-image {
+  height  : 250px;
+  width   : 100%;
+  margin  : 10px auto;
+  display : none;
+
+  img {
+    width : 100%;
+  }
 }
 
-.advert-single__main-image-inner-inner {
-  background : {
-    size     : cover;
-    position : center;
-    repeat   : no-repeat;
-    color    : #c6c5c5;
-  }
+.advert-single__main-image--mobile {
+  display : block;
+  padding : 5px;
+  border  : 2px solid $blue;
 
+  .advert-single__main-image-inner {
+    height : 100%;
+
+    background : {
+      position : center;
+      size     : cover;
+      repeat   : no-repeat;
+    }
+  }
 }
 
 .advert-single__title {
-  font-size  : 1.3em;
-  text-align : center;
+  font-size : 1.3em;
 }
 
 .advert-single__images {
@@ -156,11 +165,15 @@ $editBtnIncrement : 20px;
 
 .advert-uploaded__image {
   position : relative;
-  width    : 260px;
+  width    : 32%;
+  height   : 200px;
   display  : inline-block;
+  overflow : hidden;
+  margin   : 5px 0;
 
   img {
-    width: 100%;
+    width      : 100%;
+    min-height : 100%;
   }
 }
 
@@ -173,8 +186,10 @@ $editBtnIncrement : 20px;
 }
 
 .advert-single__info {
+  padding   : 0 0 20px;
   display   : flex;
-  width     : 100%;
+  width     : 90%;
+  margin    : 0 auto;
   flex-flow : column;
 }
 
@@ -186,6 +201,11 @@ $editBtnIncrement : 20px;
   vertical-align : top;
 }
 
+.advert-uploaded__images-buttons {
+  display         : flex;
+  justify-content : space-between;
+}
+
 @media (min-width : 550px) {
   .advert-single__image {
     width          : 49%;
@@ -194,16 +214,33 @@ $editBtnIncrement : 20px;
 }
 
 @media (min-width : 700px) {
-  .advert-single__main-image {
-    text-align : center;
+
+  .advert-single__banner-inner {
+    background : {
+      color    : #c6c5c5;
+      position : 90% center;
+    }
   }
-  .advert-single__main-image-inner {
+  .advert-single__main-image {
+    display : block;
+  }
+  .advert-single__main-image--mobile {
+    display : none;
+  }
+  .advert-single__edit-btn {
+    position : absolute;
+  }
+  .advert-single__image {
+    width          : 100%;
+    padding-bottom : 60%;
+  }
+
+  .advert-single__main-image {
     float   : left;
-    display : inline-block;
-    padding : 10px;
+    padding : 5px;
     border  : 2px solid $blue;
     margin  : 0 auto;
-    width   : 400px;
+    width   : 50%;
     height  : auto;
 
     img {
@@ -211,20 +248,18 @@ $editBtnIncrement : 20px;
     }
   }
   .advert-single__info {
-    width   : 55%;
-    padding : 30px 0 30px 10%;
+    width   : 65%;
+    padding : 30px 0 30px 15%;
+    margin  : 0;
   }
   .advert-single__images {
     margin-top   : 40px;
     padding-left : 10px;
   }
-}
 
-@media (min-width : 900px) {
-  .advert-single__image {
-    width          : 32%;
-    padding-bottom : 20%;
-    max-width      : 350px;
+  .advert-uploaded__image {
+    width  : 49%;
+    height : 150px;
   }
 }
 
@@ -241,14 +276,14 @@ $editBtnIncrement : 20px;
   }
 }
 
-@media (min-width : 1100px) {
-  .advert-single__image {
-    width          : 24%;
-    padding-bottom : 15%;
-  }
-}
-
 @media (min-width : 1024px) {
+  .advert-single__main-image {
+    width : 32%;
+  }
+  .advert-single__image {
+    width          : 32%;
+    padding-bottom : 22%;
+  }
   .advert-single__banner {
     width        : calc(100% + #{2*$mainContentPaddingLg});
     margin-left  : -$mainContentPaddingLg;
@@ -256,9 +291,19 @@ $editBtnIncrement : 20px;
   }
 }
 
+@media (min-width : 1366px) {
+  .advert-single__banner-inner {
+    min-height : 60vh;
+  }
+}
+
 @media (min-width : 1500px) {
+  .advert-single__main-image {
+    width     : 24%;
+    max-width : 400px;
+  }
   .advert-single__image {
-    width          : 19%;
-    padding-bottom : 11%;
+    width          : 24%;
+    padding-bottom : 16%;
   }
 }
