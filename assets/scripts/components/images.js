@@ -43,27 +43,6 @@ function imagesComponentsInit ( module, constants ) {
         }
     ]);
 
-    module.component("mainImageWrapper", {
-        template : `<img main-image src="{{$ctrl.image}}" >`,
-        bindings : {
-            image : "@",
-            locate : "&locateMainImage"
-        }
-    });
-
-    module.directive("mainImage", [
-        function () {
-            return {
-                require : "^mainImageWrapper",
-                link : ( scope, element, atts, wrapper ) => {
-                    element.on("load", function ( event ) {
-                        wrapper.locate({ isThin : event.path[ 0 ].clientWidth < event.path[ 0 ].clientHeight });
-                    });
-                }
-            };
-        }
-    ]);
-
     module.component('imagesUploader', {
         templateUrl : `${constants.templatesFolder}/images-upload.html`,
         bindings : {
