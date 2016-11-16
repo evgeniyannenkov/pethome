@@ -23,7 +23,7 @@ include ../../views/mixins/formParts
             .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
     popup(type="Add Photos" wide="true")
         popup-trigger
-            .advert-single__edit-btn.advert-single__edit-btn--photos
+            .advert-single__edit-btn.advert-single__edit-btn--photos(title="{{'add photos' | translate}}")
                 i.fa.fa-plus(aria-hidden="true")
                 i.fa.fa-camera(aria-hidden="true")
         popup-content
@@ -31,7 +31,7 @@ include ../../views/mixins/formParts
                 images-uploader(advert-id="{{$parent.$parent.advert.id}}" advert="$parent.$parent.advert.fields")
     popup(type="Edit Advert")
         popup-trigger
-            .advert-single__edit-btn
+            .advert-single__edit-btn(title="{{'edit' | translate}}")
                 i.fa.fa-pencil(aria-hidden="true")
         popup-content
             .popup__content

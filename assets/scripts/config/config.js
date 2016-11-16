@@ -32,7 +32,7 @@ function applicationConfig ( module ) {
                 "email" : "Почта",
                 "password" : "Пароль",
                 "phone" : "Номер телефона",
-                "edit" : "Изменить",
+                "edit" : "Редактировать",
                 "male" : "Мужской",
                 "female" : "Женский",
                 "dog" : "Собака",
@@ -66,9 +66,10 @@ function applicationConfig ( module ) {
                 "go to" : "Перейти",
                 "not specified" : "Не указано",
                 "read more" : "Детальнее",
-                    "Set as main image" : "Сделать основным изображением",
-
-        });
+                "Set as main image" : "Сделать основным изображением",
+                "add photos" : "Добавить фотографии",
+                "add photos from your computer" : "Добавить фотографии со своего компьютера"
+            });
 
             translator.setTranslations("ua", {
                 "language" : "мова",
@@ -132,6 +133,8 @@ function applicationConfig ( module ) {
                 "not specified" : "Не вказано",
                 "read more" : "Детальніше",
                 "Set as main image" : "Зробити основним зображенням",
+                "add photos" : "Додати фото",
+                "add photos from your computer" : "Додати фото зі свого комп'ютера"
             });
 
             translator.setFullDateFormat("en", "MMM/d/yyyy h:mm a");
