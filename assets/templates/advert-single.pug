@@ -21,7 +21,7 @@ include ../../views/mixins/formParts
         .advert__field.advert__field--info.advert__field--info-full
             .advert__field-name.advert__field-name--small {{'info' | translate}}
             .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
-    popup(type="Add Photos")
+    popup(type="Add Photos" wide="true")
         popup-trigger
             .advert-single__edit-btn.advert-single__edit-btn--photos
                 i.fa.fa-plus(aria-hidden="true")
@@ -42,7 +42,7 @@ include ../../views/mixins/formParts
 
 .advert-single__images
     .advert-single__image(ng-repeat="image in advert.fields.images")
-        ng-image.advert-single__image-inner(remove="advert.removeImage(image);" set-main="advert.setMainImage(image);" is-main="advert.fields.mainImage == image;" image="{{image}}")
+        ng-image.advert-single__image-inner(bottom-btn="advert.removeImage(image);" top-btn="advert.setMainImage(image);" is-main="advert.fields.mainImage == image;" image="/{{image}}")
 //div(ng-if="advert.reviewEnabled && !advert.fields.reviewed")
 //    +button("Mark Reviewed")(ng-click="advert.review();")
 //.advert-single__title(ng-if="!advert.fields.published")

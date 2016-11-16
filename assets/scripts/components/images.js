@@ -86,38 +86,31 @@ function imagesComponentsInit ( module, constants ) {
 
             return {
                 restrict : 'A',
-                template : '<canvas/>',
-                link : function ( scope, element, attributes ) {
+                scope : {
+                    file : "=newFile",
+                },
+                link : function ( scope, element ) {
                     if ( !helper.support ) {
                         return;
                     }
 
-                    const params = scope.$eval(attributes.ngThumb);
-
-                    if ( !helper.isFile(params.file) ) {
+                    if ( !helper.isFile(scope.file) ) {
                         return;
                     }
-                    if ( !helper.isImage(params.file) ) {
+                    if ( !helper.isImage(scope.file) ) {
                         return;
                     }
 
-                    const canvas = element.find('canvas');
                     const reader = new FileReader();
 
+                    reader.readAsDataURL(scope.file);
                     reader.onload = onLoadFile;
-                    reader.readAsDataURL(params.file);
 
                     function onLoadFile ( event ) {
                         const img = new Image();
-                        img.onload = onLoadImage;
                         img.src = event.target.result;
-                    }
 
-                    function onLoadImage () {
-                        const width = params.width || this.width / this.height * params.height;
-                        const height = params.height || this.height / this.width * params.width;
-                        canvas.attr({ width : width, height : height });
-                        canvas[ 0 ].getContext('2d').drawImage(this, 0, 0, width, height);
+                        element.prepend(img);
                     }
                 }
             };

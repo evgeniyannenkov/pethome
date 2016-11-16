@@ -148,6 +148,22 @@ $editBtnIncrement : 20px;
   margin         : 0 0 15px;
 }
 
+.advert-uploaded__images {
+  display         : flex;
+  justify-content : space-between;
+  flex-flow       : row wrap;
+}
+
+.advert-uploaded__image {
+  position : relative;
+  width    : 260px;
+  display  : inline-block;
+
+  img {
+    width: 100%;
+  }
+}
+
 .advert-single__image-inner {
   position : absolute;
   top      : 0;
