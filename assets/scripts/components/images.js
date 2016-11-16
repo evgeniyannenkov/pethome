@@ -54,15 +54,15 @@ function imagesComponentsInit ( module, constants ) {
     });
 
     module.component('ngImage', {
-        template : `<div image-overview="{{image.src}}" class="image" style="background-image: url('/{{image.src}}')">
-                        <div ng-if="!image.isMain" class="image__button image__button--set" ng-click="image.setMain({image : image.src});">{{"Set as main image" | translate}}</div>
-                        <div ng-if="image.isMain" class="image__button image__button--set fa fa-check" aria-hidden="true"></div>
-                        <div class="image__button image__button--remove" ng-click="image.remove({image : image.src});">{{"remove" | translate}}</div>
+        template : `<div class="image" style="background-image: url('{{image.src}}')">
+                        <div ng-if="!image.isMain" class="image__button image__button--top" ng-click="image.topBtn({image : image.src});">{{"Set as main image" | translate}}</div>
+                        <div ng-if="image.isMain" class="image__button image__button--top fa fa-check" aria-hidden="true"></div>
+                        <div class="image__button image__button--bottom" ng-click="image.bottomBtn({image : image.src});">{{"remove" | translate}}</div>
                     </div>`,
         bindings : {
             src : "@image",
-            remove : "&",
-            setMain : "&",
+            topBtn : "&",
+            bottomBtn : "&",
             isMain : "="
         },
         controller : function () {

@@ -29,7 +29,7 @@
     vertical-align : middle;
   }
 
-  &.image__button--remove {
+  &.image__button--bottom {
     top              : initial;
     bottom           : 0;
     background-color : $transparentRed;
@@ -39,7 +39,7 @@
     }
   }
 
-  &.image__button--set {
+  &.image__button--top {
     background-color : $transparentBlue;
 
     &:hover {
