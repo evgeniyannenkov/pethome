@@ -42,3 +42,12 @@
     color : white;
   }
 }
+
+.button--red {
+  background   : $red;
+  border-color : $red;
+
+  .button__title {
+    color : white;
+  }
+}

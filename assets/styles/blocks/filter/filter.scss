@@ -19,13 +19,6 @@
   }
 }
 
-.filter__tabs {
-  display         : flex;
-  flex-flow       : row nowrap;
-  justify-content : flex-end;
-  align-items     : flex-end;
-}
-
 .filter__item {
   margin-bottom : 15px;
   &:last-child {
