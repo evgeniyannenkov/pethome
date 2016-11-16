@@ -7,7 +7,7 @@ function paralaxComponentsInit ( module, constants ) {
         function ( $window ) {
             return ( $scope, $element, $attr ) => {
                 let ratio = $attr.ratio || 0.1;
-                angular.element($window).bind("scroll", function () {
+                angular.element($window).on("scroll", function () {
                     $element.css({
                         transform : "translateY(" + $window.pageYOffset * ratio + "%)"
                     });
