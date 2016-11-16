@@ -83,6 +83,10 @@
   &.active {
     animation : popup 0.5s forwards;
   }
+  &.wide {
+    width     : auto !important;
+    max-width : initial !important;
+  }
 }
 
 .popup__header {
