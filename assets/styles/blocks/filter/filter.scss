@@ -13,6 +13,12 @@
   padding : 25px;
 }
 
+.filter__search {
+  .disabled {
+    color : transparent;
+  }
+}
+
 .filter__tabs {
   display         : flex;
   flex-flow       : row nowrap;

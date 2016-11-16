@@ -1,13 +1,14 @@
 include ../../views/mixins/formParts
 include ../../views/mixins/buttons
 
+
+.filter__search
+    +input("Search")(ng-model = "filter.fields" ng-focus="filter.fields = '';filter.extended = false;" ng-class="{disabled: filter.extended}")
++btn-tab("Extended Search")(ng-class="{'active': filter.extended}" ng-click="filter.fields = filter.defaults;filter.extended = true;")
+
 .filter__tabs
-    +btn-tab("General Search")(ng-class="{'active': !filter.extended}" ng-click="filter.fields = '';filter.extended = false;")
-    +btn-tab("Extended Search")(ng-class="{'active': filter.extended}" ng-click="filter.fields = filter.defaults;filter.extended = true;")
+    //+btn-tab("General Search")(ng-class="{'active': !filter.extended}" ng-click="filter.fields = '';filter.extended = false;")
 
-
-.filter__inner(ng-hide="filter.extended")
-    +input("Search")(ng-model = "filter.fields")
 .filter__inner(ng-show="filter.extended")
     .filter__item
         +input("Name")(ng-change = "filter.fieldChange('name')" ng-model = "filter.fields.name")
