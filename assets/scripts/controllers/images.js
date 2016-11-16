@@ -33,6 +33,7 @@ function imageUploadControllersInit ( module ) {
             };
 
             this.fileUploader.onCompleteAll = ( response ) => {
+                this.popup.close();
                 notify.inform({
                     message : `[[Images added]].`,
                     duration : 1500
