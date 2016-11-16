@@ -8,7 +8,7 @@ function advertControllersInit ( module ) {
 
             let current_advert = {};
 
-            adverts.get({ id : this.id })
+            adverts.get({id : this.id})
                    .then(( response ) => {
                        if ( response.data.success && response.data.advert ) {
                            this.fields = response.data.advert;
@@ -23,7 +23,7 @@ function advertControllersInit ( module ) {
                    });
 
             this.save = ( data = this.fields ) => {
-                adverts.update({ id : data._id, data })
+                adverts.update({id : data._id, data})
                        .then(( response ) => {
                            if ( response.data.success && response.data.newAdvert ) {
                                notify.inform({
@@ -57,7 +57,7 @@ function advertControllersInit ( module ) {
             };
 
             this.review = () => {
-                adverts.review({ id : this.id })
+                adverts.review({id : this.id})
                        .then(( response ) => {
                            if ( response.data.success ) {
                                this.fields.reviewed = true;
@@ -125,10 +125,19 @@ function advertControllersInit ( module ) {
             };
 
             this.fieldChange = ( field ) => {
-                if ( field !== "type" && field !== "gender" && this.fields[ field ] == "" ) {
-                    this.fields[ field ] = undefined;
+                if ( field !== "type" && field !== "gender" && this.fields[field] == "" ) {
+                    this.fields[field] = undefined;
                 }
             };
+
+            this.toggleSearch = () => {
+                this.extended = !this.extended;
+                if ( this.extended ) {
+                    this.fields = this.defaults;
+                } else {
+                    this.fields = "";
+                }
+            }
 
         }
     ]);
@@ -143,7 +152,7 @@ function advertControllersInit ( module ) {
             };
 
             this.create = () => {
-                adverts.create({ data : this.advert })
+                adverts.create({data : this.advert})
                        .then(( response ) => {
                            if ( response.data.success ) {
                                notify.inform({
@@ -195,7 +204,7 @@ function advertControllersInit ( module ) {
             });
 
             this.update = () => {
-                adverts.update({ id : this.fields._id, data : this.temporaryData })
+                adverts.update({id : this.fields._id, data : this.temporaryData})
                        .then(( response ) => {
                            if ( response.data.success && response.data.newAdvert ) {
                                notify.inform({
@@ -245,7 +254,7 @@ function advertControllersInit ( module ) {
         "$scope", "adverts", "notify", "$timeout",
         function ( $scope, adverts, notify, $timeout ) {
             this.remove = ( id ) => {
-                adverts.remove({ id })
+                adverts.remove({id})
                        .then(( response ) => {
                            if ( response.data.success && response.data.redirect ) {
                                notify.inform({
