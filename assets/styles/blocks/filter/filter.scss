@@ -40,8 +40,7 @@ $filterHeight : 37px;
 }
 
 .filter__search-btn {
-  height      : $filterHeight;
-  width       : 130px;
+  @include button(130px, $filterHeight);
   min-width   : 130px;
   font-size   : 0.8em;
   z-index     : 1;
