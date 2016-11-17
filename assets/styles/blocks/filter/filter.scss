@@ -5,12 +5,6 @@ $innerHeightSm : 355px;
 $innerHeightMd : 240px;
 $filterHeight : 37px;
 
-.section-filter {
-  background-color : ghostwhite;
-  margin-top       : -$headerHeight;
-  padding          : 25px 0;
-}
-
 .filter {
   position      : relative;
   display       : block;
@@ -37,6 +31,7 @@ $filterHeight : 37px;
 }
 
 .filter__search {
+  width           : 100%;
   display         : flex;
   flex-flow       : row nowrap;
   align-items     : center;
@@ -59,9 +54,6 @@ $filterHeight : 37px;
   color           : white;
   .hidden {
     display : none;
-  }
-  &.active {
-
   }
 }
 

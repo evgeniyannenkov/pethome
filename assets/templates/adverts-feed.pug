@@ -7,26 +7,28 @@ include ../../views/mixins/buttons
 
     .main-content__container
 
-        filter.filter.section-filter__filter(ng-if="feed.filter_enabled" feed-filter="feed.filter")
+        .section-filter__inner
 
-        .sort.section-filter__sort
-            .sort__item
-                +select("Sort", {
-                    "type" : {
-                        "-publicationDate" : "newest first",
-                        "publicationDate" : "oldest first"
-                    }
-                }, true)(ng-model = "feed.order" class="adverts-feed__select")
-            .sort__item
-                +select("Show", {
-                    "show" : {
-                        "" : "All adverts",
-                        "1" : "Last day",
-                        "3" : "Last 3 days",
-                        "7" : "Last week",
-                        "30" : "Last month"
-                    }
-                }, true)(ng-model = "feed.dateRange" class="adverts-feed__select")
+            filter.filter.section-filter__filter(ng-if="feed.filter_enabled" feed-filter="feed.filter")
+
+            .sort.section-filter__sort
+                .sort__item
+                    +select("Sort", {
+                        "type" : {
+                            "-publicationDate" : "Newest first",
+                            "publicationDate" : "Oldest first"
+                        }
+                    }, true)(ng-model = "feed.order")
+                .sort__item
+                    +select("Show", {
+                        "show" : {
+                            "" : "All adverts",
+                            "1" : "Last day",
+                            "3" : "Last 3 days",
+                            "7" : "Last week",
+                            "30" : "Last month"
+                        }
+                    }, true)(ng-model = "feed.dateRange")
 
 .main-content__container
 

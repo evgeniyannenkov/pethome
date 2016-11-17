@@ -59,13 +59,14 @@ function applicationConfig ( module ) {
                 "extended search" : "Расширенный поиск",
                 "both" : "Оба",
                 "all" : "Все",
-                "newer" : "Новее",
-                "older" : "Старее",
-                "date" : "Дата",
+                "Newest first" : "Сначала новые",
+                "Oldest first" : "Сначала старые",
                 "author" : "Автор",
                 "go to" : "Перейти",
                 "not specified" : "Не указано",
-                "read more" : "Детальнее"
+                "read more" : "Детальнее",
+                "sort" : "сортировать",
+                "show" : "показать"
             });
 
             translator.setTranslations("ua", {
@@ -122,13 +123,15 @@ function applicationConfig ( module ) {
                 "extended search" : "Розширений пошук",
                 "both" : "Обидві",
                 "all" : "Всі",
-                "newer" : "Новіші",
-                "older" : "Старіші",
+                "Newest first" : "Спочатку нові",
+                "Oldest first" : "Спочатку старі",
                 "date" : "Дата",
                 "author" : "Автор",
                 "go to" : "Перейти",
                 "not specified" : "Не вказано",
-                "read more" : "Детальніше"
+                "read more" : "Детальніше",
+                "sort" : "сортувати",
+                "show" : "показати"
             });
 
             translator.setFullDateFormat("en", "MMM/d/yyyy h:mm a");

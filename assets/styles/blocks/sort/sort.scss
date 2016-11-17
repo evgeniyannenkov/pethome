@@ -31,3 +31,13 @@
     }
   }
 }
+
+@media screen and (min-width : 1200px) {
+  .sort {
+    justify-content : flex-start;
+  }
+
+  .sort__item {
+    width        : 50%;
+  }
+}
