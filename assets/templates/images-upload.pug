@@ -6,5 +6,5 @@ input.advert-single__images-upload-btn(type="file" id="images-upload" nv-file-se
         .image__button.image__button--top(ng-click="item.upload();") {{'Upload' | translate}}
         .image__button.image__button--bottom(ng-click="item.remove();") {{'Remove' | translate}}
 .advert-uploaded__images-buttons
-    button.button.button--quarter.button--red(ng-if="images.fileUploader.queue.length" ng-click="images.fileUploader.clearQueue();") {{'Remove All' | translate}}
-    button.button.button--quarter.button--blue(ng-if="images.fileUploader.queue.length" ng-click="images.fileUploader.uploadAll();") {{'Upload All' | translate}}
+    button.button.button--red.advert-uploaded__images-button(ng-if="images.fileUploader.queue.length" ng-click="images.fileUploader.clearQueue();") {{'Remove All' | translate}}
+    button.button.button--blue.advert-uploaded__images-button(ng-if="images.fileUploader.queue.length" ng-click="images.fileUploader.uploadAll();") {{'Upload All' | translate}}

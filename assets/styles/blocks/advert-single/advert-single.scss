@@ -161,12 +161,12 @@ $editBtnIncrement : 20px;
   display         : flex;
   justify-content : space-between;
   flex-flow       : row wrap;
+  margin          : 10px 0;
 }
 
 .advert-uploaded__image {
   position : relative;
-  width    : 32%;
-  height   : 200px;
+  width    : 100%;
   display  : inline-block;
   overflow : hidden;
   margin   : 5px 0;
@@ -204,6 +204,23 @@ $editBtnIncrement : 20px;
 .advert-uploaded__images-buttons {
   display         : flex;
   justify-content : space-between;
+  flex-direction  : column;
+}
+
+.advert-uploaded__images-button {
+  width  : 100%;
+  margin : 5px;
+}
+
+@media (min-width : 500px) {
+  .advert-uploaded__image {
+    width  : 49%;
+    height : 25vw;
+  }
+  .advert-single__image {
+    width          : 49%;
+    padding-bottom : 30%;
+  }
 }
 
 @media (min-width : 550px) {
@@ -215,6 +232,13 @@ $editBtnIncrement : 20px;
 
 @media (min-width : 700px) {
 
+  .advert-uploaded__images-buttons {
+    flex-direction : row;
+  }
+  .advert-uploaded__images-button {
+    width  : 25%;
+    margin : 0;
+  }
   .advert-single__banner-inner {
     background : {
       color    : #c6c5c5;
@@ -257,11 +281,6 @@ $editBtnIncrement : 20px;
     margin-top   : 40px;
     padding-left : 10px;
   }
-
-  .advert-uploaded__image {
-    width  : 49%;
-    height : 150px;
-  }
 }
 
 @media (min-width : 992px) {
@@ -274,6 +293,10 @@ $editBtnIncrement : 20px;
       repeat   : no-repeat;
       position : center right;
     }
+  }
+  .advert-uploaded__image {
+    width  : 32%;
+    height : 18vw;
   }
 }
 
@@ -293,6 +316,10 @@ $editBtnIncrement : 20px;
 }
 
 @media (min-width : 1366px) {
+  .advert-uploaded__image {
+    width  : 24%;
+    height : 14vw;
+  }
   .advert-single__banner-inner {
     min-height : 60vh;
   }
@@ -306,5 +333,12 @@ $editBtnIncrement : 20px;
   .advert-single__image {
     width          : 24%;
     padding-bottom : 16%;
+  }
+}
+
+@media (min-width : 1700px) {
+  .advert-uploaded__image {
+    width  : 24%;
+    height : 290px;
   }
 }

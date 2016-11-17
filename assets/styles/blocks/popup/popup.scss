@@ -85,7 +85,7 @@
   }
   &.wide {
     width     : auto !important;
-    max-width : 80% !important;
+    max-width : 90% !important;
   }
 }
 
@@ -133,5 +133,14 @@
 @media screen and (min-width : 920px) {
   .popup__inner {
     width : 50%;
+  }
+}
+
+@media screen and (min-width : 1800px) {
+  .popup__inner {
+
+    &.wide {
+      max-width : 1700px !important;
+    }
   }
 }
