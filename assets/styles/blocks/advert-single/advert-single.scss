@@ -84,7 +84,7 @@ $editBtnIncrement : 20px;
   background-color : lighten($blue, 10%);
   color            : white;
   font-size        : 1.2em;
-  z-index          : 100;
+  z-index          : 9;
 
   &:hover {
     animation : editBtnHoverIn 0.2s forwards;

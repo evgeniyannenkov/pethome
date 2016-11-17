@@ -3,6 +3,9 @@
 .button {
   @include button(150px, 45px);
   position : relative;
+}
+
+.button--overlay_hover {
   &:after {
     content    : "";
     position   : absolute;
