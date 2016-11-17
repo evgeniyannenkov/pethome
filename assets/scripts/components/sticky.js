@@ -3,40 +3,54 @@
 function stickyComponentsInit ( module, constants ) {
 
     module.directive("sticky", [
-        "$window",
-        function ( $window ) {
-            return {
-                controller : function () {
+        "$window", "$document",
+        function ( $window, $document ) {
+            return ( scope, element, atts ) => {
+                let _window = angular.element($window)
+                    , elementOffset,
+                    shouldStuck,
+                    sticky,
+                    offset = 100,
+                    elementWidth;
 
-                },
-                link : ( scope, element, atts ) => {
-                    console.log(atts.wideAs);
-                    let _window = angular.element($window)
-                        , elementOffset,
-                        shouldStuck,
-                        sticky,
-                        offset = 100,
-                        elementWidth;
+                let wideAsElement;
 
-                    _window.on("scroll", function () {
-                        elementOffset = elementOffset || element.prop('offsetTop');
+                const getWidth = ( elementWidth, wideAsElement ) => {
+                    if ( wideAsElement ) {
+                        elementWidth = wideAsElement.offsetWidth;
+                    } else {
                         elementWidth = elementWidth || element.prop('offsetWidth');
-                        shouldStuck = $window.pageYOffset > elementOffset - offset;
+                    }
+                    return elementWidth;
+                };
 
-                        if ( shouldStuck && !sticky ) {
-                            element.css({
-                                'top' : offset + "px",
-                                "position" : "fixed",
-                                "width" : elementWidth + "px"
-                            });
-                            sticky = true;
-                        } else if ( !shouldStuck && sticky ) {
-                            element.css("position", "static");
-                            sticky = false;
-                        }
-
-                    });
+                if ( atts.wideAs ) {
+                    wideAsElement = document.querySelector(atts.wideAs);
                 }
+
+                _window.on("scroll", function () {
+
+                    elementOffset = elementOffset || element.prop('offsetTop');
+                    shouldStuck = $window.pageYOffset > elementOffset - offset;
+
+                    if ( shouldStuck ) {
+                        elementWidth = getWidth(elementWidth, wideAsElement);
+                        element.css({
+                            'top' : offset + "px",
+                            "position" : "fixed",
+                            "width" : elementWidth + "px"
+                        });
+                        sticky = true;
+                    } else if ( !shouldStuck && sticky ) {
+                        element.css("position", "static");
+                        sticky = false;
+                    }
+                });
+
+                _window.on("resize", function () {
+                    elementWidth = getWidth(elementWidth, wideAsElement);
+                    element.css("width", elementWidth + "px");
+                });
             };
         }
     ]);
