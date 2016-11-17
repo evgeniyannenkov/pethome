@@ -136,7 +136,7 @@ function applicationConfig ( module ) {
                 "read more" : "Детальніше",
                 "Set as main image" : "Зробити основним зображенням",
                 "add photos" : "Додати фото",
-                "add photos from your computer" : "Додати фото зі свого комп'ютера"
+                "add photos from your computer" : "фото з комп'ютера"
             });
 
             translator.setFullDateFormat("en", "MMM/d/yyyy h:mm a");

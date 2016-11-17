@@ -161,7 +161,6 @@ $editBtnIncrement : 20px;
   display         : flex;
   justify-content : space-between;
   flex-flow       : row wrap;
-  margin          : 10px 0;
 }
 
 .advert-uploaded__image {
@@ -199,11 +198,17 @@ $editBtnIncrement : 20px;
 
 .advert-single__images-upload-btn-label {
   vertical-align : top;
+  width          : 100% !important;
+  min-width      : initial !important;
+  font-size      : 0.9em;
+  height         : auto !important;
+  margin-bottom  : 10px;
 }
 
 .advert-uploaded__images-buttons {
   display         : flex;
   justify-content : space-between;
+  margin-top      : 10px;
 }
 
 .advert-uploaded__images-button {
