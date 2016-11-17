@@ -73,9 +73,42 @@
   max-height : 15em;
 }
 
+.form__select-wrap {
+  position : relative;
+  background : {
+    color    : white;
+  }
+  &:after {
+    content  : "";
+    position : absolute;
+    top      : 0;
+    right    : 0;
+    width    : 37px;
+    height   : 100%;
+    display  : inline-block;
+    background : {
+      image    : url("images/chevron.svg");
+      size     : 50%;
+      repeat   : no-repeat;
+      position : {
+        x      : 50%;
+        y      : 50%;
+      }
+    }
+  }
+}
+
 .form__select {
   @include input;
-  padding : 9px 7px;
+  position           : relative;
+  z-index            : 1;
+  padding            : 10px 7px;
+  -webkit-appearance : none;
+  appearance         : none;
+  background : {
+    color    : transparent;
+  }
+;
 }
 
 .form__radio {
