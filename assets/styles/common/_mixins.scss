@@ -2,18 +2,20 @@
 @import "typography";
 
 @mixin button($width: auto, $height: 45px) {
-  display        : inline-block;
-  padding        : 10px;
-  width          : $width;
-  min-width      : 150px;
-  height         : $height;
-  border         : 1px solid transparent;
-  background     : transparent;
-  overflow       : hidden;
-  cursor         : pointer;
-  color          : white;
-  text-transform : uppercase;
-  text-align     : center;
+  display         : inline-flex;
+  justify-content : center;
+  align-items     : center;
+  padding         : 10px;
+  width           : $width;
+  min-width       : 150px;
+  height          : $height;
+  border          : 1px solid transparent;
+  background      : transparent;
+  overflow        : hidden;
+  cursor          : pointer;
+  color           : white;
+  text-transform  : uppercase;
+  text-align      : center;
 }
 
 @mixin input {
@@ -32,5 +34,35 @@
   }
   &.ng-invalid.ng-touched {
     border : 1px solid $red;
+  }
+}
+
+@mixin invertBgHover($color) {
+  transition : color 0.2s, background 0.2s;
+  &:hover {
+    background : white;
+    color      : $color;
+    .button__title {
+      color : $color;
+    }
+  }
+}
+
+@mixin underlineHover($color, $bottomOffset: 0px) {
+  &:after {
+    content    : "";
+    display    : block;
+    position   : absolute;
+    bottom     : $bottomOffset;
+    left       : 0;
+    background : $color;
+    width      : 0;
+    height     : 1px;
+    transition : width 0.2s cubic-bezier(0.29, 1.14, 0.72, 0.73);
+  }
+  &:hover {
+    &:after {
+      width : 100%;
+    }
   }
 }
