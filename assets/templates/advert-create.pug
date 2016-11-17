@@ -3,24 +3,25 @@ include ../../views/mixins/formParts
 popup-form(name="newAdvert" submit-function="new.create();" label="Create")
     form-input(type="text" name="title" required="true" value="new.advert.title")
     form-input(type="text" name="name" required="false" value="new.advert.name")
-    +select("Type", {
-        "type" : {
-            "dog" : "Dog",
-            "cat" : "Cat",
-            "bird" : "Bird",
-            "rabbit" : "Rabbit",
-            "fish" : "Fish",
-            "ferret" : "Ferret",
-            "guinea pig" : "Guinea pig",
-            "hamster" : "Hamster"
-        }
-    })(ng-model="new.advert.type")
-    +radios("Gender", {
-        "gender" : {
-            "male" : "Male",
-            "female" : "Female"
-        }
-    })(ng-model="new.advert.gender")
+    .form__item-wrap
+        +select("Type", {
+            "type" : {
+                "dog" : "Dog",
+                "cat" : "Cat",
+                "bird" : "Bird",
+                "rabbit" : "Rabbit",
+                "fish" : "Fish",
+                "ferret" : "Ferret",
+                "guinea pig" : "Guinea pig",
+                "hamster" : "Hamster"
+            }
+        })(ng-model="new.advert.type")
+        +select("Gender", {
+            "gender" : {
+                "male" : "Male",
+                "female" : "Female"
+            }
+        }, true)(ng-model="new.advert.gender")
     form-input(type="number" name="age" min="0" value="new.advert.age")
     form-input(type="text" name="breed" required="false" value="new.advert.breed")
     form-textarea(name="info" value="new.advert.info" type="textarea")

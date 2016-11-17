@@ -2,24 +2,25 @@ include ../../views/mixins/formParts
 popup-form(name="advertEditForm" submit-function="editor.update();" label="Update")
     form-input(type="text" name="title" required="true" value="editor.temporaryData.title")
     form-input(type="text" name="name" required="false" value="editor.temporaryData.name")
-    +select("Type", {
-        "type" : {
-            "dog" : "Dog",
-            "cat" : "Cat",
-            "bird" : "Bird",
-            "rabbit" : "Rabbit",
-            "fish" : "Fish",
-            "ferret" : "Ferret",
-            "guinea pig" : "Guinea pig",
-            "hamster" : "Hamster"
-        }
-    })(ng-model = "editor.temporaryData.type")
-    +radios("Gender", {
-        "gender" : {
-            "male" : "Male",
-            "female" : "Female"
-        }
-    })(ng-model = "editor.temporaryData.gender")
+    .form__item-wrap
+        +select("Type", {
+            "type" : {
+                "dog" : "Dog",
+                "cat" : "Cat",
+                "bird" : "Bird",
+                "rabbit" : "Rabbit",
+                "fish" : "Fish",
+                "ferret" : "Ferret",
+                "guinea pig" : "Guinea pig",
+                "hamster" : "Hamster"
+            }
+        })(ng-model = "editor.temporaryData.type")
+        +select("Gender", {
+            "gender" : {
+                "male" : "Male",
+                "female" : "Female"
+            }
+        })(ng-model = "editor.temporaryData.gender")
     form-input(type="number" name="age" min="0" value="editor.temporaryData.age")
     form-input(type="text" name="breed" required="false" value="editor.temporaryData.breed")
     form-textarea(type="textarea" name="info" value="editor.temporaryData.info")

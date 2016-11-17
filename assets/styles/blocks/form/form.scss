@@ -332,4 +332,13 @@
   .form__btn-wrap {
     width : auto;
   }
+
+  .form__item-wrap {
+    display         : flex;
+    flex-flow       : row nowrap;
+    justify-content : space-between;
+    .form__item {
+      width : 45%;
+    }
+  }
 }
