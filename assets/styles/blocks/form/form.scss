@@ -75,6 +75,7 @@
 
 .form__select-wrap {
   position : relative;
+  cursor   : pointer;
   background : {
     color    : white;
   }
@@ -87,7 +88,7 @@
     height   : 100%;
     display  : inline-block;
     background : {
-      image    : url("images/chevron.svg");
+      image    : url("images/down-chevron.svg");
       size     : 50%;
       repeat   : no-repeat;
       position : {
@@ -100,6 +101,7 @@
 
 .form__select {
   @include input;
+  cursor             : pointer;
   position           : relative;
   z-index            : 1;
   padding            : 10px 7px;
