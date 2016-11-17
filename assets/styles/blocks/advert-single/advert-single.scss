@@ -204,12 +204,11 @@ $editBtnIncrement : 20px;
 .advert-uploaded__images-buttons {
   display         : flex;
   justify-content : space-between;
-  flex-direction  : column;
 }
 
 .advert-uploaded__images-button {
-  width  : 100%;
-  margin : 5px;
+  width     : 49% !important;
+  min-width : initial !important;
 }
 
 @media (min-width : 500px) {
@@ -233,11 +232,11 @@ $editBtnIncrement : 20px;
 @media (min-width : 700px) {
 
   .advert-uploaded__images-buttons {
-    flex-direction : row;
+    flex-direction  : row;
+    justify-content : space-around;
   }
   .advert-uploaded__images-button {
-    width  : 25%;
-    margin : 0;
+    width : 25% !important;
   }
   .advert-single__banner-inner {
     background : {
