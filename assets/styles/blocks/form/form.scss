@@ -1,22 +1,5 @@
 @import "../../common/variables";
-
-@mixin input {
-  @include roboto-condensed;
-  width         : 100%;
-  border        : 1px solid #e1e6f0;
-  color         : $metallicGray;
-  border-radius : 3px;
-  font-size     : 0.8em;
-  background    : $white;
-  padding       : 10px 7px 10px 10px;
-  &:focus {
-    border  : 1px solid $blue;
-    outline : none;
-  }
-  &.ng-invalid.ng-touched {
-    border : 1px solid $red;
-  }
-}
+@import "../../common/mixins";
 
 @keyframes load {
   0% {
@@ -71,9 +54,6 @@
 
 .form__item {
   margin-bottom : 15px;
-  &:last-child {
-    margin-bottom : 0;
-  }
 }
 
 .form__item--btn {
@@ -93,9 +73,44 @@
   max-height : 15em;
 }
 
+.form__select-wrap {
+  position : relative;
+  cursor   : pointer;
+  background : {
+    color    : white;
+  }
+  &:after {
+    content  : "";
+    position : absolute;
+    top      : 0;
+    right    : 0;
+    width    : 37px;
+    height   : 100%;
+    display  : inline-block;
+    background : {
+      image    : url("images/down-chevron.svg");
+      size     : 50%;
+      repeat   : no-repeat;
+      position : {
+        x      : 50%;
+        y      : 50%;
+      }
+    }
+  }
+}
+
 .form__select {
   @include input;
-  padding : 10px 7px;
+  cursor             : pointer;
+  position           : relative;
+  z-index            : 1;
+  padding            : 10px 7px;
+  -webkit-appearance : none;
+  appearance         : none;
+  background : {
+    color    : transparent;
+  }
+;
 }
 
 .form__radio {
@@ -318,5 +333,14 @@
 
   .form__btn-wrap {
     width : auto;
+  }
+
+  .form__item-wrap {
+    display         : flex;
+    flex-flow       : row nowrap;
+    justify-content : space-between;
+    .form__item {
+      width : 45%;
+    }
   }
 }

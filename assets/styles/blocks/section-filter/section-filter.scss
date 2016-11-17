@@ -1,0 +1,28 @@
+.section-filter {
+  background-color : ghostwhite;
+  margin-top       : -$headerHeight;
+  padding          : 25px 0;
+}
+
+@media screen and (min-width : 1200px) {
+
+  .section-filter__inner {
+    display         : flex;
+    flex-flow       : row nowrap;
+    justify-content : flex-start;
+    align-items     : flex-start;
+  }
+
+  .section-filter__filter {
+    width : 70%;
+    order : 2;
+  }
+
+  .section-filter__sort {
+    width        : 30%;
+    margin-right : 15px;
+    order        : 1;
+    margin-top   : 5px;
+  }
+
+}

@@ -1,21 +1,36 @@
 include ../../views/mixins/formParts
 include ../../views/mixins/buttons
 
-.main-content__container
-    .filter
-        filter(ng-if="feed.filter_enabled" feed-filter="feed.filter")
-        +select("Date", {
-            "type" : {
-                "-publicationDate" : "Newer",
-                "publicationDate" : "Older"
-            }
-        }, true)(ng-model = "feed.order" class="adverts-feed__select")
 
-        +btn-default("All adverts")(ng-click="feed.dateRange = 0;" class="button--blue")
-        +btn-default("Last day")(ng-click="feed.dateRange = 1;" class="button--blue")
-        +btn-default("Last 3 days")(ng-click="feed.dateRange = 3;" class="button--blue")
-        +btn-default("Last week")(ng-click="feed.dateRange = 7;" class="button--blue")
-        +btn-default("Last month")(ng-click="feed.dateRange = 30;" class="button--blue")
+
+.section-filter
+
+    .main-content__container
+
+        .section-filter__inner
+
+            filter.filter.section-filter__filter(ng-if="feed.filter_enabled" feed-filter="feed.filter")
+
+            .sort.section-filter__sort
+                .sort__item
+                    +select("Sort", {
+                        "type" : {
+                            "-publicationDate" : "Newest first",
+                            "publicationDate" : "Oldest first"
+                        }
+                    }, true)(ng-model = "feed.order")
+                .sort__item
+                    +select("Show", {
+                        "show" : {
+                            "" : "All adverts",
+                            "1" : "Last day",
+                            "3" : "Last 3 days",
+                            "7" : "Last week",
+                            "30" : "Last month"
+                        }
+                    }, true)(ng-model = "feed.dateRange")
+
+.main-content__container
 
     .adverts-feed(ng-if="!feed.customFilter")
         advert.advert(ng-repeat="(index, advert) in feed.adverts | dateRange : feed.dateRange | filter: feed.filter | orderBy : feed.order" fields="advert" hide-fields="feed.hideFields" author="feed.authors[advert.author]" ng-if="feed.allAllowed")

@@ -60,16 +60,23 @@ function applicationConfig ( module ) {
                 "extended search" : "Расширенный поиск",
                 "both" : "Оба",
                 "all" : "Все",
-                "newer" : "Новее",
-                "older" : "Старее",
-                "date" : "Дата",
+                "Newest first" : "Сначала новые",
+                "Oldest first" : "Сначала старые",
                 "author" : "Автор",
                 "go to" : "Перейти",
                 "not specified" : "Не указано",
                 "read more" : "Детальнее",
                 "Set as main image" : "Сделать основным изображением",
                 "add photos" : "Добавить фотографии",
-                "add photos from your computer" : "Добавить фотографии со своего компьютера"
+                "add photos from your computer" : "Добавить фотографии со своего компьютера",
+                "sort" : "сортировать",
+                "show" : "показать",
+                "all adverts" : "Все обьявления",
+                "last day" : "За последний день",
+                "last 3 days" : "За три дня",
+                "last week" : "За неделю",
+                "last month" : "За месяц",
+
             });
 
             translator.setTranslations("ua", {
@@ -127,8 +134,8 @@ function applicationConfig ( module ) {
                 "extended search" : "Розширений пошук",
                 "both" : "Обидві",
                 "all" : "Всі",
-                "newer" : "Новіші",
-                "older" : "Старіші",
+                "Newest first" : "Спочатку нові",
+                "Oldest first" : "Спочатку старі",
                 "date" : "Дата",
                 "author" : "Автор",
                 "go to" : "Перейти",
@@ -136,7 +143,15 @@ function applicationConfig ( module ) {
                 "read more" : "Детальніше",
                 "Set as main image" : "Зробити основним зображенням",
                 "add photos" : "Додати фото",
-                "add photos from your computer" : "фото з комп'ютера"
+                "add photos from your computer" : "фото з комп'ютера",
+                "sort" : "сортувати",
+                "show" : "показати",
+                "all adverts" : "Всі оголошення",
+                "last day" : "За останній день",
+                "last 3 days" : "За три дні",
+                "last week" : "За тиждень",
+                "last month" : "За місяць",
+
             });
 
             translator.setFullDateFormat("en", "MMM/d/yyyy h:mm a");

@@ -73,7 +73,7 @@ mixin checkboxes(block_title, block_inputs, hide_title)
 mixin select(label, options, without_other)
     .form__item
         div.form__title {{'#{label}' | translate}}
-        div
+        div.form__select-wrap
             each inputs, name in options
                     select.form__select(name = name)&attributes(attributes)
                         each label,value in inputs
