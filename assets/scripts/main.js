@@ -8,14 +8,14 @@ class Builder {
 
     initComponents ( module, components ) {
         for ( let index = 0; index < components.length; index++ ) {
-            components[index](this.modules[module], this.constants);
+            components[ index ](this.modules[ module ], this.constants);
         }
     }
 
     init ( components ) {
         for ( let module in components ) {
             if ( components.hasOwnProperty(module) ) {
-                this.initComponents(module, components[module]);
+                this.initComponents(module, components[ module ]);
             }
         }
     }
@@ -62,9 +62,6 @@ const components = {
         authorControllersInit,
         authorComponentsInit
     ],
-    config : [
-        applicationConfig
-    ],
     translation : [
         translationControllersInit,
         languagesComponentsInit
@@ -83,6 +80,11 @@ const components = {
     ],
     paralax : [
         paralaxComponentsInit
+    ],
+    app : [
+        stickyComponentsInit,
+        applicationConfig
+
     ]
 };
 

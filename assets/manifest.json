@@ -33,11 +33,6 @@
         "js-md5",
         "smoothscroll-for-websites"
       ]
-    },
-    "smoothscroll.js": {
-      "bower": [
-        "smoothscroll-for-websites"
-      ]
     }
   },
   "config": {

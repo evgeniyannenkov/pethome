@@ -39,7 +39,8 @@ include ../../views/mixins/formParts
                 advert-edit(advert="$parent.$parent.advert.fields")
 
 .advert-single__main-image.advert-single__main-image--desktop(ng-if="advert.fields.mainImage")
-    img(ng-src="/{{advert.fields.mainImage}}")
+    .advert-single__main-image-inner(sticky wide-as=".advert-single__main-image--desktop")
+        img(ng-src="/{{advert.fields.mainImage}}")
 
 .advert-single__images
     .advert-single__image(ng-repeat="image in advert.fields.images")

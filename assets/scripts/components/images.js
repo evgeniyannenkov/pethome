@@ -77,7 +77,7 @@ function imagesComponentsInit ( module, constants ) {
     module.directive('ngThumb', [
         '$window', function ( $window ) {
             const helper = {
-                support : !!($window.FileReader && $window.CanvasRenderingContext2D),
+                support : !!($window.FileReader),
                 isFile : function ( item ) {
                     return angular.isObject(item) && item instanceof $window.File;
                 },
@@ -114,7 +114,6 @@ function imagesComponentsInit ( module, constants ) {
                         img.src = event.target.result;
 
                         element.append(img);
-                        console.log(element);
                     }
                 }
             };

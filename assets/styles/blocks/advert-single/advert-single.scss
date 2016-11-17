@@ -250,12 +250,6 @@ $editBtnIncrement : 20px;
       size     : 15%;
     }
   }
-  .advert-single__main-image {
-    display : block;
-  }
-  .advert-single__main-image--mobile {
-    display : none;
-  }
   .advert-single__edit-btn {
     position : absolute;
   }
@@ -263,18 +257,26 @@ $editBtnIncrement : 20px;
     width          : 100%;
     padding-bottom : 60%;
   }
-
   .advert-single__main-image {
-    float   : left;
-    padding : 5px;
-    border  : 2px solid $blue;
-    margin  : 0 auto;
-    width   : 50%;
-    height  : auto;
+    display    : block;
+    border     : none;
+    padding    : 0;
+    float      : left;
+    margin     : 0 auto;
+    width      : 50%;
+    height     : auto;
+    min-height : 1px;
 
+    .advert-single__main-image-inner {
+      padding : 5px;
+      border  : 2px solid $blue;
+    }
     img {
       width : 100%;
     }
+  }
+  .advert-single__main-image--mobile {
+    display : none;
   }
   .advert-single__info {
     width   : 65%;
