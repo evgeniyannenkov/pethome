@@ -6,6 +6,9 @@
         .author__field
             | {{author.fields.contactInfo.email}}
         .author__field
+            | Member since:
+            | {{author.fields.date | translate : 'date'}}
+        .author__field
             | {{author.fields.contactInfo.phone}}
 
 popup(type="profile" ng-if="author.edit")

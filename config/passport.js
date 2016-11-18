@@ -24,7 +24,7 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            authors.create({"contactInfo.email" : email, password})
+            authors.create({"contactInfo.email" : email, password, date: new Date().getTime()})
                    .then(( response ) => {
                        if ( response.success ) {
                            done(null, response.author);

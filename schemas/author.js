@@ -42,7 +42,10 @@ const authorSchema = new mongoose.Schema({
     language : {
         type : String,
         default : "ru"
-    }
+    },
+    date : {
+        type : Number
+    },
 });
 
 authorSchema.methods.validatePassword = function ( password ) {
