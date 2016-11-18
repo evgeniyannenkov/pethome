@@ -5,6 +5,26 @@
   text-align : center;
 }
 
+.uploader__drop-zone {
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  width           : calc(100% - 20px);
+  margin          : 10px;
+  height          : 100px;
+  border          : 2px dashed $metallicGray;
+}
+
+.uploader__drop-zone--active {
+  border-color : $blue;
+}
+
+.uploader__title {
+  @include roboto-condensed;
+  font-size : 1.2em;
+  color     : $metallicGray;
+}
+
 .uploader__btn {
   @include button(100%, auto);
   min-width     : initial !important;
