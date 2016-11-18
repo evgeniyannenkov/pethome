@@ -1,16 +1,22 @@
-h3 {{author.fields.name}}
-h3 {{author.fields.contactInfo.email}}
-h3 {{author.fields.contactInfo.phone}}
+.author__block
+    .author__avatar
+    .author__inner
+        .author__field.author__field--name
+            | {{author.fields.name || 'Not specified' | translate}}
+        .author__field
+            | {{author.fields.contactInfo.email}}
+        .author__field
+            | {{author.fields.contactInfo.phone}}
 
 popup(type="profile" ng-if="author.edit")
     popup-trigger
         button {{'Edit Profile' | translate}}
     popup-content
         .popup__content
-            author-edit(author="$parent.$parent.$parent.author.fields")
+            author-edit
 popup(type="Remove Profile" ng-if="author.remove")
     popup-trigger
         button {{'Remove Profile' | translate}}
     popup-content
         .popup__content
-            author-remove(author="$parent.$parent.$parent.author.fields")
+            author-remove

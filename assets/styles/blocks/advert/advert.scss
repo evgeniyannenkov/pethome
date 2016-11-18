@@ -18,7 +18,7 @@
 }
 
 .advert__content {
-  border     : 1px solid lightgray;
+  border     : 1px solid $lightGray;
   border-top : none;
   padding    : 5px 10px;
 }
@@ -28,7 +28,7 @@
   justify-content : space-between;
   padding         : 10px 5px;
   font-size       : 1.1em;
-  border-bottom   : 1px solid lightGray;
+  border-bottom   : 1px solid $lightGray;
 }
 
 .advert__field:last-child {
@@ -102,7 +102,7 @@
 
 .advert__field-name {
   text-transform : capitalize;
-  color          : rgb(97, 95, 95);
+  color          : $gray;
 }
 
 .advert__field-name--small {

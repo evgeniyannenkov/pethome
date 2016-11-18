@@ -1,0 +1,42 @@
+.author {
+  @include roboto-regular;
+  color : $gray;
+}
+
+.author__block {
+  display         : flex;
+  flex-flow       : row nowrap;
+  justify-content : flex-start;
+  align-items     : center;
+  padding         : 2rem;
+  border          : 2px solid $lightGray;
+  border-radius   : 3px;
+}
+
+.author__field {
+  margin-bottom : 5px;
+  &:last-child {
+    margin-bottom : 0;
+  }
+}
+
+.author__field--name {
+  margin-bottom : 15px;
+  font-size     : 1.4em;
+}
+
+.author__avatar {
+  margin-right  : 20px;
+  width         : 80px;
+  height        : 80px;
+  border-radius : 50%;
+  overflow      : hidden;
+  background : {
+    image    : url("images/profile.svg");
+    position : {
+      x      : 50%;
+      y      : 50%;
+    }
+    size     : 80px;
+  }
+}
