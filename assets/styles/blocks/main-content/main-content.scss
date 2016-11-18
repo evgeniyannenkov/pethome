@@ -1,8 +1,13 @@
 @import "../../common/_variables";
+
 .main-content {
   padding-top : $headerHeight;
   max-width   : $maxContainerWidth;
   margin      : 0 auto;
+}
+
+.main-content__shifted {
+  margin-top : -$headerHeight;
 }
 
 .main-content__container {
