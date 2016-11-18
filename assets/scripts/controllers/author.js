@@ -85,9 +85,9 @@ function authorControllersInit ( module ) {
 
     module.controller('authorRemoveCtrl', [
         "author", "notify", "$scope", "$timeout",
-        function ( author, notify, $scope, $timeout ) {
+        function ( $author, notify, $scope, $timeout ) {
             this.remove = () => {
-                author.remove({ id : this.author._id })
+                $author.remove({ id : this.author.fields._id })
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({

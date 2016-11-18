@@ -32,10 +32,8 @@ function authorComponentsInit ( module, constants ) {
     module.component('authorRemove', {
         templateUrl : `${constants.templatesFolder}/author-remove.html`,
         require : {
-            popup : "^^?popup"
-        },
-        bindings : {
-            author : "="
+            popup : "^^?popup",
+            author: "^^?author"
         },
         controller : "authorRemoveCtrl",
         controllerAs : "remover"
