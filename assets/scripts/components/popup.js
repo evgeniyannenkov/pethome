@@ -9,7 +9,8 @@ function popupComponentsInit ( module, constants ) {
         },
         templateUrl : `${constants.templatesFolder}/popup.html`,
         bindings : {
-            type : "@"
+            type : "@",
+            wide: "="
         },
         controller : "popupCtrl",
         controllerAs : "popup"
