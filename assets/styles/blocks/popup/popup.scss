@@ -83,10 +83,6 @@
   &.active {
     animation : popup 0.5s forwards;
   }
-  &.wide {
-    width     : auto !important;
-    max-width : 90% !important;
-  }
 }
 
 .popup__header {
@@ -124,15 +120,7 @@
 
 @media screen and (min-width : 920px) {
   .popup__inner {
-    width : 50%;
-  }
-}
-
-@media screen and (min-width : 1800px) {
-  .popup__inner {
-
-    &.wide {
-      max-width : 1700px !important;
-    }
+    width     : 50%;
+    max-width : 1000px;
   }
 }
