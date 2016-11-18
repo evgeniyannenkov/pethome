@@ -34,25 +34,25 @@ function authorControllersInit ( module ) {
 
     module.controller('authorEditCtrl', [
         "author", "notify", "$scope", "$rootScope", "$timeout",
-        function ( author, notify, $scope, $rootScope, $timeout ) {
+        function ( $author, notify, $scope, $rootScope, $timeout ) {
 
             $rootScope.$on("popup_open", ( $event, type ) => {
                 if ( type == "profile" ) {
-                    this.temporaryData = angular.copy(this.author);
+                    this.temporaryData = angular.copy(this.author.fields);
                     this.temporaryData.language = localStorage[ "preferred_language" ] || 'ru'
                 }
             });
 
             this.edit = () => {
 
-                author.update({ id : this.author._id, data : this.temporaryData })
+                $author.update({ id : this.author.fields._id, data : this.temporaryData })
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({
                                   message : `[[Updated]]  <i class="fa fa-check" aria-hidden="true"></i>`,
                                   duration : 1500
                               });
-                              this.author = angular.copy(this.temporaryData);
+                              this.author.fields = angular.copy(this.temporaryData);
                               if ( this.popup ) {
                                   this.popup.close();
                               }

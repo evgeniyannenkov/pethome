@@ -22,10 +22,8 @@ function authorComponentsInit ( module, constants ) {
     module.component('authorEdit', {
         templateUrl : `${constants.templatesFolder}/author-edit.html`,
         require : {
-            popup : "^^?popup"
-        },
-        bindings : {
-            author : "="
+            popup : "^^?popup",
+            author: "^^?author"
         },
         controller : "authorEditCtrl",
         controllerAs : "editor"
