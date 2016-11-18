@@ -1,0 +1,76 @@
+@import "../../common/mixins";
+
+.uploader {
+  display    : block;
+  text-align : center;
+}
+
+.uploader__btn {
+  @include button(100%, auto);
+  min-width     : initial !important;
+  font-size     : 0.9em;
+  margin-bottom : 10px;
+}
+
+.uploader__input {
+  display : none;
+}
+
+.uploader__inner {
+  display         : flex;
+  justify-content : center;
+  flex-flow       : row wrap;
+}
+
+.uploader__image {
+  height           : 300px;
+  background-color : $whiteSmoke;
+  overflow         : hidden;
+  margin           : 5px 0;
+  img {
+    width      : 100%;
+    min-height : 100%;
+  }
+}
+
+.uploader__btn-wrap {
+  display    : flex;
+  flex-flow  : column nowrap;
+  margin-top : 10px;
+}
+
+@media (min-width : 500px) {
+  .uploader__image {
+    width  : calc(50% - 20px);
+    height : 250px;
+    margin : 5px 10px;
+  }
+
+  .uploader__btn-wrap {
+    flex-flow       : row nowrap;
+    justify-content : center;
+  }
+
+  .uploader__btn {
+    width  : calc(100% - 20px);
+    margin : 10px;
+  }
+
+  .uploader__btn--wrapped {
+    width     : calc(50% - 20px);
+    max-width : 200px;
+  }
+}
+
+@media (min-width : 920px) {
+  .uploader__image {
+    width  : calc(33% - 20px);
+    height : 150px;
+  }
+}
+
+@media (min-width : 1400px) {
+  .uploader__image {
+    width : calc(20% - 20px);
+  }
+}

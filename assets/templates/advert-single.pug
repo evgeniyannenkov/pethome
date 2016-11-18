@@ -22,14 +22,14 @@ include ../../views/mixins/formParts
         .advert__field.advert__field--info.advert__field--info-full
             .advert__field-name.advert__field-name--small {{'info' | translate}}
             .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
-    popup(type="Add Photos" wide="true")
+    popup(type="Add Photos")
         popup-trigger
             .advert-single__edit-btn.advert-single__edit-btn--photos(title="{{'add photos' | translate}}")
                 i.fa.fa-plus(aria-hidden="true")
                 i.fa.fa-camera(aria-hidden="true")
         popup-content
             .popup__content
-                images-uploader(advert-id="{{$parent.$parent.advert.id}}" advert="$parent.$parent.advert.fields")
+                images-uploader.uploader(advert-id="{{$parent.$parent.advert.id}}" advert="$parent.$parent.advert.fields")
     popup(type="Edit Advert")
         popup-trigger
             .advert-single__edit-btn(title="{{'edit' | translate}}")

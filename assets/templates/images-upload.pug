@@ -1,10 +1,10 @@
 include ../../views/mixins/buttons
-label.button.button--blue.advert-single__images-upload-btn-label(ng-class="{'no-margin' : !images.fileUploader.queue.length}" for="images-upload") {{'Add photos from your computer' | translate}}
-input.advert-single__images-upload-btn(type="file" id="images-upload" nv-file-select uploader="images.fileUploader" multiple)
-.advert-uploaded__images
-    ng-thumb.advert-uploaded__image(ng-repeat="item in images.fileUploader.queue" new-file="item._file")
+label.uploader__btn.button--blue.button--invert_hover(ng-class="{'no-margin' : !images.fileUploader.queue.length}" for="images-upload") {{'Add photos from your computer' | translate}}
+input.uploader__input(type="file" id="images-upload" nv-file-select uploader="images.fileUploader" multiple)
+.uploader__inner
+    ng-thumb.image.uploader__image(ng-repeat="item in images.fileUploader.queue" new-file="item._file")
         .image__button.image__button--top(ng-click="item.upload();") {{'Upload' | translate}}
         .image__button.image__button--bottom(ng-click="item.remove();") {{'Remove' | translate}}
-.advert-uploaded__images-buttons(ng-class="{'no-margin' : !images.fileUploader.queue.length}")
-    button.button.button--red.advert-uploaded__images-button(ng-if="images.fileUploader.queue.length" ng-click="images.fileUploader.clearQueue();") {{'Remove All' | translate}}
-    button.button.button--blue.advert-uploaded__images-button(ng-if="images.fileUploader.queue.length" ng-click="images.fileUploader.uploadAll();") {{'Upload All' | translate}}
+.uploader__btn-wrap(ng-class="{'no-margin' : !images.fileUploader.queue.length}")
+    button.uploader__btn.uploader__btn--wrapped.button--red.button--invert_hover(ng-if="images.fileUploader.queue.length" ng-click="images.fileUploader.clearQueue();") {{'Remove All' | translate}}
+    button.uploader__btn.uploader__btn--wrapped.button--blue.button--invert_hover(ng-if="images.fileUploader.queue.length" ng-click="images.fileUploader.uploadAll();") {{'Upload All' | translate}}
