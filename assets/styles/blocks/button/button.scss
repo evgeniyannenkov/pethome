@@ -2,7 +2,8 @@
 
 .button {
   @include button(150px, 45px);
-  position : relative;
+  position    : relative;
+  line-height : 1.2;
 }
 
 .button--overlay_hover {
@@ -32,7 +33,7 @@
   z-index  : 2;
 }
 
-.button--read-more {
+.button--read_more {
   position  : absolute;
   width     : calc(100% - 20px);
   height    : 40px;
@@ -42,19 +43,27 @@
 }
 
 .button--blue {
-  background   : $blue;
-  border-color : $blue;
-
+  background   : $blue !important;
+  border-color : $blue !important;
   .button__title {
     color : white;
+  }
+  &.button--invert_hover {
+    border-width : 2px;
+    @include invertBgHover($blue);
   }
 }
 
 .button--red {
-  background   : $red;
-  border-color : $red;
+  background   : $red !important;
+  border-color : $red !important;
 
   .button__title {
     color : white;
+  }
+
+  &.button--invert_hover {
+    border-width : 2px;
+    @include invertBgHover($red);
   }
 }

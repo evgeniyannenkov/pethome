@@ -1,5 +1,6 @@
 .lang__trigger {
   perspective : 900px;
+  height      : 100%;
 }
 
 .header__menu--mobile {
@@ -21,7 +22,7 @@
     &.active {
       .lang__trigger {
         transition : transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
-        transform : translateY(-50%);
+        transform  : translateY(-50%);
       }
     }
   }

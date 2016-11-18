@@ -40,25 +40,19 @@ $filterHeight : 37px;
 }
 
 .filter__search-btn {
-  display         : inline-flex;
-  justify-content : center;
-  height          : $filterHeight;
-  width           : 150px;
-  position        : relative;
-  z-index         : 1;
-  margin-left     : 25px;
-  padding         : 0 15px;
-  cursor          : pointer;
-  background      : $red;
-  border          : 1px solid $red;
-  color           : white;
+  @include button(130px, $filterHeight);
+  min-width   : 130px;
+  font-size   : 0.8em;
+  z-index     : 1;
+  margin-left : 25px;
+  padding     : 0 10px;
   .hidden {
     display : none;
   }
 }
 
 .filter__search-field {
-  width    : calc(100% - 175px);
+  width    : 100%;
   position : relative;
   input {
     @include input;
@@ -93,6 +87,16 @@ $filterHeight : 37px;
 
 @media screen and (min-width : 600px) {
 
+  .filter__search-btn {
+    width     : 200px;
+    min-width : 150px;
+    font-size : 0.8em;
+  }
+
+  .filter__search-field {
+    width : calc(100% - 225px);
+  }
+
   .filter__inner {
     display         : flex;
     flex-flow       : row wrap;
@@ -123,7 +127,7 @@ $filterHeight : 37px;
     transform-origin : left center;
     transition       : transform 0.3s cubic-bezier(0, 1.13, 1, 0.95), width 0.3s cubic-bezier(0, 1.13, 1, 0.95);
     &.active {
-      width   : calc(100% - 175px);
+      width   : calc(100% - 225px);
       padding : 0;
       height  : auto;
     }

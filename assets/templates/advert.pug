@@ -30,4 +30,4 @@ include ../../views/mixins/buttons
     .advert__field.advert__field--info
         .advert__field-name.advert__field-name--small {{'info' | translate}}
         .advert__field-content {{advert.fields.info || 'Not specified' | translate | excerpt : 10}}
-        +btn-more('Read more')(type="button" class="button--read-more button--blue" href="/advert/{{advert.fields._id}}")
+        +btn-more('Read more')(type="button" class="button--blue button--invert_hover" href="/advert/{{advert.fields._id}}")

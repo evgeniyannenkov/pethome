@@ -1,4 +1,5 @@
 @import "../../common/variables";
+@import "../../common/mixins";
 
 .header {
   position        : fixed;
@@ -118,6 +119,12 @@
     display         : flex;
     align-items     : center;
     justify-content : flex-end;
+  }
+
+  .header__menu-link {
+    display  : inline-block;
+    position : relative;
+    @include underlineHover(white, -1px);
   }
 
   .header__menu--mobile {
