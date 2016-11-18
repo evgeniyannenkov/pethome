@@ -2,8 +2,8 @@
 
 .button {
   @include button(150px, 45px);
-  position : relative;
-  line-height: 1.2;
+  position    : relative;
+  line-height : 1.2;
 }
 
 .button--overlay_hover {
@@ -43,8 +43,8 @@
 }
 
 .button--blue {
-  background   : $blue;
-  border-color : $blue;
+  background   : $blue !important;
+  border-color : $blue !important;
   .button__title {
     color : white;
   }
@@ -55,8 +55,8 @@
 }
 
 .button--red {
-  background   : $red;
-  border-color : $red;
+  background   : $red !important;
+  border-color : $red !important;
 
   .button__title {
     color : white;

@@ -40,7 +40,7 @@
 @mixin invertBgHover($color) {
   transition : color 0.2s, background 0.2s;
   &:hover {
-    background : white;
+    background : white !important;
     color      : $color;
     .button__title {
       color : $color;
