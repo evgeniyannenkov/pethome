@@ -4,13 +4,15 @@
 }
 
 .author__block {
+  position        : relative;
   display         : flex;
-  flex-flow       : row nowrap;
-  justify-content : flex-start;
+  flex-flow       : column nowrap;
+  justify-content : center;
   align-items     : flex-start;
-  padding         : 2rem;
-  border          : 2px solid $lightGray;
+  padding         : 1rem;
+  border          : 1px solid $lightGray;
   border-radius   : 3px;
+  margin-bottom   : 40px;
 }
 
 .author__field {
@@ -20,7 +22,7 @@
   }
 }
 
-.author__field--name {
+.author__title {
   margin-bottom : 15px;
   font-size     : 1.4em;
 }
@@ -43,6 +45,38 @@
 
 .author__btn {
   display         : flex;
-  justify-content : flex-end;
+  justify-content : flex-start;
   flex            : 1 auto;
+  margin-top      : 15px;
+  .author__btn--hidden_sm {
+    display : none;
+  }
+}
+
+@media screen and (min-width : 700px) {
+  .author__block {
+    align-items     : flex-start;
+    flex-flow       : row wrap;
+    justify-content : flex-start;
+    padding         : 2rem;
+    border-width    : 2px;
+  }
+
+  .author__inner {
+    flex : 1 30%;
+  }
+
+  .author__btn {
+    justify-content : flex-end;
+    margin          : 0;
+    .author__btn--hidden_sm {
+      display : flex;
+    }
+  }
+}
+
+@media screen and (min-width : 1024px) {
+  .author__btn--hidden_lg {
+    display : none !important;
+  }
 }

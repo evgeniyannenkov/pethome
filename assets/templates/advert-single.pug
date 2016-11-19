@@ -24,7 +24,7 @@ include ../../views/mixins/formParts
             .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
     popup(type="Add Photos" wide="true")
         popup-trigger
-            .btn-round.btn-round--double.advert-single__btn(title="{{'add photos' | translate}}")
+            .btn-round.btn-round--left.btn-round--double.advert-single__btn(title="{{'add photos' | translate}}")
                 i.fa.fa-plus(aria-hidden="true")
                 i.fa.fa-camera(aria-hidden="true")
         popup-content

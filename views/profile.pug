@@ -10,12 +10,15 @@ block content
         else
             h1 PROFILE (Blocked)
 
-        .profile-section
-            author.author(author-id=currentUser._id edit="true" remove="true")
+        author.author(author-id=currentUser._id edit="true" remove="true")
 
         popup(type="New Advert")
             popup-trigger
-                button {{'New Advert' | translate}}
+                //button {{'New Advert' | translate}}
+                .btn-round.btn-round--left.btn-round--double.author__btn--hidden_lg(title="{{'Edit Profile' | translate}}")
+                    i.fa.fa-plus(aria-hidden="true")
+                    i.fa.fa-file(aria-hidden="true")
+
             popup-content
                 .popup__content
                     advert-create

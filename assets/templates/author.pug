@@ -1,11 +1,10 @@
 include ../../views/mixins/buttons
 
 .author__block
-
     .author__avatar
     .author__inner
-        .author__field.author__field--name
-            | {{author.fields.name || 'Not specified' | translate}}
+        .author__field
+            .author__title {{author.fields.name || 'Not specified' | translate}}
         .author__field
             | {{author.fields.contactInfo.email}}
         .author__field
@@ -17,14 +16,21 @@ include ../../views/mixins/buttons
     .author__btn
         popup(type="profile" ng-if="author.edit")
             popup-trigger
-                +btn-default('Edit Profile').button--blue.button--invert_hover
+                +btn-default('Edit Profile').button--blue.button--invert_hover.author__btn--hidden_sm
+                .btn-round.author__btn--hidden_lg(title="{{'Edit Profile' | translate}}")
+                    i.fa.fa-pencil(aria-hidden="true")
             popup-content
                 .popup__content
                     author-edit
 
-popup(type="Remove Profile" ng-if="author.remove")
-    popup-trigger
-        button {{'Remove Profile' | translate}}
-    popup-content
-        .popup__content
-            author-remove
+.author__block
+    .author__inner
+        .author__title Deactivate account
+        | This will permanently delete all adverts and settings.
+    .author__btn
+        popup(type="Remove Profile" ng-if="author.remove")
+            popup-trigger
+                +btn-default('Remove Profile').button--red.button--transparent
+            popup-content
+                .popup__content
+                    author-remove

@@ -75,10 +75,12 @@ $btnIncrement : 20px;
   }
 }
 
-.btn-round--double {
+.btn-round--left {
   right           : initial;
-  bottom          : $btnPosition;
   left            : $btnPosition;
+}
+
+.btn-round--double {
   justify-content : space-around;
   font-size       : 0.8em;
   &:hover {
