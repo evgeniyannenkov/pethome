@@ -1,0 +1,87 @@
+@import "../../common/_variables";
+@import "../../common/mixins";
+
+$btnSize : 50px;
+$btnPosition : 20px;
+$btnIncrement : 20px;
+
+@keyframes btnHoverIn {
+  0% {
+    width            : $btnSize;
+    height           : $btnSize;
+    bottom           : $btnPosition;
+    right            : $btnPosition;
+    background-color : lighten($blue, 10%);
+  }
+  30% {
+    width  : $btnSize + $btnIncrement;
+    height : $btnSize + $btnIncrement;
+    bottom : $btnPosition - ($btnIncrement/2);
+    right  : $btnPosition - ($btnIncrement/2);
+  }
+  100% {
+    background-color : $blue;
+    width            : $btnSize + ($btnIncrement/2);
+    height           : $btnSize + ($btnIncrement/2);
+    bottom           : $btnPosition - ($btnIncrement/4);
+    right            : $btnPosition - ($btnIncrement/4);
+  }
+}
+
+@keyframes doubleBtnHoverIn {
+  0% {
+    padding          : 0 8px;
+    width            : $btnSize;
+    height           : $btnSize;
+    bottom           : $btnPosition;
+    left             : $btnPosition;
+    background-color : lighten($blue, 10%);
+  }
+  30% {
+    width  : $btnSize + $btnIncrement;
+    height : $btnSize + $btnIncrement;
+    bottom : $btnPosition - ($btnIncrement/2);
+    left   : $btnPosition - ($btnIncrement/2);
+  }
+  100% {
+    padding          : 0 10px;
+    background-color : $blue;
+    width            : $btnSize + ($btnIncrement/2);
+    height           : $btnSize + ($btnIncrement/2);
+    bottom           : $btnPosition - ($btnIncrement/4);
+    left             : $btnPosition - ($btnIncrement/4);
+  }
+}
+
+.btn-round {
+  display          : flex;
+  cursor           : pointer;
+  width            : $btnSize;
+  height           : $btnSize;
+  position         : fixed;
+  bottom           : $btnPosition;
+  right            : $btnPosition;
+  justify-content  : center;
+  align-items      : center;
+  border-radius    : 50%;
+  background-color : lighten($blue, 10%);
+  color            : white;
+  font-size        : 1.2em;
+  padding          : 8px;
+  z-index          : 9;
+
+  &:hover {
+    animation : btnHoverIn 0.2s forwards;
+  }
+}
+
+.btn-round--double {
+  right           : initial;
+  bottom          : $btnPosition;
+  left            : $btnPosition;
+  justify-content : space-around;
+  font-size       : 0.8em;
+  &:hover {
+    animation : doubleBtnHoverIn 0.2s forwards;
+  }
+}

@@ -1,56 +1,5 @@
 @import "../../common/_variables";
-
-$editBtnSize : 50px;
-$editBtnPosition : 20px;
-$editBtnIncrement : 20px;
-
-@keyframes editBtnHoverIn {
-  0% {
-    width            : $editBtnSize;
-    height           : $editBtnSize;
-    bottom           : $editBtnPosition;
-    right            : $editBtnPosition;
-    background-color : lighten($blue, 10%);
-  }
-  30% {
-    width  : $editBtnSize + $editBtnIncrement;
-    height : $editBtnSize + $editBtnIncrement;
-    bottom : $editBtnPosition - ($editBtnIncrement/2);
-    right  : $editBtnPosition - ($editBtnIncrement/2);
-  }
-  100% {
-    background-color : $blue;
-    width            : $editBtnSize + ($editBtnIncrement/2);
-    height           : $editBtnSize + ($editBtnIncrement/2);
-    bottom           : $editBtnPosition - ($editBtnIncrement/4);
-    right            : $editBtnPosition - ($editBtnIncrement/4);
-  }
-}
-
-@keyframes photosBtnHoverIn {
-  0% {
-    padding          : 0 8px;
-    width            : $editBtnSize;
-    height           : $editBtnSize;
-    bottom           : $editBtnPosition;
-    left             : $editBtnPosition;
-    background-color : lighten($blue, 10%);
-  }
-  30% {
-    width  : $editBtnSize + $editBtnIncrement;
-    height : $editBtnSize + $editBtnIncrement;
-    bottom : $editBtnPosition - ($editBtnIncrement/2);
-    left   : $editBtnPosition - ($editBtnIncrement/2);
-  }
-  100% {
-    padding          : 0 10px;
-    background-color : $blue;
-    width            : $editBtnSize + ($editBtnIncrement/2);
-    height           : $editBtnSize + ($editBtnIncrement/2);
-    bottom           : $editBtnPosition - ($editBtnIncrement/4);
-    left             : $editBtnPosition - ($editBtnIncrement/4);
-  }
-}
+@import "../../common/mixins";
 
 .advert-single__banner {
   display      : inline-block;
@@ -67,40 +16,6 @@ $editBtnIncrement : 20px;
     position : 96% 4%;
     repeat   : no-repeat;
     color    : white;
-  }
-}
-
-.advert-single__edit-btn {
-  display          : flex;
-  cursor           : pointer;
-  width            : $editBtnSize;
-  height           : $editBtnSize;
-  position         : fixed;
-  bottom           : $editBtnPosition;
-  right            : $editBtnPosition;
-  justify-content  : center;
-  align-items      : center;
-  border-radius    : 50%;
-  background-color : lighten($blue, 10%);
-  color            : white;
-  font-size        : 1.2em;
-  z-index          : 9;
-
-  &:hover {
-    animation : editBtnHoverIn 0.2s forwards;
-  }
-}
-
-.advert-single__edit-btn--photos {
-  right           : initial;
-  bottom          : $editBtnPosition;
-  left            : $editBtnPosition;
-  justify-content : space-around;
-  font-size       : 0.8em;
-  padding         : 0 8px;
-
-  &:hover {
-    animation : photosBtnHoverIn 0.2s forwards;
   }
 }
 
@@ -139,7 +54,8 @@ $editBtnIncrement : 20px;
 }
 
 .advert-single__title {
-  font-size : 1.3em;
+  font-size     : 1.3em;
+  padding-right : 30px;
 }
 
 .advert-single__images {
@@ -180,14 +96,11 @@ $editBtnIncrement : 20px;
   }
 }
 
-@media (min-width : 550px) {
-  .advert-single__image {
-    width          : 49%;
-    padding-bottom : 30%;
-  }
-}
-
 @media (min-width : 700px) {
+
+  .advert-single__title {
+    padding-right : 0;
+  }
 
   .advert-single__banner-inner {
     background : {
@@ -196,8 +109,8 @@ $editBtnIncrement : 20px;
       size     : 15%;
     }
   }
-  .advert-single__edit-btn {
-    position : absolute;
+  .advert-single__btn {
+    position : absolute !important;
   }
   .advert-single__image {
     width          : 100%;
