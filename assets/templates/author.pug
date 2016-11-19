@@ -1,4 +1,7 @@
+include ../../views/mixins/buttons
+
 .author__block
+
     .author__avatar
     .author__inner
         .author__field.author__field--name
@@ -11,12 +14,14 @@
         .author__field
             | {{author.fields.contactInfo.phone}}
 
-popup(type="profile" ng-if="author.edit")
-    popup-trigger
-        button {{'Edit Profile' | translate}}
-    popup-content
-        .popup__content
-            author-edit
+    .author__btn
+        popup(type="profile" ng-if="author.edit")
+            popup-trigger
+                +btn-default('Edit Profile').button--blue.button--invert_hover
+            popup-content
+                .popup__content
+                    author-edit
+
 popup(type="Remove Profile" ng-if="author.remove")
     popup-trigger
         button {{'Remove Profile' | translate}}

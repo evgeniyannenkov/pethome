@@ -7,7 +7,7 @@
   display         : flex;
   flex-flow       : row nowrap;
   justify-content : flex-start;
-  align-items     : center;
+  align-items     : flex-start;
   padding         : 2rem;
   border          : 2px solid $lightGray;
   border-radius   : 3px;
@@ -39,4 +39,10 @@
     }
     size     : 80px;
   }
+}
+
+.author__btn {
+  display         : flex;
+  justify-content : flex-end;
+  flex            : 1 auto;
 }

@@ -38,6 +38,7 @@
 }
 
 @mixin invertBgHover($color) {
+  @include roboto-regular;
   transition : color 0.2s, background 0.2s;
   &:hover {
     background : white !important;
