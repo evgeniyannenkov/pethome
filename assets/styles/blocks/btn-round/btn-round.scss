@@ -3,54 +3,44 @@
 
 $btnSize : 50px;
 $btnPosition : 20px;
+$btnMobileVerticalPosition : 70px;
 $btnIncrement : 20px;
 
-@keyframes btnHoverIn {
+@mixin btnRoundHoverAnimation($horPlace : right, $verPlace : bottom, $verPosition : $btnPosition, $horPosition : $btnPosition) {
   0% {
-    width            : $btnSize;
-    height           : $btnSize;
-    bottom           : $btnPosition;
-    right            : $btnPosition;
-    background-color : lighten($blue, 10%);
+    width         : $btnSize;
+    height        : $btnSize;
+    #{$verPlace}  : $verPosition;
+    #{$horPlace}  : $horPosition;
   }
   30% {
-    width  : $btnSize + $btnIncrement;
-    height : $btnSize + $btnIncrement;
-    bottom : $btnPosition - ($btnIncrement/2);
-    right  : $btnPosition - ($btnIncrement/2);
+    width         : $btnSize + $btnIncrement;
+    height        : $btnSize + $btnIncrement;
+    #{$verPlace}  : $verPosition - ($btnIncrement/2);
+    #{$horPlace}  : $horPosition - ($btnIncrement/2);
   }
   100% {
-    background-color : $blue;
-    width            : $btnSize + ($btnIncrement/2);
-    height           : $btnSize + ($btnIncrement/2);
-    bottom           : $btnPosition - ($btnIncrement/4);
-    right            : $btnPosition - ($btnIncrement/4);
+    width         : $btnSize + ($btnIncrement/2);
+    height        : $btnSize + ($btnIncrement/2);
+    #{$verPlace}  : $verPosition - ($btnIncrement/4);
+    #{$horPlace}  : $horPosition - ($btnIncrement/4);
   }
 }
 
-@keyframes doubleBtnHoverIn {
-  0% {
-    padding          : 0 8px;
-    width            : $btnSize;
-    height           : $btnSize;
-    bottom           : $btnPosition;
-    left             : $btnPosition;
-    background-color : lighten($blue, 10%);
-  }
-  30% {
-    width  : $btnSize + $btnIncrement;
-    height : $btnSize + $btnIncrement;
-    bottom : $btnPosition - ($btnIncrement/2);
-    left   : $btnPosition - ($btnIncrement/2);
-  }
-  100% {
-    padding          : 0 10px;
-    background-color : $blue;
-    width            : $btnSize + ($btnIncrement/2);
-    height           : $btnSize + ($btnIncrement/2);
-    bottom           : $btnPosition - ($btnIncrement/4);
-    left             : $btnPosition - ($btnIncrement/4);
-  }
+@keyframes btnHoverIn {
+  @include btnRoundHoverAnimation();
+}
+
+@keyframes btnLeftHoverIn {
+  @include btnRoundHoverAnimation('left');
+}
+
+@keyframes btnTopMobileHoverIn {
+  @include btnRoundHoverAnimation('right', 'top', $btnMobileVerticalPosition);
+}
+
+@keyframes btnTopHoverIn {
+  @include btnRoundHoverAnimation('right', 'top');
 }
 
 .btn-round {
@@ -69,21 +59,56 @@ $btnIncrement : 20px;
   font-size        : 1.2em;
   padding          : 8px;
   z-index          : 9;
+  transition       : background-color 0.2s, padding 0.2s;
 
   &:hover {
-    animation : btnHoverIn 0.2s forwards;
+    animation        : btnHoverIn 0.2s forwards;
+    background-color : $blue;
+  }
+}
+
+.btn-round--red {
+  background-color : lighten($red, 10%);
+  &:hover {
+    background-color : $red;
   }
 }
 
 .btn-round--left {
-  right           : initial;
-  left            : $btnPosition;
+  right : initial;
+  left  : $btnPosition;
+
+  &:hover {
+    animation : btnLeftHoverIn 0.2s forwards;
+  }
+}
+
+.btn-round--top {
+  bottom : initial;
+  top    : $btnMobileVerticalPosition;
+
+  &:hover {
+    animation : btnTopMobileHoverIn 0.2s forwards;
+  }
 }
 
 .btn-round--double {
+  padding         : 0 8px;
+
   justify-content : space-around;
   font-size       : 0.8em;
   &:hover {
-    animation : doubleBtnHoverIn 0.2s forwards;
+    padding : 0 10px;
+  }
+}
+
+@media (min-width : 700px) {
+
+  .btn-round--top {
+    top : $btnPosition;
+
+    &:hover {
+      animation : btnTopHoverIn 0.2s forwards;
+    }
   }
 }
