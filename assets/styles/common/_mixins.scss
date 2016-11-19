@@ -49,6 +49,24 @@
   }
 }
 
+@mixin buttonTransparent($color) {
+  @include roboto-regular;
+  background-color : transparent !important;
+  color            : $color !important;
+  border-color     : $color !important;
+  transition       : color 0.2s, background 0.2s;
+  .button__title {
+    color : $color !important;
+  }
+  &:hover {
+    background-color : $color !important;
+    color            : white !important;
+    .button__title {
+      color : white !important;
+    }
+  }
+}
+
 @mixin underlineHover($color, $bottomOffset: 0px) {
   &:after {
     content    : "";

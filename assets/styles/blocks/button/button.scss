@@ -48,10 +48,17 @@
   .button__title {
     color : white;
   }
+
+  &.button--transparent {
+    border-width : 2px;
+    @include buttonTransparent($blue);
+  }
+
   &.button--invert_hover {
     border-width : 2px;
     @include invertBgHover($blue);
   }
+
 }
 
 .button--red {
@@ -60,6 +67,10 @@
 
   .button__title {
     color : white;
+  }
+
+  &.button--transparent {
+    @include buttonTransparent($red);
   }
 
   &.button--invert_hover {
