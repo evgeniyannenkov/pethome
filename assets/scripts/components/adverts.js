@@ -38,7 +38,8 @@ function advertComponentsInit ( module, constants ) {
         templateUrl : `${constants.templatesFolder}/advert-single.html`,
         bindings : {
             id : "@advertId",
-            reviewEnabled : "=enableReview"
+            reviewEnabled : "=enableReview",
+            editEnabled : "=enableEdit",
         },
         controller : "advertCtrl",
         controllerAs : "advert"

@@ -6,25 +6,10 @@ block header
 block content
     .main-content__container
         if currentUser && currentUser.is_admin
-            advert-single.advert-single(advert-id=advert._id enable-review="true")
+            advert-single.advert-single(advert-id=advert._id enable-edit="true" enable-review="true")
         else if currentUser && (advert.author.toString() == currentUser._id.toString())
-            advert-single.advert-single(advert-id=advert._id)
+            advert-single.advert-single(advert-id=advert._id enable-edit="true")
         else
-            if advert.mainImage
-                h1= advert.mainImage
-            if advert.name
-                h1= advert.name
-            if advert.type
-                h1= advert.type
-            if advert.gender
-                h1= advert.gender
-            if advert.age
-                h1= advert.age
-            if advert.publicationDate
-                h1 {{#{advert.publicationDate} | date : 'd/MM/yyyy H:mm'}}
-            if advert.breed
-                h1= advert.breed
-            if advert.info
-                h1= advert.info
+            advert-single.advert-single(advert-id=advert._id)
 block footer
     include partials/_footer
