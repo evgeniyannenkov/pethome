@@ -39,7 +39,7 @@
   height    : 40px;
   left      : 10px;
   bottom    : 10px;
-  font-size : 0.9em;
+  font-size : 0.8rem;
 }
 
 .button--blue {
@@ -77,4 +77,27 @@
     border-width : 2px;
     @include invertBgHover($red);
   }
+}
+
+.button--green {
+  background   : $green !important;
+  border-color : $green !important;
+
+  .button__title {
+    color : white;
+  }
+
+  &.button--transparent {
+    @include buttonTransparent($green);
+  }
+
+  &.button--invert_hover {
+    border-width : 2px;
+    @include invertBgHover($green);
+  }
+
+  &.button--standard_hover {
+    @include standardBgHover($greenHover);
+  }
+
 }

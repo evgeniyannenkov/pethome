@@ -49,6 +49,14 @@
   }
 }
 
+@mixin standardBgHover($color) {
+  @include roboto-regular;
+  transition : background 0.2s;
+  &:hover {
+    background : $color !important;
+  }
+}
+
 @mixin buttonTransparent($color) {
   @include roboto-regular;
   background-color : transparent !important;
