@@ -10,9 +10,10 @@ function formControllersInit ( module ) {
 
             this.fields = {};
 
+
             $rootScope.$on("popup_open", ( event, data ) => {
                 if ( data ) {
-                    this.$form = $scope[this.name];
+                    this.$form = $scope[ this.name ];
                 }
             });
 
@@ -23,24 +24,26 @@ function formControllersInit ( module ) {
             };
 
             this.check = () => {
+
                 if ( this.$form ) {
                     this.validClass = this.$form.$valid ? "valid" : "error";
                 }
+
             };
 
             this.submit = () => {
 
                 angular.forEach(this.fields, ( value, key ) => {
-                    this.$form[key].$setTouched();
+                    this.$form[ key ].$setTouched();
                 });
 
                 if ( this.$form && this.$form.$valid ) {
 
-                    this.submitFunction({name : this.name, data: this.data});
+                    this.submitFunction({ name : this.name, data : this.data });
 
                     $scope.$on("formResponse", ( event, data ) => {
                         this.responseClass = data.responseClass;
-                        if(data.reset) {
+                        if ( data.reset ) {
                             this.validClass = "";
                             this.cancel();
                         }
@@ -64,9 +67,9 @@ function formControllersInit ( module ) {
             this.regex = {
                 email : validate.email(),
                 password : validate.password(),
-                text: validate.text(),
-                textarea: validate.textarea(),
-                tel: validate.tel()
+                text : validate.text(),
+                textarea : validate.textarea(),
+                tel : validate.tel()
             };
 
             this.reset = () => {
@@ -76,7 +79,7 @@ function formControllersInit ( module ) {
 
             this.check = () => {
                 if ( this.form && this.form.fields ) {
-                    this.form.fields[this.name] = this[this.name];
+                    this.form.fields[ this.name ] = this[ this.name ];
                 }
             }
 

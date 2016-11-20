@@ -32,15 +32,15 @@ $btnIncrement : 20px;
 }
 
 @keyframes btnLeftHoverIn {
-  @include btnRoundHoverAnimation('left');
+  @include btnRoundHoverAnimation(left);
 }
 
 @keyframes btnTopMobileHoverIn {
-  @include btnRoundHoverAnimation('right', 'top', $btnMobileVerticalPosition);
+  @include btnRoundHoverAnimation(right, top, $btnMobileVerticalPosition);
 }
 
 @keyframes btnTopHoverIn {
-  @include btnRoundHoverAnimation('right', 'top');
+  @include btnRoundHoverAnimation(right, top);
 }
 
 .btn-round {

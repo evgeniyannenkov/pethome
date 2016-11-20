@@ -47,7 +47,8 @@ function advertComponentsInit ( module, constants ) {
 
     module.component('advertEdit', {
         require : {
-            popup : "^^?popup"
+            popup : "^^?popupContent",
+            advert : '^^advertSingle'
         },
         templateUrl : `${constants.templatesFolder}/advert-edit.html`,
         bindings : {

@@ -1,0 +1,7 @@
+.popup(ng-class="{visible : popup.active}" ng-click="popup.close($event);")
+    .popup__close(ng-click="popup.close();")
+    .popup__inner(ng-class="{active : popup.active, wide : popup.wide}")
+        .popup__header {{popup.type | translate}}
+        .popup__content
+            advert-edit(advert="popup.data.advert" ng-if="popup.isExpected('edit advert')" ng-show="popup.type == 'edit advert'")
+            advert-remove(advert-id="{{popup.data.advertId}}" ng-if="popup.isExpected('remove advert')" ng-show="popup.type == 'remove advert'")

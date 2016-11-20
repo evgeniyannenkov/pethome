@@ -2,9 +2,18 @@
 
 function popupControllersInit ( module ) {
 
-    module.controller('popupCtrl', [
-        "$rootScope",
-        function ($rootScope) {
+    module.controller('popupContentCtrl', [
+        "$rootScope", "popup", "$scope",
+        function ( $rootScope, popup, $scope ) {
+
+            this.isExpected = ( type ) => {
+                return this.expected.indexOf(type) != -1;
+            };
+
+            $rootScope.$on("popup_open", ( event, type, data ) => {
+                this.open(type, data);
+                $scope.$apply();
+            });
             this.close = ( event ) => {
                 if ( event ) {
                     if ( angular.element(event.target).hasClass("popup") ) {
@@ -15,10 +24,11 @@ function popupControllersInit ( module ) {
                 }
                 $rootScope.$broadcast("popup_close", this.type.toLowerCase());
             };
-            this.open = () => {
+            this.open = ( type, data ) => {
+                this.type = type;
+                this.data = data;
                 this.active = true;
-                $rootScope.$broadcast("popup_open", this.type.toLowerCase());
-            }
+            };
         }
     ]);
 }

@@ -5,7 +5,7 @@ function formComponentsInit ( module, constants ) {
     module.component("popupForm", {
             templateUrl : `${constants.templatesFolder}/popup-form.html`,
             require : {
-                popup : "^^?popup"
+                popup : "^^?popupContent"
             },
             bindings : {
                 name : "@",

@@ -8,7 +8,7 @@ function advertControllersInit ( module ) {
 
             let current_advert = {};
 
-            adverts.get({id : this.id})
+            adverts.get({ id : this.id })
                    .then(( response ) => {
                        if ( response.data.success && response.data.advert ) {
                            this.fields = response.data.advert;
@@ -23,28 +23,31 @@ function advertControllersInit ( module ) {
                    });
 
             this.save = ( data = this.fields ) => {
-                adverts.update({id : data._id, data})
-                       .then(( response ) => {
-                           if ( response.data.success && response.data.newAdvert ) {
-                               notify.inform({
-                                   message : `${data.name} [[updated]].`,
-                                   duration : 2000
-                               });
+                return new Promise(( resolve, reject ) => {
+                    adverts.update({ id : data._id, data })
+                           .then(( response ) => {
+                               if ( response.data.success && response.data.newAdvert ) {
+                                   notify.inform({
+                                       message : `${data.name} [[updated]].`,
+                                       duration : 2000
+                                   });
 
-                               this.fields = response.data.newAdvert;
-                               if ( this.fields.age ) {
-                                   this.fields.age = parseInt(this.fields.age);
+                                   this.fields = response.data.newAdvert;
+                                   if ( this.fields.age ) {
+                                       this.fields.age = parseInt(this.fields.age);
+                                   }
+                                   resolve(this.fields);
+                               } else {
+                                   notify.error({
+                                       message : response.data.message,
+                                       duration : 2000
+                                   });
                                }
-                           } else {
-                               notify.error({
-                                   message : response.data.message,
-                                   duration : 2000
-                               });
-                           }
-                       })
-                       .catch(( err ) => {
-                           console.log(err);
-                       });
+                           })
+                           .catch(( error ) => {
+                               reject(error);
+                           });
+                });
             };
 
             this.removeImage = ( image ) => {
@@ -70,7 +73,7 @@ function advertControllersInit ( module ) {
             };
 
             this.review = () => {
-                adverts.review({id : this.id})
+                adverts.review({ id : this.id })
                        .then(( response ) => {
                            if ( response.data.success ) {
                                this.fields.reviewed = true;
@@ -84,6 +87,117 @@ function advertControllersInit ( module ) {
                            console.log(response);
                        });
             };
+        }
+    ]);
+
+    module.controller('newAdvertCtrl', [
+        "$scope", "adverts", "notify", "$timeout",
+        function ( $scope, adverts, notify, $timeout ) {
+            this.advert = {
+                gender : "male",
+                type : "dog",
+                age : 1
+            };
+
+            this.create = () => {
+                adverts.create({ data : this.advert })
+                       .then(( response ) => {
+                           if ( response.data.success ) {
+                               notify.inform({
+                                   message : `[[Created]] ${response.data.advert.name} <i class="fa fa-check" aria-hidden="true"></i>`,
+                                   duration : 1200
+                               });
+                               $timeout(1500)
+                                   .then(() => {
+                                       $scope.$broadcast("formResponse", {
+                                           responseClass : "success"
+                                       });
+                                       document.location.href = `/advert/${response.data.advert._id}`;
+                                   });
+                           } else {
+                               notify.error({
+                                   message : response.data.message,
+                                   duration : 3000
+                               });
+                               $timeout(500)
+                                   .then(() => {
+                                       $scope.$broadcast("formResponse", {
+                                           responseClass : "fail"
+                                       });
+                                   });
+                           }
+                       })
+                       .catch(( err ) => {
+                           console.log(err);
+                           $timeout(500)
+                               .then(() => {
+                                   $scope.$broadcast("formResponse", {
+                                       responseClass : "fail"
+                                   });
+                               });
+                       });
+            };
+
+        }
+    ]);
+
+    module.controller('editAdvertCtrl', [
+        "$scope", "$rootScope", "adverts", "notify", "$timeout",
+        function ( $scope, $rootScope, adverts, notify, $timeout ) {
+            $rootScope.$on("popup_open", ( $event, type ) => {
+                if ( type == "edit advert" ) {
+                    this.temporaryData = angular.copy(this.advert.fields);
+                    $scope.$apply();
+                }
+            });
+
+            this.update = () => {
+                this.advert.save(this.temporaryData)
+                    .then(() => {
+                        this.popup.close();
+                    })
+                    .catch(( error ) => {
+                        console.log(error);
+                    });
+            };
+
+        }
+    ]);
+
+    module.controller('advertRemoveCtrl', [
+        "$scope", "adverts", "notify", "$timeout",
+        function ( $scope, adverts, notify, $timeout ) {
+            this.remove = ( id ) => {
+                adverts.remove({ id })
+                       .then(( response ) => {
+                           if ( response.data.success && response.data.redirect ) {
+                               notify.inform({
+                                   message : `[[Removed]]  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                   duration : 1200
+                               });
+                               $timeout(1200)
+                                   .then(() => {
+                                       $scope.$broadcast("formResponse", {
+                                           responseClass : "success"
+                                       });
+                                       document.location.href = response.data.redirect;
+                                   });
+                           } else if ( response.data.message ) {
+                               console.log(response.data);
+                           }
+                       })
+                       .catch(( err ) => {
+                           console.log(err);
+
+                           $timeout(500)
+                               .then(() => {
+                                   $scope.$broadcast("formResponse", {
+                                       responseClass : "fail"
+                                   });
+                               });
+                       });
+            };
+
         }
     ]);
 
@@ -136,8 +250,8 @@ function advertControllersInit ( module ) {
             };
 
             this.fieldChange = ( field ) => {
-                if ( field !== "type" && field !== "gender" && this.fields[field] == "" ) {
-                    this.fields[field] = undefined;
+                if ( field !== "type" && field !== "gender" && this.fields[ field ] == "" ) {
+                    this.fields[ field ] = undefined;
                 }
             };
 
@@ -149,151 +263,6 @@ function advertControllersInit ( module ) {
                     this.fields = "";
                 }
             }
-
-        }
-    ]);
-
-    module.controller('newAdvertCtrl', [
-        "$scope", "adverts", "notify", "$timeout",
-        function ( $scope, adverts, notify, $timeout ) {
-            this.advert = {
-                gender : "male",
-                type : "dog",
-                age : 1
-            };
-
-            this.create = () => {
-                adverts.create({data : this.advert})
-                       .then(( response ) => {
-                           if ( response.data.success ) {
-                               notify.inform({
-                                   message : `[[Created]] ${response.data.advert.name} <i class="fa fa-check" aria-hidden="true"></i>`,
-                                   duration : 1200
-                               });
-                               $timeout(1500)
-                                   .then(() => {
-                                       $scope.$broadcast("formResponse", {
-                                           responseClass : "success"
-                                       });
-                                       document.location.href = `/advert/${response.data.advert._id}`;
-                                   });
-                           } else {
-                               notify.error({
-                                   message : response.data.message,
-                                   duration : 3000
-                               });
-                               $timeout(500)
-                                   .then(() => {
-                                       $scope.$broadcast("formResponse", {
-                                           responseClass : "fail"
-                                       });
-                                   });
-                           }
-                       })
-                       .catch(( err ) => {
-                           console.log(err);
-                           $timeout(500)
-                               .then(() => {
-                                   $scope.$broadcast("formResponse", {
-                                       responseClass : "fail"
-                                   });
-                               });
-                       });
-            };
-
-        }
-    ]);
-
-    module.controller('editAdvertCtrl', [
-        "$scope", "$rootScope", "adverts", "notify", "$timeout",
-        function ( $scope, $rootScope, adverts, notify, $timeout ) {
-
-            $rootScope.$on("popup_open", ( $event, type ) => {
-                if ( type == "edit advert" ) {
-                    this.temporaryData = angular.copy(this.fields);
-                }
-            });
-
-            this.update = () => {
-                adverts.update({id : this.fields._id, data : this.temporaryData})
-                       .then(( response ) => {
-                           if ( response.data.success && response.data.newAdvert ) {
-                               notify.inform({
-                                   message : `${this.temporaryData.name} [[updated]].`,
-                                   duration : 2000
-                               });
-
-                               this.fields = response.data.newAdvert;
-                               if ( this.fields.age ) {
-                                   this.fields.age = parseInt(this.fields.age);
-                               }
-
-                               $scope.$broadcast("formResponse", {
-                                   responseClass : "",
-                                   reset : true
-                               });
-
-                           } else {
-                               notify.error({
-                                   message : response.data.message,
-                                   duration : 2000
-                               });
-
-                               $timeout(500)
-                                   .then(() => {
-                                       $scope.$broadcast("formResponse", {
-                                           responseClass : "fail"
-                                       });
-                                   });
-                           }
-                       })
-                       .catch(( err ) => {
-                           console.log(err);
-                           $timeout(500)
-                               .then(() => {
-                                   $scope.$broadcast("formResponse", {
-                                       responseClass : "fail"
-                                   });
-                               });
-                       });
-            };
-
-        }
-    ]);
-
-    module.controller('advertRemoveCtrl', [
-        "$scope", "adverts", "notify", "$timeout",
-        function ( $scope, adverts, notify, $timeout ) {
-            this.remove = ( id ) => {
-                adverts.remove({id})
-                       .then(( response ) => {
-                           if ( response.data.success && response.data.redirect ) {
-                               notify.inform({
-                                   message : `[[Removed]]  <i class="fa fa-check" aria-hidden="true"></i>`,
-                                   duration : 1200
-                               });
-                               $timeout(1200)
-                                   .then(() => {
-                                       $scope.$broadcast("formResponse", {
-                                           responseClass : "success"
-                                       });
-                                       document.location.href = response.data.redirect;
-                                   });
-                           } else if ( response.data.message ) {
-                               console.log(response.data);
-                           }
-                       })
-                       .catch(( err ) => {
-                           console.log(err);
-
-                           $timeout(500)
-                               .then(() => {
-                                   $scope.$broadcast("formResponse", {
-                                       responseClass : "fail"
-                                   });
-                               });
-                       });
-            };
 
         }
     ]);
