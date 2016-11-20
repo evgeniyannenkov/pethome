@@ -41,6 +41,9 @@ include ../../views/mixins/formParts
         i.fa.fa-pencil(aria-hidden="true")
     .btn-round.btn-round--top.btn-round--red.advert-single__btn.advert-single__btn--remove(popup-trigger="remove advert" advert-id="{{advert.id}}" title="{{'edit' | translate}}")
         i.fa.fa-trash(aria-hidden="true")
+    .btn-round.btn-round--left.btn-round--double.advert-single__btn(popup-trigger="upload images" advert-id="{{advert.id}}" advert="advert.fields" title="{{'add photos' | translate}}")
+        i.fa.fa-plus(aria-hidden="true")
+        i.fa.fa-camera(aria-hidden="true")
 
 
 .advert-single__main-image.advert-single__main-image--desktop(ng-if="advert.fields.mainImage")
@@ -54,5 +57,5 @@ include ../../views/mixins/formParts
 //    +button("Mark Reviewed")(ng-click="advert.review();")
 //.advert-single__title(ng-if="!advert.fields.published")
 //    h2 (Not Published)
-popup-content(initial="edit advert,remove advert")
+popup-content(initial="edit advert,remove advert,upload images")
 

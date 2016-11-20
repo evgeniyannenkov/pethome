@@ -45,7 +45,7 @@ function imagesComponentsInit ( module, constants ) {
     module.component('imagesUploader', {
         templateUrl : `${constants.templatesFolder}/images-upload.html`,
         require : {
-            popup : "^^popup"
+            popup : "^^popupContent"
         },
         bindings : {
             advert_id : "@advertId",
