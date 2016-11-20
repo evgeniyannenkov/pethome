@@ -32,7 +32,7 @@ function imagesComponentsInit ( module, constants ) {
     module.directive("backgroundBlock", [
         function () {
             return {
-                template : `<div class="background-block {{classes}}"  style="background-image: url('{{url}}');" ng-transclude></div>`,
+                template : `<div class="background-block {{classes}}" ng-paralax ratio="0.1" style="background-image: url('{{url}}');" ng-transclude></div>`,
                 scope : {
                     url : "@backgroundBlock",
                     classes : "@",

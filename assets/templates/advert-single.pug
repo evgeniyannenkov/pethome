@@ -22,21 +22,6 @@ include ../../views/mixins/formParts
         .advert__field.advert__field--info.advert__field--info-full
             .advert__field-name.advert__field-name--small {{'info' | translate}}
             .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
-    //popup(type="Remove Advert" ng-if="advert.editEnabled")
-    //    popup-trigger
-    //        .btn-round.btn-round--top.btn-round--red.advert-single__btn.advert-single__btn--remove(title="{{'Remove' | translate}}")
-    //            i.fa.fa-trash(aria-hidden="true")
-    //    popup-content
-    //        .popup__content
-    //            advert-remove(advert-id="{{advert.id}}")
-    //popup(type="Add Photos" wide="true" ng-if="advert.editEnabled")
-    //    popup-trigger
-    //        .btn-round.btn-round--left.btn-round--double.advert-single__btn(title="{{'add photos' | translate}}")
-    //            i.fa.fa-plus(aria-hidden="true")
-    //            i.fa.fa-camera(aria-hidden="true")
-    //    popup-content
-    //        .popup__content
-    //            images-uploader.uploader(advert-id="{{$parent.$parent.advert.id}}" advert="$parent.$parent.advert.fields")
     .btn-round.advert-single__btn(popup-trigger="edit advert" advert="advert.fields" title="{{'edit' | translate}}")
         i.fa.fa-pencil(aria-hidden="true")
     .btn-round.btn-round--top.btn-round--red.advert-single__btn.advert-single__btn--remove(popup-trigger="remove advert" advert-id="{{advert.id}}" title="{{'edit' | translate}}")
@@ -44,7 +29,6 @@ include ../../views/mixins/formParts
     .btn-round.btn-round--left.btn-round--double.advert-single__btn(popup-trigger="upload images" advert-id="{{advert.id}}" advert="advert.fields" title="{{'add photos' | translate}}")
         i.fa.fa-plus(aria-hidden="true")
         i.fa.fa-camera(aria-hidden="true")
-
 
 .advert-single__main-image.advert-single__main-image--desktop(ng-if="advert.fields.mainImage")
     .advert-single__main-image-inner(sticky wide-as=".advert-single__main-image--desktop")
