@@ -14,6 +14,7 @@ function popupControllersInit ( module ) {
                 this.open(type, data);
                 $scope.$apply();
             });
+
             this.close = ( event ) => {
                 if ( event ) {
                     if ( angular.element(event.target).hasClass("popup") ) {

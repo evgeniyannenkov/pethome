@@ -142,14 +142,14 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('editAdvertCtrl', [
-        "$scope", "$rootScope", "adverts", "notify", "$timeout",
-        function ( $scope, $rootScope, adverts, notify, $timeout ) {
-            $rootScope.$on("popup_open", ( $event, type ) => {
-                if ( type == "edit advert" ) {
-                    this.temporaryData = angular.copy(this.advert.fields);
-                    $scope.$apply();
-                }
-            });
+        "$scope", "popup",
+        function ( $scope, popup ) {
+
+            popup.onOpen("edit advert")
+                 .then(() => {
+                     this.temporaryData = angular.copy(this.advert.fields);
+                     $scope.$apply();
+                 });
 
             this.update = () => {
                 this.advert.save(this.temporaryData)
