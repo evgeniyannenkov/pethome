@@ -10,9 +10,11 @@ function popupControllersInit ( module ) {
                 return this.expected && this.expected.indexOf(type) != -1;
             };
 
-            $rootScope.$on("popup_open", ( event, type, data ) => {
-                this.open(type, data);
-                $scope.$apply();
+            $rootScope.$on("popup_open", ( event, data, type ) => {
+                if ( this.isExpected(type) ) {
+                    this.open(type, data);
+                    $scope.$apply();
+                }
             });
 
             this.close = ( event ) => {
