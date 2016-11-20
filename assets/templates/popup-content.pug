@@ -6,3 +6,5 @@
             advert-edit(advert="popup.data.advert" ng-show="popup.type == 'edit advert'" ng-if="popup.isExpected('edit advert')")
             advert-remove(advert-id="{{popup.data.advertId}}" ng-show="popup.type == 'remove advert'" ng-if="popup.isExpected('remove advert')")
             images-uploader.uploader(advert-id="{{popup.data.advertId}}" advert="popup.data.advert" ng-show="popup.type == 'upload images'" ng-if="popup.isExpected('upload images')")
+            auth-form(form="registration" ng-show="popup.type == 'registration'" ng-if="popup.isExpected('registration')" title="sign up")
+            auth-form(form="login" ng-show="popup.type == 'login'" ng-if="popup.isExpected('login')" title="login")

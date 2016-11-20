@@ -2,20 +2,13 @@ ul.header__menu
     li.header__menu-item.header__menu-item--lang(ng-class="{'active' : header.languageSelect}")
         language(language-select="header.languageSelect")
     li.header__menu-item(ng-class="{'hidden' : header.languageSelect}" ng-if="!header.user")
-        popup(type="registration")
-            popup-trigger.header__menu-link {{'Sign Up' | translate}}
-            popup-content
-                .popup__content
-                    auth-form(form="registration" title="sign up")
+        .header__menu-link(popup-trigger="registration") {{'Sign Up' | translate}}
     li.header__menu-item(ng-class="{'hidden' : header.languageSelect}" ng-if="!header.user")
-        popup(type="login")
-            popup-trigger.header__menu-link {{'Login' | translate}}
-            popup-content
-                .popup__content
-                    auth-form(form="login" title="login")
+        .header__menu-link(popup-trigger="login") {{'Login' | translate}}
     li.header__menu-item(ng-class="{'hidden' : header.languageSelect}" ng-if="header.user && header.isAdmin")
         a.header__menu-link(href='/admin') {{'Admin' | translate}}
     li.header__menu-item(ng-class="{'hidden' : header.languageSelect}" ng-if="header.user")
         a.header__menu-link(href='/profile') {{'Profile' | translate}}
     li.header__menu-item(ng-class="{'hidden' : header.languageSelect}" ng-if="header.user")
         a.header__menu-link(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") {{'Logout' | translate}}
+popup-content(initial="login,registration")
