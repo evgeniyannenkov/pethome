@@ -7,7 +7,7 @@ function popupControllersInit ( module ) {
         function ( $rootScope, popup, $scope ) {
 
             this.isExpected = ( type ) => {
-                return this.expected.indexOf(type) != -1;
+                return this.expected && this.expected.indexOf(type) != -1;
             };
 
             $rootScope.$on("popup_open", ( event, type, data ) => {
