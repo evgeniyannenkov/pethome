@@ -30,6 +30,7 @@
   height          : 100%;
   @include roboto-condensed;
   font-size       : 28px;
+  color           : white;
 }
 
 .header__menu--mobile {
@@ -124,6 +125,7 @@
   .header__menu-link {
     display  : inline-block;
     position : relative;
+    color    : white;
     @include underlineHover(white, -1px);
   }
 
