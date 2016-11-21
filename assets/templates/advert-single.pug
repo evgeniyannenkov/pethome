@@ -22,11 +22,11 @@ include ../../views/mixins/formParts
         .advert__field.advert__field--info.advert__field--info-full
             .advert__field-name.advert__field-name--small {{'info' | translate}}
             .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
-    .btn-round.advert-single__btn(popup-trigger="edit advert" advert="advert.fields" title="{{'edit' | translate}}")
+    .btn-round.advert-single__btn(popup-trigger="edit advert" advert="advert.fields" title="{{'edit' | translate}}" ng-if="advert.editEnabled")
         i.fa.fa-pencil(aria-hidden="true")
-    .btn-round.btn-round--top.btn-round--red.advert-single__btn.advert-single__btn--remove(popup-trigger="remove advert" advert-id="{{advert.id}}" title="{{'edit' | translate}}")
+    .btn-round.btn-round--top.btn-round--red.advert-single__btn.advert-single__btn--remove(popup-trigger="remove advert" advert-id="{{advert.id}}" title="{{'edit' | translate}}" ng-if="advert.editEnabled")
         i.fa.fa-trash(aria-hidden="true")
-    .btn-round.btn-round--left.btn-round--double.advert-single__btn(popup-trigger="upload images" advert-id="{{advert.id}}" advert="advert.fields" title="{{'add photos' | translate}}")
+    .btn-round.btn-round--left.btn-round--double.advert-single__btn(popup-trigger="upload images" advert-id="{{advert.id}}" advert="advert.fields" title="{{'add photos' | translate}}" ng-if="advert.editEnabled")
         i.fa.fa-plus(aria-hidden="true")
         i.fa.fa-camera(aria-hidden="true")
 
