@@ -19,6 +19,7 @@ function popupComponentsInit ( module, constants ) {
     module.directive('popupTrigger', function () {
         return {
             scope : {
+                wide : "=",
                 advertId : "@",
                 advert : "=",
                 authorId : "@"
@@ -30,6 +31,7 @@ function popupComponentsInit ( module, constants ) {
                 function ( popup ) {
                     this.open = ( type ) => {
                         popup.open(type, {
+                            wide : this.wide,
                             advertId : this.advertId,
                             advert : this.advert,
                             authorId : this.authorId

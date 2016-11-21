@@ -26,7 +26,7 @@ include ../../views/mixins/formParts
         i.fa.fa-pencil(aria-hidden="true")
     .btn-round.btn-round--top.btn-round--red.advert-single__btn.advert-single__btn--remove(popup-trigger="remove advert" advert-id="{{advert.id}}" title="{{'edit' | translate}}" ng-if="advert.editEnabled")
         i.fa.fa-trash(aria-hidden="true")
-    .btn-round.btn-round--left.btn-round--double.advert-single__btn(popup-trigger="upload images" advert-id="{{advert.id}}" advert="advert.fields" title="{{'add photos' | translate}}" ng-if="advert.editEnabled")
+    .btn-round.btn-round--left.btn-round--double.advert-single__btn(popup-trigger="upload images" wide="true" advert-id="{{advert.id}}" advert="advert.fields" title="{{'add photos' | translate}}" ng-if="advert.editEnabled")
         i.fa.fa-plus(aria-hidden="true")
         i.fa.fa-camera(aria-hidden="true")
 

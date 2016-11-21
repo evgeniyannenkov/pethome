@@ -15,8 +15,8 @@ include ../../views/mixins/buttons
 
     .author__btn(popup-trigger="edit profile" ng-if="author.edit")
         +btn-default('Edit Profile').button--blue.button--invert_hover.author__btn--hidden_sm
-            .btn-round.author__btn--hidden_lg(title="{{'Edit Profile' | translate}}")
-                i.fa.fa-pencil(aria-hidden="true")
+        .btn-round.author__btn--hidden_lg(title="{{'Edit Profile' | translate}}")
+            i.fa.fa-pencil(aria-hidden="true")
 
 .author__block
     .author__inner
