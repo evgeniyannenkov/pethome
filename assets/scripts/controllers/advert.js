@@ -3,8 +3,8 @@
 function advertControllersInit ( module ) {
 
     module.controller('advertCtrl', [
-        "adverts", "notify",
-        function ( adverts, notify ) {
+        "adverts", "author", "notify",
+        function ( adverts, author, notify ) {
 
             let current_advert = {};
 
@@ -16,6 +16,13 @@ function advertControllersInit ( module ) {
                                this.fields.age = parseInt(this.fields.age);
                            }
                            current_advert = angular.copy(this.fields);
+
+                           author.get({ id : this.fields.author })
+                                 .then(( response ) => {
+                                     if ( response.data.success ) {
+                                         this.author = response.data.author;
+                                     }
+                                 });
                        }
                    })
                    .catch(( err ) => {

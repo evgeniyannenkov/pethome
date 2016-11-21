@@ -22,6 +22,9 @@ include ../../views/mixins/formParts
         .advert__field
             .advert__field-name {{'breed' | translate}}
             .advert__field-content {{advert.fields.breed || 'Not specified' | translate}}
+        .advert__field.advert__field--author(ng-if="!advert.hide.author")
+            span.advert__field-name {{'Author' | translate}}
+            a.advert__field-content(href="/author/{{advert.fields.author}}") {{advert.author.name || 'Go to' | translate}}
         .advert__field.advert__field--info.advert__field--info-full
             .advert__field-name.advert__field-name--small {{'info' | translate}}
             .advert__field-content {{advert.fields.info || 'Not specified' | translate}}
