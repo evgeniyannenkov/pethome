@@ -3,8 +3,8 @@
 function imageUploadControllersInit ( module ) {
 
     module.controller('imagesUploadCtrl', [
-        "FileUploader", "notify", "$rootScope", "popup",
-        function ( FileUploader, notify, $rootScope, popup ) {
+        "FileUploader", "notify", "$rootScope",
+        function ( FileUploader, notify, $rootScope ) {
 
             this.fileUploader = new FileUploader({
                 alias : "images",
@@ -21,10 +21,11 @@ function imageUploadControllersInit ( module ) {
                 }
             });
 
-            popup.onOpen("upload images")
-                 .then(() => {
-                     this.fileUploader.url = `/api/advert/${this.advert_id}/images`;
-                 });
+            $rootScope.$on("popup_open", ( event, data, type ) => {
+                if ( type == "upload images" ) {
+                    this.fileUploader.url = `/api/advert/${this.advert_id}/images`;
+                }
+            });
 
             this.fileUploader.onSuccessItem = ( fileItem, response, status, headers ) => {
                 fileItem.remove();

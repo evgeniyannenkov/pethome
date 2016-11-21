@@ -3,8 +3,8 @@
 function popupControllersInit ( module ) {
 
     module.controller('popupContentCtrl', [
-        "$rootScope", "popup", "$scope",
-        function ( $rootScope, popup, $scope ) {
+        "$rootScope", "$scope",
+        function ( $rootScope, $scope ) {
 
             this.isExpected = ( type ) => {
                 return this.expected && this.expected.indexOf(type) != -1;

@@ -2,20 +2,6 @@
 
 function popupComponentsInit ( module, constants ) {
 
-    // module.component('popup', {
-    //     transclude : {
-    //         "trigger" : "popupTrigger",
-    //         "content" : "popupContent"
-    //     },
-    //     templateUrl : `${constants.templatesFolder}/popup.html`,
-    //     bindings : {
-    //         type : "@",
-    //         wide: "="
-    //     },
-    //     controller : "popupCtrl",
-    //     controllerAs : "popup"
-    // });
-
     module.directive('popupTrigger', function () {
         return {
             scope : {
@@ -27,15 +13,17 @@ function popupComponentsInit ( module, constants ) {
             controllerAs : "ctrl",
             bindToController : true,
             controller : [
-                "popup",
-                function ( popup ) {
+                "$rootScope",
+                function ( $rootScope ) {
                     this.open = ( type ) => {
-                        popup.open(type, {
+
+                        $rootScope.$broadcast("popup_open", {
                             wide : this.wide,
                             advertId : this.advertId,
                             advert : this.advert,
                             authorId : this.authorId
-                        })
+                        }, type.toLowerCase());
+
                     };
                 }
             ],
