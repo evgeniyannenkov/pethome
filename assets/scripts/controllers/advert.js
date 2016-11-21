@@ -60,6 +60,11 @@ function advertControllersInit ( module ) {
                 this.save();
             };
 
+            this.changeState = () => {
+                this.fields.published = !this.fields.published;
+                this.save();
+            };
+
             this.setMainImage = ( image ) => {
                 image = image.startsWith("/") ? image.substr(1, image.length - 1) : image;
                 if ( image && this.fields.images.indexOf(image) != -1 ) {
@@ -143,7 +148,7 @@ function advertControllersInit ( module ) {
 
     module.controller('editAdvertCtrl', [
         "$scope", "$rootScope",
-        function ( $scope, $rootScope) {
+        function ( $scope, $rootScope ) {
 
             $rootScope.$on("popup_open", ( event, data, type ) => {
                 if ( type == "edit advert" ) {
@@ -157,7 +162,7 @@ function advertControllersInit ( module ) {
                     .then(() => {
                         $scope.$broadcast("formResponse", {
                             responseClass : "",
-                            reset: true
+                            reset : true
                         });
 
                     })
