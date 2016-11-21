@@ -12,19 +12,8 @@ function popupServicesInit ( module ) {
                 $rootScope.$broadcast(eventName, data, type.toLowerCase());
             };
 
-            const onOpen = ( onOpenType ) => {
-                return new Promise(( resolve ) => {
-                    $rootScope.$on(eventName, function ( event, data, type ) {
-                        if ( !onOpenType || onOpenType == type ) {
-                            resolve(data, type);
-                        }
-                    });
-                });
-            };
-
             return {
-                open,
-                onOpen
+                open
             };
 
         }

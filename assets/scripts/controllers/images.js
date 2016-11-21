@@ -21,10 +21,11 @@ function imageUploadControllersInit ( module ) {
                 }
             });
 
-            popup.onOpen("upload images")
-                 .then(() => {
-                     this.fileUploader.url = `/api/advert/${this.advert_id}/images`;
-                 });
+            $rootScope.$on("popup_open", ( event, data, type ) => {
+                if ( type == "upload images" ) {
+                    this.fileUploader.url = `/api/advert/${this.advert_id}/images`;
+                }
+            });
 
             this.fileUploader.onSuccessItem = ( fileItem, response, status, headers ) => {
                 fileItem.remove();
