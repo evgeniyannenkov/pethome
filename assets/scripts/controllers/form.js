@@ -11,8 +11,8 @@ function formControllersInit ( module ) {
             this.fields = {};
 
 
-            $rootScope.$on("popup_open", ( event, data ) => {
-                if ( data ) {
+            $rootScope.$on("popup_open", ( event, data, type ) => {
+                if ( type ) {
                     this.$form = $scope[ this.name ];
                 }
             });
@@ -21,6 +21,7 @@ function formControllersInit ( module ) {
                 if ( this.popup ) {
                     this.popup.close();
                 }
+                this.validClass = "";
             };
 
             this.check = () => {

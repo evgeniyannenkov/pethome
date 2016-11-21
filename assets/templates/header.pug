@@ -7,3 +7,5 @@
 
     .header__menu--mobile(ng-class="{'open' : header.mobile}")
         include ../../views/partials/_nav
+
+    popup-content(initial="login,registration" ng-if="!header.user")
