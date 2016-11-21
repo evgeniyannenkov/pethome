@@ -56,6 +56,32 @@
 .advert-single__title {
   font-size     : 1.3em;
   padding-right : 30px;
+
+  .status {
+    @include roboto-condensed;
+    font-size      : 0.7em;
+    margin-left    : 5px;
+    cursor         : pointer;
+    transition     : color 0.2s;
+    text-transform : lowercase;
+
+    &.not-published {
+      color : $gray;
+
+      &:hover {
+        color : $fontColor;
+      }
+    }
+
+    &.published {
+      color : $blue;
+
+      &:hover {
+        color : darken($blue, 10%);
+      }
+    }
+  }
+
 }
 
 .advert-single__images {
