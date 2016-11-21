@@ -9,8 +9,34 @@
   padding         : 10px 0;
 }
 
+.adverts-feed__item {
+  flex : 0 100%;
+}
+
 @media (min-width : 700px) {
   .adverts-feed {
     justify-content : space-between;
+  }
+
+  .adverts-feed__item {
+    flex : 0 49%;
+  }
+}
+
+@media (min-width : 900px) {
+  .adverts-feed__item {
+    flex : 0 32%;
+  }
+}
+
+@media (min-width : 1400px) {
+  .adverts-feed__item {
+    flex : 0 24%;
+  }
+}
+
+@media (min-width : 1700px) {
+  .adverts-feed__item {
+    flex : 0 19%;
   }
 }

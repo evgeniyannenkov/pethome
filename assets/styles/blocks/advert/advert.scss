@@ -111,27 +111,8 @@
 
 }
 
-@media (min-width : 700px) {
-  .advert {
-    width : 48%;
-  }
-}
-
-@media (min-width : 900px) {
-  .advert {
-    width : 31%;
-  }
-}
-
-@media (min-width : 1400px) {
-  .advert {
-    width : 23%;
-  }
-}
-
 @media (min-width : 1700px) {
   .advert {
-    width     : 18%;
     max-width : 400px;
   }
 }
