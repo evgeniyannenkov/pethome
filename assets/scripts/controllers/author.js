@@ -20,10 +20,13 @@ function authorControllersInit ( module ) {
     module.controller('authorsListCtrl', [
         "author",
         function ( author ) {
+            this.authors = [];
             author.getAll()
                   .then(( response ) => {
                       if ( response.data.success ) {
-                          this.authors = response.data.authors;
+                          this.authors = Object.keys(response.data.authors).map(function ( key ) {
+                              return response.data.authors[ key ];
+                          });
                       }
                   })
                   .catch(( response ) => {
