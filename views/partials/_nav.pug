@@ -11,4 +11,3 @@ ul.header__menu
         a.header__menu-link(href='/profile') {{'Profile' | translate}}
     li.header__menu-item(ng-class="{'hidden' : header.languageSelect}" ng-if="header.user")
         a.header__menu-link(ng-controller="logoutCtrl as ctrl" ng-click="ctrl.logout();") {{'Logout' | translate}}
-popup-content(initial="login,registration")

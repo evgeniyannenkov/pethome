@@ -22,6 +22,7 @@ function imageUploadControllersInit ( module ) {
             });
 
             $rootScope.$on("popup_open", ( event, data, type ) => {
+
                 if ( type == "upload images" ) {
                     this.fileUploader.url = `/api/advert/${this.advert_id}/images`;
                 }

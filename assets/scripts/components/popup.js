@@ -16,7 +16,6 @@ function popupComponentsInit ( module, constants ) {
                 "$rootScope",
                 function ( $rootScope ) {
                     this.open = ( type ) => {
-
                         $rootScope.$broadcast("popup_open", {
                             wide : this.wide,
                             advertId : this.advertId,
