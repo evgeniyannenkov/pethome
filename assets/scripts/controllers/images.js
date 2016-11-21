@@ -3,8 +3,8 @@
 function imageUploadControllersInit ( module ) {
 
     module.controller('imagesUploadCtrl', [
-        "FileUploader", "notify", "$rootScope", "popup",
-        function ( FileUploader, notify, $rootScope, popup ) {
+        "FileUploader", "notify", "$rootScope",
+        function ( FileUploader, notify, $rootScope ) {
 
             this.fileUploader = new FileUploader({
                 alias : "images",

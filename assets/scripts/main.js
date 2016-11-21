@@ -83,7 +83,6 @@ const components = {
     ],
     app : [
         stickyComponentsInit,
-        popupServicesInit,
         applicationConfig
 
     ]

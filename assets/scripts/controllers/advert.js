@@ -142,8 +142,8 @@ function advertControllersInit ( module ) {
     ]);
 
     module.controller('editAdvertCtrl', [
-        "$scope", "$rootScope", "popup",
-        function ( $scope, $rootScope, popup ) {
+        "$scope", "$rootScope",
+        function ( $scope, $rootScope ) {
 
             $rootScope.$on("popup_open", ( event, data, type ) => {
                 if ( type == "edit advert" ) {
