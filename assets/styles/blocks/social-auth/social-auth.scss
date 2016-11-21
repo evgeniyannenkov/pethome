@@ -1,0 +1,70 @@
+@import "../../common/variables";
+@import "../../common/mixins";
+
+.social-auth {
+  color         : $metallicGray;
+  text-align    : center;
+  margin-bottom : 25px;
+}
+
+.social-auth__inner {
+  margin          : 15px 0;
+  display         : flex;
+  flex-flow       : row wrap;
+  justify-content : center;
+  align-items     : center;
+}
+
+.social-auth__btn {
+  margin    : 5px 0;
+  flex      : 1 100%;
+  font-size : 1.4em;
+}
+
+.social-auth__btn--fb {
+  background : $facebookColor;
+  &:hover {
+    @include standardBgHover($facebookHoverColor);
+  }
+}
+
+.social-auth__btn--vk {
+  background : $vkColor;
+  &:hover {
+    @include standardBgHover($vkHoverColor);
+  }
+}
+
+.social-auth__description {
+  font-size : 0.8em;
+  @include roboto-condensed;
+}
+
+.social-auth__separator {
+  display         : flex;
+  margin          : 25px 0;
+  flex-flow       : row nowrap;
+  justify-content : center;
+  align-items     : center;
+  font-size       : 0.8em;
+  color           : $blue;
+  span {
+    margin : 0 5px;
+  }
+  &:before, &:after {
+    content    : "";
+    height     : 1px;
+    background : $blue;
+    flex       : 1 auto;
+  }
+}
+
+@media screen and (min-width : 500px) {
+  .social-auth__inner {
+    justify-content : space-between;
+  }
+
+  .social-auth__btn {
+    flex : 0 auto;
+  }
+}

@@ -77,7 +77,7 @@ function applicationConfig ( module ) {
                 "last 3 days" : "За три дня",
                 "last week" : "За неделю",
                 "last month" : "За месяц",
-
+                "or" : "или"
             });
 
             translator.setTranslations("ua", {
@@ -153,7 +153,7 @@ function applicationConfig ( module ) {
                 "last 3 days" : "За три дні",
                 "last week" : "За тиждень",
                 "last month" : "За місяць",
-
+                "or" : "або"
             });
 
             translator.setFullDateFormat("en", "MMM/d/yyyy h:mm a");
