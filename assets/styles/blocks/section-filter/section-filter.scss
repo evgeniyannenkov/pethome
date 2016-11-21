@@ -5,6 +5,11 @@
 
 @media screen and (min-width : 1200px) {
 
+  .section-filter {
+    max-width : calc(#{$maxContainerWidth} - #{$mainContentPaddingLg * 2});
+    margin    : 0 auto;
+  }
+
   .section-filter__inner {
     display         : flex;
     flex-flow       : row nowrap;
