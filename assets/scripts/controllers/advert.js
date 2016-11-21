@@ -143,7 +143,7 @@ function advertControllersInit ( module ) {
 
     module.controller('editAdvertCtrl', [
         "$scope", "$rootScope",
-        function ( $scope, $rootScope ) {
+        function ( $scope, $rootScope) {
 
             $rootScope.$on("popup_open", ( event, data, type ) => {
                 if ( type == "edit advert" ) {
@@ -155,10 +155,20 @@ function advertControllersInit ( module ) {
             this.update = () => {
                 this.advert.save(this.temporaryData)
                     .then(() => {
-                        this.popup.close();
+                        $scope.$broadcast("formResponse", {
+                            responseClass : "",
+                            reset: true
+                        });
+
                     })
                     .catch(( error ) => {
                         console.log(error);
+                        $timeout(500)
+                            .then(() => {
+                                $scope.$broadcast("formResponse", {
+                                    responseClass : "fail"
+                                });
+                            });
                     });
             };
 

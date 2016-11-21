@@ -37,9 +37,9 @@ include ../../views/mixins/formParts
 .advert-single__images
     .advert-single__image(ng-repeat="image in advert.fields.images")
         ng-image.advert-single__image-inner(bottom-btn="advert.removeImage(image);" top-btn="advert.setMainImage(image);" is-main="advert.fields.mainImage == image;" image="/{{image}}")
-//div(ng-if="advert.reviewEnabled && !advert.fields.reviewed")
-//    +button("Mark Reviewed")(ng-click="advert.review();")
-//.advert-single__title(ng-if="!advert.fields.published")
-//    h2 (Not Published)
+div(ng-if="advert.reviewEnabled && !advert.fields.reviewed")
+    +button("Mark Reviewed")(ng-click="advert.review();")
+.advert-single__title(ng-if="!advert.fields.published")
+    h2 (Not Published)
 popup-content(initial="edit advert,remove advert,upload images")
 
