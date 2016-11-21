@@ -17,19 +17,9 @@ block content
 
     if currentUser && currentUser.is_admin
         if !author.blocked
-            popup(type="Block : " + author._id)
-                popup-trigger
-                    button Block
-                popup-content
-                    .popup__content
-                        author-block(author-id = author._id action="block")
+            button(popup-trigger="block" author-id=author._id) Block
         else
-            popup(type="Unblock : " + author._id)
-                popup-trigger
-                    button Unblock
-                popup-content
-                    .popup__content
-                        author-block(author-id = author._id action="unblock")
-
+            button(popup-trigger="unblock" author-id=author._id) Unblock
+    popup-content(initial="block,unblock")
 block footer
     include partials/_footer

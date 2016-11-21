@@ -20,7 +20,8 @@ function popupComponentsInit ( module, constants ) {
         return {
             scope : {
                 advertId : "@",
-                advert : "="
+                advert : "=",
+                authorId : "@"
             },
             controllerAs : "ctrl",
             bindToController : true,
@@ -30,7 +31,8 @@ function popupComponentsInit ( module, constants ) {
                     this.open = ( type ) => {
                         popup.open(type, {
                             advertId : this.advertId,
-                            advert : this.advert
+                            advert : this.advert,
+                            authorId : this.authorId
                         })
                     };
                 }

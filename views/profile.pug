@@ -10,16 +10,11 @@ block content
             if !currentUser.blocked
                 .heading__item
                     h1 PROFILE
-                .heading__item
-                    popup(type="New Advert")
-                        popup-trigger
-                            +btn-default('New Advert').button--green.button--green.button--standard_hover
-                            .btn-round.btn-round--left.btn-round--double.author__btn--hidden_lg(title="{{'New Advert' | translate}}")
-                                i.fa.fa-plus(aria-hidden="true")
-                                i.fa.fa-file(aria-hidden="true")
-                        popup-content
-                            .popup__content
-                                advert-create
+                .heading__item(popup-trigger="new advert")
+                    +btn-default('New Advert').button--green.button--green.button--standard_hover
+                        .btn-round.btn-round--left.btn-round--double.author__btn--hidden_lg(title="{{'New Advert' | translate}}")
+                            i.fa.fa-plus(aria-hidden="true")
+                            i.fa.fa-file(aria-hidden="true")
             else
                 .heading__item
                     h1 PROFILE (Blocked)
@@ -28,5 +23,6 @@ block content
 
     feed(author-id=currentUser._id hide-fields="{author:true}" enable-filter="true" all-allowed="true")
 
+    popup-content(initial="new advert")
 block footer
     include partials/_footer

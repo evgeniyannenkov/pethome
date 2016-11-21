@@ -13,24 +13,15 @@ include ../../views/mixins/buttons
         .author__field
             | {{author.fields.contactInfo.phone}}
 
-    .author__btn
-        popup(type="profile" ng-if="author.edit")
-            popup-trigger
-                +btn-default('Edit Profile').button--blue.button--invert_hover.author__btn--hidden_sm
-                .btn-round.author__btn--hidden_lg(title="{{'Edit Profile' | translate}}")
-                    i.fa.fa-pencil(aria-hidden="true")
-            popup-content
-                .popup__content
-                    author-edit
+    .author__btn(popup-trigger="edit profile" ng-if="author.edit")
+        +btn-default('Edit Profile').button--blue.button--invert_hover.author__btn--hidden_sm
+            .btn-round.author__btn--hidden_lg(title="{{'Edit Profile' | translate}}")
+                i.fa.fa-pencil(aria-hidden="true")
 
 .author__block
     .author__inner
         .author__title Deactivate account
         | This will permanently delete all adverts and settings.
-    .author__btn
-        popup(type="Remove Profile" ng-if="author.remove")
-            popup-trigger
-                +btn-default('Remove Profile').button--red.button--transparent
-            popup-content
-                .popup__content
-                    author-remove
+    .author__btn(popup-trigger="remove profile" ng-if="author.remove")
+        +btn-default('Remove Profile').button--red.button--transparent
+popup-content(initial="edit profile,remove profile")

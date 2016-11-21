@@ -36,49 +36,50 @@ function authorControllersInit ( module ) {
         "author", "notify", "$scope", "$rootScope", "$timeout",
         function ( $author, notify, $scope, $rootScope, $timeout ) {
 
-            $rootScope.$on("popup_open", ( $event, type ) => {
-                if ( type == "profile" ) {
+            $rootScope.$on("popup_open", ( $event, data, type ) => {
+                if ( type == "edit profile" ) {
                     this.temporaryData = angular.copy(this.author.fields);
-                    this.temporaryData.language = localStorage[ "preferred_language" ] || 'ru'
+                    this.temporaryData.language = localStorage[ "preferred_language" ] || 'ru';
+                    $scope.$apply();
                 }
             });
 
             this.edit = () => {
 
                 $author.update({ id : this.author.fields._id, data : this.temporaryData })
-                      .then(( response ) => {
-                          if ( response.data.success ) {
-                              notify.inform({
-                                  message : `[[Updated]]  <i class="fa fa-check" aria-hidden="true"></i>`,
-                                  duration : 1500
-                              });
-                              this.author.fields = angular.copy(this.temporaryData);
-                              if ( this.popup ) {
-                                  this.popup.close();
-                              }
-                              $scope.$broadcast("formResponse", {
-                                  responseClass : "",
-                                  reset : true
-                              });
-                          } else {
-                              console.log(response);
-                              $timeout(500)
-                                  .then(() => {
-                                      $scope.$broadcast("formResponse", {
-                                          responseClass : "fail"
-                                      });
-                                  });
-                          }
-                      })
-                      .catch(( error ) => {
-                          console.log(error);
-                          $timeout(500)
-                              .then(() => {
-                                  $scope.$broadcast("formResponse", {
-                                      responseClass : "fail"
-                                  });
-                              });
-                      });
+                       .then(( response ) => {
+                           if ( response.data.success ) {
+                               notify.inform({
+                                   message : `[[Updated]]  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                   duration : 1500
+                               });
+                               this.author.fields = angular.copy(this.temporaryData);
+                               if ( this.popup ) {
+                                   this.popup.close();
+                               }
+                               $scope.$broadcast("formResponse", {
+                                   responseClass : "",
+                                   reset : true
+                               });
+                           } else {
+                               console.log(response);
+                               $timeout(500)
+                                   .then(() => {
+                                       $scope.$broadcast("formResponse", {
+                                           responseClass : "fail"
+                                       });
+                                   });
+                           }
+                       })
+                       .catch(( error ) => {
+                           console.log(error);
+                           $timeout(500)
+                               .then(() => {
+                                   $scope.$broadcast("formResponse", {
+                                       responseClass : "fail"
+                                   });
+                               });
+                       });
             };
         }
     ]);
@@ -86,32 +87,33 @@ function authorControllersInit ( module ) {
     module.controller('authorRemoveCtrl', [
         "author", "notify", "$scope", "$timeout",
         function ( $author, notify, $scope, $timeout ) {
+
             this.remove = () => {
                 $author.remove({ id : this.author.fields._id })
-                      .then(( response ) => {
-                          if ( response.data.success ) {
-                              notify.inform({
-                                  message : `[[Removed]]  <i class="fa fa-check" aria-hidden="true"></i>`,
-                                  duration : 1000
-                              });
-                              $timeout(1200)
-                                  .then(() => {
-                                      $scope.$broadcast("formResponse", {
-                                          responseClass : "success"
-                                      });
-                                      document.location.href = "/";
-                                  });
-                          }
-                      })
-                      .catch(( err ) => {
-                          console.log(err);
-                          $timeout(500)
-                              .then(() => {
-                                  $scope.$broadcast("formResponse", {
-                                      responseClass : "fail"
-                                  });
-                              });
-                      });
+                       .then(( response ) => {
+                           if ( response.data.success ) {
+                               notify.inform({
+                                   message : `[[Removed]]  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                   duration : 1000
+                               });
+                               $timeout(1200)
+                                   .then(() => {
+                                       $scope.$broadcast("formResponse", {
+                                           responseClass : "success"
+                                       });
+                                       document.location.href = "/";
+                                   });
+                           }
+                       })
+                       .catch(( err ) => {
+                           console.log(err);
+                           $timeout(500)
+                               .then(() => {
+                                   $scope.$broadcast("formResponse", {
+                                       responseClass : "fail"
+                                   });
+                               });
+                       });
             };
 
         }
