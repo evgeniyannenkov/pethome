@@ -5,14 +5,12 @@
   overflow      : hidden;
   position      : relative;
   width         : 100%;
-  display       : flex;
-  flex-flow     : column wrap;
-  align-items   : stretch;
   margin        : 0 0 30px;
   max-width     : 500px;
 }
 
 .advert__head {
+  width       : 100%;
   position    : relative;
   padding-top : 60%;
 }
@@ -35,6 +33,13 @@
   border-bottom : none;
 }
 
+.advert__field--author {
+  .advert__field-content {
+    flex       : 0 70%;
+    text-align : right;
+  }
+}
+
 .advert__field--title {
   padding         : 10px 10px;
   position        : absolute;
@@ -46,6 +51,9 @@
   color           : white;
   background      : rgba(0, 0, 0, .5);
   z-index         : 2;
+  a {
+    color : white;
+  }
 }
 
 .advert__field--image {
