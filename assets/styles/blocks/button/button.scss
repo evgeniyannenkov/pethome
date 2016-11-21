@@ -77,6 +77,10 @@
     border-width : 2px;
     @include invertBgHover($red);
   }
+
+  &.button--standard_hover {
+    @include standardBgHover($redHover);
+  }
 }
 
 .button--green {

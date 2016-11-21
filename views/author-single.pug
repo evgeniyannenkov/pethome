@@ -1,25 +1,31 @@
 extends layout
+include mixins/buttons
+
 
 block header
     include partials/_header
 
 block content
+    .main-content__container
+        .heading
+            if author.blocked
+                .heading__item
+                    h1 Author (Blocked)
+                .heading__item
+                    +btn-default('Unblock').button--green.button--standard_hover(popup-trigger="unblock" author-id=author._id)
+            else
+                .heading__item
+                    h1 Author
+                .heading__item
+                    +btn-default('Block').button--red.button--invert_hover(popup-trigger="block" author-id=author._id)
 
-    if author.blocked
-        h1 (Blocked)
-
-    if currentUser && currentUser.is_admin
-        author(author-id=author._id edit="true" remove="true")
-    else
-        author(author-id=author._id)
-
-    feed(author-id=author._id hide-fields="{author:true}" all-allowed="true")
-
-    if currentUser && currentUser.is_admin
-        if !author.blocked
-            button(popup-trigger="block" author-id=author._id) Block
+        if currentUser && currentUser.is_admin
+            author(author-id=author._id edit="true" remove="true")
         else
-            button(popup-trigger="unblock" author-id=author._id) Unblock
+            author(author-id=author._id)
+
+    feed(author-id=author._id hide-fields="{author:true}" all-allowed="true" enable-filter="true")
+
     popup-content(initial="block,unblock")
 block footer
     include partials/_footer
