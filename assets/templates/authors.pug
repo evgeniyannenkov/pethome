@@ -1,6 +1,8 @@
 h3 Authors :
-p(ng-repeat="(id, author) in list.authors")
-    a(href="/author/{{id}}")
-        span(ng-if = "author.name") {{author.name}}
-        span(ng-if = "!author.name") {{id}}
+label
+    | Blocked
+    input(type="checkbox" ng-model="list.filter.blocked")
+p(ng-repeat="author in list.authors | filter : list.filter | orderBy : 'name'")
+    a(href="/author/{{author._id}}")
+        span {{author.name || author._id}}
     span {{author.blocked ? "(blocked)" : ""}}
