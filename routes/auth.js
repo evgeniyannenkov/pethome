@@ -13,6 +13,14 @@ router.get('/facebook/callback', passport.authenticate('facebook', routesConfig.
     res.redirect('/profile');
 });
 
+//VK Route
+router.get('/vkontakte', passport.authenticate('vkontakte', { scope: ['email'] }), ( req, res, next ) => {
+
+});
+router.get('/vkontakte/callback', passport.authenticate('vkontakte', routesConfig.passportMiddlewareFail), ( req, res, next ) => {
+    res.redirect('/profile');
+});
+
 //Registration Route
 router.post('/', passport.authenticate('local-register', routesConfig.passportMiddlewareFail), ( req, res, next ) => {
     console.log(req.sessionID);
