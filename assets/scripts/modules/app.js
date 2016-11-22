@@ -6,6 +6,7 @@ function getModules () {
         providers : angular.module("providers", []),
         filters : angular.module("filters", []),
         notifier : angular.module("notifier", []),
+        lightbox : angular.module("lightbox", [ "ngAnimate", "ngAria", "ngMaterial", ]),
         auth : angular.module("auth", []),
         popup : angular.module("popup", []),
         advert : angular.module("advert", []),
@@ -15,10 +16,11 @@ function getModules () {
         images : angular.module("images", []),
         form : angular.module("form", []),
         header : angular.module("header", []),
-        paralax : angular.module("paralax", []),
+        parallax : angular.module("parallax", []),
         app : angular.module("app",
             [
                 "providers",
+                "lightbox",
                 "config",
                 "angularFileUpload",
                 "services",
@@ -32,7 +34,7 @@ function getModules () {
                 "images",
                 "form",
                 "header",
-                "paralax"
+                "parallax"
             ]
         )
     };
