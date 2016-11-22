@@ -47,6 +47,10 @@
   &:hover {
     opacity : 1;
   }
+
+  &:focus {
+    outline : none;
+  }
 }
 
 .lightbox__button--close {
@@ -67,6 +71,13 @@
   left      : 5px;
   top       : 50%;
   transform : translateY(-50%);
+}
+
+.lightbox__counter {
+  position : absolute;
+  bottom   : 10px;
+  left     : 10px;
+  color    : white;
 }
 
 .lightbox__current-image {

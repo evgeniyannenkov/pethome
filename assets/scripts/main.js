@@ -33,8 +33,7 @@ const components = {
         validationServicesInit,
         authorServicesInit,
         advertServicesInit,
-        currentUserServicesInit,
-        lightboxServicesInit
+        currentUserServicesInit
     ],
     providers : [
         translatorProviderInit
@@ -46,6 +45,11 @@ const components = {
         notifierControllersInit,
         notifierServicesInit,
         notifierComponentsInit
+    ],
+    lightbox : [
+        lightboxServicesInit,
+        lightboxComponentsInit,
+        lightboxControllersInit
     ],
     auth : [
         authControllersInit,

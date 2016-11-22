@@ -1,9 +1,10 @@
 .lightbox(ng-keypress="ctrl.key();" tabindex="1" ng-class="{'open' : ctrl.lightbox.active }")
     .lightbox__inner(ng-click="ctrl.close($event);")
+        .lightbox__counter {{ctrl.lightbox.currentIndex + 1}} / {{ctrl.lightbox.images.length}}
         .lightbox__button.lightbox__button--close(ng-click="ctrl.close();")
             i.fa.fa-times(aria-hidden='true')
         .lightbox__button.lightbox__button--previous(ng-click="ctrl.previous();")
             i.fa.fa-angle-left(aria-hidden='true')
         .lightbox__button.lightbox__button--next(ng-click="ctrl.next();")
             i.fa.fa-angle-right(aria-hidden='true')
-        img.lightbox__current-image(ng-src="{{ctrl.lightbox.currentImage}}")
+        img.lightbox__current-image(ng-src="{{ctrl.lightbox.currentImage}}" md-swipe-left="ctrl.next();" md-swipe-right="ctrl.previous();")

@@ -6,6 +6,7 @@ function getModules () {
         providers : angular.module("providers", []),
         filters : angular.module("filters", []),
         notifier : angular.module("notifier", []),
+        lightbox : angular.module("lightbox", [ "ngAnimate", "ngAria", "ngMaterial", ]),
         auth : angular.module("auth", []),
         popup : angular.module("popup", []),
         advert : angular.module("advert", []),
@@ -19,6 +20,7 @@ function getModules () {
         app : angular.module("app",
             [
                 "providers",
+                "lightbox",
                 "config",
                 "angularFileUpload",
                 "services",
