@@ -1,0 +1,113 @@
+.lightbox {
+  position         : fixed;
+  width            : 100%;
+  height           : 100%;
+  background-color : transparent;
+  top              : 0;
+  left             : 0;
+  z-index          : 150;
+  visibility       : hidden;
+  transition       : background-color 0.2s;
+
+  .lightbox__inner {
+    position        : absolute;
+    top             : 0;
+    width           : 100%;
+    height          : 100%;
+    left            : -100%;
+    transition      : left 0.15s 0.2s;
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    cursor          : pointer;
+  }
+
+  &.open {
+    visibility       : visible;
+    background-color : rgba(0, 0, 0, 0.8);
+
+    .lightbox__inner {
+      left : 0;
+    }
+  }
+}
+
+.lightbox__button {
+  position        : absolute;
+  width           : 50px;
+  height          : 50px;
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  color           : white;
+  font-size       : 4em;
+  opacity         : 0.7;
+  transition      : opacity 0.2s;
+
+  &:hover {
+    opacity : 1;
+  }
+
+  &:focus {
+    outline : none;
+  }
+}
+
+.lightbox__button--close {
+  right     : 5px;
+  top       : 5px;
+  font-size : 2em;
+}
+
+.lightbox__button--next {
+  opacity   : 0.7;
+  right     : 5px;
+  top       : 50%;
+  transform : translateY(-50%);
+}
+
+.lightbox__button--previous {
+  opacity   : 0.8;
+  left      : 5px;
+  top       : 50%;
+  transform : translateY(-50%);
+}
+
+.lightbox__counter {
+  position : absolute;
+  bottom   : 10px;
+  left     : 10px;
+  color    : white;
+}
+
+.lightbox__current-image {
+  max-width  : 90%;
+  max-height : 90%;
+
+  &::selection {
+    background-color : transparent;
+  }
+}
+
+.lightbox-trigger {
+  position : relative;
+}
+
+.lightbox-trigger__inner {
+  position        : absolute;
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+  width           : 100%;
+  height          : 100%;
+  color           : white;
+  font-size       : 2em;
+  opacity         : 0.2;
+  cursor          : pointer;
+  transition      : opacity 0.2s, font-size 0.2s;
+
+  &:hover {
+    font-size : 4em;
+    opacity   : 0.8;
+  }
+}

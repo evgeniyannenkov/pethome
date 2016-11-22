@@ -28,6 +28,9 @@
       "bower": [
         "angular",
         "angular-translate",
+        "angular-animate",
+        "angular-aria",
+        "angular-material",
         "angular-file-upload",
         "es6-promise-polyfill",
         "js-md5",

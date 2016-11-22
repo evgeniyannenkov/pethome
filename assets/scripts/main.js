@@ -46,6 +46,11 @@ const components = {
         notifierServicesInit,
         notifierComponentsInit
     ],
+    lightbox : [
+        lightboxServicesInit,
+        lightboxComponentsInit,
+        lightboxControllersInit
+    ],
     auth : [
         authControllersInit,
         authComponentsInit
@@ -78,13 +83,12 @@ const components = {
         headerComponentsInit,
         headerControllersInit
     ],
-    paralax : [
+    parallax : [
         paralaxComponentsInit
     ],
     app : [
         stickyComponentsInit,
         applicationConfig
-
     ]
 };
 
