@@ -6,6 +6,7 @@ const Author = require('../schemas/author');
 const authors = require("../controllers/author");
 const config = require('./oauth');
 const FacebookStrategy = require('passport-facebook').Strategy;
+const VkStrategy = require('passport-vkontakte').Strategy;
 
 module.exports = () => {
 
@@ -111,7 +112,64 @@ module.exports = () => {
                               avatar : profile.photos[0].value || "",
                               name : profile.name.givenName + " " + profile.name.familyName || "Not specified",
                               contactInfo : {email : profile.emails[0].value},
-                              password : "test"
+                              password : "test",
+                              date : new Date().getTime()
+                          }).then(( response ) => {
+                              if ( response.success ) {
+                                  done(null, response.author);
+                              } else {
+                                  done(null, false, {message : response.message});
+                              }
+                          }).catch(( err ) => {
+                              done(err);
+                          });
+                      }
+                  })
+                  .catch(( err ) => {
+                      done(err);
+                  });
+        }
+    ));
+
+    //VkStrategy
+    passport.use(new VkStrategy({
+            clientID : config.vk.clientID,
+            clientSecret : config.vk.clientSecret,
+            callbackURL : config.vk.callbackURL,
+            scope : ['email'],
+            profileFields : ['email', 'name', 'photos']
+        },
+        ( accessToken, refreshToken, params, profile, done ) => {
+            if ( !params.email ) {
+                done(null, false, {message : "VK Authentication: User denied access to email"});
+            }
+            Author.findOne({"contactInfo.email" : params.email})
+                  .then(( user ) => {
+                      if ( user !== null ) {
+                          if ( user.oauthID.vk && user.oauthID.vk == profile.id ) {
+                              done(null, user);
+                          } else {
+                              user.oauthID.vk = profile.id;
+                              user.save()
+                                  .then(( user ) => {
+                                      if ( user ) {
+                                          done(null, user);
+                                      } else {
+                                          done(null, false, {message : "VK Authentication: User doesn't saved"});
+                                      }
+                                  })
+                                  .catch(( err ) => {
+                                      done(err);
+                                  });
+                          }
+                      } else {
+                          authors.create({
+                              oauthID : {vk : profile.id},
+                              avatar : profile.photos[0].value || "",
+                              name : profile.name.givenName + " " + profile.name.familyName || "Not specified",
+                              contactInfo : {email : params.email},
+                              password : "test",
+                              date : new Date().getTime()
                           }).then(( response ) => {
                               if ( response.success ) {
                                   done(null, response.author);
