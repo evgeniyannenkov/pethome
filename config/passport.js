@@ -4,6 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const Author = require('../schemas/author');
 const authors = require("../controllers/author");
+const config = require('./oauth');
 
 module.exports = () => {
 

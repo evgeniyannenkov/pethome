@@ -16,9 +16,10 @@
 }
 
 .social-auth__btn {
-  margin    : 5px 0;
-  flex      : 1 100%;
+  margin    : 5px;
+  flex      : 0 45%;
   font-size : 1.4em;
+  min-width : initial !important;
 }
 
 .social-auth__btn--fb {
@@ -65,6 +66,7 @@
   }
 
   .social-auth__btn {
-    flex : 0 auto;
+    flex   : 0 auto;
+    margin : 5px 0;
   }
 }
