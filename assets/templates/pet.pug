@@ -29,7 +29,7 @@ include ../../views/mixins/buttons
         a.pet__field-content(href="/author/{{pet.author._id}}")  {{pet.author.name || 'Go to' | translate}}
     .pet__field.pet__field--info(ng-if="!pet.hide.info")
         .pet__field-name.pet__field-name--small {{'info' | translate}}
-        .pet__field-content {{pet.fields.info || 'Not specified' | translate | excerpt : 10}}
+        .pet__field-content {{pet.fields.info || 'Not specified' | translate | excerpt : 9}}
         //+btn-more('Read more')(type="button" class="button--blue button--invert_hover" href="/pet/{{pet.fields._id}}")
         a.button.button--read_more(type="button" class="button--blue button--invert_hover" href="/pet/{{pet.fields._id}}")
             span.button__title {{'Read more' | translate}}
