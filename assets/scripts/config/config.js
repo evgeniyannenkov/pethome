@@ -79,7 +79,9 @@ function applicationConfig ( module ) {
                 "last month" : "За месяц",
                 "or" : "или",
                 "with your social media accounts" : "с помощью социальных сетей",
-                "We'll never spam you, post on your behalf or do anything sketchy like that" : "Мы не будем присылать спам и делать публикации от вашего имени"
+                "We'll never spam you, post on your behalf or do anything sketchy like that" : "Мы не будем присылать спам и делать публикации от вашего имени",
+                "total" : "всего",
+                "no pets were found" : "Питомцы не найдены"
             });
 
             translator.setTranslations("ua", {
@@ -157,7 +159,9 @@ function applicationConfig ( module ) {
                 "last month" : "За місяць",
                 "or" : "або",
                 "with your social media accounts" : "за допомогою соціальних мереж",
-                "We'll never spam you, post on your behalf or do anything sketchy like that" : "Ми не будемо надсилати спам і робити публікації від вашого імені"
+                "We'll never spam you, post on your behalf or do anything sketchy like that" : "Ми не будемо надсилати спам і робити публікації від вашого імені",
+                "total" : "всього",
+                "no pets were found" : "Оголошення не знайдені"
             });
 
             translator.setFullDateFormat("en", "MMM/d/yyyy h:mm a");

@@ -32,7 +32,7 @@ include ../../views/mixins/buttons
 
 .main-content__container
     page-separator(ng-if="!feed.filtered.length") {{'No pets were found' | translate}}
-    page-separator(ng-if="feed.filtered.length") {{feed.filtered.length}} {{feed.filtered.length > 1 ? 'Pets' : 'Pet'}}
+    page-separator(ng-if="feed.filtered.length") {{'total - ' | translate : 'all'}} {{feed.filtered.length}}
     .pets-feed(ng-if="!feed.customFilter")
         pet.pets-feed__item.pet(ng-repeat="(index, pet) in feed.filtered = (feed.pets | dateRange : feed.dateRange | filter: feed.filter | orderBy : feed.order)" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="feed.allAllowed")
         pet.pets-feed__item.pet(ng-repeat="(index, pet) in feed.filtered = (feed.pets | dateRange : feed.dateRange | feed : feed.authors | filter: feed.filter | orderBy : feed.order)" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="!feed.allAllowed")

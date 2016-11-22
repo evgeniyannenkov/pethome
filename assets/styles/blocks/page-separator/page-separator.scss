@@ -10,8 +10,9 @@
 .page-separator__content {
   position         : absolute;
   height           : 1em;
+  font-size        : .9em;
   left             : 50%;
-  top              : 1px;
+  top              : 2px;
   transform        : translateX(-50%);
   background-color : #fff;
   padding          : 0 10px;
