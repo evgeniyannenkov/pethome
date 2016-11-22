@@ -1,5 +1,6 @@
 include ../../views/mixins/formParts
-.advert-single__main-image.advert-single__main-image--mobile(background-block="/{{advert.fields.mainImage}}" classes="advert-single__main-image-inner")
+
+.advert-single__main-image.advert-single__main-image--mobile(background-block="/{{advert.fields.mainImage}}" classes="advert-single__main-image-inner" ng-if="advert.fields.mainImage")
 
 .advert-single__banner(background-block="/assets/images/bg/advert-bg-{{advert.fields.type}}.svg" classes="advert-single__banner-inner")
     .advert-single__info
