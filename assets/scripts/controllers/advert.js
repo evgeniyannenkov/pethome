@@ -3,8 +3,8 @@
 function advertControllersInit ( module ) {
 
     module.controller('advertCtrl', [
-        "adverts", "author", "notify",
-        function ( adverts, author, notify ) {
+        "adverts", "author", "notify", "lightboxService",
+        function ( adverts, author, notify, lightbox ) {
 
             let current_advert = {};
 
@@ -58,6 +58,7 @@ function advertControllersInit ( module ) {
             };
 
             this.removeImage = ( image ) => {
+                lightbox.removeImage(image);
                 image = image.startsWith("/") ? image.substr(1, image.length - 1) : image;
                 this.fields.images = this.fields.images.filter(function ( element ) {
                     if ( image !== element ) {

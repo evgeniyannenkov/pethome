@@ -17,6 +17,14 @@ function lightboxServicesInit ( module ) {
                 this.lightbox.images.push(image);
             };
 
+            this.removeImage = ( imageToRemove ) => {
+                this.lightbox.images = this.lightbox.images.filter(( image ) => {
+                    if ( image != imageToRemove ) {
+                        return image;
+                    }
+                });
+            };
+
             this.open = ( image ) => {
                 this.lightbox.currentImage = image;
                 this.lightbox.currentIndex = this.lightbox.images.indexOf(image);
@@ -33,6 +41,7 @@ function lightboxServicesInit ( module ) {
                     : this.lightbox.currentIndex + 1;
                 this.lightbox.currentImage = this.lightbox.images[ this.lightbox.currentIndex ];
             };
+
             this.previous = () => {
                 this.lightbox.currentIndex = this.lightbox.currentIndex === 0
                     ? this.lightbox.images.length - 1
