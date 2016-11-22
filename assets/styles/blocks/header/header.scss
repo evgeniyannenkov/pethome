@@ -26,11 +26,20 @@
   display         : flex;
   align-items     : center;
   justify-content : center;
-  width           : 150px;
-  height          : 100%;
+  width           : 100px;
+  height          : calc(#{$headerHeight} - 10px);
+  margin          : 5px 0;
   @include roboto-condensed;
   font-size       : 28px;
   color           : white;
+  background : {
+    image    : url("images/logo.svg");
+    repeat   : no-repeat;
+    position : {
+      x      : 50%;
+      y      : 50%;
+    }
+  }
 }
 
 .header__menu--mobile {
