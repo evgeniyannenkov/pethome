@@ -88,7 +88,8 @@ const components = {
     ],
     app : [
         stickyComponentsInit,
-        applicationConfig
+        applicationConfig,
+        userComponentsInit
     ]
 };
 

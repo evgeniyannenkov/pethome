@@ -35,6 +35,9 @@ function advertComponentsInit ( module, constants ) {
     });
 
     module.component('advertSingle', {
+        require : {
+            currentUser : "^^currentUser"
+        },
         templateUrl : `${constants.templatesFolder}/advert-single.html`,
         bindings : {
             id : "@advertId",

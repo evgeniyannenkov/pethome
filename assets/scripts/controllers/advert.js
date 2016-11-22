@@ -8,6 +8,8 @@ function advertControllersInit ( module ) {
 
             let current_advert = {};
 
+            this.showActions = false;
+
             adverts.get({ id : this.id })
                    .then(( response ) => {
                        if ( response.data.success && response.data.advert ) {
@@ -21,6 +23,8 @@ function advertControllersInit ( module ) {
                                  .then(( response ) => {
                                      if ( response.data.success ) {
                                          this.author = response.data.author;
+
+                                         this.showActions = this.currentUser && ( this.author._id == this.currentUser.id || this.currentUser.isAdmin);
                                      }
                                  });
                        }

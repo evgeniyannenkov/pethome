@@ -57,18 +57,16 @@ function imagesComponentsInit ( module, constants ) {
 
     module.component('ngImage', {
         template : `<div class="image" lightbox-trigger="{{image.src}}" style="background-image: url('{{image.src}}')">
-                        <div ng-if="!image.isMain" class="image__button image__button--top" ng-click="image.topBtn({image : image.src});">{{"Set as main image" | translate}}</div>
-                        <div ng-if="image.isMain" class="image__button image__button--top fa fa-check" aria-hidden="true"></div>
-                        <div class="image__button image__button--bottom" ng-click="image.bottomBtn({image : image.src});">{{"remove" | translate}}</div>
+                        <div ng-if="image.showActions && !image.isMain" class="image__button image__button--top" ng-click="image.topBtn({image : image.src});">{{"Set as main image" | translate}}</div>
+                        <div ng-if="image.showActions && image.isMain" class="image__button image__button--top fa fa-check" aria-hidden="true"></div>
+                        <div ng-if="image.showActions" class="image__button image__button--bottom" ng-click="image.bottomBtn({image : image.src});">{{"remove" | translate}}</div>
                     </div>`,
         bindings : {
             src : "@image",
             topBtn : "&",
             bottomBtn : "&",
-            isMain : "="
-        },
-        controller : function () {
-
+            isMain : "=",
+            showActions : "="
         },
         controllerAs : "image"
     });
