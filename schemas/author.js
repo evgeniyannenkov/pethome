@@ -3,7 +3,10 @@ const mongoose = require('mongoose');
 const hasher = require('password-hash-and-salt');
 
 const authorSchema = new mongoose.Schema({
-    "oauthID" : Number,
+    "oauthID" : {
+        "facebook" : Number,
+        "vk": Number
+    },
     "avatar" : String,
     "name" : String,
     "contactInfo" : {
