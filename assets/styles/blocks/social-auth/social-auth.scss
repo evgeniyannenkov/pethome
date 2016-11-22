@@ -70,7 +70,8 @@
   }
 
   .social-auth__btn {
-    flex   : 0 auto;
-    margin : 5px 0;
+    flex      : 0 auto;
+    margin    : 5px 0;
+    min-width : 150px !important;
   }
 }
