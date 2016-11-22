@@ -1,7 +1,7 @@
 include ../../views/mixins/buttons
 
 .author__block
-    .author__avatar
+    .author__avatar(style="background-image: url({{author.fields.avatar && author.fields.avatar !== '' ? author.fields.avatar : '/assets/images/profile.svg'}})")
     .author__inner
         .author__field
             .author__title {{author.fields.name || 'Not specified' | translate}}
