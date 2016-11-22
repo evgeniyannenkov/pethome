@@ -30,4 +30,6 @@ include ../../views/mixins/buttons
     .advert__field.advert__field--info(ng-if="!advert.hide.info")
         .advert__field-name.advert__field-name--small {{'info' | translate}}
         .advert__field-content {{advert.fields.info || 'Not specified' | translate | excerpt : 10}}
-        +btn-more('Read more')(type="button" class="button--blue button--invert_hover" href="/advert/{{advert.fields._id}}")
+        //+btn-more('Read more')(type="button" class="button--blue button--invert_hover" href="/advert/{{advert.fields._id}}")
+        a.button.button--read_more(type="button" class="button--blue button--invert_hover" href="/advert/{{advert.fields._id}}")
+            span.button__title {{'Read more' | translate}}

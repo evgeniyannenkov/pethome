@@ -60,7 +60,7 @@
   .status {
     @include roboto-condensed;
     font-size      : 0.7em;
-    margin-left    : 5px;
+    display        : block;
     cursor         : pointer;
     transition     : color 0.2s;
     text-transform : lowercase;
@@ -126,6 +126,11 @@
 
   .advert-single__title {
     padding-right : 0;
+
+    .status {
+      margin-left : 5px;
+      display     : inline-block;
+    }
   }
 
   .advert-single__banner-inner {
