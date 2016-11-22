@@ -5,8 +5,8 @@ include ../../views/mixins/formParts
     .advert-single__info
         h1.advert-single__title
             span {{advert.fields.title}}
-            span.status.not-published(ng-click="advert.changeState();" ng-if="!advert.fields.published") {{'not published' | translate}}
-            span.status.published(ng-click="advert.changeState();" ng-if="advert.fields.published") {{'published' | translate}}
+            span.status.not-published(ng-click="advert.changeState();" ng-if="advert.showActions && !advert.fields.published") {{'not published' | translate}}
+            span.status.published(ng-click="advert.changeState();" ng-if="advert.showActions && advert.fields.published") {{'published' | translate}}
         .advert__field
             .advert__field-name {{'name' | translate}}
             .advert__field-content {{advert.fields.name}}
