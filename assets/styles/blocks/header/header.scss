@@ -65,7 +65,7 @@
     transform-origin : left center;
     display          : flex;
     flex-flow        : column wrap;
-    width            : 100%;
+    flex             : 0 100%;
     height           : 100%;
     justify-content  : center;
     align-items      : center;
@@ -95,6 +95,10 @@
   height      : 40px;
   padding     : 0 15px;
   cursor      : pointer;
+}
+
+.header__menu-link {
+  color : inherit;
 }
 
 .header__menu-item--lang {
