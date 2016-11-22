@@ -3,8 +3,8 @@
 function popupControllersInit ( module ) {
 
     module.controller('popupContentCtrl', [
-        "$rootScope", "$scope",
-        function ( $rootScope, $scope ) {
+        "$rootScope", "$scope", "$window",
+        function ( $rootScope, $scope, $window ) {
 
             this.isExpected = ( type ) => {
                 return this.expected && this.expected.indexOf(type) != -1;
@@ -32,6 +32,21 @@ function popupControllersInit ( module ) {
                 this.data = data;
                 this.active = true;
             };
+
+            let _window = angular.element($window);
+
+            const keyDownHandler = ( event ) => {
+
+                if ( this.active && event.keyCode == 27 ) {
+                    this.close();
+                    $scope.$apply();
+                }
+            };
+
+            _window.on("keydown", keyDownHandler);
+            $scope.$on('$destroy', function () {
+                _window.off('keydown', keyDownHandler);
+            });
         }
     ]);
 }
