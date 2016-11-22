@@ -20,6 +20,10 @@
   flex      : 0 45%;
   font-size : 1.4em;
   min-width : initial !important;
+  color     : white;
+  &:visited {
+    color : white;
+  }
 }
 
 .social-auth__btn--fb {

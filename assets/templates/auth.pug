@@ -6,9 +6,9 @@ include ../../views/mixins/buttons
         span {{auth.form=='login' ? 'Login' : 'Sign up' | translate}}
         span  {{'with your social media accounts' | translate}}
     .social-auth__inner
-        button.button.social-auth__btn.social-auth__btn--fb
+        a.button.social-auth__btn.social-auth__btn--fb(href="/auth/facebook" title="facebook")
             i.fa.fa-facebook
-        button.button.social-auth__btn.social-auth__btn--vk
+        a.button.social-auth__btn.social-auth__btn--vk(title="vk")
             i.fa.fa-vk
 
     .social-auth__description {{"We'll never spam you, post on your behalf or do anything sketchy like that" | translate}}
