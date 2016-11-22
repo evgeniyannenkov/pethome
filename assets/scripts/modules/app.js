@@ -6,7 +6,7 @@ function getModules () {
         providers : angular.module("providers", []),
         filters : angular.module("filters", []),
         notifier : angular.module("notifier", []),
-        lightbox : angular.module("lightbox", [  ]),
+        lightbox : angular.module("lightbox", []),
         auth : angular.module("auth", []),
         popup : angular.module("popup", []),
         advert : angular.module("advert", []),

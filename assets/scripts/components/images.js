@@ -32,12 +32,10 @@ function imagesComponentsInit ( module, constants ) {
     module.directive("backgroundBlock", [
         function () {
             return {
-                template : `<div ng-if="parallax" class="background-block {{classes}}" ng-paralax ratio="0.1" style="background-image: url('{{url}}');" ng-transclude></div>
-                            <div ng-if="!parallax" class="background-block {{classes}}" style="background-image: url('{{url}}');" ng-transclude></div>`,
+                template : `<div class="background-block {{classes}}" ng-parallax ratio="0.1" style="background-image: url('{{url}}');" ng-transclude></div>`,
                 scope : {
                     url : "@backgroundBlock",
-                    classes : "@",
-                    parrallax : "="
+                    classes : "@"
                 },
                 transclude : true,
             };

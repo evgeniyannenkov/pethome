@@ -84,7 +84,7 @@ const components = {
         headerControllersInit
     ],
     parallax : [
-        paralaxComponentsInit
+        parallaxComponentsInit
     ],
     app : [
         stickyComponentsInit,

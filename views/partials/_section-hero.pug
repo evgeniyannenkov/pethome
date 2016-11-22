@@ -1,11 +1,11 @@
 include ../../views/mixins/formParts
 include ../../views/mixins/buttons
 section.video-container
-    .video-container__inner(ng-paralax ratio="0.05")
+    .video-container__inner(ng-parallax ratio="0.05")
         video.video-container__media(autoplay loop)
             source(src="/assets/images/video/dog.mp4" type="video/mp4")
             source(src="/assets/images/video/dog.webm" type="video/webm")
-        .video-container__hero.hero(ng-paralax ratio="-0.01")
+        .video-container__hero.hero(ng-parallax ratio="-0.01")
             .hero__title Every pet needs a home
             .hero__subtitle Unified service announcements about stray animals
             .hero__btn-wrap
