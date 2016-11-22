@@ -2,14 +2,16 @@ include ../../views/mixins/formParts
 include ../../views/mixins/buttons
 
 .social-auth
-    .sort__item__title {{auth.form=='login' ? 'Login' : 'Sign up'}} with your social media accounts
+    .sort__item__title
+        span {{auth.form=='login' ? 'Login' : 'Sign up' | translate}}
+        span | {{'with your social media accounts' | translate}}
     .social-auth__inner
         button.button.social-auth__btn.social-auth__btn--fb
             i.fa.fa-facebook
         button.button.social-auth__btn.social-auth__btn--vk
             i.fa.fa-vk
 
-    .social-auth__description We'll never spam you, post on your behalf or do anything sketchy like that
+    .social-auth__description {{"We'll never spam you, post on your behalf or do anything sketchy like that" | translate}}
 
     .social-auth__separator
         span {{"or" | translate}}
