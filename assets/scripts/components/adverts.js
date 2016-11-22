@@ -72,7 +72,7 @@ function advertComponentsInit ( module, constants ) {
         require : {
             currentUser : "^^currentUser"
         },
-        templateUrl : `${constants.templatesFolder}/advert-single.html`,
+        templateUrl : "http://138.68.95.45:3000/advert/58348ae7ad62c30459a5de7c",
         bindings : {
             id : "@advertId",
             reviewEnabled : "=enableReview",
