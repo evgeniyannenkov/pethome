@@ -9,7 +9,7 @@ block content
         .heading
             if !currentUser.blocked
                 .heading__item
-                    h1 PROFILE
+                    h2 PROFILE
                 .heading__item(popup-trigger="new pet")
                     +btn-default('New Pet').button--green.button--standard_hover
                     .btn-round.btn-round--left.btn-round--double.author__btn--hidden_lg(title="{{'New Pet' | translate}}")
