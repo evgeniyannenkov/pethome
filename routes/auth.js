@@ -5,13 +5,13 @@ const router = express.Router();
 const routesConfig = require("../config/routes");
 const passport = require("passport");
 
-//Facebook
-//router.get('/facebook', passport.authenticate('facebook', {scope : ['email']}), ( req, res, next ) => {
-//
-//});
-//router.get('/facebook/callback', passport.authenticate('facebook', routesConfig.passportMiddlewareFail), ( req, res, next ) => {
-//    res.redirect('/profile');
-//});
+//Facebook Route
+router.get('/facebook', passport.authenticate('facebook', {scope : ['email']}), ( req, res, next ) => {
+
+});
+router.get('/facebook/callback', passport.authenticate('facebook', routesConfig.passportMiddlewareFail), ( req, res, next ) => {
+    res.redirect('/profile');
+});
 
 //Registration Route
 router.post('/', passport.authenticate('local-register', routesConfig.passportMiddlewareFail), ( req, res, next ) => {
