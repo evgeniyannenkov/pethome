@@ -1,4 +1,4 @@
-.lightbox(ng-class="{'open' : ctrl.lightbox.active }")
+.lightbox(ng-keypress="ctrl.key();" tabindex="1" ng-class="{'open' : ctrl.lightbox.active }")
     .lightbox__inner(ng-click="ctrl.close($event);")
         .lightbox__button.lightbox__button--close(ng-click="ctrl.close();")
             i.fa.fa-times(aria-hidden='true')
