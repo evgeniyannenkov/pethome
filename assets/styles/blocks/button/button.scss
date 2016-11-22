@@ -1,7 +1,7 @@
 @import "../../common/mixins";
 
 .button {
-  @include button(150px, 45px);
+  @include button(auto, 45px);
   position    : relative;
   line-height : 1.2;
 }
