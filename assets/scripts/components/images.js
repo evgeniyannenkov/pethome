@@ -56,7 +56,7 @@ function imagesComponentsInit ( module, constants ) {
     });
 
     module.component('ngImage', {
-        template : `<div class="image" style="background-image: url('{{image.src}}')">
+        template : `<div class="image" lightbox-trigger="{{image.src}}" style="background-image: url('{{image.src}}')">
                         <div ng-if="!image.isMain" class="image__button image__button--top" ng-click="image.topBtn({image : image.src});">{{"Set as main image" | translate}}</div>
                         <div ng-if="image.isMain" class="image__button image__button--top fa fa-check" aria-hidden="true"></div>
                         <div class="image__button image__button--bottom" ng-click="image.bottomBtn({image : image.src});">{{"remove" | translate}}</div>
@@ -119,4 +119,57 @@ function imagesComponentsInit ( module, constants ) {
         }
     ]);
 
+    module.directive("lightboxTrigger", function () {
+        return {
+            template : `<div ng-transclude></div>
+                        <div class="lightbox-trigger__inner" ng-click="lightbox.open();"><i class="fa fa-search-plus" aria-hidden="true"></i></div>`,
+            transclude : true,
+            controllerAs : "lightbox",
+            controller : [
+                "lightboxService", "$scope",
+                function ( lightboxService, $scope ) {
+                    this.addImage = ( image ) => {
+                        lightboxService.addImage(image);
+                        this.image = image;
+                    };
+                    this.open = ( image = this.image ) => {
+                        lightboxService.open(image);
+                    };
+                }
+            ],
+            link : ( scope, element, atts, ctrl ) => {
+                let image = atts.lightboxTrigger;
+                element.addClass("lightbox-trigger");
+                ctrl.addImage(image);
+            }
+        };
+    });
+
+    module.directive("lightbox", function () {
+        return {
+            restrict : "AE",
+            templateUrl : `${constants.templatesFolder}/lightbox.html`,
+            controllerAs : "ctrl",
+            controller : [
+                "lightboxService", "$scope",
+                function ( lightboxService, $scope ) {
+                    this.lightbox = lightboxService.lightbox;
+
+                    this.close = ( event ) => {
+                        if ( !event || angular.element(event.target).hasClass("lightbox__inner") ) {
+                            lightboxService.close();
+                        }
+                    };
+
+                    this.next = () => {
+                        lightboxService.next();
+                    };
+
+                    this.previous = () => {
+                        lightboxService.previous();
+                    };
+                }
+            ]
+        };
+    });
 }

@@ -33,7 +33,8 @@ const components = {
         validationServicesInit,
         authorServicesInit,
         advertServicesInit,
-        currentUserServicesInit
+        currentUserServicesInit,
+        lightboxServicesInit
     ],
     providers : [
         translatorProviderInit
@@ -78,13 +79,12 @@ const components = {
         headerComponentsInit,
         headerControllersInit
     ],
-    paralax : [
+    parallax : [
         paralaxComponentsInit
     ],
     app : [
         stickyComponentsInit,
         applicationConfig
-
     ]
 };
 

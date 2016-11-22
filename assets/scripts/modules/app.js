@@ -15,7 +15,7 @@ function getModules () {
         images : angular.module("images", []),
         form : angular.module("form", []),
         header : angular.module("header", []),
-        paralax : angular.module("paralax", []),
+        parallax : angular.module("parallax", []),
         app : angular.module("app",
             [
                 "providers",
@@ -32,7 +32,7 @@ function getModules () {
                 "images",
                 "form",
                 "header",
-                "paralax"
+                "parallax"
             ]
         )
     };
