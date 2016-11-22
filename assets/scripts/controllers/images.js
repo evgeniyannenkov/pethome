@@ -24,14 +24,14 @@ function imageUploadControllersInit ( module ) {
             $rootScope.$on("popup_open", ( event, data, type ) => {
 
                 if ( type == "upload images" ) {
-                    this.fileUploader.url = `/api/advert/${this.advert_id}/images`;
+                    this.fileUploader.url = `/api/pet/${this.pet_id}/images`;
                 }
             });
 
             this.fileUploader.onSuccessItem = ( fileItem, response, status, headers ) => {
                 fileItem.remove();
-                this.advert.images = response.newAdvert.images;
-                this.advert.mainImage = response.newAdvert.mainImage;
+                this.pet.images = response.newPet.images;
+                this.pet.mainImage = response.newPet.mainImage;
             };
 
             this.fileUploader.onProgressAll = ( response ) => {

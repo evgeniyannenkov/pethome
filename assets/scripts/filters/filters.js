@@ -2,13 +2,13 @@
 
 function appFiltersInit ( module ) {
     module.filter("feed", () => {
-        return ( adverts, authors ) => {
+        return ( pets, authors ) => {
             let allowed = [];
 
-            angular.forEach(adverts, ( advert ) => {
+            angular.forEach(pets, ( pet ) => {
 
-                if ( authors && !authors[ advert.author ].blocked && advert.published ) {
-                    allowed.push(advert);
+                if ( authors && !authors[ pet.author ].blocked && pet.published ) {
+                    allowed.push(pet);
                 }
 
             });
@@ -76,17 +76,17 @@ function appFiltersInit ( module ) {
 
     module.filter("dateRange", [
         function () {
-            function translationFilter ( adverts, days ) {
+            function translationFilter ( pets, days ) {
 
                 let time = days * 24 * 60 * 60 * 1000,
                     currentTime = Date.now();
 
-                if(!days) return adverts;
+                if(!days) return pets;
 
-                if ( adverts ) {
-                    return adverts.filter(( advert ) => {
-                        if ( advert.publicationDate > currentTime - time ) {
-                            return advert;
+                if ( pets ) {
+                    return pets.filter(( pet ) => {
+                        if ( pet.publicationDate > currentTime - time ) {
+                            return pet;
                         }
                     });
                 }

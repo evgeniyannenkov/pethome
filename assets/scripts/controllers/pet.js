@@ -1,23 +1,23 @@
 "use strict";
 
-function advertControllersInit ( module ) {
+function petControllersInit ( module ) {
 
-    module.controller('advertCtrl', [
-        "adverts", "author", "notify", "lightboxService",
-        function ( adverts, author, notify, lightbox ) {
+    module.controller('petCtrl', [
+        "pets", "author", "notify", "lightboxService",
+        function ( pets, author, notify, lightbox ) {
 
-            let current_advert = {};
+            let current_pet = {};
 
             this.showActions = false;
 
-            adverts.get({ id : this.id })
+            pets.get({ id : this.id })
                    .then(( response ) => {
-                       if ( response.data.success && response.data.advert ) {
-                           this.fields = response.data.advert;
+                       if ( response.data.success && response.data.pet ) {
+                           this.fields = response.data.pet;
                            if ( this.fields.age ) {
                                this.fields.age = parseInt(this.fields.age);
                            }
-                           current_advert = angular.copy(this.fields);
+                           current_pet = angular.copy(this.fields);
 
                            author.get({ id : this.fields.author })
                                  .then(( response ) => {
@@ -35,15 +35,15 @@ function advertControllersInit ( module ) {
 
             this.save = ( data = this.fields ) => {
                 return new Promise(( resolve, reject ) => {
-                    adverts.update({ id : data._id, data })
+                    pets.update({ id : data._id, data })
                            .then(( response ) => {
-                               if ( response.data.success && response.data.newAdvert ) {
+                               if ( response.data.success && response.data.newPet ) {
                                    notify.inform({
                                        message : `${data.name} [[updated]].`,
                                        duration : 2000
                                    });
 
-                                   this.fields = response.data.newAdvert;
+                                   this.fields = response.data.newPet;
                                    if ( this.fields.age ) {
                                        this.fields.age = parseInt(this.fields.age);
                                    }
@@ -90,7 +90,7 @@ function advertControllersInit ( module ) {
             };
 
             this.review = () => {
-                adverts.review({ id : this.id })
+                pets.review({ id : this.id })
                        .then(( response ) => {
                            if ( response.data.success ) {
                                this.fields.reviewed = true;
@@ -107,21 +107,21 @@ function advertControllersInit ( module ) {
         }
     ]);
 
-    module.controller('newAdvertCtrl', [
-        "$scope", "adverts", "notify", "$timeout",
-        function ( $scope, adverts, notify, $timeout ) {
-            this.advert = {
+    module.controller('newPetCtrl', [
+        "$scope", "pets", "notify", "$timeout",
+        function ( $scope, pets, notify, $timeout ) {
+            this.pet = {
                 gender : "male",
                 type : "dog",
                 age : 1
             };
 
             this.create = () => {
-                adverts.create({ data : this.advert })
+                pets.create({ data : this.pet })
                        .then(( response ) => {
                            if ( response.data.success ) {
                                notify.inform({
-                                   message : `[[Created]] ${response.data.advert.name} <i class="fa fa-check" aria-hidden="true"></i>`,
+                                   message : `[[Created]] ${response.data.pet.name} <i class="fa fa-check" aria-hidden="true"></i>`,
                                    duration : 1200
                                });
                                $timeout(1500)
@@ -129,7 +129,7 @@ function advertControllersInit ( module ) {
                                        $scope.$broadcast("formResponse", {
                                            responseClass : "success"
                                        });
-                                       document.location.href = `/advert/${response.data.advert._id}`;
+                                       document.location.href = `/pet/${response.data.pet._id}`;
                                    });
                            } else {
                                notify.error({
@@ -158,19 +158,19 @@ function advertControllersInit ( module ) {
         }
     ]);
 
-    module.controller('editAdvertCtrl', [
+    module.controller('editPetCtrl', [
         "$scope", "$rootScope",
         function ( $scope, $rootScope ) {
 
             $rootScope.$on("popup_open", ( event, data, type ) => {
-                if ( type == "edit advert" ) {
-                    this.temporaryData = angular.copy(this.advert.fields);
+                if ( type == "edit pet" ) {
+                    this.temporaryData = angular.copy(this.pet.fields);
                     $scope.$apply();
                 }
             });
 
             this.update = () => {
-                this.advert.save(this.temporaryData)
+                this.pet.save(this.temporaryData)
                     .then(() => {
                         $scope.$broadcast("formResponse", {
                             responseClass : "",
@@ -192,11 +192,11 @@ function advertControllersInit ( module ) {
         }
     ]);
 
-    module.controller('advertRemoveCtrl', [
-        "$scope", "adverts", "notify", "$timeout",
-        function ( $scope, adverts, notify, $timeout ) {
+    module.controller('petRemoveCtrl', [
+        "$scope", "pets", "notify", "$timeout",
+        function ( $scope, pets, notify, $timeout ) {
             this.remove = ( id ) => {
-                adverts.remove({ id })
+                pets.remove({ id })
                        .then(( response ) => {
                            if ( response.data.success && response.data.redirect ) {
                                notify.inform({
@@ -229,9 +229,9 @@ function advertControllersInit ( module ) {
         }
     ]);
 
-    module.controller('advertsFeedCtrl', [
-        "$http", "adverts", "author",
-        function ( ajax, adverts, author ) {
+    module.controller('petsFeedCtrl', [
+        "$http", "pets", "author",
+        function ( ajax, pets, author ) {
             this.order = "-publicationDate";
 
             author.getAll()
@@ -239,12 +239,12 @@ function advertControllersInit ( module ) {
                       this.authors = response.data.authors;
                   });
 
-            this.getAdverts = ( user_id ) => {
+            this.getPets = ( user_id ) => {
                 if ( !user_id ) {
-                    adverts.getAll()
+                    pets.getAll()
                            .then(( response ) => {
-                               if ( response.data.adverts ) {
-                                   this.adverts = response.data.adverts;
+                               if ( response.data.pets ) {
+                                   this.pets = response.data.pets;
                                }
                            })
                            .catch(( err ) => {
@@ -255,10 +255,10 @@ function advertControllersInit ( module ) {
                 } else {
                     ajax({
                         method : "get",
-                        url : `/api/author/${user_id}/adverts`
+                        url : `/api/author/${user_id}/pets`
                     }).then(( response ) => {
-                        if ( response.data.adverts ) {
-                            this.adverts = response.data.adverts;
+                        if ( response.data.pets ) {
+                            this.pets = response.data.pets;
                         }
                     }).catch(( err ) => {
                         console.log(err);
@@ -266,11 +266,11 @@ function advertControllersInit ( module ) {
                 }
             };
 
-            this.getAdverts(this.id);
+            this.getPets(this.id);
         }
     ]);
 
-    module.controller('advertsFeedFilterCtrl', [
+    module.controller('petsFeedFilterCtrl', [
         function () {
             this.defaults = {
                 gender : "",

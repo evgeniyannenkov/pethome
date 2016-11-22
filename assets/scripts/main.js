@@ -32,7 +32,7 @@ const components = {
         authServicesInit,
         validationServicesInit,
         authorServicesInit,
-        advertServicesInit,
+        petServicesInit,
         currentUserServicesInit
     ],
     providers : [
@@ -59,9 +59,9 @@ const components = {
         popupControllersInit,
         popupComponentsInit
     ],
-    advert : [
-        advertControllersInit,
-        advertComponentsInit
+    pet : [
+        petControllersInit,
+        petComponentsInit
     ],
     author : [
         authorControllersInit,

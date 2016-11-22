@@ -1,0 +1,27 @@
+include ../../views/mixins/formParts
+
+popup-form(name="newPet" submit-function="new.create();" label="Create")
+    form-input(type="text" name="title" required="true" value="new.pet.title")
+    form-input(type="text" name="name" required="false" value="new.pet.name")
+    .form__item-wrap
+        +select("Type", {
+            "type" : {
+                "dog" : "Dog",
+                "cat" : "Cat",
+                "bird" : "Bird",
+                "rabbit" : "Rabbit",
+                "fish" : "Fish",
+                "ferret" : "Ferret",
+                "guinea pig" : "Guinea pig",
+                "hamster" : "Hamster"
+            }
+        })(ng-model="new.pet.type")
+        +select("Gender", {
+            "gender" : {
+                "male" : "Male",
+                "female" : "Female"
+            }
+        }, true)(ng-model="new.pet.gender")
+    form-input(type="number" name="age" min="0" value="new.pet.age")
+    form-input(type="text" name="breed" required="false" value="new.pet.breed")
+    form-textarea(name="info" value="new.pet.info" type="textarea")

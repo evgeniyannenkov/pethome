@@ -3,7 +3,7 @@
 const express = require('express');
 const passport = require('passport');
 const Author = require('../../schemas/author');
-const Advert = require('../../schemas/advert');
+const Pet = require('../../schemas/pet');
 const response = require("../../middleware/response");
 const router = express.Router();
 
@@ -115,14 +115,14 @@ router.put('/:id', response.ifLoggedOut(), ( req, res, next ) => {
 
 });
 
-//Author Get Adverts
-router.get('/:id/adverts', ( req, res, next ) => {
+//Author Get Pets
+router.get('/:id/pets', ( req, res, next ) => {
     const _id = req.params.id || 0;
 
-    Advert.find({ "author" : _id })
-          .then(( adverts ) => {
+    Pet.find({ "author" : _id })
+          .then(( pets ) => {
               res.json({
-                  adverts,
+                  pets,
                   success : true
               });
           })
@@ -141,7 +141,7 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
     if ( req.user._id == _id || req.user.is_admin ) {
         Author.findByIdAndRemove(_id)
               .then(() => {
-                  Advert.remove({ author : _id })
+                  Pet.remove({ author : _id })
                         .then(( data ) => {
                             res.json({
                                 success : true,

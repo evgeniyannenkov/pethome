@@ -1,0 +1,49 @@
+include ../../views/mixins/formParts
+
+.pet-single__main-image.pet-single__main-image--mobile(background-block="/{{pet.fields.mainImage}}" classes="pet-single__main-image-inner" ng-if="pet.fields.mainImage")
+
+.pet-single__banner(background-block="/assets/images/bg/pet-bg-{{pet.fields.type}}.svg" classes="pet-single__banner-inner")
+    .pet-single__info
+        h1.pet-single__title
+            span {{pet.fields.title}}
+            span.status(ng-class="{'published' : pet.fields.published, 'not-published' : !pet.fields.published}" ng-click="pet.changeState();") {{!pet.fields.published ? 'not published' : 'published' | translate}}
+        .pet__field
+            .pet__field-name {{'name' | translate}}
+            .pet__field-content {{pet.fields.name}}
+        .pet__field
+            .pet__field-name {{'type' | translate}}
+            .pet__field-content {{pet.fields.type | translate}}
+        .pet__field
+            .pet__field-name {{'gender' | translate}}
+            .pet__field-content {{pet.fields.gender | translate}}
+        .pet__field
+            .pet__field-name {{'age' | translate}}
+            .pet__field-content {{pet.fields.age || 'Not specified' | translate}}
+        .pet__field
+            .pet__field-name {{'breed' | translate}}
+            .pet__field-content {{pet.fields.breed || 'Not specified' | translate}}
+        .pet__field.pet__field--author(ng-if="!pet.hide.author")
+            span.pet__field-name {{'Author' | translate}}
+            a.pet__field-content(href="/author/{{pet.fields.author}}") {{pet.author.name || 'Go to' | translate}}
+        .pet__field.pet__field--info.pet__field--info-full
+            .pet__field-name.pet__field-name--small {{'info' | translate}}
+            .pet__field-content {{pet.fields.info || 'Not specified' | translate}}
+    .btn-round.pet-single__btn(popup-trigger="edit pet" pet="pet.fields" title="{{'edit' | translate}}" ng-if="pet.editEnabled")
+        i.fa.fa-pencil(aria-hidden="true")
+    .btn-round.btn-round--top.btn-round--red.pet-single__btn.pet-single__btn--remove(popup-trigger="remove pet" pet-id="{{pet.id}}" title="{{'edit' | translate}}" ng-if="pet.editEnabled")
+        i.fa.fa-trash(aria-hidden="true")
+    .btn-round.btn-round--left.btn-round--double.pet-single__btn(popup-trigger="upload images" wide="true" pet-id="{{pet.id}}" pet="pet.fields" title="{{'add photos' | translate}}" ng-if="pet.editEnabled")
+        i.fa.fa-plus(aria-hidden="true")
+        i.fa.fa-camera(aria-hidden="true")
+
+.pet-single__main-image.pet-single__main-image--desktop(ng-if="pet.fields.mainImage")
+    .pet-single__main-image-inner(sticky align-to=".pet-single__main-image--desktop")
+        img(ng-src="/{{pet.fields.mainImage}}")
+
+.pet-single__images
+    .pet-single__image(ng-repeat="image in pet.fields.images")
+        ng-image.pet-single__image-inner(show-actions="pet.showActions" bottom-btn="pet.removeImage(image);" top-btn="pet.setMainImage(image);" is-main="pet.fields.mainImage == image;" image="/{{image}}")
+div(ng-if="pet.reviewEnabled && !pet.fields.reviewed")
+    +button("Mark Reviewed")(ng-click="pet.review();")
+popup-content(initial="edit pet,remove pet,upload images")
+

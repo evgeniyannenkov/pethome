@@ -1,15 +1,15 @@
 "use strict";
 
 const express = require('express');
-const Advert = require('../schemas/advert');
+const Pet = require('../schemas/pet');
 const router = express.Router();
 
 router.get("/:id", ( req, res, next ) => {
     const _id = req.params.id;
-    Advert.findById(_id)
-          .then(( advert ) => {
-              if ( advert ) {
-                  res.render("advert-single", { advert });
+    Pet.findById(_id)
+          .then(( pet ) => {
+              if ( pet ) {
+                  res.render("pet-single", { pet });
               } else {
                   next();
               }

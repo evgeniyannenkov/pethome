@@ -11,10 +11,10 @@ function imagesComponentsInit ( module, constants ) {
                     bg = atts.backgroundImage;
                     bgSize = "cover";
                 } else if ( atts.type ) {
-                    bg = 'assets/images/bg/advert-bg-' + atts.type + '.svg';
+                    bg = 'assets/images/bg/pet-bg-' + atts.type + '.svg';
                     bgSize = "20%";
                 } else {
-                    bg = 'assets/images/bg/advert-bg-other.svg';
+                    bg = 'assets/images/bg/pet-bg-other.svg';
                     bgSize = "20%";
                 }
 
@@ -48,8 +48,8 @@ function imagesComponentsInit ( module, constants ) {
             popup : "^^popupContent"
         },
         bindings : {
-            advert_id : "@advertId",
-            advert : "="
+            pet_id : "@petId",
+            pet : "="
         },
         controller : "imagesUploadCtrl",
         controllerAs : "images"

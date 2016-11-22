@@ -1,13 +1,13 @@
 "use strict";
 
-function advertServicesInit ( module ) {
-    module.factory('adverts', [
+function petServicesInit ( module ) {
+    module.factory('pets', [
         "api",
         function ( api ) {
 
             return api.generate({
                 options : {
-                    api_base : "/api/advert"
+                    api_base : "/api/pet"
                 },
                 calls : {
                     "GET" : {

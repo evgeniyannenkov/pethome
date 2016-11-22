@@ -1,16 +1,16 @@
 "use strict";
 
 const express = require('express');
-const Advert = require('../../schemas/advert');
+const Pet = require('../../schemas/pet');
 const router = express.Router();
 const response = require("../../middleware/response");
 const uploader = require("../../config/uploader");
 
 router.get("/", ( req, res, next ) => {
-    Advert.find({})
-          .then(( adverts ) => {
+    Pet.find({})
+          .then(( pets ) => {
               res.json({
-                  adverts,
+                  pets,
                   success : true
               });
           })
@@ -24,9 +24,9 @@ router.get("/", ( req, res, next ) => {
 
 router.get("/:id", ( req, res, next ) => {
     const _id = req.params.id;
-    Advert.findById(_id)
-          .then(( advert ) => {
-              res.json({ advert, success : true });
+    Pet.findById(_id)
+          .then(( pet ) => {
+              res.json({ pet, success : true });
           })
           .catch(( error ) => {
               res.json({
@@ -38,18 +38,18 @@ router.get("/:id", ( req, res, next ) => {
 
 router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
     const _id = req.params.id;
-    const newAdvert = req.body || {};
+    const newPet = req.body || {};
 
     let image;
 
-    if ( newAdvert._id && newAdvert._id == _id && (req.user._id == newAdvert.author || req.user.is_admin) ) {
+    if ( newPet._id && newPet._id == _id && (req.user._id == newPet.author || req.user.is_admin) ) {
 
-        Advert.findOne({ _id, author : newAdvert.author })
-              .then(( advert ) => {
-                  if ( advert ) {
-                      for ( let i = 0; i < advert.images.length; i++ ) {
-                          image = advert.images[ i ];
-                          if ( newAdvert.images.indexOf(image) === -1 ) {
+        Pet.findOne({ _id, author : newPet.author })
+              .then(( pet ) => {
+                  if ( pet ) {
+                      for ( let i = 0; i < pet.images.length; i++ ) {
+                          image = pet.images[ i ];
+                          if ( newPet.images.indexOf(image) === -1 ) {
                               uploader.deleteFile(image)
                                       .then(( response ) => {
                                           console.log(response.data.success);
@@ -57,29 +57,29 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
                                       .catch(( error ) => {
                                           console.log(err);
                                       });
-                              newAdvert.mainImage = newAdvert.mainImage == image ? "" : newAdvert.mainImage;
+                              newPet.mainImage = newPet.mainImage == image ? "" : newPet.mainImage;
 
-                              newAdvert.mainImage = i == advert.images.length - 1 ? newAdvert.images[ 0 ] || "" : newAdvert.mainImage;
+                              newPet.mainImage = i == pet.images.length - 1 ? newPet.images[ 0 ] || "" : newPet.mainImage;
 
-                          } else if ( !newAdvert.mainImage ) {
-                              newAdvert.mainImage = image;
+                          } else if ( !newPet.mainImage ) {
+                              newPet.mainImage = image;
                           }
                       }
-                      newAdvert.reviewed = false;
-                      Advert.findOneAndUpdate({ _id }, newAdvert, { new : true })
-                            .then(( newAdvert ) => {
-                                res.json({ newAdvert, success : true, message : "Update Advert: saved" });
+                      newPet.reviewed = false;
+                      Pet.findOneAndUpdate({ _id }, newPet, { new : true })
+                            .then(( newPet ) => {
+                                res.json({ newPet, success : true, message : "Update Pet: saved" });
                             })
                             .catch(( err ) => {
                                 res.json({
-                                    message : "Update Advert: not saved",
+                                    message : "Update Pet: not saved",
                                     error_message : err.message,
                                     success : false
                                 });
                             });
                   } else {
                       res.json({
-                          message : "Update Advert: not found",
+                          message : "Update Pet: not found",
                           success : false
                       });
                   }
@@ -92,7 +92,7 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
               });
     } else {
         res.json({
-            message : "Update Advert: id isn't correct",
+            message : "Update Pet: id isn't correct",
             success : false
         });
     }
@@ -101,13 +101,13 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
 router.put("/:id/review", response.ifNotAdmin(), ( req, res, next ) => {
     const _id = req.params.id;
 
-    Advert.findByIdAndUpdate(_id, { reviewed : true }, { new : true })
-          .then(( advert ) => {
-              if ( advert ) {
-                  res.json({ advert, success : true, message : "[[Reviewed]]." });
+    Pet.findByIdAndUpdate(_id, { reviewed : true }, { new : true })
+          .then(( pet ) => {
+              if ( pet ) {
+                  res.json({ pet, success : true, message : "[[Reviewed]]." });
               } else {
                   res.json({
-                      message : "Review Advert: not found",
+                      message : "Review Pet: not found",
                       success : false
                   });
               }
@@ -124,29 +124,29 @@ router.post('/', response.ifLoggedOut(), ( req, res, next ) => {
 
     if ( !req.user.blocked ) {
 
-        const advert = new Advert();
+        const pet = new Pet();
 
-        advert.title = req.body.title;
-        advert.publicationDate = new Date().getTime();
-        advert.type = req.body.type || advert.type;
-        advert.gender = req.body.gender || advert.gender;
-        advert.age = req.body.age || advert.age;
-        advert.name = req.body.name || `${advert.type}, ${advert.gender} ${advert.age}`;
-        advert.author = req.user._id;
+        pet.title = req.body.title;
+        pet.publicationDate = new Date().getTime();
+        pet.type = req.body.type || pet.type;
+        pet.gender = req.body.gender || pet.gender;
+        pet.age = req.body.age || pet.age;
+        pet.name = req.body.name || `${pet.type}, ${pet.gender} ${pet.age}`;
+        pet.author = req.user._id;
 
         if ( req.body.breed ) {
-            advert.breed = req.body.breed;
+            pet.breed = req.body.breed;
         }
 
         if ( req.body.info ) {
-            advert.info = req.body.info;
+            pet.info = req.body.info;
         }
 
-        advert.save()
+        pet.save()
               .then(( data )=> {
                   res.json({
                       success : true,
-                      advert : data
+                      pet : data
                   });
               })
               .catch(( error )=> {
@@ -158,7 +158,7 @@ router.post('/', response.ifLoggedOut(), ( req, res, next ) => {
     } else {
         res.json({
             success : false,
-            message : "This account is blocked, you can't create new advert."
+            message : "This account is blocked, you can't create new pet."
         });
     }
 
@@ -174,11 +174,11 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
         searchData.author = req.user._id;
     }
 
-    Advert.findOneAndRemove(searchData)
-          .then(( advert ) => {
-              if ( advert ) {
-                  for ( let i = 0; i < advert.images.length; i++ ) {
-                      image = advert.images[ i ];
+    Pet.findOneAndRemove(searchData)
+          .then(( pet ) => {
+              if ( pet ) {
+                  for ( let i = 0; i < pet.images.length; i++ ) {
+                      image = pet.images[ i ];
                       uploader.deleteFile(image)
                               .then(( response ) => {
                                   console.log(response.data.success);
@@ -187,9 +187,9 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
                                   console.log(err);
                               });
                   }
-                  res.json({ success : true, advert, redirect : "/profile" });
+                  res.json({ success : true, pet, redirect : "/profile" });
               } else {
-                  res.json({ success : false, message : "No advert was removed." });
+                  res.json({ success : false, message : "No pet was removed." });
               }
           })
           .catch(( error ) => {
@@ -205,20 +205,20 @@ router.post("/:id/images", response.ifLoggedOut(), uploader.imagesUpload.single(
     const uploads = "uploads/";
     const src = uploads + req.file.filename;
 
-    Advert.findOne({ _id })
-          .then(( advert ) => {
-              if ( advert ) {
-                  advert.images.push(src);
-                  if ( !advert.mainImage ) {
-                      advert.mainImage = src;
+    Pet.findOne({ _id })
+          .then(( pet ) => {
+              if ( pet ) {
+                  pet.images.push(src);
+                  if ( !pet.mainImage ) {
+                      pet.mainImage = src;
                   }
-                  advert.save()
-                        .then(( newAdvert ) => {
-                            res.json({ newAdvert, success : true });
+                  pet.save()
+                        .then(( newPet ) => {
+                            res.json({ newPet, success : true });
                         })
                         .catch(( err ) => {
                             res.json({
-                                message : "Save Advert: not saved",
+                                message : "Save Pet: not saved",
                                 error_message : err.message,
                                 success : false
                             });
@@ -226,7 +226,7 @@ router.post("/:id/images", response.ifLoggedOut(), uploader.imagesUpload.single(
 
               } else {
                   res.json({
-                      message : "Find Advert: not found",
+                      message : "Find Pet: not found",
                       success : false
                   });
               }

@@ -6,8 +6,8 @@ function popupComponentsInit ( module, constants ) {
         return {
             scope : {
                 wide : "=",
-                advertId : "@",
-                advert : "=",
+                petId : "@",
+                pet : "=",
                 authorId : "@"
             },
             controllerAs : "ctrl",
@@ -18,8 +18,8 @@ function popupComponentsInit ( module, constants ) {
                     this.open = ( type ) => {
                         $rootScope.$broadcast("popup_open", {
                             wide : this.wide,
-                            advertId : this.advertId,
-                            advert : this.advert,
+                            petId : this.petId,
+                            pet : this.pet,
                             authorId : this.authorId
                         }, type.toLowerCase());
 

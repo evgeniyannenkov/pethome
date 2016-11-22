@@ -1,0 +1,35 @@
+include ../../views/mixins/buttons
+.pet__head
+    .pet__field.pet__field--title(ng-if="pet.fields.title && !pet.hide.title")
+        a(href="/pet/{{pet.fields._id}}") {{pet.fields.title}}
+    .pet__field.pet__field--image(background-image="{{pet.fields.mainImage}}" type="{{pet.fields.type}}")
+        a(href="/pet/{{pet.fields._id}}")
+    .pet__field.pet__field--time
+        | {{pet.fields.publicationDate | translate : 'time'}}
+    .pet__field.pet__field--date
+        | {{pet.fields.publicationDate | translate : 'date'}}
+.pet__content
+    .pet__field(ng-if="!pet.hide.name")
+        .pet__field-name {{'name' | translate}}
+        .pet__field-content {{pet.fields.name}}
+    .pet__field(ng-if="!pet.hide.type")
+        .pet__field-name {{'type' | translate}}
+        .pet__field-content {{pet.fields.type | translate}}
+    .pet__field(ng-if="!pet.hide.gender")
+        .pet__field-name {{'gender' | translate}}
+        .pet__field-content {{pet.fields.gender | translate}}
+    .pet__field(ng-if="!pet.hide.age")
+        .pet__field-name {{'age' | translate}}
+        .pet__field-content {{pet.fields.age || 'Not specified' | translate}}
+    .pet__field(ng-if="!pet.hide.breed")
+        .pet__field-name {{'breed' | translate}}
+        .pet__field-content {{pet.fields.breed || 'Not specified' | translate}}
+    .pet__field.pet__field--author(ng-if="!pet.hide.author")
+        span.pet__field-name {{'Author' | translate}}
+        a.pet__field-content(href="/author/{{pet.author._id}}")  {{pet.author.name || 'Go to' | translate}}
+    .pet__field.pet__field--info(ng-if="!pet.hide.info")
+        .pet__field-name.pet__field-name--small {{'info' | translate}}
+        .pet__field-content {{pet.fields.info || 'Not specified' | translate | excerpt : 10}}
+        //+btn-more('Read more')(type="button" class="button--blue button--invert_hover" href="/pet/{{pet.fields._id}}")
+        a.button.button--read_more(type="button" class="button--blue button--invert_hover" href="/pet/{{pet.fields._id}}")
+            span.button__title {{'Read more' | translate}}

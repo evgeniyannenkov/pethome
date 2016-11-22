@@ -3,13 +3,13 @@
     .popup__inner(ng-class="{active : popup.active, wide : popup.data.wide}")
         .popup__header {{popup.type | translate}}
         .popup__content
-            advert-edit(advert="popup.data.advert" ng-show="popup.type == 'edit advert'" ng-if="popup.isExpected('edit advert')")
-            advert-remove(advert-id="{{popup.data.advertId}}" ng-show="popup.type == 'remove advert'" ng-if="popup.isExpected('remove advert')")
-            images-uploader.uploader(advert-id="{{popup.data.advertId}}" advert="popup.data.advert" ng-show="popup.type == 'upload images'" ng-if="popup.isExpected('upload images')")
+            pet-edit(pet="popup.data.pet" ng-show="popup.type == 'edit pet'" ng-if="popup.isExpected('edit pet')")
+            pet-remove(pet-id="{{popup.data.petId}}" ng-show="popup.type == 'remove pet'" ng-if="popup.isExpected('remove pet')")
+            images-uploader.uploader(pet-id="{{popup.data.petId}}" pet="popup.data.pet" ng-show="popup.type == 'upload images'" ng-if="popup.isExpected('upload images')")
             auth-form(form="registration" ng-show="popup.type == 'registration'" ng-if="popup.isExpected('registration')" title="sign up")
             auth-form(form="login" ng-show="popup.type == 'login'" ng-if="popup.isExpected('login')" title="login")
             author-edit(ng-show="popup.type == 'edit profile'" ng-if="popup.isExpected('edit profile')")
             author-remove(ng-show="popup.type == 'remove profile'" ng-if="popup.isExpected('remove profile')")
-            advert-create(ng-show="popup.type == 'new advert'" ng-if="popup.isExpected('new advert')")
+            pet-create(ng-show="popup.type == 'new pet'" ng-if="popup.isExpected('new pet')")
             author-block(author-id = "{{popup.data.authorId}}" action="block" ng-show="popup.type == 'block'" ng-if="popup.isExpected('block')")
             author-block(author-id = "{{popup.data.authorId}}" action="unblock" ng-show="popup.type == 'unblock'" ng-if="popup.isExpected('unblock')")

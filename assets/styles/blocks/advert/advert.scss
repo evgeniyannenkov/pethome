@@ -1,6 +1,6 @@
 @import "../../common/variables";
 
-.advert {
+.pet {
   border-radius : 3px 3px 0 0;
   overflow      : hidden;
   position      : relative;
@@ -9,19 +9,19 @@
   max-width     : 500px;
 }
 
-.advert__head {
+.pet__head {
   width       : 100%;
   position    : relative;
   padding-top : 60%;
 }
 
-.advert__content {
+.pet__content {
   border     : 1px solid $lightGray;
   border-top : none;
   padding    : 5px 10px;
 }
 
-.advert__field {
+.pet__field {
   display         : flex;
   justify-content : space-between;
   padding         : 10px 5px;
@@ -29,12 +29,12 @@
   border-bottom   : 1px solid $lightGray;
 }
 
-.advert__field:last-child {
+.pet__field:last-child {
   border-bottom : none;
 }
 
-.advert__field--author {
-  .advert__field-content {
+.pet__field--author {
+  .pet__field-content {
     flex       : 0 70%;
     text-align : right;
   }
@@ -43,7 +43,7 @@
   }
 }
 
-.advert__field--title {
+.pet__field--title {
   padding         : 10px 10px;
   position        : absolute;
   top             : 0;
@@ -59,7 +59,7 @@
   }
 }
 
-.advert__field--image {
+.pet__field--image {
   position      : absolute;
   border-bottom : none;
   height        : 100%;
@@ -75,7 +75,7 @@
   }
 }
 
-.advert__field--time {
+.pet__field--time {
   position      : absolute;
   right         : 0;
   bottom        : 10px;
@@ -85,7 +85,7 @@
   padding       : 5px;
 }
 
-.advert__field--date {
+.pet__field--date {
   position      : absolute;
   left          : 0;
   bottom        : 10px;
@@ -95,35 +95,35 @@
   padding       : 5px;
 }
 
-.advert__field--info {
+.pet__field--info {
   flex-direction  : column;
   justify-content : flex-start;
   height          : 120px;
   padding-bottom  : 45px;
 
-  .advert__field-content {
+  .pet__field-content {
     font-size : 0.9em;
   }
 }
 
-.advert__field--info-full {
+.pet__field--info-full {
   height         : auto;
   padding-bottom : 5px;
 }
 
-.advert__field-name {
+.pet__field-name {
   text-transform : capitalize;
   color          : $gray;
 }
 
-.advert__field-name--small {
+.pet__field-name--small {
   font-size     : 0.8em;
   margin-bottom : 5px;
 
 }
 
 @media (min-width : 1700px) {
-  .advert {
+  .pet {
     max-width : 400px;
   }
 }

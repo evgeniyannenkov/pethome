@@ -1,7 +1,7 @@
 "use strict";
 const mongoose = require('mongoose');
 
-const advertSchema = new mongoose.Schema({
+const petSchema = new mongoose.Schema({
     "title" : {
         type : String,
         required : [true, 'title required']
@@ -52,4 +52,4 @@ const advertSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Advert', advertSchema);
+module.exports = mongoose.model('Pet', petSchema);

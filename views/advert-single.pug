@@ -6,10 +6,10 @@ block header
 block content
     .main-content__container
         if currentUser && currentUser.is_admin
-            advert-single.advert-single(advert-id=advert._id enable-edit="true" enable-review="true")
-        else if currentUser && (advert.author.toString() == currentUser._id.toString())
-            advert-single.advert-single(advert-id=advert._id enable-edit="true")
+            pet-single.pet-single(pet-id=pet._id enable-edit="true" enable-review="true")
+        else if currentUser && (pet.author.toString() == currentUser._id.toString())
+            pet-single.pet-single(pet-id=pet._id enable-edit="true")
         else
-            advert-single.advert-single(advert-id=advert._id)
+            pet-single.pet-single(pet-id=pet._id)
 block footer
     include partials/_footer

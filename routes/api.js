@@ -3,9 +3,9 @@
 const router = require('express').Router();
 
 const author = require('./api/author');
-const advert = require('./api/advert');
+const pet = require('./api/pet');
 
 router.use("/author", author);
-router.use("/advert", advert);
+router.use("/pet", pet);
 
 module.exports = router;

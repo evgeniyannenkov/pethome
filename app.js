@@ -17,7 +17,7 @@ const seed = require("./seed");
 //Routes
 const routes = require('./routes/main');
 const admin = require('./routes/admin');
-const advert = require('./routes/advert');
+const pet = require('./routes/pet');
 const author = require('./routes/author');
 const auth = require('./routes/auth');
 const api = require('./routes/api');
@@ -65,7 +65,7 @@ app.use(( req, res, next ) => {
 
 app.use('/', routes);
 app.use('/admin', admin);
-app.use('/advert', advert);
+app.use('/pet', pet);
 app.use('/author', author);
 app.use('/auth', auth);
 app.use("/api", api);
