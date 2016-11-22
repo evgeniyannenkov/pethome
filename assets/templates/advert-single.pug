@@ -37,7 +37,7 @@ include ../../views/mixins/formParts
         i.fa.fa-camera(aria-hidden="true")
 
 .advert-single__main-image.advert-single__main-image--desktop(ng-if="advert.fields.mainImage")
-    .advert-single__main-image-inner(sticky wide-as=".advert-single__main-image--desktop")
+    .advert-single__main-image-inner(sticky align-to=".advert-single__main-image--desktop")
         img(ng-src="/{{advert.fields.mainImage}}")
 
 .advert-single__images

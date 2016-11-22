@@ -13,7 +13,7 @@ function stickyComponentsInit ( module, constants ) {
                     offset = 100,
                     elementWidth;
 
-                let wideAsElement;
+                let alignToElement;
 
                 const getWidth = ( elementWidth, wideAsElement ) => {
                     if ( wideAsElement ) {
@@ -24,17 +24,21 @@ function stickyComponentsInit ( module, constants ) {
                     return elementWidth;
                 };
 
-                if ( atts.wideAs ) {
-                    wideAsElement = document.querySelector(atts.wideAs);
+                if ( atts.alignTo ) {
+                    alignToElement = document.querySelector(atts.alignTo);
                 }
 
                 _window.on("scroll", function () {
 
-                    elementOffset = elementOffset || element.prop('offsetTop');
+                    if ( atts.alignTo ) {
+                        elementOffset = elementOffset || alignToElement.offsetTop;
+                    } else {
+                        elementOffset = elementOffset || element.prop('offsetTop');
+                    }
                     shouldStuck = $window.pageYOffset > elementOffset - offset;
 
                     if ( shouldStuck ) {
-                        elementWidth = getWidth(elementWidth, wideAsElement);
+                        elementWidth = getWidth(elementWidth, alignToElement);
                         element.css({
                             'top' : offset + "px",
                             "position" : "fixed",
@@ -48,7 +52,7 @@ function stickyComponentsInit ( module, constants ) {
                 });
 
                 _window.on("resize", function () {
-                    elementWidth = getWidth(elementWidth, wideAsElement);
+                    elementWidth = getWidth(elementWidth, alignToElement);
                     element.css("width", elementWidth + "px");
                 });
             };
