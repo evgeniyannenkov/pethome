@@ -1,6 +1,7 @@
 "use strict";
 
 const authors = require("./controllers/author");
+const pets = require("./controllers/pet");
 
 const defaultData = [
     {
@@ -23,12 +24,29 @@ const defaultData = [
     }
 ];
 
-defaultData.forEach(( element )=> {
-    authors.create(element)
-           .then(( response ) => {
-               //console.log(response);
-           })
-           .catch(( error ) => {
-               // console.log(error.message);
-           });
-});
+function createAdmins () {
+    defaultData.forEach(( element ) => {
+        authors.create(element)
+               .then(( response ) => {
+                   //console.log(response);
+               })
+               .catch(( error ) => {
+                   // console.log(error.message);
+               });
+    });
+}
+
+function createPets () {
+    for ( let i = 1; i <= 10000; i++ ) {
+        pets.create({ userId : "5832d4f10d71a919d055902c", data : { title : i } })
+            .then(( response ) => {
+                //console.log(response);
+            })
+            .catch(( error ) => {
+                // console.log(error.message);
+            });
+    }
+}
+
+createAdmins();
+// createPets();

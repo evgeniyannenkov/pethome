@@ -1,8 +1,6 @@
 include ../../views/mixins/formParts
 include ../../views/mixins/buttons
 
-
-
 .section-filter
 
     .main-content__container
@@ -34,7 +32,7 @@ include ../../views/mixins/buttons
     page-separator(ng-if="!feed.filtered.length") {{'no adverts were found' | translate}}
     page-separator(ng-if="feed.filtered.length") {{'total - ' | translate : 'all'}} {{feed.filtered.length}}
     .pets-feed(ng-if="!feed.customFilter")
-        pet.pets-feed__item.pet(ng-repeat="(index, pet) in feed.filtered = (feed.pets | dateRange : feed.dateRange | filter: feed.filter | orderBy : feed.order)" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="feed.allAllowed")
-        pet.pets-feed__item.pet(ng-repeat="(index, pet) in feed.filtered = (feed.pets | dateRange : feed.dateRange | feed : feed.authors | filter: feed.filter | orderBy : feed.order)" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="!feed.allAllowed")
+        pet.pets-feed__item.pet(ng-repeat="(index, pet) in feed.filtered = (feed.pets | dateRange : feed.dateRange | filter: feed.filter | orderBy : feed.order) | limitTo : feed.limit" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="feed.allAllowed")
+        pet.pets-feed__item.pet(ng-repeat="(index, pet) in feed.filtered = (feed.pets | dateRange : feed.dateRange | feed : feed.authors | filter: feed.filter | orderBy : feed.order) | limitTo : feed.limit" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="!feed.allAllowed")
     .pets-feed(ng-if="feed.customFilter")
-        pet.pets-feed__item.pet(ng-repeat="(index, pet) in feed.filtered = (feed.pets | dateRange : feed.dateRange | filter: feed.customFilter | orderBy : feed.order)" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]")
+        pet.pets-feed__item.pet(ng-repeat="(index, pet) in feed.filtered = (feed.pets | dateRange : feed.dateRange | filter: feed.customFilter | orderBy : feed.order) | limitTo : feed.limit" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]")

@@ -2,18 +2,37 @@
 
 function petComponentsInit ( module, constants ) {
 
-    module.component('feed', {
-        templateUrl : `${constants.templatesFolder}/pets-feed.html`,
-        bindings : {
-            id : "@authorId",
-            filter_enabled : "=enableFilter",
-            hideFields : "=",
-            allAllowed : "=",
-            customFilter : "="
-        },
-        controller : "petsFeedCtrl",
-        controllerAs : "feed"
-    });
+    module.directive('feed', [
+        "$window",
+        function ( $window ) {
+            return {
+                templateUrl : `${constants.templatesFolder}/pets-feed.html`,
+                scope : {
+                    id : "@authorId",
+                    filter_enabled : "=enableFilter",
+                    hideFields : "=",
+                    allAllowed : "=",
+                    customFilter : "="
+                },
+                controller : "petsFeedCtrl",
+                controllerAs : "feed",
+                bindToController : true,
+                link : ( scope, element, atts, feedCtrl ) => {
+                    element.css({
+                        "display" : "inline-block"
+                    });
+                    let _window = angular.element($window);
+
+                    function onScroll ( event ) {
+                        if ( ($window.innerHeight + $window.pageYOffset) >= element.prop("offsetHeight") + element.prop("offsetTop") ) {
+                            feedCtrl.loadMore();
+                        }
+                    }
+
+                    _window.on("scroll", onScroll);
+                }
+            };
+        } ]);
 
     module.component('filter', {
         templateUrl : `${constants.templatesFolder}/pets-filter.html`,

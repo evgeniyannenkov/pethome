@@ -230,9 +230,12 @@ function petControllersInit ( module ) {
     ]);
 
     module.controller('petsFeedCtrl', [
-        "$http", "pets", "author",
-        function ( ajax, pets, author ) {
+        "$http", "pets", "author", "$scope",
+        function ( ajax, pets, author, $scope ) {
+
             this.order = "-publicationDate";
+            this.limit = 10;
+            this.number = 10;
 
             author.getAll()
                   .then(( response ) => {
@@ -267,12 +270,18 @@ function petControllersInit ( module ) {
             };
 
             this.getPets(this.id);
+
+            this.loadMore = ( number = this.number ) => {
+                this.limit += number;
+                $scope.$apply();
+            };
         }
     ]);
 
     module.controller('petsFeedFilterCtrl', [
         "$filter",
         function ( $filter ) {
+
             this.defaults = {
                 gender : "",
                 type : "",
