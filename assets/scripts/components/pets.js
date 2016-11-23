@@ -36,8 +36,9 @@ function petComponentsInit ( module, constants ) {
             feed : "^^?feed"
         },
         template : `<button ng-click="pagination.feed.prevPage();" ng-if="pagination.feed.prev">Previous Page</button>
-                      <h2>{{pagination.feed.page}}</h2>
-                      <button ng-click="pagination.feed.nextPage();" ng-if="pagination.feed.next">Next Page</button>
+                    <span>{{pagination.feed.page}}</span>
+                    <button ng-click="pagination.feed.nextPage();" ng-if="pagination.feed.next">Next Page</button>
+                    <span ng-show="pagination.feed.inProgress">In Progress</span>
                     `,
         controllerAs : "pagination"
     });

@@ -250,6 +250,7 @@ function petControllersInit ( module ) {
             };
 
             this.getFeed = ( data = { limit : this.perPage, page : this.page } ) => {
+                this.inProgress = true;
                 pets.getFeed(data)
                     .then(( response ) => {
                         if ( response.data.success && response.data.pets ) {
@@ -259,9 +260,11 @@ function petControllersInit ( module ) {
                             this.total = response.data.total;
                             this.page = response.data.current;
                         }
+                        this.inProgress = false;
                     })
                     .catch(( err ) => {
                             console.log(err);
+                            this.inProgress = false;
                         }
                     );
             };
