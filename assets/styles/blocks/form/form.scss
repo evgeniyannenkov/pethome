@@ -248,7 +248,7 @@
     animation : error 0.5s forwards;
     .form__btn-icon {
       &:before {
-        content : "\f00d";
+        content : "\e801";
       }
     }
   }
@@ -264,7 +264,7 @@
     .form__btn-icon {
       &:before {
         transition : content 0.2s;
-        content    : "\f00c";
+        content    : "\e806";
       }
     }
   }
@@ -272,7 +272,7 @@
     .form__btn-icon {
       &:before {
         transition : content 0.2s;
-        content    : "\f00d";
+        content    : "\e801";
       }
     }
   }
@@ -283,13 +283,13 @@
   border           : 1px solid $red;
   .form__btn-icon {
     &:before {
-      content : "\f00d";
+      content : "\e801";
     }
   }
 }
 
 .form__btn-icon {
-  font                    : normal normal normal 14px/1 FontAwesome;
+  font                    : normal normal normal 14px/1 Fontello;
   text-rendering          : auto;
   -webkit-font-smoothing  : antialiased;
   -moz-osx-font-smoothing : grayscale;
@@ -305,8 +305,9 @@
   top                     : 0;
   left                    : -100%;
   transition              : left 0.3s;
+
   &:before {
-    content : "\f0e0";
+    content : "\e800";
   }
 }
 

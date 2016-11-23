@@ -4,7 +4,7 @@ include ../../views/mixins/buttons
 
 .filter__search
     .filter__search-field
-        i.fa.fa-search
+        i.icon-search
         input(ng-model = "filter.fields.title" placeholder="{{'Start typing the Title' | translate}}")
     button.filter__search-btn.button--red.button--invert_hover(ng-class="{'active': filter.extended}" ng-click="filter.toggleSearch();")
         span(ng-class="{'hidden': filter.extended}") {{'Extended Search' | translate}}

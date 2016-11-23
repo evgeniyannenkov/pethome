@@ -18,9 +18,6 @@ function petComponentsInit ( module, constants ) {
                 controllerAs : "feed",
                 bindToController : true,
                 link : ( scope, element, atts, feedCtrl ) => {
-                    element.css({
-                        "display" : "inline-block"
-                    });
                     let _window = angular.element($window);
 
                     function onScroll ( event ) {
