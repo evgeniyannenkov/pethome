@@ -27,73 +27,45 @@ const constants = {
 };
 
 const components = {
-    services : [
+    app : [
+        stickyComponentsInit,
+        applicationConfig,
+        userComponentsInit,
+        separatorComponentsInit,
         apiGenServicesInit,
         authServicesInit,
         validationServicesInit,
         authorServicesInit,
         petServicesInit,
-        currentUserServicesInit
-    ],
-    providers : [
-        translatorProviderInit
-    ],
-    filters : [
+        currentUserServicesInit,
+        translatorProviderInit,
         appFiltersInit,
-    ],
-    notifier : [
         notifierControllersInit,
         notifierServicesInit,
-        notifierComponentsInit
-    ],
-    lightbox : [
+        notifierComponentsInit,
         lightboxServicesInit,
         lightboxComponentsInit,
-        lightboxControllersInit
-    ],
-    auth : [
+        lightboxControllersInit,
         authControllersInit,
-        authComponentsInit
-    ],
-    popup : [
+        authComponentsInit,
         popupControllersInit,
-        popupComponentsInit
-    ],
-    pet : [
+        popupComponentsInit,
         petControllersInit,
-        petComponentsInit
-    ],
-    author : [
+        petComponentsInit,
         authorControllersInit,
-        authorComponentsInit
-    ],
-    translation : [
+        authorComponentsInit,
         translationControllersInit,
-        languagesComponentsInit
-    ],
-    images : [
+        languagesComponentsInit,
         imagesComponentsInit,
-        imageUploadControllersInit
-    ],
-    form : [
+        imageUploadControllersInit,
         formComponentsInit,
-        formControllersInit
-    ],
-    header : [
+        formControllersInit,
         headerComponentsInit,
-        headerControllersInit
-    ],
-    parallax : [
+        headerControllersInit,
         parallaxComponentsInit
-    ],
-    app : [
-        stickyComponentsInit,
-        applicationConfig,
-        userComponentsInit,
-        separatorComponentsInit
+
     ]
 };
 
 const builder = new Builder(modules, constants);
-
 builder.init(components);
