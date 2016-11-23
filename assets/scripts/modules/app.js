@@ -2,6 +2,6 @@
 
 function getModules () {
     return {
-        app : angular.module("app", [])
+        app : angular.module("app", ["angularFileUpload"])
     };
 }
