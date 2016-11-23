@@ -4,5 +4,16 @@
   width           : 100%;
   justify-content : space-between;
   align-items     : center;
-  margin-top      : 20px;
+  padding         : 20px 0;
+}
+
+.heading__item {
+  color: $gray;
+  margin : 5px 0;
+  &:nth-of-type(1) {
+    margin-right : 10px;
+  }
+  h1, h2, h3, h4 {
+    margin : 0;
+  }
 }

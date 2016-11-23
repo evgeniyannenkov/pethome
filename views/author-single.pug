@@ -11,17 +11,17 @@ block content
             if author.blocked
                 .heading__item
                     if !author.name
-                        h1 Author (Blocked)
+                        h2 Author (Blocked)
                     else
-                        h1 #{author.name} (Blocked)
+                        h2 #{author.name} (Blocked)
                 .heading__item
                     +btn-default('Unblock').button--green.button--standard_hover(popup-trigger="unblock" author-id=author._id)
             else
                 .heading__item
                     if !author.name
-                        h1 Author
+                        h2 Author
                     else
-                        h1 #{author.name}
+                        h2 #{author.name}
                 .heading__item
                     +btn-default('Block').button--red.button--transparent(popup-trigger="block" author-id=author._id)
 
