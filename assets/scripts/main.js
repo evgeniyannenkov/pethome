@@ -62,8 +62,8 @@ const components = {
         formControllersInit,
         headerComponentsInit,
         headerControllersInit,
-        parallaxComponentsInit
-
+        parallaxComponentsInit,
+        heroComponentsInit
     ]
 };
 
