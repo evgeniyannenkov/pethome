@@ -1,5 +1,9 @@
 @import "../../common/variables";
 
+feed {
+  display : block;
+}
+
 .pets-feed {
   margin          : 10px auto;
   display         : flex;

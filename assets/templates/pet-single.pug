@@ -29,12 +29,12 @@ include ../../views/mixins/formParts
             .pet__field-name.pet__field-name--small {{'info' | translate}}
             .pet__field-content {{pet.fields.info || 'Not specified' | translate}}
     .btn-round.pet-single__btn(popup-trigger="edit pet" pet="pet.fields" title="{{'edit' | translate}}" ng-if="pet.editEnabled")
-        i.fa.fa-pencil(aria-hidden="true")
+        i.icon-pencil
     .btn-round.btn-round--top.btn-round--red.pet-single__btn.pet-single__btn--remove(popup-trigger="remove pet" pet-id="{{pet.id}}" title="{{'edit' | translate}}" ng-if="pet.editEnabled")
-        i.fa.fa-trash(aria-hidden="true")
+        i.icon-trash
     .btn-round.btn-round--left.btn-round--double.pet-single__btn(popup-trigger="upload images" wide="true" pet-id="{{pet.id}}" pet="pet.fields" title="{{'add photos' | translate}}" ng-if="pet.editEnabled")
-        i.fa.fa-plus(aria-hidden="true")
-        i.fa.fa-camera(aria-hidden="true")
+        i.icon-plus
+        i.icon-camera
 
 .pet-single__main-image.pet-single__main-image--desktop(ng-if="pet.fields.mainImage")
     .pet-single__main-image-inner(sticky align-to=".pet-single__main-image--desktop")

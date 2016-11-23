@@ -53,7 +53,7 @@ function authorControllersInit ( module ) {
                        .then(( response ) => {
                            if ( response.data.success ) {
                                notify.inform({
-                                   message : `[[Updated]]  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                   message : `[[Updated]]  <i class="icon-check"></i>`,
                                    duration : 1500
                                });
                                this.author.fields = angular.copy(this.temporaryData);
@@ -96,7 +96,7 @@ function authorControllersInit ( module ) {
                        .then(( response ) => {
                            if ( response.data.success ) {
                                notify.inform({
-                                   message : `[[Removed]]  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                   message : `[[Removed]]  <i class="icon-check"></i>`,
                                    duration : 1000
                                });
                                $timeout(1200)
