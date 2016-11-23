@@ -234,7 +234,7 @@ function petControllersInit ( module ) {
         function ( ajax, pets, author, $scope ) {
 
             this.order = "-publicationDate";
-            this.limit = 10;
+            this.perPage = 1;
             this.page = 1;
 
             author.getAll()
@@ -251,7 +251,7 @@ function petControllersInit ( module ) {
                 this.getFeed();
             };
 
-            this.getFeed = ( data = { limit : this.limit, page : this.page } ) => {
+            this.getFeed = ( data = { limit : this.perPage, page : this.page } ) => {
                 pets.getFeed(data)
                     .then(( response ) => {
                         if ( response.data.success && response.data.pets ) {
