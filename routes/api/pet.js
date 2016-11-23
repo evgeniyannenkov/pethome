@@ -7,6 +7,57 @@ const response = require("../../middleware/response");
 const uploader = require("../../config/uploader");
 const pets = require("../../controllers/pet");
 
+router.get("/feed", ( req, res, next ) => {
+    let limit = +req.query.limit && +req.query.limit > 0 ? +req.query.limit : 20;
+    let page = +req.query.page && +req.query.page > 0 ? +req.query.page : 1;
+
+    let prevPage,
+        nextPage,
+        lastPage;
+
+    Pet.find({})
+       .skip(page * limit - limit)
+       .limit(limit)
+       .then(( pets ) => {
+           Pet.count({})
+              .then(( count ) => {
+
+                  lastPage = Math.round(count / limit);
+
+                  nextPage = pets.length && pets.length == limit && page < lastPage ? `/feed?limit=${limit}&page=${page + 1}` : false;
+                  if ( page > lastPage ) {
+                      prevPage = `/feed?limit=${limit}&page=${lastPage}`;
+                  } else {
+                      prevPage = page != 1 ? `/feed?limit=${limit}&page=${page - 1}` : false;
+                  }
+
+                  res.json({
+                      pets,
+                      success : true,
+                      total : count,
+                      next : nextPage ? {
+                          url : nextPage,
+                          page : page + 1,
+                          limit
+                      } : false,
+                      prev : prevPage ? {
+                          url : prevPage,
+                          page : page - 1,
+                          limit
+                      } : false
+                  });
+              })
+              .catch(( data ) => {
+                  console.log(data);
+              });
+       })
+       .catch(( error ) => {
+           res.json({
+               success : false,
+               message : error.message
+           });
+       });
+});
 
 router.get("/", ( req, res, next ) => {
     Pet.find({})
