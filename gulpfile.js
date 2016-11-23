@@ -3,14 +3,12 @@ const argv = require('minimist')(process.argv.slice(2));
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 const babel = require('gulp-babel');
-const changed = require('gulp-changed');
 const concat = require('gulp-concat');
 const checkFilesize = require("gulp-check-filesize");
 const childProcess = require("child_process");
 const flatten = require('gulp-flatten');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
-const imagemin = require('gulp-imagemin');
 const insert = require('gulp-insert');
 const jshint = require('gulp-jshint');
 const lazypipe = require('lazypipe');
@@ -26,9 +24,6 @@ const runSequence = require('run-sequence');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
-//const dotenv = require('dotenv').config({ path : './.env' });
-const fs = require('fs');
-const gulpFile = require('gulp-file');
 const concatFilenames = require('gulp-concat-filenames');
 const notify = require("gulp-notify");
 const watch = require('gulp-watch');
@@ -468,11 +463,6 @@ gulp.task('fonts', function () {
 // `gulp images` - Run lossless compression on all the images.
 gulp.task('images', function () {
     return gulp.src(globs.images)
-               .pipe(imagemin({
-                   progressive : true,
-                   interlaced : true,
-                   svgoPlugins : [{removeUnknownsAndDefaults : false}, {cleanupIDs : false}]
-               }))
                .pipe(gulp.dest(path.dist + 'images'))
                .pipe(browserSync.stream());
 });
@@ -496,19 +486,6 @@ gulp.task('jshint', function () {
                }))
                .pipe(jshint.reporter('jshint-stylish'))
                .pipe(gulpif(enabled.failJSHint, jshint.reporter('fail')));
-});
-
-//Editing Manifest
-gulp.task('dotenv', function () {
-
-    const manifestSrc = './assets/manifest.json';
-    const manifestRaw = JSON.parse(fs.readFileSync(manifestSrc, 'utf8'));
-
-    manifestRaw.config.devUrl = process.env.SITE_URL;
-
-    return gulp.src('manifest.json')
-               .pipe(gulpFile('manifest.json', JSON.stringify(manifestRaw)))
-               .pipe(gulp.dest('assets'));
 });
 
 // ### Clean
@@ -583,7 +560,6 @@ gulp.task('watch', ['clean'], function () {
 
     gulp.watch([path.source + 'fonts/**/*'], ['fonts']);
     gulp.watch([path.source + 'images/**/*'], ['images']);
-    //gulp.watch(['bower.json', 'assets/manifest.json'], ['watch']);
 });
 
 // ### Build
@@ -598,7 +574,6 @@ gulp.task('build', ['clean'], function ( callback ) {
 
 gulp.task('build-operations', function ( callback ) {
     runSequence(
-        //'dotenv',
         'styles',
         'scripts',
         'critical',
