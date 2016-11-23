@@ -508,6 +508,7 @@ gulp.task('watch', ['clean'], function () {
     runSequence(
         'sass:import:watch',
         'build-operations',
+        'server-start',
         'mongo-start'
     );
 
@@ -578,7 +579,6 @@ gulp.task('build-operations', function ( callback ) {
         'scripts',
         'critical',
         ['fonts', 'images', 'templates'],
-        'server-start',
         callback);
 });
 
