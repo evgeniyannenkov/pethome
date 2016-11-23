@@ -39,10 +39,7 @@ function petComponentsInit ( module, constants ) {
                       <h2>{{pagination.feed.page}}</h2>
                       <button ng-click="pagination.feed.nextPage();" ng-if="pagination.feed.next">Next Page</button>
                     `,
-        controllerAs : "pagination",
-        controller : function () {
-            console.log(this);
-        }
+        controllerAs : "pagination"
     });
 
     module.component('filter', {
