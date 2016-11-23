@@ -29,8 +29,11 @@ include ../../views/mixins/buttons
                     }, true)(ng-model = "feed.dateRange")
 
 .main-content__container
-    page-separator(ng-if="!feed.filtered.length") {{'no adverts were found' | translate}}
-    page-separator(ng-if="feed.filtered.length") {{'total - ' | translate : 'all'}} {{feed.filtered.length}}
+    page-separator(ng-if="!feed.total") {{'no adverts were found' | translate}}
+    page-separator(ng-if="feed.total") {{'total - ' | translate : 'all'}} {{feed.total}}
+    button(ng-click="feed.prevPage();" ng-if="feed.prev") Previous Page
+    h2 {{feed.page}}
+    button(ng-click="feed.nextPage();" ng-if="feed.next") Next Page
     .pets-feed(ng-if="!feed.customFilter")
         pet.pets-feed__item.pet(ng-repeat="(index, pet) in feed.filtered = (feed.pets | dateRange : feed.dateRange | filter: feed.filter | orderBy : feed.order) | limitTo : feed.limit" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="feed.allAllowed")
         pet.pets-feed__item.pet(ng-repeat="(index, pet) in feed.filtered = (feed.pets | dateRange : feed.dateRange | feed : feed.authors | filter: feed.filter | orderBy : feed.order) | limitTo : feed.limit" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="!feed.allAllowed")

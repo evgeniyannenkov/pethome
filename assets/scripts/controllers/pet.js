@@ -235,26 +235,41 @@ function petControllersInit ( module ) {
 
             this.order = "-publicationDate";
             this.limit = 10;
-            this.number = 10;
+            this.page = 1;
 
             author.getAll()
                   .then(( response ) => {
                       this.authors = response.data.authors;
                   });
 
+            this.prevPage = () => {
+                this.page--;
+                this.getFeed();
+            };
+            this.nextPage = () => {
+                this.page++;
+                this.getFeed();
+            };
+
+            this.getFeed = ( data = { limit : this.limit, page : this.page } ) => {
+                pets.getFeed(data)
+                    .then(( response ) => {
+                        if ( response.data.success && response.data.pets ) {
+                            this.pets = response.data.pets;
+                            this.next = response.data.next;
+                            this.prev = response.data.prev;
+                            this.total = response.data.total;
+                        }
+                    })
+                    .catch(( err ) => {
+                            console.log(err);
+                        }
+                    );
+            };
+
             this.getPets = ( user_id ) => {
                 if ( !user_id ) {
-                    pets.getAll()
-                        .then(( response ) => {
-                            if ( response.data.pets ) {
-                                this.pets = response.data.pets;
-                            }
-                        })
-                        .catch(( err ) => {
-                                console.log(err);
-                            }
-                        );
-
+                    this.getFeed();
                 } else {
                     ajax({
                         method : "get",
