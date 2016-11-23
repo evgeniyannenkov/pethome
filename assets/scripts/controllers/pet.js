@@ -121,7 +121,7 @@ function petControllersInit ( module ) {
                     .then(( response ) => {
                         if ( response.data.success ) {
                             notify.inform({
-                                message : `[[Created]] ${response.data.pet.name} <i class="fa fa-check" aria-hidden="true"></i>`,
+                                message : `[[Created]] ${response.data.pet.name} <i class="icon-check"></i>`,
                                 duration : 1200
                             });
                             $timeout(1500)
@@ -200,7 +200,7 @@ function petControllersInit ( module ) {
                     .then(( response ) => {
                         if ( response.data.success && response.data.redirect ) {
                             notify.inform({
-                                message : `[[Removed]]  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                message : `[[Removed]]  <i class="icon-check"></i>`,
                                 duration : 1200
                             });
                             $timeout(1200)
@@ -230,9 +230,12 @@ function petControllersInit ( module ) {
     ]);
 
     module.controller('petsFeedCtrl', [
-        "$http", "pets", "author",
-        function ( ajax, pets, author ) {
+        "$http", "pets", "author", "$scope",
+        function ( ajax, pets, author, $scope ) {
+
             this.order = "-publicationDate";
+            this.limit = 10;
+            this.number = 10;
 
             author.getAll()
                   .then(( response ) => {
@@ -267,12 +270,18 @@ function petControllersInit ( module ) {
             };
 
             this.getPets(this.id);
+
+            this.loadMore = ( number = this.number ) => {
+                this.limit += number;
+                $scope.$apply();
+            };
         }
     ]);
 
     module.controller('petsFeedFilterCtrl', [
         "$filter",
         function ( $filter ) {
+
             this.defaults = {
                 gender : "",
                 type : "",

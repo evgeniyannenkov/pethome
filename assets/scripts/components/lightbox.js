@@ -5,7 +5,7 @@ function lightboxComponentsInit ( module, constants ) {
     module.directive("lightboxTrigger", function () {
         return {
             template : `<div ng-transclude></div>
-                        <div class="lightbox-trigger__inner" ng-click="lightbox.open();"><i class="fa fa-search-plus" aria-hidden="true"></i></div>`,
+                        <div class="lightbox-trigger__inner" ng-click="lightbox.open();"><i class="icon-zoom"></i></div>`,
             transclude : true,
             controllerAs : "lightbox",
             controller : "lightboxTriggerCtrl",
