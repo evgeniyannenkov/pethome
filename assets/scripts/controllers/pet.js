@@ -234,7 +234,7 @@ function petControllersInit ( module ) {
         function ( ajax, pets, author, $scope ) {
 
             this.order = "-publicationDate";
-            this.perPage = 1;
+            this.perPage = 10;
             this.page = 1;
 
             author.getAll()

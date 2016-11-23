@@ -31,6 +31,20 @@ function petComponentsInit ( module, constants ) {
             };
         } ]);
 
+    module.component("feedPagination", {
+        require : {
+            feed : "^^?feed"
+        },
+        template : `<button ng-click="pagination.feed.prevPage();" ng-if="pagination.feed.prev">Previous Page</button>
+                      <h2>{{pagination.feed.page}}</h2>
+                      <button ng-click="pagination.feed.nextPage();" ng-if="pagination.feed.next">Next Page</button>
+                    `,
+        controllerAs : "pagination",
+        controller : function () {
+            console.log(this);
+        }
+    });
+
     module.component('filter', {
         templateUrl : `${constants.templatesFolder}/pets-filter.html`,
         bindings : {
