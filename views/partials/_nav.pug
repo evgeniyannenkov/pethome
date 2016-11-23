@@ -1,6 +1,8 @@
 ul.header__menu
     li.header__menu-item.header__menu-item--lang(ng-class="{'active' : header.languageSelect}")
         language(language-select="header.languageSelect")
+    li.header__menu-item(ng-class="{'hidden' : header.languageSelect}")
+        a.header__menu-link(href='/') {{'Home' | translate}}
     li.header__menu-item(ng-class="{'hidden' : header.languageSelect}" ng-if="!header.user")
         .header__menu-link(popup-trigger="registration") {{'Sign Up' | translate}}
     li.header__menu-item(ng-class="{'hidden' : header.languageSelect}" ng-if="!header.user")
