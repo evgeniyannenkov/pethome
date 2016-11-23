@@ -243,12 +243,10 @@ function petControllersInit ( module ) {
                   });
 
             this.prevPage = () => {
-                this.page--;
-                this.getFeed();
+                this.getFeed({ limit : this.perPage, page : this.page - 1 });
             };
             this.nextPage = () => {
-                this.page++;
-                this.getFeed();
+                this.getFeed({ limit : this.perPage, page : this.page + 1 });
             };
 
             this.getFeed = ( data = { limit : this.perPage, page : this.page } ) => {
@@ -259,6 +257,7 @@ function petControllersInit ( module ) {
                             this.next = response.data.next;
                             this.prev = response.data.prev;
                             this.total = response.data.total;
+                            this.page = response.data.current;
                         }
                     })
                     .catch(( err ) => {

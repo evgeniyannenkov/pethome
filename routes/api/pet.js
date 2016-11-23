@@ -35,6 +35,7 @@ router.get("/feed", ( req, res, next ) => {
                       pets,
                       success : true,
                       total : count,
+                      current : page,
                       next : nextPage ? {
                           url : nextPage,
                           page : page + 1,
