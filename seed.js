@@ -37,7 +37,7 @@ function createAdmins () {
 }
 
 function createPets () {
-    for ( let i = 1; i <= 10000; i++ ) {
+    for ( let i = 1; i <= 500; i++ ) {
         pets.create({ userId : "5832d4f10d71a919d055902c", data : { title : i } })
             .then(( response ) => {
                 //console.log(response);
