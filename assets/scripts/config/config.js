@@ -4,7 +4,7 @@ function applicationConfig ( module ) {
     module.config([
         "$translatorProvider",
         function ( translator ) {
-            const preferred = localStorage[ "preferred_language" ] || "ru";
+            const preferred = localStorage["preferred_language"] || "ru";
             translator.setTranslations("ru", {
                 "language" : "язык",
                 "russian" : "русский",
@@ -16,6 +16,7 @@ function applicationConfig ( module ) {
                 "login" : "Вход",
                 "admin" : "Управление",
                 "profile" : "Профиль",
+                "home" : "Главная",
                 "logout" : "Выход",
                 "welcome back" : "С возвращением",
                 "welcome" : "Добро пожаловать",
@@ -95,6 +96,7 @@ function applicationConfig ( module ) {
                 "login" : "Вхід",
                 "admin" : "Адміністрування",
                 "profile" : "Профіль",
+                "home" : "Головна",
                 "logout" : "Вихід",
                 "welcome back" : "З поверненням",
                 "welcome" : "Ласкаво просимо",
@@ -171,5 +173,6 @@ function applicationConfig ( module ) {
             translator.setDateFormat("ru", "d/MM/yyyy");
             translator.setTimeFormat("ru", "H:mm");
             translator.setLocale(preferred);
-        } ]);
+        }
+    ]);
 }
