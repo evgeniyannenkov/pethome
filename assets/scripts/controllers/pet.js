@@ -11,53 +11,53 @@ function petControllersInit ( module ) {
             this.showActions = false;
 
             pets.get({ id : this.id })
-                   .then(( response ) => {
-                       if ( response.data.success && response.data.pet ) {
-                           this.fields = response.data.pet;
-                           if ( this.fields.age ) {
-                               this.fields.age = parseInt(this.fields.age);
-                           }
-                           current_pet = angular.copy(this.fields);
+                .then(( response ) => {
+                    if ( response.data.success && response.data.pet ) {
+                        this.fields = response.data.pet;
+                        if ( this.fields.age ) {
+                            this.fields.age = parseInt(this.fields.age);
+                        }
+                        current_pet = angular.copy(this.fields);
 
-                           author.get({ id : this.fields.author })
-                                 .then(( response ) => {
-                                     if ( response.data.success ) {
-                                         this.author = response.data.author;
+                        author.get({ id : this.fields.author })
+                              .then(( response ) => {
+                                  if ( response.data.success ) {
+                                      this.author = response.data.author;
 
-                                         this.showActions = this.currentUser && ( this.author._id == this.currentUser.id || this.currentUser.isAdmin);
-                                     }
-                                 });
-                       }
-                   })
-                   .catch(( err ) => {
-                       console.log(err);
-                   });
+                                      this.showActions = this.currentUser && ( this.author._id == this.currentUser.id || this.currentUser.isAdmin);
+                                  }
+                              });
+                    }
+                })
+                .catch(( err ) => {
+                    console.log(err);
+                });
 
             this.save = ( data = this.fields ) => {
                 return new Promise(( resolve, reject ) => {
                     pets.update({ id : data._id, data })
-                           .then(( response ) => {
-                               if ( response.data.success && response.data.newPet ) {
-                                   notify.inform({
-                                       message : `${data.name} [[updated]].`,
-                                       duration : 2000
-                                   });
+                        .then(( response ) => {
+                            if ( response.data.success && response.data.newPet ) {
+                                notify.inform({
+                                    message : `${data.name} [[updated]].`,
+                                    duration : 2000
+                                });
 
-                                   this.fields = response.data.newPet;
-                                   if ( this.fields.age ) {
-                                       this.fields.age = parseInt(this.fields.age);
-                                   }
-                                   resolve(this.fields);
-                               } else {
-                                   notify.error({
-                                       message : response.data.message,
-                                       duration : 2000
-                                   });
-                               }
-                           })
-                           .catch(( error ) => {
-                               reject(error);
-                           });
+                                this.fields = response.data.newPet;
+                                if ( this.fields.age ) {
+                                    this.fields.age = parseInt(this.fields.age);
+                                }
+                                resolve(this.fields);
+                            } else {
+                                notify.error({
+                                    message : response.data.message,
+                                    duration : 2000
+                                });
+                            }
+                        })
+                        .catch(( error ) => {
+                            reject(error);
+                        });
                 });
             };
 
@@ -91,18 +91,18 @@ function petControllersInit ( module ) {
 
             this.review = () => {
                 pets.review({ id : this.id })
-                       .then(( response ) => {
-                           if ( response.data.success ) {
-                               this.fields.reviewed = true;
-                               notify.inform({
-                                   message : response.data.message,
-                                   duration : 2000
-                               });
-                           }
-                       })
-                       .catch(( response ) => {
-                           console.log(response);
-                       });
+                    .then(( response ) => {
+                        if ( response.data.success ) {
+                            this.fields.reviewed = true;
+                            notify.inform({
+                                message : response.data.message,
+                                duration : 2000
+                            });
+                        }
+                    })
+                    .catch(( response ) => {
+                        console.log(response);
+                    });
             };
         }
     ]);
@@ -118,41 +118,41 @@ function petControllersInit ( module ) {
 
             this.create = () => {
                 pets.create({ data : this.pet })
-                       .then(( response ) => {
-                           if ( response.data.success ) {
-                               notify.inform({
-                                   message : `[[Created]] ${response.data.pet.name} <i class="fa fa-check" aria-hidden="true"></i>`,
-                                   duration : 1200
-                               });
-                               $timeout(1500)
-                                   .then(() => {
-                                       $scope.$broadcast("formResponse", {
-                                           responseClass : "success"
-                                       });
-                                       document.location.href = `/pet/${response.data.pet._id}`;
-                                   });
-                           } else {
-                               notify.error({
-                                   message : response.data.message,
-                                   duration : 3000
-                               });
-                               $timeout(500)
-                                   .then(() => {
-                                       $scope.$broadcast("formResponse", {
-                                           responseClass : "fail"
-                                       });
-                                   });
-                           }
-                       })
-                       .catch(( err ) => {
-                           console.log(err);
-                           $timeout(500)
-                               .then(() => {
-                                   $scope.$broadcast("formResponse", {
-                                       responseClass : "fail"
-                                   });
-                               });
-                       });
+                    .then(( response ) => {
+                        if ( response.data.success ) {
+                            notify.inform({
+                                message : `[[Created]] ${response.data.pet.name} <i class="fa fa-check" aria-hidden="true"></i>`,
+                                duration : 1200
+                            });
+                            $timeout(1500)
+                                .then(() => {
+                                    $scope.$broadcast("formResponse", {
+                                        responseClass : "success"
+                                    });
+                                    document.location.href = `/pet/${response.data.pet._id}`;
+                                });
+                        } else {
+                            notify.error({
+                                message : response.data.message,
+                                duration : 3000
+                            });
+                            $timeout(500)
+                                .then(() => {
+                                    $scope.$broadcast("formResponse", {
+                                        responseClass : "fail"
+                                    });
+                                });
+                        }
+                    })
+                    .catch(( err ) => {
+                        console.log(err);
+                        $timeout(500)
+                            .then(() => {
+                                $scope.$broadcast("formResponse", {
+                                    responseClass : "fail"
+                                });
+                            });
+                    });
             };
 
         }
@@ -197,33 +197,33 @@ function petControllersInit ( module ) {
         function ( $scope, pets, notify, $timeout ) {
             this.remove = ( id ) => {
                 pets.remove({ id })
-                       .then(( response ) => {
-                           if ( response.data.success && response.data.redirect ) {
-                               notify.inform({
-                                   message : `[[Removed]]  <i class="fa fa-check" aria-hidden="true"></i>`,
-                                   duration : 1200
-                               });
-                               $timeout(1200)
-                                   .then(() => {
-                                       $scope.$broadcast("formResponse", {
-                                           responseClass : "success"
-                                       });
-                                       document.location.href = response.data.redirect;
-                                   });
-                           } else if ( response.data.message ) {
-                               console.log(response.data);
-                           }
-                       })
-                       .catch(( err ) => {
-                           console.log(err);
+                    .then(( response ) => {
+                        if ( response.data.success && response.data.redirect ) {
+                            notify.inform({
+                                message : `[[Removed]]  <i class="fa fa-check" aria-hidden="true"></i>`,
+                                duration : 1200
+                            });
+                            $timeout(1200)
+                                .then(() => {
+                                    $scope.$broadcast("formResponse", {
+                                        responseClass : "success"
+                                    });
+                                    document.location.href = response.data.redirect;
+                                });
+                        } else if ( response.data.message ) {
+                            console.log(response.data);
+                        }
+                    })
+                    .catch(( err ) => {
+                        console.log(err);
 
-                           $timeout(500)
-                               .then(() => {
-                                   $scope.$broadcast("formResponse", {
-                                       responseClass : "fail"
-                                   });
-                               });
-                       });
+                        $timeout(500)
+                            .then(() => {
+                                $scope.$broadcast("formResponse", {
+                                    responseClass : "fail"
+                                });
+                            });
+                    });
             };
 
         }
@@ -242,15 +242,15 @@ function petControllersInit ( module ) {
             this.getPets = ( user_id ) => {
                 if ( !user_id ) {
                     pets.getAll()
-                           .then(( response ) => {
-                               if ( response.data.pets ) {
-                                   this.pets = response.data.pets;
-                               }
-                           })
-                           .catch(( err ) => {
-                                   console.log(err);
-                               }
-                           );
+                        .then(( response ) => {
+                            if ( response.data.pets ) {
+                                this.pets = response.data.pets;
+                            }
+                        })
+                        .catch(( err ) => {
+                                console.log(err);
+                            }
+                        );
 
                 } else {
                     ajax({
@@ -271,10 +271,15 @@ function petControllersInit ( module ) {
     ]);
 
     module.controller('petsFeedFilterCtrl', [
-        function () {
+        "$filter",
+        function ( $filter ) {
             this.defaults = {
                 gender : "",
                 type : "",
+            };
+
+            this.checkGeneral = () => {
+                this.fields.title = this.fields.general;
             };
 
             this.fieldChange = ( field ) => {
@@ -285,11 +290,7 @@ function petControllersInit ( module ) {
 
             this.toggleSearch = () => {
                 this.extended = !this.extended;
-                if ( this.extended ) {
-                    this.fields = this.defaults;
-                } else {
-                    this.fields = "";
-                }
+                this.fields = this.defaults;
             }
 
         }
