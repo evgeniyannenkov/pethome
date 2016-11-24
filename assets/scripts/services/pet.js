@@ -15,7 +15,7 @@ function petServicesInit ( module ) {
                             url : "/:id"
                         },
                         getFeed : {
-                            url : "/feed?limit=:limit&page=:page"
+                            url : "/feed?limit=:limit&page=:page&user=:user"
                         },
                         search : {
                             url : "/search?title=:title"

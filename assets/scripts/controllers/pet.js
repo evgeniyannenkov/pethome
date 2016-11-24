@@ -243,14 +243,15 @@ function petControllersInit ( module ) {
                   });
 
             this.prevPage = () => {
-                this.getFeed({ limit : this.perPage, page : this.page - 1 });
+                this.getFeed({ limit : this.perPage, page : this.page - 1, user : this.id });
             };
 
             this.nextPage = () => {
-                this.getFeed({ limit : this.perPage, page : this.page + 1 });
+                this.getFeed({ limit : this.perPage, page : this.page + 1, user : this.id });
             };
 
-            this.getFeed = ( data = { limit : this.perPage, page : this.page } ) => {
+            this.getFeed = ( data = { limit : this.perPage, page : this.page, user : this.id } ) => {
+                console.log(data);
                 this.inProgress = true;
                 pets.getFeed(data)
                     .then(( response ) => {
@@ -274,24 +275,7 @@ function petControllersInit ( module ) {
                 console.log(data);
             };
 
-            this.getPets = ( user_id ) => {
-                if ( !user_id ) {
-                    this.getFeed();
-                } else {
-                    ajax({
-                        method : "get",
-                        url : `/api/author/${user_id}/pets`
-                    }).then(( response ) => {
-                        if ( response.data.pets ) {
-                            this.pets = response.data.pets;
-                        }
-                    }).catch(( err ) => {
-                        console.log(err);
-                    });
-                }
-            };
-
-            this.getPets(this.id);
+            this.getFeed();
         }
     ]);
 

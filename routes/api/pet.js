@@ -10,16 +10,22 @@ const pets = require("../../controllers/pet");
 router.get("/feed", ( req, res, next ) => {
     let limit = +req.query.limit && +req.query.limit > 0 ? +req.query.limit : 20;
     let page = +req.query.page && +req.query.page > 0 ? +req.query.page : 1;
+    let sort = req.query.sort || 'desc';
+    let user = req.query.user;
 
     let prevPage,
         nextPage,
-        lastPage;
+        lastPage,
+        findData;
 
-    Pet.find({})
+    findData = user && user != 'undefined' ? { author : user } : {};
+
+    Pet.find(findData)
+       .sort({ publicationDate : sort })
        .skip(page * limit - limit)
        .limit(limit)
        .then(( pets ) => {
-           Pet.count({})
+           Pet.count(findData)
               .then(( count ) => {
 
                   lastPage = Math.round(count / limit);
@@ -34,6 +40,7 @@ router.get("/feed", ( req, res, next ) => {
                   res.json({
                       pets,
                       success : true,
+                      last : lastPage,
                       total : count,
                       current : page,
                       next : nextPage ? {
