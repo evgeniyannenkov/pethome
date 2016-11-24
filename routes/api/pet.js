@@ -79,21 +79,23 @@ router.get("/feed", ( req, res, next ) => {
 });
 
 router.get("/search", ( req, res, next ) => {
-    let title = req.query.title;
+    let q = req.query.q;
 
-    Pet.find({"title" : {"$regex" : title, "$options" : "i"}})
-       .then(( pets ) => {
-           res.json({
-               pets,
-               success : true
-           });
-       })
-       .catch(( error ) => {
-           res.json({
-               success : false,
-               message : error.message
-           });
-       });
+    Pet.find().or([
+        {"title" : {"$regex" : q, "$options" : "i"}},
+        {"name" : {"$regex" : q, "$options" : "i"}},
+        {"info" : {"$regex" : q, "$options" : "i"}}
+    ]).then(( pets ) => {
+        res.json({
+            pets,
+            success : true
+        });
+    }).catch(( error ) => {
+        res.json({
+            success : false,
+            message : error.message
+        });
+    });
 });
 
 router.get("/", ( req, res, next ) => {
