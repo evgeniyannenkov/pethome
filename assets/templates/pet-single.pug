@@ -6,7 +6,7 @@ include ../../views/mixins/formParts
     .pet-single__info
         h1.pet-single__title
             span {{pet.fields.title}}
-            span.status(ng-class="{'published' : pet.fields.published, 'not-published' : !pet.fields.published}" ng-click="pet.changeState();") {{!pet.fields.published ? 'not published' : 'published' | translate}}
+            span.status(ng-class="{'published' : pet.fields.published, 'not-published' : !pet.fields.published}" ng-click="pet.changeState();" ng-if="pet.showActions") {{!pet.fields.published ? 'not published' : 'published' | translate}}
         .pet__field
             .pet__field-name {{'name' | translate}}
             .pet__field-content {{pet.fields.name}}
