@@ -9,35 +9,32 @@ function petComponentsInit ( module, constants ) {
                 templateUrl : `${constants.templatesFolder}/pets-feed.html`,
                 scope : {
                     id : "@authorId",
-                    filter_enabled : "=enableFilter",
                     hideFields : "=",
                     allAllowed : "=",
                     customFilter : "="
                 },
                 controller : "petsFeedCtrl",
                 controllerAs : "feed",
-                bindToController : true,
-                link : ( scope, element, atts, feedCtrl ) => {
-                    let _window = angular.element($window);
-
-                    function onScroll ( event ) {
-                        if ( ($window.innerHeight + $window.pageYOffset) >= element.prop("offsetHeight") + element.prop("offsetTop") ) {
-                            feedCtrl.loadMore();
-                        }
-                    }
-
-                    _window.on("scroll", onScroll);
-                }
+                bindToController : true
             };
         } ]);
 
-    module.component('filter', {
-        templateUrl : `${constants.templatesFolder}/pets-filter.html`,
-        bindings : {
-            fields : "=feedFilter"
+    module.component("feedPagination", {
+        require : {
+            feed : "^^?feed"
         },
-        controller : "petsFeedFilterCtrl",
-        controllerAs : "filter"
+        template : `<button ng-click="pagination.feed.prevPage();" ng-if="pagination.feed.prev">Previous Page</button>
+                    <span>{{pagination.feed.page}}</span>
+                    <button ng-click="pagination.feed.nextPage();" ng-if="pagination.feed.next">Next Page</button>
+                    <span ng-show="pagination.feed.inProgress">In Progress</span>
+                    `,
+        controllerAs : "pagination"
+    });
+
+    module.component('search', {
+        templateUrl : `${constants.templatesFolder}/pets-search.html`,
+        controller : "petsSearchCtrl",
+        controllerAs : "search"
     });
 
     module.component('pet', {

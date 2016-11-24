@@ -10,7 +10,7 @@ function petControllersInit ( module ) {
 
             this.showActions = false;
 
-            pets.get({ id : this.id })
+            pets.get({id : this.id})
                 .then(( response ) => {
                     if ( response.data.success && response.data.pet ) {
                         this.fields = response.data.pet;
@@ -19,7 +19,7 @@ function petControllersInit ( module ) {
                         }
                         current_pet = angular.copy(this.fields);
 
-                        author.get({ id : this.fields.author })
+                        author.get({id : this.fields.author})
                               .then(( response ) => {
                                   if ( response.data.success ) {
                                       this.author = response.data.author;
@@ -35,7 +35,7 @@ function petControllersInit ( module ) {
 
             this.save = ( data = this.fields ) => {
                 return new Promise(( resolve, reject ) => {
-                    pets.update({ id : data._id, data })
+                    pets.update({id : data._id, data})
                         .then(( response ) => {
                             if ( response.data.success && response.data.newPet ) {
                                 notify.inform({
@@ -90,7 +90,7 @@ function petControllersInit ( module ) {
             };
 
             this.review = () => {
-                pets.review({ id : this.id })
+                pets.review({id : this.id})
                     .then(( response ) => {
                         if ( response.data.success ) {
                             this.fields.reviewed = true;
@@ -117,7 +117,7 @@ function petControllersInit ( module ) {
             };
 
             this.create = () => {
-                pets.create({ data : this.pet })
+                pets.create({data : this.pet})
                     .then(( response ) => {
                         if ( response.data.success ) {
                             notify.inform({
@@ -196,7 +196,7 @@ function petControllersInit ( module ) {
         "$scope", "pets", "notify", "$timeout",
         function ( $scope, pets, notify, $timeout ) {
             this.remove = ( id ) => {
-                pets.remove({ id })
+                pets.remove({id})
                     .then(( response ) => {
                         if ( response.data.success && response.data.redirect ) {
                             notify.inform({
@@ -230,78 +230,112 @@ function petControllersInit ( module ) {
     ]);
 
     module.controller('petsFeedCtrl', [
-        "$http", "pets", "author", "$scope",
-        function ( ajax, pets, author, $scope ) {
+        "$http", "pets", "author",
+        function ( ajax, pets, author ) {
 
-            this.order = "-publicationDate";
-            this.limit = 10;
-            this.number = 10;
+            this.order = "desc";
+            this.period = "";
+            this.gender = "";
+            this.type = "";
+            this.perPage = 10;
+            this.page = 1;
+
+            this.feedData = {
+                sort : this.order,
+                period : this.period,
+                limit : this.perPage,
+                page : this.page,
+                user : this.id,
+                gender : this.gender,
+                type : this.type
+            };
 
             author.getAll()
                   .then(( response ) => {
                       this.authors = response.data.authors;
                   });
 
-            this.getPets = ( user_id ) => {
-                if ( !user_id ) {
-                    pets.getAll()
-                        .then(( response ) => {
-                            if ( response.data.pets ) {
-                                this.pets = response.data.pets;
-                            }
-                        })
-                        .catch(( err ) => {
-                                console.log(err);
-                            }
-                        );
+            this.changeOrder = () => {
+                this.feedData.sort = this.order;
+                this.feedData.page = 1;
+                this.getFeed();
+            };
 
-                } else {
-                    ajax({
-                        method : "get",
-                        url : `/api/author/${user_id}/pets`
-                    }).then(( response ) => {
-                        if ( response.data.pets ) {
+            this.changePeriod = () => {
+                this.feedData.period = this.period;
+                this.getFeed();
+            };
+
+            this.changeGender = () => {
+                this.feedData.gender = this.gender;
+                this.getFeed();
+            };
+
+            this.changeType = () => {
+                this.feedData.type = this.type;
+                this.getFeed();
+            };
+
+            this.prevPage = () => {
+                this.feedData.page = this.page - 1;
+                this.getFeed();
+            };
+
+            this.nextPage = () => {
+                this.feedData.page = this.page + 1;
+                this.getFeed();
+            };
+
+            this.getFeed = ( data = this.feedData ) => {
+                // console.log(this.feedData);
+                this.inProgress = true;
+                pets.getFeed(data)
+                    .then(( response ) => {
+                        if ( response.data.success && response.data.pets ) {
                             this.pets = response.data.pets;
+                            this.next = response.data.next;
+                            this.prev = response.data.prev;
+                            this.total = response.data.total;
+                            this.page = response.data.current;
                         }
-                    }).catch(( err ) => {
-                        console.log(err);
-                    });
-                }
+                        this.inProgress = false;
+                    })
+                    .catch(( err ) => {
+                            console.log(err);
+                            this.inProgress = false;
+                        }
+                    );
             };
 
-            this.getPets(this.id);
-
-            this.loadMore = ( number = this.number ) => {
-                this.limit += number;
-                $scope.$apply();
-            };
+            this.getFeed();
         }
     ]);
 
-    module.controller('petsFeedFilterCtrl', [
-        "$filter",
-        function ( $filter ) {
+    module.controller('petsSearchCtrl', [
+        "pets",
+        function ( pets ) {
+            this.results = [];
 
-            this.defaults = {
-                gender : "",
-                type : "",
-            };
-
-            this.checkGeneral = () => {
-                this.fields.title = this.fields.general;
-            };
-
-            this.fieldChange = ( field ) => {
-                if ( field !== "type" && field !== "gender" && this.fields[ field ] == "" ) {
-                    this.fields[ field ] = undefined;
+            this.change = () => {
+                if ( this.value && this.value.length > 2 ) {
+                    this.find(this.value);
+                } else {
+                    this.results = [];
                 }
             };
 
-            this.toggleSearch = () => {
-                this.extended = !this.extended;
-                this.fields = this.defaults;
-            }
-
+            this.find = ( value ) => {
+                pets.search({q : value})
+                    .then(( response ) => {
+                        console.log(response.data);
+                        if ( response.data.success ) {
+                            this.results = response.data.results;
+                        }
+                    })
+                    .catch(( error ) => {
+                        console.log(error);
+                    });
+            };
         }
     ]);
 }
