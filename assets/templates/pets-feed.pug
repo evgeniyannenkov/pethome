@@ -7,7 +7,7 @@ include ../../views/mixins/buttons
 
         .section-filter__inner
 
-            search.filter.section-filter__filter
+            search.section-filter__search
 
             .sort.section-filter__sort
                 .sort__item
@@ -27,6 +27,13 @@ include ../../views/mixins/buttons
                             "30" : "Last month"
                         }
                     }, true)(ng-model = "feed.period" ng-change="feed.changePeriod()")
+                .sort__item
+                    +select("Location", {
+                        "location" : {
+                            "kyiv" : "Kyiv",
+                            "chernihiv" : "Chernihiv"
+                        }
+                    }, true)
                 .sort__item
                     +select("Gender", {
                         "gender" : {

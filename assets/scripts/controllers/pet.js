@@ -10,7 +10,7 @@ function petControllersInit ( module ) {
 
             this.showActions = false;
 
-            pets.get({ id : this.id })
+            pets.get({id : this.id})
                 .then(( response ) => {
                     if ( response.data.success && response.data.pet ) {
                         this.fields = response.data.pet;
@@ -19,7 +19,7 @@ function petControllersInit ( module ) {
                         }
                         current_pet = angular.copy(this.fields);
 
-                        author.get({ id : this.fields.author })
+                        author.get({id : this.fields.author})
                               .then(( response ) => {
                                   if ( response.data.success ) {
                                       this.author = response.data.author;
@@ -35,7 +35,7 @@ function petControllersInit ( module ) {
 
             this.save = ( data = this.fields ) => {
                 return new Promise(( resolve, reject ) => {
-                    pets.update({ id : data._id, data })
+                    pets.update({id : data._id, data})
                         .then(( response ) => {
                             if ( response.data.success && response.data.newPet ) {
                                 notify.inform({
@@ -90,7 +90,7 @@ function petControllersInit ( module ) {
             };
 
             this.review = () => {
-                pets.review({ id : this.id })
+                pets.review({id : this.id})
                     .then(( response ) => {
                         if ( response.data.success ) {
                             this.fields.reviewed = true;
@@ -117,7 +117,7 @@ function petControllersInit ( module ) {
             };
 
             this.create = () => {
-                pets.create({ data : this.pet })
+                pets.create({data : this.pet})
                     .then(( response ) => {
                         if ( response.data.success ) {
                             notify.inform({
@@ -196,7 +196,7 @@ function petControllersInit ( module ) {
         "$scope", "pets", "notify", "$timeout",
         function ( $scope, pets, notify, $timeout ) {
             this.remove = ( id ) => {
-                pets.remove({ id })
+                pets.remove({id})
                     .then(( response ) => {
                         if ( response.data.success && response.data.redirect ) {
                             notify.inform({
@@ -319,14 +319,16 @@ function petControllersInit ( module ) {
             this.change = () => {
                 if ( this.value && this.value.length > 2 ) {
                     this.find(this.value);
+                } else {
+                    this.results = [];
                 }
             };
 
             this.find = ( value ) => {
-                pets.search({ q : value })
+                pets.search({q : value})
                     .then(( response ) => {
                         console.log(response.data);
-                        if(response.data.success){
+                        if ( response.data.success ) {
                             this.results = response.data.results;
                         }
                     })

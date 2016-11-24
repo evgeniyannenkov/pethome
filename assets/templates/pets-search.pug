@@ -1,7 +1,9 @@
-.filter__search
-    .filter__search-field
+.search
+    .search__field
         i.icon-search
         input(ng-model = "search.value" ng-change="search.change();" placeholder="{{'Search' | translate}}")
-    .search__results
-        .search__item(ng-repeat="result in search.results")
-            a(href="/pet/{{result._id}}") {{result.title}}
+    .search__results(ng-class="{active: search.results.length}")
+        a.search__item(ng-repeat="result in search.results" href="/pet/{{result._id}}")
+            .search__item-icon(style="background-size: {{result.mainImage ? 'cover' : '80%'}};background-image: url({{result.mainImage || '/assets/images/bg/pet-bg-' + result.type + '.svg'}})")
+            .search__item-title {{result.title}}
+            .search__item-name {{result.name}}
