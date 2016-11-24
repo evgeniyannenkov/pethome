@@ -6,7 +6,7 @@ function apiGenServicesInit ( module ) {
         function ( ajax ) {
 
             class Api {
-                constructor (settings) {
+                constructor ( settings ) {
                     this.options = {
                         api_base : "",
                         url : ""
@@ -22,11 +22,12 @@ function apiGenServicesInit ( module ) {
                     call_options.url = call_options.url || this.options.url;
 
                     let requestData = {
-                        method,
-                        url : `${this.options.api_base}${call_options.url}`
+                        method
                     };
 
                     return ( params ) => {
+
+                        requestData.url = `${this.options.api_base}${call_options.url}`;
 
                         for ( let param in params ) {
                             if ( params.hasOwnProperty(param) ) {
