@@ -233,6 +233,8 @@ function petControllersInit ( module ) {
         "$http", "pets", "author",
         function ( ajax, pets, author ) {
 
+            let value;
+
             this.order = "desc";
             this.period = "";
             this.gender = "";
@@ -277,17 +279,37 @@ function petControllersInit ( module ) {
             };
 
             this.prevPage = () => {
-                this.feedData.page = this.page - 1;
-                this.getFeed();
+                if ( this.prev ) {
+                    this.feedData.page = this.page - 1;
+                    this.getFeed();
+                }
             };
 
             this.nextPage = () => {
-                this.feedData.page = this.page + 1;
-                this.getFeed();
+                value = parseInt(this.page);
+                if ( this.next ) {
+                    this.feedData.page = this.page + 1;
+                    this.getFeed();
+                }
+            };
+
+            this.goTo = () => {
+                value = parseInt(this.page);
+                if ( value && value <= parseInt(this.last) ) {
+                    this.feedData.page = this.page;
+                    this.getFeed();
+                }
+            };
+
+            this.setDefaultValue = () => {
+                value = parseInt(this.page);
+                if ( !value || value > parseInt(this.last) ) {
+                    this.page = 1;
+                }
             };
 
             this.getFeed = ( data = this.feedData ) => {
-                // console.log(this.feedData);
+                //console.log(this.feedData);
                 this.inProgress = true;
                 pets.getFeed(data)
                     .then(( response ) => {
@@ -297,6 +319,7 @@ function petControllersInit ( module ) {
                             this.prev = response.data.prev;
                             this.total = response.data.total;
                             this.page = response.data.current;
+                            this.last = response.data.last;
                         }
                         this.inProgress = false;
                     })

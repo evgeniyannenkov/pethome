@@ -61,7 +61,7 @@ include ../../views/mixins/buttons
     page-separator(ng-if="!feed.total") {{'no adverts were found' | translate}}
     page-separator(ng-if="feed.total") {{'total - ' | translate : 'all'}} {{feed.total}}
 
-    feed-pagination
+    pagination
 
     .pets-feed(ng-if="!feed.customFilter")
         pet.pets-feed__item.pet(ng-repeat="pet in feed.pets" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="feed.allAllowed")

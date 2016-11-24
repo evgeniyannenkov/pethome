@@ -1,0 +1,12 @@
+include ../../views/mixins/buttons
+
+.pagination
+    button(class="pagination__btn button--blue button--standard_hover" ng-click="pagination.feed.prevPage();" ng-class="{disabled: !pagination.feed.prev}")
+        i.icon-arrow--left
+    .pagination__inner
+        span Page
+        input.pagination__page(select-on-click placeholder="{{pagination.feed.page}}" ng-model="pagination.feed.page" ng-change="pagination.feed.goTo();" ng-blur="pagination.feed.setDefaultValue();")
+        span from {{pagination.feed.last}}
+    button(class="pagination__btn button--blue button--standard_hover" ng-click="pagination.feed.nextPage();" ng-class="{disabled: !pagination.feed.next}")
+        i.icon-arrow--right
+    //span(ng-show="pagination.feed.inProgress") In Progress
