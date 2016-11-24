@@ -21,7 +21,7 @@ $filterHeight : 37px;
   visibility : hidden;
   overflow   : hidden;
   background : white;
-  z-index    : 10;
+  z-index    : 6;
   transition : height 0.3s;
   &.active {
     visibility : visible;
