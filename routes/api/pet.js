@@ -13,11 +13,6 @@ router.get("/feed", ( req, res, next ) => {
     let sort = req.query.sort || 'desc';
     let period = req.query.period;
     let user = req.query.user;
-    let currentTime = Date.now();
-
-    console.log(typeof  limit);
-
-    const time = 24 * 60 * 60 * 1000;
 
     let prevPage,
         nextPage,
@@ -27,19 +22,17 @@ router.get("/feed", ( req, res, next ) => {
     limit = limit > 0 ? limit : 20;
     page = page > 0 ? page : 1;
 
-
     if ( user && user != "undefined" ) {
         findData.author = user;
     }
 
     if ( period ) {
         period = parseInt(period);
-        findData.publicationDate = { "$gte" : currentTime - period * time, "$lt" : currentTime }
+        findData.publicationDate = {"$gte" : Date.now() - period * 24 * 60 * 60 * 1000}
     }
 
-    console.log(findData);
     Pet.find(findData)
-       .sort({ publicationDate : sort })
+       .sort({publicationDate : sort})
        .skip(page * limit - limit)
        .limit(limit)
        .then(( pets ) => {
@@ -88,7 +81,7 @@ router.get("/feed", ( req, res, next ) => {
 router.get("/search", ( req, res, next ) => {
     let title = req.query.title;
 
-    Pet.find({ "title" : { "$regex" : title, "$options" : "i" } })
+    Pet.find({"title" : {"$regex" : title, "$options" : "i"}})
        .then(( pets ) => {
            res.json({
                pets,
@@ -123,7 +116,7 @@ router.get("/:id", ( req, res, next ) => {
     const _id = req.params.id;
     Pet.findById(_id)
        .then(( pet ) => {
-           res.json({ pet, success : true });
+           res.json({pet, success : true});
        })
        .catch(( error ) => {
            res.json({
@@ -141,11 +134,11 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
 
     if ( newPet._id && newPet._id == _id && (req.user._id == newPet.author || req.user.is_admin) ) {
 
-        Pet.findOne({ _id, author : newPet.author })
+        Pet.findOne({_id, author : newPet.author})
            .then(( pet ) => {
                if ( pet ) {
                    for ( let i = 0; i < pet.images.length; i++ ) {
-                       image = pet.images[ i ];
+                       image = pet.images[i];
                        if ( newPet.images.indexOf(image) === -1 ) {
                            uploader.deleteFile(image)
                                    .then(( response ) => {
@@ -156,16 +149,16 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
                                    });
                            newPet.mainImage = newPet.mainImage == image ? "" : newPet.mainImage;
 
-                           newPet.mainImage = i == pet.images.length - 1 ? newPet.images[ 0 ] || "" : newPet.mainImage;
+                           newPet.mainImage = i == pet.images.length - 1 ? newPet.images[0] || "" : newPet.mainImage;
 
                        } else if ( !newPet.mainImage ) {
                            newPet.mainImage = image;
                        }
                    }
                    newPet.reviewed = false;
-                   Pet.findOneAndUpdate({ _id }, newPet, { new : true })
+                   Pet.findOneAndUpdate({_id}, newPet, {new : true})
                       .then(( newPet ) => {
-                          res.json({ newPet, success : true, message : "Update Pet: saved" });
+                          res.json({newPet, success : true, message : "Update Pet: saved"});
                       })
                       .catch(( err ) => {
                           res.json({
@@ -198,10 +191,10 @@ router.put("/:id", response.ifLoggedOut(), ( req, res, next ) => {
 router.put("/:id/review", response.ifNotAdmin(), ( req, res, next ) => {
     const _id = req.params.id;
 
-    Pet.findByIdAndUpdate(_id, { reviewed : true }, { new : true })
+    Pet.findByIdAndUpdate(_id, {reviewed : true}, {new : true})
        .then(( pet ) => {
            if ( pet ) {
-               res.json({ pet, success : true, message : "[[Reviewed]]." });
+               res.json({pet, success : true, message : "[[Reviewed]]."});
            } else {
                res.json({
                    message : "Review Pet: not found",
@@ -221,12 +214,12 @@ router.post('/', response.ifLoggedOut(), ( req, res, next ) => {
 
     if ( !req.user.blocked ) {
 
-        pets.create({ userId : req.user._id, data : req.body })
+        pets.create({userId : req.user._id, data : req.body})
             .then(( response ) => {
                 res.json(response);
             })
             .catch(( error ) => {
-                res.json({ success : false, message : error.message });
+                res.json({success : false, message : error.message});
             });
 
     } else {
@@ -242,7 +235,7 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
     const _id = req.params.id;
 
     let image;
-    let searchData = { _id };
+    let searchData = {_id};
 
     if ( !req.user.is_admin ) {
         searchData.author = req.user._id;
@@ -252,7 +245,7 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
        .then(( pet ) => {
            if ( pet ) {
                for ( let i = 0; i < pet.images.length; i++ ) {
-                   image = pet.images[ i ];
+                   image = pet.images[i];
                    uploader.deleteFile(image)
                            .then(( response ) => {
                                console.log(response.data.success);
@@ -261,9 +254,9 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
                                console.log(err);
                            });
                }
-               res.json({ success : true, pet, redirect : "/profile" });
+               res.json({success : true, pet, redirect : "/profile"});
            } else {
-               res.json({ success : false, message : "No pet was removed." });
+               res.json({success : false, message : "No pet was removed."});
            }
        })
        .catch(( error ) => {
@@ -279,7 +272,7 @@ router.post("/:id/images", response.ifLoggedOut(), uploader.imagesUpload.single(
     const uploads = "uploads/";
     const src = uploads + req.file.filename;
 
-    Pet.findOne({ _id })
+    Pet.findOne({_id})
        .then(( pet ) => {
            if ( pet ) {
                pet.images.push(src);
@@ -288,7 +281,7 @@ router.post("/:id/images", response.ifLoggedOut(), uploader.imagesUpload.single(
                }
                pet.save()
                   .then(( newPet ) => {
-                      res.json({ newPet, success : true });
+                      res.json({newPet, success : true});
                   })
                   .catch(( err ) => {
                       res.json({
