@@ -17,17 +17,15 @@ function petComponentsInit ( module, constants ) {
                 controllerAs : "feed",
                 bindToController : true
             };
-        } ]);
+        }
+    ]);
 
-    module.component("feedPagination", {
+    module.component("pagination", {
         require : {
             feed : "^^?feed"
         },
-        template : `<button ng-click="pagination.feed.prevPage();" ng-if="pagination.feed.prev">Previous Page</button>
-                    <span>{{pagination.feed.page}}</span>
-                    <button ng-click="pagination.feed.nextPage();" ng-if="pagination.feed.next">Next Page</button>
-                    <span ng-show="pagination.feed.inProgress">In Progress</span>
-                    `,
+        templateUrl : `${constants.templatesFolder}/pagination.html`,
+
         controllerAs : "pagination"
     });
 
