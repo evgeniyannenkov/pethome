@@ -27,6 +27,14 @@ include ../../views/mixins/buttons
                             "30" : "Last month"
                         }
                     }, true)(ng-model = "feed.period" ng-change="feed.changePeriod()")
+                .sort__item
+                    +select("Gender", {
+                        "gender" : {
+                            "" : "Both",
+                            "male" : "Male",
+                            "female" : "Female"
+                        }
+                    }, true)(ng-change = "feed.changeGender()" ng-model = "feed.gender")
 
 .main-content__container
     page-separator(ng-if="!feed.total") {{'no adverts were found' | translate}}

@@ -10,7 +10,7 @@ function petControllersInit ( module ) {
 
             this.showActions = false;
 
-            pets.get({ id : this.id })
+            pets.get({id : this.id})
                 .then(( response ) => {
                     if ( response.data.success && response.data.pet ) {
                         this.fields = response.data.pet;
@@ -19,7 +19,7 @@ function petControllersInit ( module ) {
                         }
                         current_pet = angular.copy(this.fields);
 
-                        author.get({ id : this.fields.author })
+                        author.get({id : this.fields.author})
                               .then(( response ) => {
                                   if ( response.data.success ) {
                                       this.author = response.data.author;
@@ -35,7 +35,7 @@ function petControllersInit ( module ) {
 
             this.save = ( data = this.fields ) => {
                 return new Promise(( resolve, reject ) => {
-                    pets.update({ id : data._id, data })
+                    pets.update({id : data._id, data})
                         .then(( response ) => {
                             if ( response.data.success && response.data.newPet ) {
                                 notify.inform({
@@ -90,7 +90,7 @@ function petControllersInit ( module ) {
             };
 
             this.review = () => {
-                pets.review({ id : this.id })
+                pets.review({id : this.id})
                     .then(( response ) => {
                         if ( response.data.success ) {
                             this.fields.reviewed = true;
@@ -117,7 +117,7 @@ function petControllersInit ( module ) {
             };
 
             this.create = () => {
-                pets.create({ data : this.pet })
+                pets.create({data : this.pet})
                     .then(( response ) => {
                         if ( response.data.success ) {
                             notify.inform({
@@ -196,7 +196,7 @@ function petControllersInit ( module ) {
         "$scope", "pets", "notify", "$timeout",
         function ( $scope, pets, notify, $timeout ) {
             this.remove = ( id ) => {
-                pets.remove({ id })
+                pets.remove({id})
                     .then(( response ) => {
                         if ( response.data.success && response.data.redirect ) {
                             notify.inform({
@@ -235,15 +235,17 @@ function petControllersInit ( module ) {
 
             this.order = "desc";
             this.period = "";
+            this.gender = "";
             this.perPage = 10;
             this.page = 1;
 
             this.feedData = {
                 sort : this.order,
-                period: this.period,
+                period : this.period,
                 limit : this.perPage,
                 page : this.page,
-                user : this.id
+                user : this.id,
+                gender : this.gender
             };
 
             author.getAll()
@@ -261,6 +263,12 @@ function petControllersInit ( module ) {
                 this.feedData.period = this.period;
                 this.getFeed();
             };
+
+            this.changeGender = () => {
+                this.feedData.gender = this.gender;
+                this.getFeed();
+            };
+
             this.prevPage = () => {
                 this.feedData.page = this.page - 1;
                 this.getFeed();
@@ -309,8 +317,8 @@ function petControllersInit ( module ) {
             };
 
             this.change = ( field ) => {
-                if ( this.fields[ field ] && this.fields[ field ].length > 2 ) {
-                    this.feed.find({ [field] : this.fields[ field ] });
+                if ( this.fields[field] && this.fields[field].length > 2 ) {
+                    this.feed.find({[field] : this.fields[field]});
                 }
             };
 
@@ -319,8 +327,8 @@ function petControllersInit ( module ) {
             };
 
             this.fieldChange = ( field ) => {
-                if ( field !== "type" && field !== "gender" && this.fields[ field ] == "" ) {
-                    this.fields[ field ] = undefined;
+                if ( field !== "type" && field !== "gender" && this.fields[field] == "" ) {
+                    this.fields[field] = undefined;
                 }
             };
 

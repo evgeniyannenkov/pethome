@@ -28,12 +28,4 @@ include ../../views/mixins/buttons
             }
         })(ng-change = "filter.fieldChange('type')" ng-model = "filter.fields.type")
     .filter__item
-        +select("Gender", {
-            "gender" : {
-                "" : "Both",
-                "male" : "Male",
-                "female" : "Female"
-            }
-        }, true)(ng-change = "filter.fieldChange('gender')" ng-model = "filter.fields.gender")
-    .filter__item
         +input("Breed")(ng-change = "filter.fieldChange('breed')" ng-model = "filter.fields.breed")

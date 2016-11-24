@@ -12,6 +12,7 @@ router.get("/feed", ( req, res, next ) => {
     let page = req.query.page ? parseInt(req.query.page) : 1;
     let sort = req.query.sort || 'desc';
     let period = req.query.period;
+    let gender = req.query.gender;
     let user = req.query.user;
 
     let prevPage,
@@ -29,6 +30,10 @@ router.get("/feed", ( req, res, next ) => {
     if ( period ) {
         period = parseInt(period);
         findData.publicationDate = {"$gte" : Date.now() - period * 24 * 60 * 60 * 1000}
+    }
+
+    if ( gender ) {
+        findData.gender = gender;
     }
 
     Pet.find(findData)
