@@ -39,7 +39,7 @@ router.get("/feed", ( req, res, next ) => {
            Pet.count(findData)
               .then(( count ) => {
 
-                  lastPage = Math.round(count / limit);
+                  lastPage = Math.round(count / limit) || 1;
 
                   nextPage = pets.length && pets.length == limit && page < lastPage ? `/feed?limit=${limit}&page=${page + 1}` : false;
                   if ( page > lastPage ) {
