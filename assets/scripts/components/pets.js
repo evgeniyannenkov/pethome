@@ -9,7 +9,6 @@ function petComponentsInit ( module, constants ) {
                 templateUrl : `${constants.templatesFolder}/pets-feed.html`,
                 scope : {
                     id : "@authorId",
-                    filter_enabled : "=enableFilter",
                     hideFields : "=",
                     allAllowed : "=",
                     customFilter : "="
@@ -32,16 +31,10 @@ function petComponentsInit ( module, constants ) {
         controllerAs : "pagination"
     });
 
-    module.component('filter', {
-        require : {
-            feed : "^^?feed"
-        },
-        templateUrl : `${constants.templatesFolder}/pets-filter.html`,
-        bindings : {
-            fields : "=feedFilter"
-        },
-        controller : "petsFeedFilterCtrl",
-        controllerAs : "filter"
+    module.component('search', {
+        templateUrl : `${constants.templatesFolder}/pets-search.html`,
+        controller : "petsSearchCtrl",
+        controllerAs : "search"
     });
 
     module.component('pet', {

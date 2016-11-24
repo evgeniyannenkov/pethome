@@ -11,7 +11,7 @@
 
 @media screen and (min-width : 400px) {
   .sort {
-    flex-flow       : row nowrap;
+    flex-flow       : row wrap;
     justify-content : space-between;
   }
 
@@ -33,6 +33,13 @@
     &:last-child {
       margin-right : 0;
     }
+  }
+}
+
+@media screen and (min-width : 600px) {
+
+  .sort__item {
+    width     : 31%;
   }
 }
 

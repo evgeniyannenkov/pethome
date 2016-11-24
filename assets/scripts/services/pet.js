@@ -15,10 +15,10 @@ function petServicesInit ( module ) {
                             url : "/:id"
                         },
                         getFeed : {
-                            url : "/feed?limit=:limit&page=:page"
+                            url : "/feed?limit=:limit&page=:page&user=:user&sort=:sort&period=:period&gender=:gender&type=:type"
                         },
                         search : {
-                            url : "/search?title=:title"
+                            url : "/search?q=:q"
                         },
                         getAll : {},
                         remove : {

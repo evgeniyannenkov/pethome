@@ -8,21 +8,48 @@ const uploader = require("../../config/uploader");
 const pets = require("../../controllers/pet");
 
 router.get("/feed", ( req, res, next ) => {
-    let limit = +req.query.limit && +req.query.limit > 0 ? +req.query.limit : 20;
-    let page = +req.query.page && +req.query.page > 0 ? +req.query.page : 1;
+    let limit = req.query.limit ? parseInt(req.query.limit) : 20;
+    let page = req.query.page ? parseInt(req.query.page) : 1;
+    let sort = req.query.sort || 'desc';
+    let period = req.query.period;
+    let gender = req.query.gender;
+    let type = req.query.type;
+    let user = req.query.user;
 
     let prevPage,
         nextPage,
-        lastPage;
+        lastPage,
+        findData = {};
 
-    Pet.find({})
+    limit = limit > 0 ? limit : 20;
+    page = page > 0 ? page : 1;
+
+    if ( user && user != "undefined" ) {
+        findData.author = user;
+    }
+
+    if ( period ) {
+        period = parseInt(period);
+        findData.publicationDate = { "$gte" : Date.now() - period * 24 * 60 * 60 * 1000 }
+    }
+
+    if ( gender ) {
+        findData.gender = gender;
+    }
+
+    if ( type ) {
+        findData.type = type;
+    }
+
+    Pet.find(findData)
+       .sort({ publicationDate : sort })
        .skip(page * limit - limit)
        .limit(limit)
        .then(( pets ) => {
-           Pet.count({})
+           Pet.count(findData)
               .then(( count ) => {
 
-                  lastPage = Math.round(count / limit);
+                  lastPage = Math.round(count / limit) || 1;
 
                   nextPage = pets.length && pets.length == limit && page < lastPage ? `/feed?limit=${limit}&page=${page + 1}` : false;
                   if ( page > lastPage ) {
@@ -34,6 +61,7 @@ router.get("/feed", ( req, res, next ) => {
                   res.json({
                       pets,
                       success : true,
+                      last : lastPage,
                       total : count,
                       current : page,
                       next : nextPage ? {
@@ -61,21 +89,26 @@ router.get("/feed", ( req, res, next ) => {
 });
 
 router.get("/search", ( req, res, next ) => {
-    let title = req.query.title;
+    let q = req.query.q;
 
-    Pet.find({ "title" : { "$regex" : title, "$options" : "i" } })
-       .then(( pets ) => {
-           res.json({
-               pets,
-               success : true
-           });
-       })
-       .catch(( error ) => {
-           res.json({
-               success : false,
-               message : error.message
-           });
-       });
+    Pet.find()
+       .sort({ publicationDate : -1 })
+       .limit(100)
+       .or([
+           { "title" : { "$regex" : q, "$options" : "i" } },
+           { "name" : { "$regex" : q, "$options" : "i" } },
+           { "info" : { "$regex" : q, "$options" : "i" } }
+       ]).then(( results ) => {
+        res.json({
+            results,
+            success : true
+        });
+    }).catch(( error ) => {
+        res.json({
+            success : false,
+            message : error.message
+        });
+    });
 });
 
 router.get("/", ( req, res, next ) => {
