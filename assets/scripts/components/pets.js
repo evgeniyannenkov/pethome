@@ -16,18 +16,7 @@ function petComponentsInit ( module, constants ) {
                 },
                 controller : "petsFeedCtrl",
                 controllerAs : "feed",
-                bindToController : true,
-                link : ( scope, element, atts, feedCtrl ) => {
-                    let _window = angular.element($window);
-
-                    function onScroll ( event ) {
-                        if ( ($window.innerHeight + $window.pageYOffset) >= element.prop("offsetHeight") + element.prop("offsetTop") ) {
-                            feedCtrl.loadMore();
-                        }
-                    }
-
-                    _window.on("scroll", onScroll);
-                }
+                bindToController : true
             };
         } ]);
 
@@ -44,6 +33,9 @@ function petComponentsInit ( module, constants ) {
     });
 
     module.component('filter', {
+        require : {
+            feed : "^^?feed"
+        },
         templateUrl : `${constants.templatesFolder}/pets-filter.html`,
         bindings : {
             fields : "=feedFilter"

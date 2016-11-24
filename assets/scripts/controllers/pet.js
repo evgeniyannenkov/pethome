@@ -245,6 +245,7 @@ function petControllersInit ( module ) {
             this.prevPage = () => {
                 this.getFeed({ limit : this.perPage, page : this.page - 1 });
             };
+
             this.nextPage = () => {
                 this.getFeed({ limit : this.perPage, page : this.page + 1 });
             };
@@ -269,6 +270,10 @@ function petControllersInit ( module ) {
                     );
             };
 
+            this.find = ( data ) => {
+                console.log(data);
+            };
+
             this.getPets = ( user_id ) => {
                 if ( !user_id ) {
                     this.getFeed();
@@ -287,21 +292,21 @@ function petControllersInit ( module ) {
             };
 
             this.getPets(this.id);
-
-            this.loadMore = ( number = this.number ) => {
-                this.limit += number;
-                $scope.$apply();
-            };
         }
     ]);
 
     module.controller('petsFeedFilterCtrl', [
-        "$filter",
-        function ( $filter ) {
+        function () {
 
             this.defaults = {
                 gender : "",
                 type : "",
+            };
+
+            this.change = ( field ) => {
+                if ( this.fields[ field ] && this.fields[ field ].length > 2 ) {
+                    this.feed.find({ [field] : this.fields[ field ] });
+                }
             };
 
             this.checkGeneral = () => {

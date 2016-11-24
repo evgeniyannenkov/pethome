@@ -60,6 +60,24 @@ router.get("/feed", ( req, res, next ) => {
        });
 });
 
+router.get("/search", ( req, res, next ) => {
+    let title = req.query.title;
+
+    Pet.find({ "title" : { "$regex" : title, "$options" : "i" } })
+       .then(( pets ) => {
+           res.json({
+               pets,
+               success : true
+           });
+       })
+       .catch(( error ) => {
+           res.json({
+               success : false,
+               message : error.message
+           });
+       });
+});
+
 router.get("/", ( req, res, next ) => {
     Pet.find({})
        .then(( pets ) => {
