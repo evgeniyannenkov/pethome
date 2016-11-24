@@ -1,0 +1,42 @@
+@import "../../common/mixins";
+
+pagination {
+  display : block;
+}
+
+.pagination {
+  width           : 100%;
+  display         : flex;
+  justify-content : flex-end;
+  margin          : 25px 0 25px;
+}
+
+.pagination__inner {
+  margin    : 0 10px;
+  display   : inline-block;
+  color     : $gray;
+  @include roboto-condensed;
+  font-size : 0.8em;
+}
+
+.pagination__btn {
+  @include button(35px, 35px);
+  min-width : 35px;
+  &.disabled {
+    background   : $lightGray !important;
+    border-color : $lightGray !important;
+    &:hover {
+      background   : $lightGray !important;
+      border-color : $lightGray !important;
+    }
+  }
+}
+
+.pagination__page {
+  @include input;
+  width      : 35px;
+  height     : 35px;
+  text-align : center;
+  padding    : 5px;
+  margin     : 0 10px;
+}
