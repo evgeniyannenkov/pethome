@@ -1,0 +1,7 @@
+.filter__search
+    .filter__search-field
+        i.icon-search
+        input(ng-model = "search.value" ng-change="search.change();" placeholder="{{'Search' | translate}}")
+    .search__results
+        .search__item(ng-repeat="result in search.results")
+            a(href="/pet/{{result._id}}") {{result.title}}
