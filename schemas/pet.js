@@ -18,7 +18,7 @@ const petSchema = new mongoose.Schema({
     "gender" : {
         type : String,
         required : [true, 'pet gender required'],
-        default : "boy"
+        default : "male"
     },
     "age" : {
         type : String,

@@ -8,18 +8,36 @@ const uploader = require("../../config/uploader");
 const pets = require("../../controllers/pet");
 
 router.get("/feed", ( req, res, next ) => {
-    let limit = +req.query.limit && +req.query.limit > 0 ? +req.query.limit : 20;
-    let page = +req.query.page && +req.query.page > 0 ? +req.query.page : 1;
+    let limit = req.query.limit ? parseInt(req.query.limit) : 20;
+    let page = req.query.page ? parseInt(req.query.page) : 1;
     let sort = req.query.sort || 'desc';
+    let period = req.query.period;
     let user = req.query.user;
+    let currentTime = Date.now();
+
+    console.log(typeof  limit);
+
+    const time = 24 * 60 * 60 * 1000;
 
     let prevPage,
         nextPage,
         lastPage,
-        findData;
+        findData = {};
 
-    findData = user && user != 'undefined' ? { author : user } : {};
+    limit = limit > 0 ? limit : 20;
+    page = page > 0 ? page : 1;
 
+
+    if ( user && user != "undefined" ) {
+        findData.author = user;
+    }
+
+    if ( period ) {
+        period = parseInt(period);
+        findData.publicationDate = { "$gte" : currentTime - period * time, "$lt" : currentTime }
+    }
+
+    console.log(findData);
     Pet.find(findData)
        .sort({ publicationDate : sort })
        .skip(page * limit - limit)

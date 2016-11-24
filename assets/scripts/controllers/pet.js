@@ -233,25 +233,46 @@ function petControllersInit ( module ) {
         "$http", "pets", "author", "$scope",
         function ( ajax, pets, author, $scope ) {
 
-            this.order = "-publicationDate";
+            this.order = "desc";
+            this.period = "";
             this.perPage = 10;
             this.page = 1;
+
+            this.feedData = {
+                sort : this.order,
+                period: this.period,
+                limit : this.perPage,
+                page : this.page,
+                user : this.id
+            };
 
             author.getAll()
                   .then(( response ) => {
                       this.authors = response.data.authors;
                   });
 
+            this.changeOrder = () => {
+                this.feedData.sort = this.order;
+                this.feedData.page = 1;
+                this.getFeed();
+            };
+
+            this.changePeriod = () => {
+                this.feedData.period = this.period;
+                this.getFeed();
+            };
             this.prevPage = () => {
-                this.getFeed({ limit : this.perPage, page : this.page - 1, user : this.id });
+                this.feedData.page = this.page - 1;
+                this.getFeed();
             };
 
             this.nextPage = () => {
-                this.getFeed({ limit : this.perPage, page : this.page + 1, user : this.id });
+                this.feedData.page = this.page + 1;
+                this.getFeed();
             };
 
-            this.getFeed = ( data = { limit : this.perPage, page : this.page, user : this.id } ) => {
-                console.log(data);
+            this.getFeed = ( data = this.feedData ) => {
+                // console.log(this.feedData);
                 this.inProgress = true;
                 pets.getFeed(data)
                     .then(( response ) => {
