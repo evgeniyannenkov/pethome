@@ -13,6 +13,7 @@ router.get("/feed", ( req, res, next ) => {
     let sort = req.query.sort || 'desc';
     let period = req.query.period;
     let gender = req.query.gender;
+    let type = req.query.type;
     let user = req.query.user;
 
     let prevPage,
@@ -34,6 +35,10 @@ router.get("/feed", ( req, res, next ) => {
 
     if ( gender ) {
         findData.gender = gender;
+    }
+
+    if ( type ) {
+        findData.type = type;
     }
 
     Pet.find(findData)

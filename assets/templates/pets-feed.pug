@@ -35,6 +35,20 @@ include ../../views/mixins/buttons
                             "female" : "Female"
                         }
                     }, true)(ng-change = "feed.changeGender()" ng-model = "feed.gender")
+                .sort__item
+                    +select("Type", {
+                        "type" : {
+                            "" : "All",
+                            "dog" : "Dog",
+                            "cat" : "Cat",
+                            "bird" : "Bird",
+                            "rabbit" : "Rabbit",
+                            "fish" : "Fish",
+                            "ferret" : "Ferret",
+                            "guinea pig" : "Guinea pig",
+                            "hamster" : "Hamster"
+                        }
+                    })(ng-change = "feed.changeType()" ng-model = "feed.type")
 
 .main-content__container
     page-separator(ng-if="!feed.total") {{'no adverts were found' | translate}}

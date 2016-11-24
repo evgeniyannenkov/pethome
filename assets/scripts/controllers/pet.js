@@ -236,6 +236,7 @@ function petControllersInit ( module ) {
             this.order = "desc";
             this.period = "";
             this.gender = "";
+            this.type = "";
             this.perPage = 10;
             this.page = 1;
 
@@ -245,7 +246,8 @@ function petControllersInit ( module ) {
                 limit : this.perPage,
                 page : this.page,
                 user : this.id,
-                gender : this.gender
+                gender : this.gender,
+                type : this.type
             };
 
             author.getAll()
@@ -266,6 +268,11 @@ function petControllersInit ( module ) {
 
             this.changeGender = () => {
                 this.feedData.gender = this.gender;
+                this.getFeed();
+            };
+
+            this.changeType = () => {
+                this.feedData.type = this.type;
                 this.getFeed();
             };
 
