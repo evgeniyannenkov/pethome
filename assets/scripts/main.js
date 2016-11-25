@@ -64,7 +64,7 @@ const components = {
         headerControllersInit,
         parallaxComponentsInit,
         heroComponentsInit,
-        selectOnClickComponentInit
+        commonComponentsInit
     ]
 };
 
