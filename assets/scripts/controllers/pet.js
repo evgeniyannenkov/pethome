@@ -305,10 +305,12 @@ function petControllersInit ( module ) {
 
             this.goTo = () => {
                 value = parseInt(this.page);
-                if ( value && value <= parseInt(this.last) ) {
-                    this.feedData.page = this.page;
-                    this.getFeed();
+                if ( value && value <= this.last ) {
+                    this.feedData.page = value;
+                } else {
+                    this.feedData.page = this.last;
                 }
+                this.getFeed();
             };
 
             this.setDefaultValue = () => {
@@ -320,7 +322,6 @@ function petControllersInit ( module ) {
             };
 
             this.getFeed = ( data = this.feedData ) => {
-                //console.log(this.feedData);
                 this.inProgress = true;
                 pets.getFeed(data)
                     .then(( response ) => {
