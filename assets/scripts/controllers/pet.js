@@ -283,6 +283,7 @@ function petControllersInit ( module ) {
             };
 
             this.changeLimit = () => {
+                this.page = 1;
                 this.feedData.limit = this.perPage;
                 this.getFeed();
             };
@@ -367,6 +368,10 @@ function petControllersInit ( module ) {
                     .catch(( error ) => {
                         console.log(error);
                     });
+            };
+
+            this.reset = () => {
+                this.results = [];
             };
         }
     ]);
