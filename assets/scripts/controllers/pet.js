@@ -239,7 +239,7 @@ function petControllersInit ( module ) {
             this.period = "";
             this.gender = "";
             this.type = "";
-            this.perPage = 10;
+            this.perPage = "20";
             this.page = 1;
 
             this.feedData = {
@@ -278,6 +278,11 @@ function petControllersInit ( module ) {
                 this.getFeed();
             };
 
+            this.changeLimit = () => {
+                this.feedData.limit = this.perPage;
+                this.getFeed();
+            };
+
             this.prevPage = () => {
                 if ( this.prev ) {
                     this.feedData.page = this.page - 1;
@@ -305,6 +310,7 @@ function petControllersInit ( module ) {
                 value = parseInt(this.page);
                 if ( !value || value > parseInt(this.last) ) {
                     this.page = 1;
+                    this.getFeed();
                 }
             };
 
