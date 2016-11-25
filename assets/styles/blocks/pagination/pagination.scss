@@ -7,13 +7,14 @@ pagination {
 .pagination {
   width           : 100%;
   display         : flex;
-  justify-content : flex-end;
+  flex-flow       : row wrap;
+  justify-content : flex-start;
   align-items     : center;
   margin          : 25px 0 25px;
 }
 
 .pagination__filter {
-  margin-right : 50px;
+  width : 100%;
 }
 
 .pagination__filter-item {
@@ -57,4 +58,16 @@ pagination {
   text-align : center;
   padding    : 5px;
   margin     : 0 10px;
+}
+
+@media screen and(min-width : 500px) {
+  .pagination {
+    flex-flow       : row nowrap;
+    justify-content : flex-end;
+  }
+
+  .pagination__filter {
+    width        : auto;
+    margin-right : 50px;
+  }
 }
