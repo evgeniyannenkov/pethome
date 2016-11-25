@@ -8,7 +8,25 @@ pagination {
   width           : 100%;
   display         : flex;
   justify-content : flex-end;
+  align-items     : center;
   margin          : 25px 0 25px;
+}
+
+.pagination__filter {
+  margin-right : 50px;
+}
+
+.pagination__filter-item {
+  width        : 75px;
+  display      : inline-block;
+  margin-right : 10px;
+}
+
+.pagination__filter-count {
+  display   : inline-block;
+  color     : $gray;
+  @include roboto-condensed;
+  font-size : 0.8em;
 }
 
 .pagination__inner {
