@@ -2,7 +2,7 @@ include ../../views/mixins/formParts
 
 .pet-single__main-image.pet-single__main-image--mobile(background-block="/{{pet.fields.mainImage}}" classes="pet-single__main-image-inner" ng-if="pet.fields.mainImage")
 
-.pet-single__banner(background-block="/assets/images/bg/pet-bg-{{pet.fields.type}}.svg" classes="pet-single__banner-inner")
+.pet-single__banner(background-block="/assets/images/bg/pet-bg-{{pet.niceType(pet.fields.type)}}.svg" classes="pet-single__banner-inner")
     .pet-single__info
         h1.pet-single__title
             span {{pet.fields.title}}
