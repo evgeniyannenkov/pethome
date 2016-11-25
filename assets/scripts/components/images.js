@@ -11,11 +11,11 @@ function imagesComponentsInit ( module, constants ) {
                     bg = atts.backgroundImage;
                     bgSize = "cover";
                 } else if ( atts.type ) {
-                    bg = 'assets/images/bg/pet-bg-' + atts.type + '.svg';
-                    bgSize = "20%";
+                    bg = 'assets/images/bg/pet-bg-' + atts.type.toLocaleLowerCase().replace(" ", "-") + '.svg';
+                    bgSize = atts.bgSize || "20%";
                 } else {
                     bg = 'assets/images/bg/pet-bg-other.svg';
-                    bgSize = "20%";
+                    bgSize = atts.bgSize || "20%";
                 }
 
                 element.css({

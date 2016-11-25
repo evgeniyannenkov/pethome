@@ -97,9 +97,34 @@ $filterHeight : 37px;
   }
 }
 
+@media screen and (min-width : 700px) {
+  .search__results {
+    &.active {
+      max-height : 252px;
+    }
+  }
+}
+
 @media screen and (min-width : 850px) {
   .search {
     margin : 25px 0;
   }
 
+  .search__results {
+    &.active {
+      max-height : 352px;
+    }
+  }
+}
+
+@media screen and (min-width : 1400px) {
+  .search {
+    margin : 25px 0;
+  }
+
+  .search__results {
+    &.active {
+      max-height : 552px;
+    }
+  }
 }
