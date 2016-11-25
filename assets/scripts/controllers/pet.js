@@ -356,7 +356,6 @@ function petControllersInit ( module ) {
             this.find = ( value ) => {
                 pets.search({q : value})
                     .then(( response ) => {
-                        console.log(response.data);
                         if ( response.data.success ) {
                             this.results = response.data.results;
                         }
