@@ -3,8 +3,7 @@
 function petComponentsInit ( module, constants ) {
 
     module.directive('feed', [
-        "$window",
-        function ( $window ) {
+        function () {
             return {
                 templateUrl : `${constants.templatesFolder}/pets-feed.html`,
                 scope : {

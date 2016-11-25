@@ -59,6 +59,10 @@
     @include invertBgHover($blue);
   }
 
+  &.button--standard_hover {
+    @include standardBgHover($blueHover);
+  }
+
 }
 
 .button--red {

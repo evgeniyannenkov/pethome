@@ -1,12 +1,25 @@
 include ../../views/mixins/buttons
+include ../../views/mixins/formParts
 
 .pagination
+    .pagination__filter
+        .pagination__filter-item
+            +select("Display", {
+                "limit" : {
+                    "20" : "20",
+                    "40" : "40",
+                    "60" : "60",
+                    "100" : "100"
+                }
+            }, true)(ng-change = "pagination.feed.changeLimit();" ng-model = "pagination.feed.perPage")
+        .pagination__filter-count {{pagination.feed.perPage}} {{'from' | translate}} {{pagination.feed.total}}
+
     button(class="pagination__btn button--blue button--standard_hover" ng-click="pagination.feed.prevPage();" ng-class="{disabled: !pagination.feed.prev}")
         i.icon-arrow--left
     .pagination__inner
-        span Page
+        span {{'page' | translate}}
         input.pagination__page(select-on-click placeholder="{{pagination.feed.page}}" ng-model="pagination.feed.page" ng-change="pagination.feed.goTo();" ng-blur="pagination.feed.setDefaultValue();")
-        span from {{pagination.feed.last}}
+        span {{'from' | translate}} {{pagination.feed.last}}
     button(class="pagination__btn button--blue button--standard_hover" ng-click="pagination.feed.nextPage();" ng-class="{disabled: !pagination.feed.next}")
         i.icon-arrow--right
     //span(ng-show="pagination.feed.inProgress") In Progress
