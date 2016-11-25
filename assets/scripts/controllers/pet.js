@@ -106,7 +106,7 @@ function petControllersInit ( module ) {
             };
 
             this.niceType = ( type ) => {
-                return type.toLowerCase().replace(" ", "-");
+                return type ? type.toLowerCase().replace(" ", "-") : type;
             };
         }
     ]);
