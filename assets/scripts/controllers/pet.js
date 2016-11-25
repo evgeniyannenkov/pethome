@@ -368,6 +368,10 @@ function petControllersInit ( module ) {
                         console.log(error);
                     });
             };
+
+            this.reset = () => {
+                this.results = [];
+            };
         }
     ]);
 }
