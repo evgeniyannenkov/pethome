@@ -129,13 +129,7 @@ module.exports = () => {
                           }).then(( response ) => {
                               if ( response.success ) {
                                   done(null, response.author);
-                                  mailer.send(letter)
-                                        .then(( response ) => {
-                                            console.log(response);
-                                        })
-                                        .catch(( error ) => {
-                                            console.log(error);
-                                        });
+                                  mailer.send(letter);
                               } else {
                                   done(null, false, { message : response.message });
                               }
@@ -159,10 +153,22 @@ module.exports = () => {
             profileFields : [ 'email', 'name', 'photos' ]
         },
         ( accessToken, refreshToken, params, profile, done ) => {
+
             if ( !params.email ) {
                 done(null, false, { message : "VK Authentication: User denied access to email" });
             }
-            Author.findOne({ "contactInfo.email" : params.email })
+
+            const email = params.email;
+            const time = new Date().getTime();
+            const password = md5(email + time);
+            const letter = {
+                to : [ email ],
+                from : 'pethome@gmail.com',
+                subject : 'VK registration',
+                html : `<h4>Password ${password}</h4>`
+            };
+
+            Author.findOne({ "contactInfo.email" : email })
                   .then(( user ) => {
                       if ( user !== null ) {
                           if ( user.oauthID.vk && user.oauthID.vk == profile.id ) {
@@ -186,12 +192,13 @@ module.exports = () => {
                               oauthID : { vk : profile.id },
                               avatar : profile.photos[ 0 ].value || "",
                               name : profile.name.givenName + " " + profile.name.familyName || "Not specified",
-                              contactInfo : { email : params.email },
-                              password : "test",
-                              date : new Date().getTime()
+                              contactInfo : { email : email },
+                              password : password,
+                              date : time
                           }).then(( response ) => {
                               if ( response.success ) {
                                   done(null, response.author);
+                                  mailer.send(letter);
                               } else {
                                   done(null, false, { message : response.message });
                               }
