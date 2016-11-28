@@ -23,7 +23,6 @@ router.get('/vkontakte/callback', passport.authenticate('vkontakte', routesConfi
 
 //Registration Route
 router.post('/', passport.authenticate('local-register', routesConfig.passportMiddlewareFail), ( req, res, next ) => {
-    console.log(req.sessionID);
     res.json({
         message : "Registration: success",
         success : true
@@ -32,7 +31,6 @@ router.post('/', passport.authenticate('local-register', routesConfig.passportMi
 
 //Login Route
 router.post('/login', passport.authenticate('local-login', routesConfig.passportMiddlewareFail), ( req, res, next ) => {
-    console.log(req.sessionID);
     res.json({
         message : "Login: success",
         success : true,

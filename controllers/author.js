@@ -12,7 +12,7 @@ const create = ( data ) => {
                 data.password = hash;
                 new Author(data)
                     .save()
-                    .then(( author )=> {
+                    .then(( author ) => {
                         resolve({
                             success : true,
                             author

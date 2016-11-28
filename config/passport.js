@@ -7,6 +7,7 @@ const authors = require("../controllers/author");
 const config = require('./oauth');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const VkStrategy = require('passport-vkontakte').Strategy;
+const mailer = require("../config/mailer");
 
 module.exports = () => {
 
@@ -27,19 +28,19 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            authors.create({"contactInfo.email" : email, password, date : new Date().getTime()})
+            authors.create({ "contactInfo.email" : email, password, date : new Date().getTime() })
                    .then(( response ) => {
                        if ( response.success ) {
                            done(null, response.author);
                        } else {
-                           done(null, false, {message : response.message});
+                           done(null, false, { message : response.message });
                        }
                    })
                    .catch(( error ) => {
                        if ( error.message.indexOf(email) == -1 && error.message.indexOf("duplicate") == -1 ) {
                            done(error);
                        } else {
-                           done(null, false, {message : "This Email is taken."});
+                           done(null, false, { message : "This Email is taken." });
                        }
                    });
         }
@@ -50,7 +51,7 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            Author.findOne({"contactInfo.email" : email})
+            Author.findOne({ "contactInfo.email" : email })
                   .then(( user ) => {
                       if ( !user ) {
                           done(null, false, "Login: User not found");
@@ -61,14 +62,14 @@ module.exports = () => {
                                       if ( data.success ) {
                                           done(null, user);
                                       } else {
-                                          done(null, false, {message : data.message});
+                                          done(null, false, { message : data.message });
                                       }
                                   })
                                   .catch(( err ) => {
-                                      done(null, false, {message : err});
+                                      done(null, false, { message : err });
                                   });
                           } else {
-                              done(null, false, {message : "This account is blocked."});
+                              done(null, false, { message : "This account is blocked." });
                           }
                       }
 
@@ -84,10 +85,20 @@ module.exports = () => {
             clientID : config.facebook.clientID,
             clientSecret : config.facebook.clientSecret,
             callbackURL : config.facebook.callbackURL,
-            profileFields : ['email', 'name', 'photos']
+            profileFields : [ 'email', 'name', 'photos' ]
         },
         ( accessToken, refreshToken, profile, done ) => {
-            Author.findOne({"contactInfo.email" : profile.emails[0].value})
+            const email = profile.emails[ 0 ].value;
+            const time = new Date().getTime();
+            const password = btoa(email + time);
+            const letter = {
+                to : [ email ],
+                from : 'pethome@gmail.com',
+                subject : 'Facebook registration',
+                html : `<h4>Password ${password}</h4>`
+            };
+
+            Author.findOne({ "contactInfo.email" : email })
                   .then(( user ) => {
                       if ( user !== null ) {
                           if ( user.oauthID.facebook && user.oauthID.facebook == profile.id ) {
@@ -99,7 +110,7 @@ module.exports = () => {
                                       if ( user ) {
                                           done(null, user);
                                       } else {
-                                          done(null, false, {message : "Facebook Authentication: User doesn't saved"});
+                                          done(null, false, { message : "Facebook Authentication: User doesn't saved" });
                                       }
                                   })
                                   .catch(( err ) => {
@@ -108,17 +119,24 @@ module.exports = () => {
                           }
                       } else {
                           authors.create({
-                              oauthID : {facebook : profile.id},
-                              avatar : profile.photos[0].value || "",
+                              oauthID : { facebook : profile.id },
+                              avatar : profile.photos[ 0 ].value || "",
                               name : profile.name.givenName + " " + profile.name.familyName || "Not specified",
-                              contactInfo : {email : profile.emails[0].value},
-                              password : "test",
-                              date : new Date().getTime()
+                              contactInfo : { email : email },
+                              password : password,
+                              date : time
                           }).then(( response ) => {
                               if ( response.success ) {
                                   done(null, response.author);
+                                  mailer.send(letter)
+                                        .then(( response ) => {
+                                            console.log(response);
+                                        })
+                                        .catch(( error ) => {
+                                            console.log(error);
+                                        });
                               } else {
-                                  done(null, false, {message : response.message});
+                                  done(null, false, { message : response.message });
                               }
                           }).catch(( err ) => {
                               done(err);
@@ -136,14 +154,14 @@ module.exports = () => {
             clientID : config.vk.clientID,
             clientSecret : config.vk.clientSecret,
             callbackURL : config.vk.callbackURL,
-            scope : ['email'],
-            profileFields : ['email', 'name', 'photos']
+            scope : [ 'email' ],
+            profileFields : [ 'email', 'name', 'photos' ]
         },
         ( accessToken, refreshToken, params, profile, done ) => {
             if ( !params.email ) {
-                done(null, false, {message : "VK Authentication: User denied access to email"});
+                done(null, false, { message : "VK Authentication: User denied access to email" });
             }
-            Author.findOne({"contactInfo.email" : params.email})
+            Author.findOne({ "contactInfo.email" : params.email })
                   .then(( user ) => {
                       if ( user !== null ) {
                           if ( user.oauthID.vk && user.oauthID.vk == profile.id ) {
@@ -155,7 +173,7 @@ module.exports = () => {
                                       if ( user ) {
                                           done(null, user);
                                       } else {
-                                          done(null, false, {message : "VK Authentication: User doesn't saved"});
+                                          done(null, false, { message : "VK Authentication: User doesn't saved" });
                                       }
                                   })
                                   .catch(( err ) => {
@@ -164,17 +182,17 @@ module.exports = () => {
                           }
                       } else {
                           authors.create({
-                              oauthID : {vk : profile.id},
-                              avatar : profile.photos[0].value || "",
+                              oauthID : { vk : profile.id },
+                              avatar : profile.photos[ 0 ].value || "",
                               name : profile.name.givenName + " " + profile.name.familyName || "Not specified",
-                              contactInfo : {email : params.email},
+                              contactInfo : { email : params.email },
                               password : "test",
                               date : new Date().getTime()
                           }).then(( response ) => {
                               if ( response.success ) {
                                   done(null, response.author);
                               } else {
-                                  done(null, false, {message : response.message});
+                                  done(null, false, { message : response.message });
                               }
                           }).catch(( err ) => {
                               done(err);
