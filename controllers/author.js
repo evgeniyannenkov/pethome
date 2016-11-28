@@ -7,8 +7,7 @@ const create = ( data ) => {
         hasher(data.password).hash(( err, hash ) => {
             if ( err ) {
                 reject(err);
-            }
-            else {
+            } else {
                 data.password = hash;
                 new Author(data)
                     .save()

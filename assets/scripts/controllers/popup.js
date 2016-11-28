@@ -18,14 +18,16 @@ function popupControllersInit ( module ) {
             });
 
             this.close = ( event ) => {
-                if ( event ) {
-                    if ( angular.element(event.target).hasClass("popup") ) {
+                if ( this.active ) {
+                    if ( event ) {
+                        if ( angular.element(event.target).hasClass("popup") ) {
+                            this.active = false;
+                        }
+                    } else {
                         this.active = false;
                     }
-                } else {
-                    this.active = false;
+                    $rootScope.$broadcast("popup_close", this.type.toLowerCase());
                 }
-                $rootScope.$broadcast("popup_close", this.type.toLowerCase());
             };
             this.open = ( type, data ) => {
                 this.type = type;

@@ -20,6 +20,9 @@ function authorServicesInit ( module ) {
                         getAll : {
                             url : ""
                         },
+                        reset : {
+                            url : "/reset/:hash"
+                        },
                         getCurrent : {
                             url : "/current"
                         },

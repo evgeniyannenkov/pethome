@@ -13,3 +13,4 @@
             pet-create(ng-show="popup.type == 'new pet'" ng-if="popup.isExpected('new pet')")
             author-block(author-id = "{{popup.data.authorId}}" action="block" ng-show="popup.type == 'block'" ng-if="popup.isExpected('block')")
             author-block(author-id = "{{popup.data.authorId}}" action="unblock" ng-show="popup.type == 'unblock'" ng-if="popup.isExpected('unblock')")
+            reset-password(ng-show="popup.type == 'reset password'" ng-if="popup.isExpected('reset password')")

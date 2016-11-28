@@ -15,4 +15,17 @@ function authComponentsInit ( module, constants ) {
         controllerAs : "auth"
     });
 
+    module.component("resetPassword", {
+        templateUrl : `${constants.templatesFolder}/reset-password.html`,
+        require : {
+            popup : "^^popupContent"
+        },
+        bindings : {
+            form : "@",
+            title : "@"
+        },
+        controller: "resetPassCtrl",
+        controllerAs : "reset"
+    });
+
 }

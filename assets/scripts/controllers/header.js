@@ -40,10 +40,6 @@ function headerControllersInit ( module ) {
                     this.hide = false;
                 }
             });
-
-            //$rootScope.$on("resize", ( event, data ) => {
-            //    this.header.mobile = false;
-            //});
         }
     ]);
 }

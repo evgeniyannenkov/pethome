@@ -1,6 +1,3 @@
-include ../../views/mixins/formParts
-include ../../views/mixins/buttons
-
 .social-auth
     .sort__item__title
         span {{auth.form=='login' ? 'Login' : 'Sign up' | translate}}
@@ -19,3 +16,4 @@ include ../../views/mixins/buttons
 popup-form(name="{{auth.form}}" submit-function="auth.authenticate(name);" label="{{auth.form=='login' ? 'login' : 'sign up'}}")
     form-input(type="email" name="email" required="true" value="auth.email")
     form-input(type="password" name="password" required="true" value="auth.password")
+    span(popup-trigger="reset password") Forgot Password

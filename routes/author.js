@@ -3,6 +3,9 @@
 const express = require('express');
 const Author = require('../schemas/author');
 const router = express.Router();
+const base64 = require('js-base64').Base64;
+const hasher = require('password-hash-and-salt');
+const moment = require("moment");
 
 router.get("/:id", ( req, res, next ) => {
     const _id = req.params.id;
@@ -22,6 +25,24 @@ router.get("/:id", ( req, res, next ) => {
                   next();
               });
     }
+});
+
+router.get("/reset/:emailHash/:hash", ( req, res, next ) => {
+    const emailHash = req.params.emailHash;
+    const hash = req.params.hash;
+    const email = base64.decode(emailHash);
+    const token = moment().format("DD/MM/YYYY") + "_evgenius_verstalikas_superus_adminius_" + email;
+
+    hasher(token).verifyAgainst(hash, function ( err, verified ) {
+        if ( err ) {
+            res.json({ success : false, message : err.message });
+        }
+        if ( !verified ) {
+            res.json({ success : false, message : "Reset: Wrong Token" });
+        } else {
+            res.json({ success : true, message : "Reset: Correct Token" });
+        }
+    });
 });
 
 module.exports = router;

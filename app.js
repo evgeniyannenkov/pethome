@@ -21,7 +21,6 @@ const pet = require('./routes/pet');
 const author = require('./routes/author');
 const auth = require('./routes/auth');
 const api = require('./routes/api');
-const mail = require('./routes/mail');
 
 const app = express();
 
@@ -68,7 +67,6 @@ app.use('/pet', pet);
 app.use('/author', author);
 app.use('/auth', auth);
 app.use("/api", api);
-app.use("/mail", mail);
 
 // catch 404 and forward to error handler
 app.use(function ( req, res, next ) {

@@ -6,7 +6,7 @@ function authControllersInit ( module ) {
 
             this.authenticate = ( name ) => {
 
-                authService.authenticate(name, {email : this.email, password : this.password})
+                authService.authenticate(name, { email : this.email, password : this.password })
                            .then(( response ) => {
                                if ( response.data.success ) {
 
@@ -35,7 +35,7 @@ function authControllersInit ( module ) {
                                    $timeout(2000)
                                        .then(() => {
                                            $scope.$broadcast("formResponse", {
-                                               responseClass: "success"
+                                               responseClass : "success"
                                            });
                                            document.location.href = "/profile";
                                        });
@@ -54,7 +54,7 @@ function authControllersInit ( module ) {
                                    $timeout(500)
                                        .then(() => {
                                            $scope.$broadcast("formResponse", {
-                                               responseClass: "fail"
+                                               responseClass : "fail"
                                            });
                                        });
 
@@ -84,9 +84,61 @@ function authControllersInit ( module ) {
                            .catch(( err ) => {
                                console.log(err);
                            });
-
             };
 
+        }
+    ]);
+
+    module.controller('resetPassCtrl', [
+        "$scope", "author", "$timeout", "notify",
+        function ( $scope, author, $timeout, notify ) {
+            let hash;
+            this.send = () => {
+                hash = btoa(this.email);
+
+                author.reset({ hash })
+                      .then(( response ) => {
+                          if ( response.data.success ) {
+                              notify.inform({
+                                  message : "[[Email sent]].",
+                                  duration : 1000
+                              });
+                              $scope.$broadcast("formResponse", {
+                                  responseClass : "",
+                                  reset : true
+                              });
+                          }
+                          else {
+                              notify.error({
+                                  message : `[[${response.data.message}]].`,
+                                  duration : 1000,
+                                  delay : 500
+                              });
+                              $timeout(500)
+                                  .then(() => {
+                                      $scope.$broadcast("formResponse", {
+                                          responseClass : "fail",
+                                          reset : true
+                                      });
+                                  });
+                          }
+                      })
+                      .catch(( err ) => {
+                          console.log(err);
+                          notify.error({
+                              message : "[[Email wasn't send]].",
+                              duration : 1000,
+                              delay : 500
+                          });
+                          $timeout(500)
+                              .then(() => {
+                                  $scope.$broadcast("formResponse", {
+                                      responseClass : "fail",
+                                      reset : true
+                                  });
+                              });
+                      });
+            };
         }
     ]);
 }
