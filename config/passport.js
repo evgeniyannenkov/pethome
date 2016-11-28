@@ -8,6 +8,7 @@ const config = require('./oauth');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const VkStrategy = require('passport-vkontakte').Strategy;
 const mailer = require("../config/mailer");
+const md5 = require('md5');
 
 module.exports = () => {
 
@@ -90,7 +91,7 @@ module.exports = () => {
         ( accessToken, refreshToken, profile, done ) => {
             const email = profile.emails[ 0 ].value;
             const time = new Date().getTime();
-            const password = btoa(email + time);
+            const password = md5(email + time);
             const letter = {
                 to : [ email ],
                 from : 'pethome@gmail.com',
