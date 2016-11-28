@@ -186,6 +186,15 @@
   text-transform : capitalize;
 }
 
+.form__reset {
+  color     : $metallicGray;
+  cursor    : pointer;
+  font-size : 0.6em;
+  float     : right;
+  margin    : -10px 0 5px;
+  @include regular-font;
+}
+
 .form__btn-wrap {
   margin-top : 15px;
   display    : inline-block;
