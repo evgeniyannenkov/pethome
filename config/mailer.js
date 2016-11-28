@@ -12,11 +12,14 @@ const options = {
 const mailer = nodemailer.createTransport(sgTransport(options));
 
 const send = ( email ) => {
-    mailer.sendMail(email, function ( err, res ) {
-        if ( err ) {
-            console.log(err)
-        }
-        console.log(res);
+
+    return new Promise(( resolve, reject ) => {
+        mailer.sendMail(email, function ( err, res ) {
+            if ( err ) {
+                reject(err);
+            }
+            resolve(res);
+        });
     });
 };
 

@@ -12,6 +12,12 @@ const email = {
 };
 
 router.get("/", ( req, res, next ) => {
-    mailer.send(email);
+    mailer.send(email)
+          .then(( response ) => {
+              res.json(response);
+          })
+          .catch(( error ) => {
+              res.json(error);
+          });
 });
 
