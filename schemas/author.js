@@ -49,6 +49,10 @@ const authorSchema = new mongoose.Schema({
     date : {
         type : Number
     },
+    is_verified_email: {
+        type: Boolean,
+        default: false
+    }
 });
 
 authorSchema.methods.validatePassword = function ( password ) {
