@@ -1,14 +1,14 @@
 "use strict";
 
 class Builder {
-    constructor ( modules, constants = {} ) {
+    constructor ( modules, common = {} ) {
         this.modules = modules;
-        this.constants = constants;
+        this.common = common;
     }
 
     initComponents ( module, components ) {
         for ( let index = 0; index < components.length; index++ ) {
-            components[ index ](this.modules[ module ], this.constants);
+            components[ index ](this.modules[ module ], this.common);
         }
     }
 
@@ -22,8 +22,12 @@ class Builder {
 }
 
 const modules = getModules();
-const constants = {
-    templatesFolder : "/assets/templates"
+
+const common = {
+    templatesFolder : "/assets/templates",
+    getTemplatePath : function ( filename ) {
+        return `${this.templatesFolder}/${filename}.html`;
+    }
 };
 
 const components = {
@@ -68,5 +72,5 @@ const components = {
     ]
 };
 
-const builder = new Builder(modules, constants);
+const builder = new Builder(modules, common);
 builder.init(components);

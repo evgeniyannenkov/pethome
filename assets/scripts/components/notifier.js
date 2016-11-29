@@ -1,9 +1,9 @@
 "use strict";
 
-function notifierComponentsInit (  module, constants  ) {
+function notifierComponentsInit ( module, common ) {
 
     module.component('notify', {
-        templateUrl : `${constants.templatesFolder}/notify.html`,
+        templateUrl : common.getTemplatePath("notify"),
         controller : "notifierCtrl",
         controllerAs : "notifier"
     });
