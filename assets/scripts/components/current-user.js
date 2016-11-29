@@ -1,6 +1,6 @@
 "use strict";
 
-function userComponentsInit ( module, constants ) {
+function userComponentsInit ( module, common ) {
 
     module.directive('currentUser', function () {
         return {

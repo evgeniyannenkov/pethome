@@ -1,11 +1,11 @@
 "use strict";
 
-function petComponentsInit ( module, constants ) {
+function petComponentsInit ( module, common ) {
 
     module.directive('feed', [
         function () {
             return {
-                templateUrl : `${constants.templatesFolder}/pets-feed.html`,
+                templateUrl : common.getTemplatePath("pets-feed"),
                 scope : {
                     id : "@authorId",
                     hideFields : "=",
@@ -23,19 +23,19 @@ function petComponentsInit ( module, constants ) {
         require : {
             feed : "^^?feed"
         },
-        templateUrl : `${constants.templatesFolder}/pagination.html`,
+        templateUrl : common.getTemplatePath("pagination"),
 
         controllerAs : "pagination"
     });
 
     module.component('search', {
-        templateUrl : `${constants.templatesFolder}/pets-search.html`,
+        templateUrl : common.getTemplatePath("pets-search"),
         controller : "petsSearchCtrl",
         controllerAs : "search"
     });
 
     module.component('pet', {
-        templateUrl : `${constants.templatesFolder}/pet.html`,
+        templateUrl : common.getTemplatePath("pet"),
         bindings : {
             fields : "=",
             author : "=",
@@ -48,7 +48,7 @@ function petComponentsInit ( module, constants ) {
         require : {
             currentUser : "^^currentUser"
         },
-        templateUrl : `${constants.templatesFolder}/pet-single.html`,
+        templateUrl : common.getTemplatePath("pet-single"),
         bindings : {
             id : "@petId",
             reviewEnabled : "=enableReview",
@@ -63,7 +63,7 @@ function petComponentsInit ( module, constants ) {
             popup : "^^?popupContent",
             pet : '^^petSingle'
         },
-        templateUrl : `${constants.templatesFolder}/pet-edit.html`,
+        templateUrl : common.getTemplatePath("pet-edit"),
         bindings : {
             fields : "=pet"
         },
@@ -76,7 +76,7 @@ function petComponentsInit ( module, constants ) {
             popup : "^^?popup",
             form : "^^?form"
         },
-        templateUrl : `${constants.templatesFolder}/pet-remove.html`,
+        templateUrl : common.getTemplatePath("pet-remove"),
         bindings : {
             id : "@petId"
         },
@@ -88,7 +88,7 @@ function petComponentsInit ( module, constants ) {
         require : {
             popup : "^^?popup"
         },
-        templateUrl : `${constants.templatesFolder}/pet-create.html`,
+        templateUrl : common.getTemplatePath("pet-create"),
         controller : "newPetCtrl",
         controllerAs : "new"
     });

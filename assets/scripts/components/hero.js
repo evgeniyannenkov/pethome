@@ -1,8 +1,8 @@
 "use strict";
 
-function heroComponentsInit ( module, constants ) {
+function heroComponentsInit ( module, common ) {
     module.component("hero", {
-        templateUrl : `${constants.templatesFolder}/hero.html`,
+        templateUrl : common.getTemplatePath("hero"),
         controllerAs : "hero"
     });
 }

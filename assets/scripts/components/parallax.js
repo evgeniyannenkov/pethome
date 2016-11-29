@@ -1,6 +1,6 @@
 "use strict";
 
-function parallaxComponentsInit ( module, constants ) {
+function parallaxComponentsInit ( module, common ) {
 
     module.directive("ngParallax", [
         "$window", "$document",

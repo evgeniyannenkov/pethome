@@ -1,15 +1,15 @@
 "use strict";
 
-function formComponentsInit ( module, constants ) {
+function formComponentsInit ( module, common ) {
 
     module.component("popupForm", {
-            templateUrl : `${constants.templatesFolder}/popup-form.html`,
+            templateUrl : common.getTemplatePath("popup-form"),
             require : {
                 popup : "^^?popupContent"
             },
             bindings : {
                 name : "@",
-                label: "@",
+                label : "@",
                 submitFunction : "&"
             },
             transclude : true,
@@ -19,7 +19,7 @@ function formComponentsInit ( module, constants ) {
     );
 
     module.component("formInput", {
-        templateUrl : `${constants.templatesFolder}/form-parts/form-input.html`,
+        templateUrl : common.getTemplatePath("form-parts/form-input"),
         require : {
             form : "^^?popupForm"
         },
@@ -27,16 +27,16 @@ function formComponentsInit ( module, constants ) {
             type : "@",
             name : "@",
             required : "@",
-            value: "=",
-            min: "@",
-            max: "@"
+            value : "=",
+            min : "@",
+            max : "@"
         },
         controller : "formFieldCtrl",
         controllerAs : "field"
     });
 
     module.component("formTextarea", {
-        templateUrl : `${constants.templatesFolder}/form-parts/form-textarea.html`,
+        templateUrl : common.getTemplatePath("form-parts/form-textarea"),
         require : {
             form : "^^?popupForm"
         },
@@ -44,9 +44,15 @@ function formComponentsInit ( module, constants ) {
             type : "@",
             name : "@",
             required : "@",
-            value: "="
+            value : "="
         },
         controller : "formFieldCtrl",
         controllerAs : "field"
+    });
+
+    module.component("resetForm", {
+        templateUrl : common.getTemplatePath("reset"),
+        controller : function () {
+        }
     });
 }

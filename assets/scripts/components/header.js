@@ -1,9 +1,9 @@
 "use strict";
 
-function headerComponentsInit ( module, constants ) {
+function headerComponentsInit ( module, common ) {
 
     module.component("header", {
-        templateUrl : `${constants.templatesFolder}/header.html`,
+        templateUrl : common.getTemplatePath("header"),
         controller : "headerCtrl",
         controllerAs : "header",
         bindings : {
@@ -13,7 +13,7 @@ function headerComponentsInit ( module, constants ) {
     });
 
     module.component("burgerButton", {
-        templateUrl : `${constants.templatesFolder}/burger-button.html`,
+        templateUrl : common.getTemplatePath("burger-button"),
         require : {
             header : "^^?header"
         },

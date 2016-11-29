@@ -1,9 +1,9 @@
 "use strict";
 
-function authComponentsInit ( module, constants ) {
+function authComponentsInit ( module, common ) {
 
     module.component("authForm", {
-        templateUrl : `${constants.templatesFolder}/auth.html`,
+        templateUrl : common.getTemplatePath("auth"),
         require : {
             popup : "^^?popup"
         },
@@ -11,12 +11,12 @@ function authComponentsInit ( module, constants ) {
             form : "@",
             title : "@"
         },
-        controller: "authCtrl",
+        controller : "authCtrl",
         controllerAs : "auth"
     });
 
     module.component("resetPassword", {
-        templateUrl : `${constants.templatesFolder}/reset-password.html`,
+        templateUrl : common.getTemplatePath("reset-password"),
         require : {
             popup : "^^popupContent"
         },
@@ -24,7 +24,7 @@ function authComponentsInit ( module, constants ) {
             form : "@",
             title : "@"
         },
-        controller: "resetPassCtrl",
+        controller : "resetPassCtrl",
         controllerAs : "reset"
     });
 

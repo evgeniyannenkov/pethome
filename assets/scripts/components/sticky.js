@@ -1,6 +1,6 @@
 "use strict";
 
-function stickyComponentsInit ( module, constants ) {
+function stickyComponentsInit ( module, common ) {
 
     module.directive("sticky", [
         "$window", "$document",

@@ -1,6 +1,6 @@
 "use strict";
 
-function separatorComponentsInit ( module, constants ) {
+function separatorComponentsInit ( module, common ) {
 
     module.directive("pageSeparator", function () {
         return {

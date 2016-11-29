@@ -1,9 +1,9 @@
 "use strict";
 
-function languagesComponentsInit ( module, constants ) {
+function languagesComponentsInit ( module, common ) {
 
     module.component('language', {
-        templateUrl : `${constants.templatesFolder}/languages-select.html`,
+        templateUrl : common.getTemplatePath("languages-select"),
         bindings : {
             languageSelect : "="
         },
