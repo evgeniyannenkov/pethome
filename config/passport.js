@@ -159,7 +159,7 @@ module.exports = () => {
                                       to : [email],
                                       from : 'pethome@gmail.com',
                                       subject : 'Registration',
-                                      html : `<h4>Confirm <a href="${process.env.HOST}/api/author/verify/${emailHash}/${hash}">email</a></h4>`
+                                      html : `<h4>Confirm <a href="${process.env.HOST}/author/verify/${emailHash}/${hash}">email</a></h4>`
                                   };
 
                                   authors.create({
@@ -250,7 +250,7 @@ module.exports = () => {
                                       to : [email],
                                       from : 'pethome@gmail.com',
                                       subject : 'Registration',
-                                      html : `<h4>Confirm <a href="${process.env.HOST}/api/author/verify/${emailHash}/${hash}">email</a></h4>`
+                                      html : `<h4>Confirm <a href="${process.env.HOST}/author/verify/${emailHash}/${hash}">email</a></h4>`
                                   };
 
                                   authors.create({
