@@ -6,7 +6,10 @@ include ../../views/mixins/buttons
         .author__field
             .author__title {{author.fields.name || 'Not specified' | translate}}
         .author__field
-            | {{author.fields.contactInfo.email}}
+            span {{author.fields.contactInfo.email}}
+            span.author__status-icon(class="{{author.fields.verification.is_verified ? 'success' : 'fail'}}")
+                i.icon-check(ng-if="author.fields.verification.is_verified")
+                i.icon-cancel(ng-if="!author.fields.verification.is_verified")
         .author__field
             | Member since:
             | {{author.fields.date | translate : 'date'}}
