@@ -36,6 +36,9 @@ function authorServicesInit ( module ) {
                     "PUT" : {
                         update : {
                             url : "/:id"
+                        },
+                        resetPassword : {
+                            url : "/reset/:emailHash/:hash"
                         }
                     }
                 }

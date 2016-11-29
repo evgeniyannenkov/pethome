@@ -4,8 +4,6 @@ include ../../views/mixins/formParts
     .popup__inner
         .popup__header {{'Password Reset' | translate}}
         .popup__content
-            form.form(novalidate ng-submit="reset.submit();" name="resetForm")
-                +input("Password")
-                +input("Confirm Password")
-                div.form__item.form__item--btn.form__item--no-margin
-                    +button("Reset")(ng-click="reset.check()" title="{{'Reset' | translate}}")
+            popup-form(name="resetForm" submit-function="reset.submit();" label="Reset")
+                form-input(type="password" name="password" required="true" value="reset.password")
+                form-input(type="password" name="passwordConfirm" required="true" value="reset.passwordConfirm")

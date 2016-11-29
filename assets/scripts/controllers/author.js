@@ -65,7 +65,6 @@ function authorControllersInit ( module ) {
                                    reset : true
                                });
                            } else {
-                               console.log(response);
                                $timeout(500)
                                    .then(() => {
                                        $scope.$broadcast("formResponse", {
