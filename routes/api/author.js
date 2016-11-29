@@ -255,18 +255,18 @@ router.get("/reset/:hash", ( req, res, next ) => {
                                   to : [ email ],
                                   from : 'pethome@gmail.com',
                                   subject : 'Password reset',
-                                  html : `<h4>Change password <a href="http://localhost:3000/author/reset/${emailHash}/${hash}">here</a>.</h4>`
+                                  html : `<h4>Change password <a href="http://${process.env.HOST}/author/reset/${emailHash}/${hash}">here</a>.</h4>`
                               })
                               .then(( response ) => {
                                   res.json({
                                       success : true,
-                                      response
+                                      message : response
                                   });
                               })
-                              .catch(( response ) => {
+                              .catch(( error ) => {
                                   res.json({
                                       success : false,
-                                      data : response
+                                      message : error.message
                                   });
                               });
                       }

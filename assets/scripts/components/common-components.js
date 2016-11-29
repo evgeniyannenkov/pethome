@@ -1,6 +1,6 @@
 "use strict";
 
-function commonComponentsInit ( module ) {
+function commonComponentsInit ( module, common ) {
     module.directive('selectOnClick', [
         '$window',
         function ( $window ) {

@@ -1,0 +1,5 @@
+include ../../views/mixins/formParts
+
+form.form(novalidate ng-submit="reset.submit();" name="resetForm")
+    div.form__item.form__item--btn
+        +button("Reset")(ng-click="reset.check()" title="{{'Reset' | translate}}")

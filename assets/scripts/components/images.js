@@ -1,6 +1,6 @@
 "use strict";
 
-function imagesComponentsInit ( module, constants ) {
+function imagesComponentsInit ( module, common ) {
 
     module.directive("backgroundImage", [
         function () {
@@ -43,7 +43,7 @@ function imagesComponentsInit ( module, constants ) {
     ]);
 
     module.component('imagesUploader', {
-        templateUrl : `${constants.templatesFolder}/images-upload.html`,
+        templateUrl : common.getTemplatePath("images-upload"),
         require : {
             popup : "^^popupContent"
         },

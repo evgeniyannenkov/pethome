@@ -1,5 +1,8 @@
 "use strict";
 
+//.ENV file initialized
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -11,7 +14,6 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const dbConnection = require('./config/database');
 const mongoStore = require('connect-mongo')(session);
-
 const seed = require("./seed");
 
 //Routes

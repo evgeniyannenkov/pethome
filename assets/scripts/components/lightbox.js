@@ -1,6 +1,6 @@
 "use strict";
 
-function lightboxComponentsInit ( module, constants ) {
+function lightboxComponentsInit ( module, common ) {
 
     module.directive("lightboxTrigger", function () {
         return {
@@ -20,7 +20,7 @@ function lightboxComponentsInit ( module, constants ) {
     module.directive("lightbox", function () {
         return {
             restrict : "AE",
-            templateUrl : `${constants.templatesFolder}/lightbox.html`,
+            templateUrl : common.getTemplatePath("lightbox"),
             controllerAs : "ctrl",
             controller : "lightboxCtrl"
         };

@@ -35,12 +35,12 @@ router.get("/reset/:emailHash/:hash", ( req, res, next ) => {
 
     hasher(token).verifyAgainst(hash, function ( err, verified ) {
         if ( err ) {
-            res.json({ success : false, message : err.message });
+            next();
         }
         if ( !verified ) {
-            res.json({ success : false, message : "Reset: Wrong Token" });
+            next();
         } else {
-            res.json({ success : true, message : "Reset: Correct Token" });
+            res.render("reset");
         }
     });
 });

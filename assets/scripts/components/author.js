@@ -1,9 +1,9 @@
 "use strict";
 
-function authorComponentsInit ( module, constants ) {
+function authorComponentsInit ( module, common ) {
 
     module.component('author', {
-        templateUrl : `${constants.templatesFolder}/author.html`,
+        templateUrl : common.getTemplatePath("author"),
         bindings : {
             id : "@authorId",
             edit : "=",
@@ -14,33 +14,33 @@ function authorComponentsInit ( module, constants ) {
     });
 
     module.component('authorsList', {
-        templateUrl : `${constants.templatesFolder}/authors.html`,
+        templateUrl : common.getTemplatePath("authors"),
         controller : "authorsListCtrl",
         controllerAs : "list"
     });
 
     module.component('authorEdit', {
-        templateUrl : `${constants.templatesFolder}/author-edit.html`,
+        templateUrl : common.getTemplatePath("author-edit"),
         require : {
             popup : "^^?popup",
-            author: "^^?author"
+            author : "^^?author"
         },
         controller : "authorEditCtrl",
         controllerAs : "editor"
     });
 
     module.component('authorRemove', {
-        templateUrl : `${constants.templatesFolder}/author-remove.html`,
+        templateUrl : common.getTemplatePath("author-remove"),
         require : {
             popup : "^^?popup",
-            author: "^^?author"
+            author : "^^?author"
         },
         controller : "authorRemoveCtrl",
         controllerAs : "remover"
     });
 
     module.component('authorBlock', {
-        templateUrl : `${constants.templatesFolder}/author-block.html`,
+        templateUrl : common.getTemplatePath("author-block"),
         require : {
             popup : "^^?popup"
         },

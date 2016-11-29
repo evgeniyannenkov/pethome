@@ -1,6 +1,6 @@
 "use strict";
 
-function popupComponentsInit ( module, constants ) {
+function popupComponentsInit ( module, common ) {
 
     module.directive('popupTrigger', function () {
         return {
@@ -42,7 +42,7 @@ function popupComponentsInit ( module, constants ) {
             },
             bindToController : true,
             restrict : "AE",
-            templateUrl : `${constants.templatesFolder}/popup-content.html`,
+            templateUrl : common.getTemplatePath("popup-content"),
             controller : "popupContentCtrl",
             controllerAs : "popup"
         };
