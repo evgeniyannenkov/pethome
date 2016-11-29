@@ -25,7 +25,7 @@ const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
 const concatFilenames = require('gulp-concat-filenames');
-const notify = require("gulp-notify");
+const notifier = require('node-notifier');
 const watch = require('gulp-watch');
 const modifyCssUrls = require('gulp-modify-css-urls');
 const pug = require('gulp-pug');
@@ -182,12 +182,6 @@ const cssTasks = function ( filename ) {
             return gulpif(enabled.rev, rev());
         })
         .pipe(function () {
-                return gulpif(enabled.notify && filename === 'main.css', notify({
-                    message : "Generated file: <%= file.relative %>"
-                }));
-            }
-        )
-        .pipe(function () {
             return gulpif(enabled.maps, sourcemaps.write('.', {
                 sourceRoot : 'assets/styles/'
             }));
@@ -282,12 +276,6 @@ const jsTasks = function ( filename ) {
         .pipe(function () {
             return gulpif(enabled.rev, rev());
         })
-        .pipe(function () {
-                return gulpif(enabled.notify && filename === files.main_js, notify({
-                    message : "Generated file: <%= file.relative %>"
-                }));
-            }
-        )
         .pipe(function () {
             return gulpif(enabled.maps, sourcemaps.write('.', {
                 sourceRoot : 'assets/scripts/'
@@ -592,6 +580,12 @@ gulp.task('mongo-start', function () {
     childProcess.exec('mongod', function ( err, stdout, stderr ) {
         console.log(stdout);
     });
+    if ( enabled.notify ) {
+        notifier.notify({
+            'title' : 'Gulp Notifications',
+            'message' : "Connected to database"
+        });
+    }
 });
 
 gulp.task('server-start', function () {
@@ -610,6 +604,12 @@ gulp.task('server-start', function () {
         ]
     })
         .on('restart', function () {
-            console.log('server is restarted...')
-        })
+            console.log('server restarted');
+            if ( enabled.notify ) {
+                notifier.notify({
+                    'title' : 'Gulp Notifications',
+                    'message' : "Server restarted"
+                });
+            }
+        });
 });

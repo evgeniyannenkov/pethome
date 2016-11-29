@@ -19,7 +19,7 @@
 }
 
 @font-face {
-  font-family    : 'Roboto Conrensed';
+  font-family    : 'Roboto Condensed';
   src            : url('fonts/Roboto-Condensed.ttf') format('truetype');
   font-style     : normal;
   font-weight    : normal;
@@ -123,6 +123,6 @@
 }
 
 @mixin roboto-condensed() {
-  font-family : "Roboto Conrensed", sans-serif;
+  font-family : "Roboto Condensed", sans-serif;
   font-weight : 400;
 }
