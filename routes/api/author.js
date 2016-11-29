@@ -260,13 +260,13 @@ router.get("/reset/:hash", ( req, res, next ) => {
                               .then(( response ) => {
                                   res.json({
                                       success : true,
-                                      response
+                                      message : response
                                   });
                               })
-                              .catch(( response ) => {
+                              .catch(( error ) => {
                                   res.json({
                                       success : false,
-                                      data : response
+                                      message : error.message
                                   });
                               });
                       }

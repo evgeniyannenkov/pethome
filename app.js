@@ -1,5 +1,8 @@
 "use strict";
 
+//.ENV file initialized
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -22,9 +25,6 @@ const auth = require('./routes/auth');
 const api = require('./routes/api');
 
 const app = express();
-
-//.ENV file initialized
-require('dotenv').config();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
