@@ -13,10 +13,10 @@ router.get("/:id", ( req, res, next ) => {
     if ( req.user && _id == req.user._id ) {
         res.redirect('/profile');
     } else {
-        Author.findOne({ _id })
+        Author.findOne({_id})
               .then(( author ) => {
                   if ( (author && !author.blocked) || (req.user && req.user.is_admin) ) {
-                      res.render("author-single", { author });
+                      res.render("author-single", {author});
                   } else {
                       next();
                   }
@@ -43,6 +43,35 @@ router.get("/reset/:emailHash/:hash", ( req, res, next ) => {
             res.render("reset");
         }
     });
+});
+
+router.get("/verify/:emailHash/:hash", ( req, res, next ) => {
+    const hash = req.params.hash;
+    const email = base64.decode(req.params.emailHash);
+    const token = process.env.EMAIL_VERIFY_SECRET + email;
+
+    hasher(token).verifyAgainst(hash, function ( err, verified ) {
+        if ( err ) {
+            next();
+        }
+        if ( !verified ) {
+            next();
+        } else {
+
+            Author.findOneAndUpdate({"contactInfo.email" : email, "verification.is_verified" : false}, {"verification.is_verified" : true})
+                  .then(( user ) => {
+                      if ( user ) {
+                          res.render("profile");
+                      } else {
+                          next();
+                      }
+                  })
+                  .catch(( error ) => {
+                      next();
+                  });
+        }
+    });
+
 });
 
 module.exports = router;
