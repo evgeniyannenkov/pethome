@@ -38,9 +38,9 @@ router.get("/reset/:emailHash/:hash", ( req, res, next ) => {
             res.json({ success : false, message : err.message });
         }
         if ( !verified ) {
-            res.json({ success : false, message : "Reset: Wrong Token" });
+            next();
         } else {
-            res.json({ success : true, message : "Reset: Correct Token" });
+            next();
         }
     });
 });
