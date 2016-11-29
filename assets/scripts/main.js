@@ -22,6 +22,7 @@ class Builder {
 }
 
 const modules = getModules();
+
 const common = {
     templatesFolder : "/assets/templates",
     getTemplatePath : function ( filename ) {
