@@ -11,7 +11,6 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const dbConnection = require('./config/database');
 const mongoStore = require('connect-mongo')(session);
-
 const seed = require("./seed");
 
 //Routes
@@ -23,6 +22,9 @@ const auth = require('./routes/auth');
 const api = require('./routes/api');
 
 const app = express();
+
+//.ENV file initialized
+require('dotenv').config();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
