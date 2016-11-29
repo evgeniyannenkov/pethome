@@ -7,13 +7,15 @@ function formControllersInit ( module ) {
         function ( $scope, $rootScope, validate, notify ) {
 
             this.$form = {};
+            this.formSet = false;
 
             this.fields = {};
 
 
             $rootScope.$on("popup_open", ( event, data, type ) => {
-                if ( type ) {
+                if ( type && !this.formSet ) {
                     this.$form = $scope[ this.name ];
+                    this.formSet = true;
                 }
             });
 
@@ -25,6 +27,11 @@ function formControllersInit ( module ) {
             };
 
             this.check = () => {
+
+                if ( !this.formSet ) {
+                    this.$form = $scope[ this.name ];
+                    this.formSet = true;
+                }
 
                 if ( this.$form ) {
                     this.validClass = this.$form.$valid ? "valid" : "error";

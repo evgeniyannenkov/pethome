@@ -329,6 +329,10 @@
   transition : left 0.3s;
 }
 
+.form__item--no-margin {
+  margin : 0 !important;
+}
+
 @media screen and (min-width : 500px) {
   .form__item--btn {
     display         : flex;

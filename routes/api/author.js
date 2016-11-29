@@ -286,4 +286,77 @@ router.get("/reset/:hash", ( req, res, next ) => {
           });
 });
 
+router.put("/reset/:emailHash/:hash", ( req, res, next ) => {
+    const emailHash = req.params.emailHash;
+    const hash = req.params.hash;
+    const email = base64.decode(emailHash);
+    const token = moment().format("DD/MM/YYYY") + "_evgenius_verstalikas_superus_adminius_" + email;
+    const newPassword = req.body.newPassword;
+
+    if ( newPassword ) {
+        Author.findOne({ "contactInfo.email" : email })
+              .then(( user ) => {
+                  if ( user ) {
+                      hasher(token).verifyAgainst(hash, function ( err, verified ) {
+                          if ( err ) {
+                              res.status(401).json({
+                                  success : false,
+                                  message : "wrong token"
+                              });
+                          }
+                          if ( !verified ) {
+                              res.status(401).json({
+                                  success : false,
+                                  message : "wrong token"
+                              });
+                          } else {
+                              hasher(newPassword).hash(( err, hash ) => {
+                                  if ( err ) {
+                                      res.status(401).json({
+                                          success : false,
+                                          message : "Didn't save"
+                                      });
+                                  }
+                                  if ( !verified ) {
+                                      res.status(401).json({
+                                          success : false,
+                                          message : "Didn't save"
+                                      });
+                                  } else {
+                                      user.password = hash;
+                                      user.save()
+                                          .then(( author ) => {
+                                              res.json({ success : true, message : "New password saved" });
+                                          })
+                                          .catch(( error ) => {
+                                              res.status(401).json({
+                                                  success : false,
+                                                  message : error.message
+                                              });
+                                          });
+                                  }
+                              });
+                          }
+                      });
+                  } else {
+                      res.status(404).json({
+                          success : false,
+                          message : "User with this email was not found"
+                      });
+                  }
+              })
+              .catch(( error ) => {
+                  res.json({
+                      success : false,
+                      message : error.message
+                  });
+              });
+    } else {
+        res.json({
+            success : false,
+            message : "No password provided."
+        });
+    }
+});
+
 module.exports = router;

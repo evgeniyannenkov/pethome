@@ -4,7 +4,7 @@ function applicationConfig ( module ) {
     module.config([
         "$translatorProvider",
         function ( translator ) {
-            const preferred = localStorage["preferred_language"] || "ru";
+            const preferred = localStorage[ "preferred_language" ] || "ru";
             translator.setTranslations("ru", {
                 "language" : "язык",
                 "russian" : "русский",
@@ -85,7 +85,11 @@ function applicationConfig ( module ) {
                 "with your social media accounts" : "с помощью социальных сетей",
                 "We'll never spam you, post on your behalf or do anything sketchy like that" : "Мы не будем присылать спам и делать публикации от вашего имени",
                 "total" : "всего",
-                "no adverts were found" : "Объявления не найдены"
+                "no adverts were found" : "Объявления не найдены",
+                "new password" : "Новый пароль",
+                "confirm password" : "Повторите пароль",
+                "reset" : "Изменить",
+                "password reset" : "Смена пароля"
             });
 
             translator.setTranslations("ua", {
@@ -169,7 +173,11 @@ function applicationConfig ( module ) {
                 "with your social media accounts" : "за допомогою соціальних мереж",
                 "We'll never spam you, post on your behalf or do anything sketchy like that" : "Ми не будемо надсилати спам і робити публікації від вашого імені",
                 "total" : "всього",
-                "no adverts were found" : "Оголошення не знайдені"
+                "no adverts were found" : "Оголошення не знайдені",
+                "new password" : "Новий пароль",
+                "confirm password" : "Підтвердіть пароль",
+                "reset" : "Змінити",
+                "password reset" : "Зміна паролю"
             });
 
             translator.setFullDateFormat("en", "MMM/d/yyyy h:mm a");

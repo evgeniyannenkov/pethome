@@ -40,7 +40,7 @@ router.get("/reset/:emailHash/:hash", ( req, res, next ) => {
         if ( !verified ) {
             next();
         } else {
-            res.render("reset");
+            res.render("reset", { emailHash, hash });
         }
     });
 });
