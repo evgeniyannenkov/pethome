@@ -50,16 +50,15 @@ function petComponentsInit ( module, common ) {
             "$sce", "$scope",
             function ( $sce, $scope ) {
                 $scope.trustAsHtml = $sce.trustAsHtml;
-                // this.fields.title = $sce.trustAsHtml(this.fields.title);
                 const fieldsToHighlight = [
                     "title", "name", "info"
                 ];
                 if ( this.highlight ) {
                     for ( let field of fieldsToHighlight ) {
-                        if ( this.fields.hasOwnProperty(field) && this.fields[ field ] && this.fields[ field ].indexOf(this.highlight) ) {
-                            this.fields[ field ] = (this.fields[ field ].replace(new RegExp(this.highlight, "ig"), function ( part ) {
+                        if ( this.fields.hasOwnProperty(field) && this.fields[field] && this.fields[field].toLowerCase().indexOf(this.highlight.toLowerCase()) != -1 ) {
+                            this.fields[field] = this.fields[field].replace(new RegExp(this.highlight, "ig"), function ( part ) {
                                 return `<span class="highlight">${part}</span>`;
-                            }));
+                            });
                         }
                     }
                 }
