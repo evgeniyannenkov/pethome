@@ -89,7 +89,9 @@ function applicationConfig ( module ) {
                 "new password" : "Новый пароль",
                 "confirm password" : "Повторите пароль",
                 "reset" : "Изменить",
-                "password reset" : "Смена пароля"
+                "password reset" : "Смена пароля",
+                "To verify your account please check your email for a verification letter" : "Для подтверждения вашего аккаунта на ваш электронный адрес было отправлено письмо",
+                "send again": "отправить снова"
             });
 
             translator.setTranslations("ua", {
@@ -177,7 +179,9 @@ function applicationConfig ( module ) {
                 "new password" : "Новий пароль",
                 "confirm password" : "Підтвердіть пароль",
                 "reset" : "Змінити",
-                "password reset" : "Зміна паролю"
+                "password reset" : "Зміна паролю",
+                "To verify your account please check your email for a verification letter" : "Для підтвердження вашого профілю на вашу електронну адресу було відправленно листа",
+                "send again": "відправити знову"
             });
 
             translator.setFullDateFormat("en", "MMM/d/yyyy h:mm a");
