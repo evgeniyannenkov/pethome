@@ -49,8 +49,7 @@ module.exports = () => {
                     authors.create({
                         "contactInfo.email" : email,
                         password,
-                        date : new Date().getTime(),
-                        "verification.email_secret" : hash
+                        date : new Date().getTime()
                     })
                            .then(( response ) => {
                                if ( response.success ) {
@@ -168,8 +167,7 @@ module.exports = () => {
                                       name : profile.name.givenName + " " + profile.name.familyName || "Not specified",
                                       contactInfo : {email : email},
                                       password : password,
-                                      date : time,
-                                      "verification.email_secret" : hash
+                                      date : time
                                   }).then(( response ) => {
                                       if ( response.success ) {
                                           done(null, response.author);
@@ -259,8 +257,7 @@ module.exports = () => {
                                       name : profile.name.givenName + " " + profile.name.familyName || "Not specified",
                                       contactInfo : {email : email},
                                       password : password,
-                                      date : time,
-                                      "verification.email_secret" : hash
+                                      date : time
                                   }).then(( response ) => {
                                       if ( response.success ) {
                                           done(null, response.author);

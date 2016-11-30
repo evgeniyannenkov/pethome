@@ -50,7 +50,6 @@ const authorSchema = new mongoose.Schema({
         type : Number
     },
     verification: {
-        email_secret: String,
         is_verified: {
             type: Boolean,
             default: false
