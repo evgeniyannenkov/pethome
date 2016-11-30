@@ -245,6 +245,7 @@ function petControllersInit ( module ) {
             this.type = "";
             this.perPage = "20";
             this.page = 1;
+            this.search = "";
 
             this.feedData = {
                 sort : this.order,
@@ -253,13 +254,21 @@ function petControllersInit ( module ) {
                 page : this.page,
                 user : this.id,
                 gender : this.gender,
-                type : this.type
+                type : this.type,
+                search : this.search
             };
 
             author.getAll()
                   .then(( response ) => {
                       this.authors = response.data.authors;
                   });
+
+            this.applySearch = ( value ) => {
+                if ( value != this.feedData.search ) {
+                    this.feedData.search = value;
+                    this.getFeed();
+                }
+            };
 
             this.changeOrder = () => {
                 this.feedData.sort = this.order;
@@ -350,12 +359,23 @@ function petControllersInit ( module ) {
         "pets",
         function ( pets ) {
             this.results = [];
+            const shouldCheck = () => {
+                return this.value && this.value.length > 2;
+            };
+
+            this.applyToFeed = ( event ) => {
+                if ( shouldCheck() && this.feed && event.keyCode == 13 ) {
+                    this.feed.applySearch(this.value);
+                    this.reset();
+                }
+            };
 
             this.change = () => {
-                if ( this.value && this.value.length > 2 ) {
+                if ( shouldCheck() ) {
                     this.find(this.value);
                 } else {
                     this.results = [];
+                    this.feed.applySearch("");
                 }
             };
 

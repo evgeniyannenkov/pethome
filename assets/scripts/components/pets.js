@@ -30,6 +30,9 @@ function petComponentsInit ( module, common ) {
 
     module.component('search', {
         templateUrl : common.getTemplatePath("pets-search"),
+        require : {
+            feed : "^^?feed"
+        },
         controller : "petsSearchCtrl",
         controllerAs : "search"
     });
