@@ -20,8 +20,8 @@ router.get('/', ( req, res, next ) => {
                       author;
 
                   for ( let index = 0; index < authorsArray.length; index++ ) {
-                      author = authorsArray[ index ];
-                      authors[ author._id ] = author;
+                      author = authorsArray[index];
+                      authors[author._id] = author;
                   }
 
                   res.json({
@@ -86,7 +86,7 @@ router.put('/:id', response.ifLoggedOut(), ( req, res, next ) => {
 
     if ( _id && author._id && req.user && (_id === author._id.toString() && (_id === req.user._id.toString() || req.user.is_admin)) ) {
 
-        Author.findOneAndUpdate({ _id, is_admin : author.is_admin }, author, { new : true })
+        Author.findOneAndUpdate({_id, is_admin : author.is_admin}, author, {new : true})
               .then(( author ) => {
 
                   if ( author ) {
@@ -123,7 +123,7 @@ router.put('/:id', response.ifLoggedOut(), ( req, res, next ) => {
 router.get('/:id/pets', ( req, res, next ) => {
     const _id = req.params.id || 0;
 
-    Pet.find({ "author" : _id })
+    Pet.find({"author" : _id})
        .then(( pets ) => {
            res.json({
                pets,
@@ -145,7 +145,7 @@ router.get("/:id/delete", response.ifLoggedOut(), ( req, res, next ) => {
     if ( req.user._id == _id || req.user.is_admin ) {
         Author.findByIdAndRemove(_id)
               .then(() => {
-                  Pet.remove({ author : _id })
+                  Pet.remove({author : _id})
                      .then(( data ) => {
                          res.json({
                              success : true,
@@ -178,10 +178,10 @@ router.get("/:id/block", response.ifNotAdmin(), ( req, res, next ) => {
     const _id = req.params.id;
 
     if ( req.user._id != _id ) {
-        Author.findByIdAndUpdate(_id, { blocked : true })
+        Author.findByIdAndUpdate(_id, {blocked : true})
               .then(( author ) => {
                   if ( author ) {
-                      res.json({ success : true, message : "Author Block : Blocked." });
+                      res.json({success : true, message : "Author Block : Blocked."});
                   } else {
                       res.json({
                           success : false,
@@ -208,10 +208,10 @@ router.get("/:id/unblock", response.ifNotAdmin(), ( req, res, next ) => {
     const _id = req.params.id;
 
     if ( req.user._id != _id ) {
-        Author.findByIdAndUpdate(_id, { blocked : false })
+        Author.findByIdAndUpdate(_id, {blocked : false})
               .then(( author ) => {
                   if ( author ) {
-                      res.json({ success : true, message : "Author Block : Unblocked." });
+                      res.json({success : true, message : "Author Block : Unblocked."});
                   } else {
                       res.json({
                           success : false,
@@ -239,7 +239,7 @@ router.get("/reset/:hash", ( req, res, next ) => {
     const email = base64.decode(emailHash);
     const token = moment().format("DD/MM/YYYY") + process.env.RESET_PASSWORD_SECRET + email;
 
-    Author.findOne({ "contactInfo.email" : email })
+    Author.findOne({"contactInfo.email" : email})
           .then(( user ) => {
               if ( user ) {
 
@@ -252,7 +252,7 @@ router.get("/reset/:hash", ( req, res, next ) => {
                       } else {
                           mailer
                               .send({
-                                  to : [ email ],
+                                  to : [email],
                                   from : 'pethome@gmail.com',
                                   subject : 'Password reset',
                                   html : `<h4>Change password <a href="${process.env.HOST}/author/reset/${emailHash}/${hash}">here</a>.</h4>`
@@ -294,7 +294,7 @@ router.put("/reset/:emailHash/:hash", ( req, res, next ) => {
     const newPassword = req.body.newPassword;
 
     if ( newPassword ) {
-        Author.findOne({ "contactInfo.email" : email })
+        Author.findOne({"contactInfo.email" : email})
               .then(( user ) => {
                   if ( user ) {
                       hasher(token).verifyAgainst(hash, function ( err, verified ) {
@@ -326,7 +326,7 @@ router.put("/reset/:emailHash/:hash", ( req, res, next ) => {
                                       user.password = hash;
                                       user.save()
                                           .then(( author ) => {
-                                              res.json({ success : true, message : "New password saved" });
+                                              res.json({success : true, message : "New password saved"});
                                           })
                                           .catch(( error ) => {
                                               res.status(401).json({
@@ -357,6 +357,60 @@ router.put("/reset/:emailHash/:hash", ( req, res, next ) => {
             message : "No password provided."
         });
     }
+});
+
+//Author verify email
+router.get("/verify/:hash", ( req, res, next ) => {
+    const emailHash = req.params.hash;
+    const email = base64.decode(emailHash);
+    const token = process.env.EMAIL_VERIFY_SECRET + email;
+
+    Author.findOne({"contactInfo.email" : email})
+          .then(( user ) => {
+              if ( user ) {
+
+                  hasher(token).hash(( err, hash ) => {
+                      if ( err ) {
+                          res.json({
+                              success : false,
+                              message : err.message
+                          });
+                      } else {
+                          mailer
+                              .send({
+                                  to : [email],
+                                  from : 'pethome@gmail.com',
+                                  subject : 'Email Verification',
+                                  html : `<h4>Confirm <a href="${process.env.HOST}/author/verify/${emailHash}/${hash}">email</a></h4>`
+
+                              })
+                              .then(( response ) => {
+                                  res.json({
+                                      success : true,
+                                      message : response
+                                  });
+                              })
+                              .catch(( error ) => {
+                                  res.json({
+                                      success : false,
+                                      message : error.message
+                                  });
+                              });
+                      }
+                  });
+              } else {
+                  res.json({
+                      success : false,
+                      message : "User with this email was not found"
+                  });
+              }
+          })
+          .catch(( error ) => {
+              res.json({
+                  success : false,
+                  message : error.message
+              });
+          });
 });
 
 module.exports = router;

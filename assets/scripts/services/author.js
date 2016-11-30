@@ -23,6 +23,9 @@ function authorServicesInit ( module ) {
                         reset : {
                             url : "/reset/:hash"
                         },
+                        verify : {
+                            url: "/verify/:hash"
+                        },
                         getCurrent : {
                             url : "/current"
                         },

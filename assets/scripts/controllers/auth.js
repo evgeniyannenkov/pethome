@@ -141,4 +141,39 @@ function authControllersInit ( module ) {
             };
         }
     ]);
+
+    module.controller('verificationBannerCtrl', [
+        "$scope", "author", "$timeout", "notify",
+        function ( $scope, author, $timeout, notify ) {
+            let hash;
+            this.send = () => {
+                hash = btoa(this.email);
+
+                author.verify({ hash })
+                      .then(( response ) => {
+                          if ( response.data.success ) {
+                              notify.inform({
+                                  message : "[[Email sent]].",
+                                  duration : 1000
+                              });
+                          }
+                          else {
+                              notify.error({
+                                  message : `[[${response.data.message}]].`,
+                                  duration : 1000,
+                                  delay : 500
+                              });
+                          }
+                      })
+                      .catch(( err ) => {
+                          console.log(err);
+                          notify.error({
+                              message : "[[Email wasn't send]].",
+                              duration : 1000,
+                              delay : 500
+                          });
+                      });
+            };
+        }
+    ]);
 }
