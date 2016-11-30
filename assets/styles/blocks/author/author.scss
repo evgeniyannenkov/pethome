@@ -24,28 +24,6 @@
   }
 }
 
-.author__status-icon {
-  display         : inline-flex;
-  width           : 15px;
-  height          : 15px;
-  align-items     : center;
-  justify-content : center;
-  border-radius   : 3px;
-  border          : 1px solid #d3d3d3;
-  margin-left     : 5px;
-  font-size       : 0.7em;
-  color           : white;
-  &.success {
-    border-color     : $green;
-    background-color : $green;
-    font-size        : 0.6em;
-  }
-  &.fail {
-    border-color     : $red;
-    background-color : $red;
-  }
-}
-
 .author__title {
   margin-bottom : 15px;
   font-size     : 1.4em;
