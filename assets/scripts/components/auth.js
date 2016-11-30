@@ -28,4 +28,13 @@ function authComponentsInit ( module, common ) {
         controllerAs : "reset"
     });
 
+    module.component("verificationBanner", {
+        bindings : {
+            email : "@"
+        },
+        templateUrl : common.getTemplatePath("verification-banner"),
+        controller : "verificationBannerCtrl",
+        controllerAs : "verification"
+    });
+
 }

@@ -1,0 +1,26 @@
+@import "../../common/variables";
+@import "../../common/mixins";
+
+.verification-banner {
+  margin-top      : 10px;
+  display         : flex;
+  width           : 100%;
+  padding         : 10px;
+  text-align      : center;
+  justify-content : center;
+  align-items     : center;
+  color           : $red;
+  border-top      : 1px solid $red;
+  border-bottom   : 1px solid $red;
+  //color            : white;
+  @include roboto-condensed;
+  font-size       : 0.9em;
+}
+
+.verification-banner__btn {
+  font-size       : 0.9em;
+  text-decoration : underline;
+  &:hover {
+    color : $redHover;
+  }
+}
