@@ -237,7 +237,7 @@ router.get("/:id/unblock", response.ifNotAdmin(), ( req, res, next ) => {
 router.get("/reset/:hash", ( req, res, next ) => {
     const emailHash = req.params.hash;
     const email = base64.decode(emailHash);
-    const token = moment().format("DD/MM/YYYY") + "_evgenius_verstalikas_superus_adminius_" + email;
+    const token = moment().format("DD/MM/YYYY") + process.env.RESET_PASSWORD_SECRET + email;
 
     Author.findOne({ "contactInfo.email" : email })
           .then(( user ) => {
@@ -255,7 +255,7 @@ router.get("/reset/:hash", ( req, res, next ) => {
                                   to : [ email ],
                                   from : 'pethome@gmail.com',
                                   subject : 'Password reset',
-                                  html : `<h4>Change password <a href="http://${process.env.HOST}/author/reset/${emailHash}/${hash}">here</a>.</h4>`
+                                  html : `<h4>Change password <a href="${process.env.HOST}/author/reset/${emailHash}/${hash}">here</a>.</h4>`
                               })
                               .then(( response ) => {
                                   res.json({
@@ -290,7 +290,7 @@ router.put("/reset/:emailHash/:hash", ( req, res, next ) => {
     const emailHash = req.params.emailHash;
     const hash = req.params.hash;
     const email = base64.decode(emailHash);
-    const token = moment().format("DD/MM/YYYY") + "_evgenius_verstalikas_superus_adminius_" + email;
+    const token = moment().format("DD/MM/YYYY") + process.env.RESET_PASSWORD_SECRET + email;
     const newPassword = req.body.newPassword;
 
     if ( newPassword ) {
