@@ -266,6 +266,7 @@ function petControllersInit ( module ) {
             this.applySearch = ( value ) => {
                 if ( value != this.feedData.search ) {
                     this.feedData.search = value;
+                    this.search = value;
                     this.getFeed();
                 }
             };
@@ -387,7 +388,7 @@ function petControllersInit ( module ) {
                         }
                     })
                     .catch(( error ) => {
-                        console.log(error);
+                        // console.log(error);
                     });
             };
 

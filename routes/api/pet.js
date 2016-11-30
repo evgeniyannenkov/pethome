@@ -55,22 +55,23 @@ router.get("/feed", ( req, res, next ) => {
         findData.type = type;
     }
 
+    countPromise = Pet.count(findData);
+
     resultPromise = Pet.find(findData)
                        .sort({ publicationDate : sort })
                        .skip(page * limit - limit)
                        .limit(limit);
 
+
     if ( search ) {
         query = getSearchQuery(search);
         resultPromise = resultPromise.or(query);
+        countPromise.or(query);
     }
 
     resultPromise
         .then(( pets ) => {
-            countPromise = Pet.count(findData);
-            if ( search ) {
-                countPromise.or(query);
-            }
+
             countPromise
                 .then(( count ) => {
 

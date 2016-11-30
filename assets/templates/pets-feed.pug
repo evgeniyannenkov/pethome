@@ -64,7 +64,7 @@ include ../../views/mixins/buttons
     pagination
 
     .pets-feed(ng-if="!feed.customFilter")
-        pet.pets-feed__item.pet(ng-repeat="pet in feed.pets" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="feed.allAllowed")
-        pet.pets-feed__item.pet(ng-repeat="pet in feed.pets" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="!feed.allAllowed")
+        pet.pets-feed__item.pet(ng-repeat="pet in feed.pets" highlight="{{feed.search}}" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="feed.allAllowed")
+        pet.pets-feed__item.pet(ng-repeat="pet in feed.pets" highlight="{{feed.search}}" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]" ng-if="!feed.allAllowed")
     .pets-feed(ng-if="feed.customFilter")
-        pet.pets-feed__item.pet(ng-repeat="pet in feed.pets" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]")
+        pet.pets-feed__item.pet(ng-repeat="pet in feed.pets" highlight="{{feed.search}}" fields="pet" hide-fields="feed.hideFields" author="feed.authors[pet.author]")
