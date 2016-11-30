@@ -30,6 +30,9 @@ function petComponentsInit ( module, common ) {
 
     module.component('search', {
         templateUrl : common.getTemplatePath("pets-search"),
+        require : {
+            feed : "^^?feed"
+        },
         controller : "petsSearchCtrl",
         controllerAs : "search"
     });
@@ -39,9 +42,30 @@ function petComponentsInit ( module, common ) {
         bindings : {
             fields : "=",
             author : "=",
-            hide : "=hideFields"
+            hide : "=hideFields",
+            highlight : "@"
         },
-        controllerAs : "pet"
+        controllerAs : "pet",
+        controller : [
+            "$sce", "$scope",
+            function ( $sce, $scope ) {
+                $scope.trustAsHtml = $sce.trustAsHtml;
+                // this.fields.title = $sce.trustAsHtml(this.fields.title);
+                const fieldsToHighlight = [
+                    "title", "name", "info"
+                ];
+                if ( this.highlight ) {
+                    for ( let field of fieldsToHighlight ) {
+                        if ( this.fields.hasOwnProperty(field) && this.fields[ field ] && this.fields[ field ].indexOf(this.highlight) ) {
+                            this.fields[ field ] = (this.fields[ field ].replace(new RegExp(this.highlight, "ig"), function ( part ) {
+                                return `<span class="highlight">${part}</span>`;
+                            }));
+                        }
+                    }
+                }
+            }
+
+        ]
     });
 
     module.component('petSingle', {
