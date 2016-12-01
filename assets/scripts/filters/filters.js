@@ -66,24 +66,27 @@ function appFiltersInit ( module ) {
                     startIndex,
                     slicedArray;
 
-                content = content.trim().replace(/\s\s+/g, ' ');
-                contentArray = content.substr(0, content.length).split(" ");
+                if ( content ) {
 
-                if ( contentArray.length > words ) {
-                    slicedArray = contentArray.slice(0, words);
-                    startIndex = startWith && content.indexOf(startWith) != -1 ? content.indexOf(startWith) : 0;
-                    if ( startWith && startIndex + startWith.length > slicedArray.join(" ").length ) {
-                        contentArray = content.substr(startIndex, content.length - startIndex).split(" ");
+                    content = content.trim().replace(/\s\s+/g, ' ');
+                    contentArray = content.substr(0, content.length).split(" ");
+
+                    if ( contentArray.length > words ) {
                         slicedArray = contentArray.slice(0, words);
+                        startIndex = startWith && content.indexOf(startWith) != -1 ? content.indexOf(startWith) : 0;
+                        if ( startWith && startIndex + startWith.length > slicedArray.join(" ").length ) {
+                            contentArray = content.substr(startIndex, content.length - startIndex).split(" ");
+                            slicedArray = contentArray.slice(0, words);
+                        } else {
+                            prefix = "";
+                        }
+                        if ( content.substring(startIndex, content.length) == slicedArray.join(" ") ) {
+                            postfix = "";
+                        }
+                        return prefix + slicedArray.join(" ") + postfix;
                     } else {
-                        prefix = "";
+                        return content;
                     }
-                    if ( content.substring(startIndex, content.length) == slicedArray.join(" ") ) {
-                        postfix = "";
-                    }
-                    return prefix + slicedArray.join(" ") + postfix;
-                } else {
-                    return content;
                 }
             }
 

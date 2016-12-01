@@ -3,6 +3,8 @@
 const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid-transport');
 
+
+
 const options = {
     auth : {
         api_key : process.env.SG_KEY
@@ -21,6 +23,7 @@ const send = ( email ) => {
             resolve(res);
         });
     });
+
 };
 
 module.exports = {
