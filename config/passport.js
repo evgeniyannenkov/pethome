@@ -7,10 +7,10 @@ const authors = require("../controllers/author");
 const config = require('./oauth');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const VkStrategy = require('passport-vkontakte').Strategy;
-const mailer = require("../config/mailer");
+const mailer = require("../controllers/mailer");
 const base64 = require('js-base64').Base64;
 const md5 = require('md5');
-const hasher = require('password-hash-and-salt');
+const hasher = require('../config/hasher');
 
 module.exports = () => {
 
@@ -31,44 +31,27 @@ module.exports = () => {
             "passwordField" : "password",
         },
         function ( email, password, done ) {
-            const token = process.env.EMAIL_VERIFY_SECRET + email;
-            const emailHash = base64.encodeURI(email);
 
-            hasher(token).hash(( err, hash ) => {
-                if ( err ) {
-                    done(err);
-                } else {
-
-                    const letter = {
-                        to : [email],
-                        from : 'pethome@gmail.com',
-                        subject : 'Registration',
-                        html : `<h4>Confirm <a href="${process.env.HOST}/author/verify/${emailHash}/${hash}">email</a></h4>`
-                    };
-
-                    authors.create({
-                        "contactInfo.email" : email,
-                        password,
-                        date : new Date().getTime()
-                    })
-                           .then(( response ) => {
-                               if ( response.success ) {
-                                   done(null, response.author);
-                                   mailer.send(letter);
-                               } else {
-                                   done(null, false, {message : response.message});
-                               }
-                           })
-                           .catch(( error ) => {
-                               if ( error.message.indexOf(email) == -1 && error.message.indexOf("duplicate") == -1 ) {
-                                   done(error);
-                               } else {
-                                   done(null, false, {message : "This Email is taken."});
-                               }
-                           });
-
-                }
-            });
+            authors.create({
+                "contactInfo.email" : email,
+                password,
+                date : new Date().getTime()
+            })
+                   .then(( response ) => {
+                       if ( response.success ) {
+                           mailer.sendVerificationMail(email);
+                           done(null, response.author);
+                       } else {
+                           done(null, false, {message : response.message});
+                       }
+                   })
+                   .catch(( error ) => {
+                       if ( error.message.indexOf(email) == -1 && error.message.indexOf("duplicate") == -1 ) {
+                           done(error);
+                       } else {
+                           done(null, false, {message : "This Email is taken."});
+                       }
+                   });
 
         }
     ));
@@ -116,17 +99,8 @@ module.exports = () => {
         },
         ( accessToken, refreshToken, profile, done ) => {
             const email = profile.emails[0].value;
-            const emailHash = base64.encodeURI(email);
             const time = new Date().getTime();
             const password = md5(email + time);
-            const token = process.env.EMAIL_VERIFY_SECRET + email;
-
-            const letter = {
-                to : [email],
-                from : 'pethome@gmail.com',
-                subject : 'Facebook registration',
-                html : `<h4>Password ${password}</h4>`
-            };
 
             Author.findOne({"contactInfo.email" : email})
                   .then(( user ) => {
@@ -149,39 +123,26 @@ module.exports = () => {
                           }
                       } else {
 
-                          hasher(token).hash(( err, hash ) => {
-                              if ( err ) {
-                                  done(err);
-                              } else {
-
-                                  const confirmLetter = {
-                                      to : [email],
-                                      from : 'pethome@gmail.com',
-                                      subject : 'Registration',
-                                      html : `<h4>Confirm <a href="${process.env.HOST}/author/verify/${emailHash}/${hash}">email</a></h4>`
-                                  };
-
-                                  authors.create({
-                                      oauthID : {facebook : profile.id},
-                                      avatar : profile.photos[0].value || "",
-                                      name : profile.name.givenName + " " + profile.name.familyName || "Not specified",
-                                      contactInfo : {email : email},
-                                      password : password,
-                                      date : time
-                                  }).then(( response ) => {
-                                      if ( response.success ) {
-                                          done(null, response.author);
-                                          mailer.send(letter);
-                                          mailer.send(confirmLetter);
-                                      } else {
-                                          done(null, false, {message : response.message});
-                                      }
-                                  }).catch(( err ) => {
-                                      done(err);
-                                  });
-
-                              }
-                          });
+                          authors.create({
+                              oauthID : {facebook : profile.id},
+                              avatar : profile.photos[0].value || "",
+                              name : profile.name.givenName + " " + profile.name.familyName || "Not specified",
+                              contactInfo : {email : email},
+                              password : password,
+                              date : time,
+                              "verification.is_verified" : true
+                          })
+                                 .then(( response ) => {
+                                     if ( response.success ) {
+                                         mailer.sendSocialRegistrationMail(email, password, "Facebook");
+                                         done(null, response.author);
+                                     } else {
+                                         done(null, false, {message : response.message});
+                                     }
+                                 })
+                                 .catch(( err ) => {
+                                     done(err);
+                                 });
 
                       }
                   })
@@ -207,16 +168,8 @@ module.exports = () => {
             }
 
             const email = params.email;
-            const emailHash = base64.encodeURI(email);
             const time = new Date().getTime();
             const password = md5(email + time);
-            const token = process.env.EMAIL_VERIFY_SECRET + email;
-            const letter = {
-                to : [email],
-                from : 'pethome@gmail.com',
-                subject : 'VK registration',
-                html : `<h4>Password ${password}</h4>`
-            };
 
             Author.findOne({"contactInfo.email" : email})
                   .then(( user ) => {
@@ -239,38 +192,26 @@ module.exports = () => {
                           }
                       } else {
 
-                          hasher(token).hash(( err, hash ) => {
-                              if ( err ) {
-                                  done(err);
-                              } else {
-
-                                  const confirmLetter = {
-                                      to : [email],
-                                      from : 'pethome@gmail.com',
-                                      subject : 'Registration',
-                                      html : `<h4>Confirm <a href="${process.env.HOST}/author/verify/${emailHash}/${hash}">email</a></h4>`
-                                  };
-
-                                  authors.create({
-                                      oauthID : {vk : profile.id},
-                                      avatar : profile.photos[0].value || "",
-                                      name : profile.name.givenName + " " + profile.name.familyName || "Not specified",
-                                      contactInfo : {email : email},
-                                      password : password,
-                                      date : time
-                                  }).then(( response ) => {
-                                      if ( response.success ) {
-                                          done(null, response.author);
-                                          mailer.send(letter);
-                                          mailer.send(confirmLetter);
-                                      } else {
-                                          done(null, false, {message : response.message});
-                                      }
-                                  }).catch(( err ) => {
-                                      done(err);
-                                  });
-                              }
-                          });
+                          authors.create({
+                              oauthID : {vk : profile.id},
+                              avatar : profile.photos[0].value || "",
+                              name : profile.name.givenName + " " + profile.name.familyName || "Not specified",
+                              contactInfo : {email : email},
+                              password : password,
+                              date : time,
+                              "verification.is_verified" : true
+                          })
+                                 .then(( response ) => {
+                                     if ( response.success ) {
+                                         mailer.sendSocialRegistrationMail(email, password, "VK");
+                                         done(null, response.author);
+                                     } else {
+                                         done(null, false, {message : response.message});
+                                     }
+                                 })
+                                 .catch(( err ) => {
+                                     done(err);
+                                 });
 
                       }
                   })
