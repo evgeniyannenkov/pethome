@@ -62,6 +62,7 @@ function appFiltersInit ( module ) {
             function translationFilter ( content, words = 20, startWith ) {
                 let contentArray,
                     prefix = "... ",
+                    postfix = " ...",
                     startIndex,
                     slicedArray;
 
@@ -77,7 +78,10 @@ function appFiltersInit ( module ) {
                     } else {
                         prefix = "";
                     }
-                    return prefix + slicedArray.join(" ") + " ...";
+                    if ( content.substring(startIndex, content.length) == slicedArray.join(" ") ) {
+                        postfix = "";
+                    }
+                    return prefix + slicedArray.join(" ") + postfix;
                 } else {
                     return content;
                 }
