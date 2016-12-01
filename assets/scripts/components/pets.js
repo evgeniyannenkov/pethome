@@ -47,23 +47,33 @@ function petComponentsInit ( module, common ) {
         },
         controllerAs : "pet",
         controller : [
-            "$sce", "$scope",
-            function ( $sce, $scope ) {
+            "$sce", "$scope", "$filter",
+            function ( $sce, $scope, $filter ) {
                 $scope.trustAsHtml = $sce.trustAsHtml;
+
+                this.excerptLength = 9;
                 const fieldsToHighlight = [
                     "title", "name", "info"
                 ];
                 if ( this.highlight ) {
                     for ( let field of fieldsToHighlight ) {
-                        if ( this.fields.hasOwnProperty(field) && this.fields[field] && this.fields[field].toLowerCase().indexOf(this.highlight.toLowerCase()) != -1 ) {
-                            this.fields[field] = this.fields[field].replace(new RegExp(this.highlight, "ig"), function ( part ) {
-                                return `<span class="highlight">${part}</span>`;
-                            });
+                        if ( this.fields.hasOwnProperty(field) && this.fields[ field ] ) {
+                            if ( this.fields[ field ].toLowerCase().indexOf(this.highlight.toLowerCase()) != -1 ) {
+
+                                this.fields[ "info" ] = $filter("excerpt")(this.fields[ "info" ], this.excerptLength, this.highlight);
+
+                                this.fields[ field ] = this.fields[ field ].replace(new RegExp(this.highlight, "ig"), function ( part ) {
+                                    return `<span class="highlight">${part}</span>`;
+                                });
+                            } else if ( field == "info" ) {
+                                this.fields[ "info" ] = $filter("excerpt")(this.fields[ "info" ], this.excerptLength);
+                            }
                         }
                     }
+                } else {
+                    this.fields[ "info" ] = $filter("excerpt")(this.fields[ "info" ], this.excerptLength);
                 }
             }
-
         ]
     });
 

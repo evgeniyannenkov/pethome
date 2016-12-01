@@ -59,12 +59,25 @@ function appFiltersInit ( module ) {
 
     module.filter("excerpt", [
         function () {
-            function translationFilter ( content, words = 20 ) {
+            function translationFilter ( content, words = 20, startWith ) {
+                let contentArray,
+                    prefix = "... ",
+                    startIndex,
+                    slicedArray;
 
-                let contentArray = content.split(" ");
+                content = content.trim().replace(/\s\s+/g, ' ');
+                contentArray = content.substr(0, content.length).split(" ");
 
                 if ( contentArray.length > words ) {
-                    return contentArray.slice(0, words).join(" ") + " ...";
+                    slicedArray = contentArray.slice(0, words);
+                    startIndex = startWith && content.indexOf(startWith) != -1 ? content.indexOf(startWith) : 0;
+                    if ( startWith && startIndex + startWith.length > slicedArray.join(" ").length ) {
+                        contentArray = content.substr(startIndex, content.length - startIndex).split(" ");
+                        slicedArray = contentArray.slice(0, words);
+                    } else {
+                        prefix = "";
+                    }
+                    return prefix + slicedArray.join(" ") + " ...";
                 } else {
                     return content;
                 }
@@ -81,7 +94,9 @@ function appFiltersInit ( module ) {
                 let time = days * 24 * 60 * 60 * 1000,
                     currentTime = Date.now();
 
-                if(!days) return pets;
+                if ( !days ) {
+                    return pets;
+                }
 
                 if ( pets ) {
                     return pets.filter(( pet ) => {
