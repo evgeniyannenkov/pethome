@@ -5,7 +5,7 @@ function authorControllersInit ( module ) {
     module.controller('authorCtrl', [
         "author",
         function ( author ) {
-            author.get({ id : this.id })
+            author.get({id : this.id})
                   .then(( response ) => {
                       if ( response.data.success ) {
                           this.fields = response.data.author;
@@ -25,7 +25,7 @@ function authorControllersInit ( module ) {
                   .then(( response ) => {
                       if ( response.data.success ) {
                           this.authors = Object.keys(response.data.authors).map(function ( key ) {
-                              return response.data.authors[ key ];
+                              return response.data.authors[key];
                           });
                       }
                   })
@@ -42,15 +42,16 @@ function authorControllersInit ( module ) {
             $rootScope.$on("popup_open", ( $event, data, type ) => {
                 if ( type == "edit profile" ) {
                     this.temporaryData = angular.copy(this.author.fields);
-                    this.temporaryData.language = localStorage[ "preferred_language" ] || 'ru';
+                    this.temporaryData.language = localStorage["preferred_language"] || 'ru';
                     $scope.$apply();
                 }
             });
 
             this.edit = () => {
 
-                $author.update({ id : this.author.fields._id, data : this.temporaryData })
+                $author.update({id : this.author.fields._id, data : this.temporaryData})
                        .then(( response ) => {
+                           console.log(response);
                            if ( response.data.success ) {
                                notify.inform({
                                    message : `[[Updated]]  <i class="icon-check"></i>`,
@@ -65,6 +66,11 @@ function authorControllersInit ( module ) {
                                    reset : true
                                });
                            } else {
+                               notify.error({
+                                   message : `[[Email is taken]]  <i class="icon-cancel"></i>`,
+                                   delay : 500,
+                                   duration : 1000
+                               });
                                $timeout(500)
                                    .then(() => {
                                        $scope.$broadcast("formResponse", {
@@ -91,7 +97,7 @@ function authorControllersInit ( module ) {
         function ( $author, notify, $scope, $timeout ) {
 
             this.remove = () => {
-                $author.remove({ id : this.author.fields._id })
+                $author.remove({id : this.author.fields._id})
                        .then(( response ) => {
                            if ( response.data.success ) {
                                notify.inform({
@@ -126,7 +132,7 @@ function authorControllersInit ( module ) {
         function ( author, notify, $scope, $timeout ) {
 
             this.block = () => {
-                author.block({ id : this.authorId })
+                author.block({id : this.authorId})
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({
@@ -161,7 +167,7 @@ function authorControllersInit ( module ) {
                       });
             };
             this.unblock = () => {
-                author.unblock({ id : this.authorId })
+                author.unblock({id : this.authorId})
                       .then(( response ) => {
                           if ( response.data.success ) {
                               notify.inform({

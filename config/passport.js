@@ -2,15 +2,13 @@
 
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
+const VkStrategy = require('passport-vkontakte').Strategy;
 const Author = require('../schemas/author');
 const authors = require("../controllers/author");
 const config = require('./oauth');
-const FacebookStrategy = require('passport-facebook').Strategy;
-const VkStrategy = require('passport-vkontakte').Strategy;
 const mailer = require("../controllers/mailer");
-const base64 = require('js-base64').Base64;
 const md5 = require('md5');
-const hasher = require('../config/hasher');
 
 module.exports = () => {
 
