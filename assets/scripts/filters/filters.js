@@ -7,7 +7,7 @@ function appFiltersInit ( module ) {
 
             angular.forEach(pets, ( pet ) => {
 
-                if ( authors && !authors[ pet.author ].blocked && pet.published ) {
+                if ( authors && !authors[pet.author].blocked && pet.published ) {
                     allowed.push(pet);
                 }
 
@@ -48,7 +48,7 @@ function appFiltersInit ( module ) {
                     }
                 }
 
-                return translator[ method ](content);
+                return translator[method](content);
             }
 
             translationFilter.$stateful = true;
@@ -65,21 +65,24 @@ function appFiltersInit ( module ) {
                     startIndex,
                     slicedArray;
 
-                content = content.trim().replace(/\s\s+/g, ' ');
-                contentArray = content.substr(0, content.length).split(" ");
+                if ( content ) {
 
-                if ( contentArray.length > words ) {
-                    slicedArray = contentArray.slice(0, words);
-                    startIndex = startWith && content.indexOf(startWith) != -1 ? content.indexOf(startWith) : 0;
-                    if ( startWith && startIndex + startWith.length > slicedArray.join(" ").length ) {
-                        contentArray = content.substr(startIndex, content.length - startIndex).split(" ");
+                    content = content.trim().replace(/\s\s+/g, ' ');
+                    contentArray = content.substr(0, content.length).split(" ");
+
+                    if ( contentArray.length > words ) {
                         slicedArray = contentArray.slice(0, words);
+                        startIndex = startWith && content.indexOf(startWith) != -1 ? content.indexOf(startWith) : 0;
+                        if ( startWith && startIndex + startWith.length > slicedArray.join(" ").length ) {
+                            contentArray = content.substr(startIndex, content.length - startIndex).split(" ");
+                            slicedArray = contentArray.slice(0, words);
+                        } else {
+                            prefix = "";
+                        }
+                        return prefix + slicedArray.join(" ") + " ...";
                     } else {
-                        prefix = "";
+                        return content;
                     }
-                    return prefix + slicedArray.join(" ") + " ...";
-                } else {
-                    return content;
                 }
             }
 
