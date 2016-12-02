@@ -12,6 +12,9 @@ body {
   font-size              : 16px;
   -webkit-font-smoothing : antialiased;
   letter-spacing         : .1px;
+  &.hidden {
+    overflow : hidden;
+  }
 }
 
 * {

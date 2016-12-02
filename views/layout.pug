@@ -2,7 +2,7 @@ doctype html(lang='en')
 html(ng-app="app")
     include partials/_head
 
-    body(current-user user=currentUser ? currentUser._id : "" user-admin=currentUser && currentUser.is_admin ? "true" : "false")
+    body(popup-overflow ng-class="{'hidden' : overflow}" current-user user=currentUser ? currentUser._id : "" user-admin=currentUser && currentUser.is_admin ? "true" : "false")
         block header
 
         .main-content

@@ -1,6 +1,7 @@
 "use strict";
 
 function commonComponentsInit ( module, common ) {
+
     module.directive('selectOnClick', [
         '$window',
         function ( $window ) {
@@ -13,4 +14,23 @@ function commonComponentsInit ( module, common ) {
             };
         }
     ]);
+
+    module.directive('popupOverflow', function () {
+            return {
+                controller : [
+                    "$scope",
+                    function ( $scope ) {
+
+                        $scope.$on("popup_open", ( event, data ) => {
+                            $scope.overflow = true;
+                        });
+
+                        $scope.$on("popup_close", ( event, data ) => {
+                            $scope.overflow = false;
+                        });
+                    }
+                ]
+            }
+        }
+    );
 }

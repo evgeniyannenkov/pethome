@@ -1,6 +1,0 @@
-div(ng-transclude="trigger" ng-click="popup.open();")
-.popup(ng-class="{visible : popup.active}" ng-click="popup.close($event);")
-    .popup__close(ng-click="popup.close();")
-    .popup__inner(ng-class="{active : popup.active, wide : popup.wide}")
-        .popup__header {{popup.type | translate}}
-        div(ng-transclude="content")

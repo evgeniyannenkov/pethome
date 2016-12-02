@@ -13,9 +13,10 @@
 }
 
 .popup {
+  padding         : 10px 0;
   display         : flex;
   flex-flow       : row nowrap;
-  align-items     : center;
+  align-items     : flex-start;
   justify-content : center;
   background      : rgba(0, 0, 0, .8);
   position        : fixed;
@@ -26,6 +27,7 @@
   z-index         : 150;
   perspective     : 1500px;
   visibility      : hidden;
+  overflow-y      : auto;
   opacity         : 0;
   transition      : opacity 0.1s;
   &.visible {
@@ -76,7 +78,6 @@
   background-color : $white;
   box-shadow       : 0 2px 4px 0 rgba(0, 0, 0, .5);
   height           : auto;
-  max-height       : 80%;
   overflow-y       : auto;
   border           : 1px solid #b7c2d9;
   border-radius    : 8px;
@@ -125,5 +126,16 @@
     &.wide {
       max-width : 1000px;
     }
+  }
+}
+
+@media screen and (min-height : 600px) {
+  .popup {
+    padding     : 0;
+    align-items : center;
+  }
+
+  .popup__inner {
+    max-height : 90%;
   }
 }
