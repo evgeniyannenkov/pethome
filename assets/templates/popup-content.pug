@@ -1,5 +1,6 @@
 .popup(ng-class="{visible : popup.active}" ng-click="popup.close($event);")
     .popup__close(ng-click="popup.close();")
+        i.icon-cancel
     .popup__inner(ng-class="{active : popup.active, wide : popup.data.wide}")
         .popup__header {{popup.type | translate}}
         .popup__content
