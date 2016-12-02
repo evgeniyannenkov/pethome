@@ -6,7 +6,7 @@
 }
 
 .uploader__drop-zone {
-  display         : flex;
+  display         : none;
   align-items     : center;
   justify-content : center;
   width           : calc(100% - 20px);
@@ -86,6 +86,12 @@
   .uploader__image {
     width  : calc(33% - 20px);
     height : 150px;
+  }
+}
+
+@media (min-width : 1024px) {
+  .uploader__drop-zone {
+    display : flex;
   }
 }
 
